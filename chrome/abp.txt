@@ -1,0 +1,8 @@
+[Adblock Plus 2.0]
+! Homepage: https://github.com/aggresss/configuration/chrome/abp.txt
+!
+! *** exceptions:exceptionrules/exceptionrules.txt ***
+! Text-based search ads on netzwelt.de
+
+||pos.baidu.com/*
+||360doc.com/ad*
