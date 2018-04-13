@@ -54,7 +54,7 @@ arch:
 	@mkdir -p src obj lib bin debug
 
 .PHONY: all
-all: $(TARGET)
+all: $(TARGET) $(TARGET_DEBUG)
 
 .PHONY: debug
 debug: $(TARGET_DEBUG)
