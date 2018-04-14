@@ -58,8 +58,13 @@
         {
             "name": "Win32",
             "includePath": [
-                "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include",
-                "${workspaceFolder}"
+                "${workspaceFolder}",
+                "${env:MINGWPATH}/x86_64-w64-mingw32/include",
+                "${env:MINGWPATH}/x86_64-w64-mingw32/include/c++",
+                "${env:MINGWPATH}/x86_64-w64-mingw32/include/c++/tr1",
+                "${env:MINGWPATH}/x86_64-w64-mingw32/include/c++/backward",
+                "${env:MINGWPATH}/x86_64-w64-mingw32/include/c++/x86_64-w64-mingw32",
+                "${env:MINGWPATH}/include"
             ],
             "defines": [
                 "_DEBUG",
@@ -69,8 +74,13 @@
             "intelliSenseMode": "msvc-x64",
             "browse": {
                 "path": [
-                    "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include/*",
-                    "${workspaceFolder}"
+                    "${workspaceFolder}",
+                    "${env:MINGWPATH}/x86_64-w64-mingw32/include",
+                    "${env:MINGWPATH}/x86_64-w64-mingw32/include/c++",
+                    "${env:MINGWPATH}/x86_64-w64-mingw32/include/c++/tr1",
+                    "${env:MINGWPATH}/x86_64-w64-mingw32/include/c++/backward",
+                    "${env:MINGWPATH}/x86_64-w64-mingw32/include/c++/x86_64-w64-mingw32",
+                    "${env:MINGWPATH}/include"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""

@@ -51,7 +51,7 @@ $(DBG_PATH)/%.o: $(SRC_PATH)/%.c*
 # phony rules
 .PHONY: arch
 arch:
-	@mkdir -p src obj lib bin debug
+	@mkdir -p src include obj lib bin debug
 
 .PHONY: all
 all: $(TARGET) $(TARGET_DEBUG)
