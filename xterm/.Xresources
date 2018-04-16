@@ -1,0 +1,27 @@
+! xterm configuration file made by aggresss
+! usage: xrdb ~/.Xresources
+! See Also: man xterm or https://linux.die.net/man/1/xterm
+
+!xterm locale, color, font, input
+xterm.locale:true
+xterm.utf8: true
+xterm*utf8Title:true
+xterm*fontMenu*fontdefault*Label:Default
+xterm*background: black
+xterm*foreground: white
+xterm*scaleHeight: 1.10
+! English font
+xterm*faceName: DejaVu Sans Mono:pixelsize=14
+! Chinese font
+xterm*faceNameDoublesize: WenQuanYi Zen Hei:pixelsize=15
+! Input method
+xterm*inputMethod:fcitx
+! History line
+xterm*SaveLines: 9999
+
+!mouse selection to copy, Ctrl-V, also Shift+Insert
+xterm*VT100.Translations: #override \
+    <Btn1Up>: select-end(CLIPBOARD,PRIMARY,CUT_BUFFER0) \n\
+    Ctrl <KeyPress> V: insert-selection(CLIPBOARD,PRIMARY,CUT_BUFFER0)
+
+! EOF
