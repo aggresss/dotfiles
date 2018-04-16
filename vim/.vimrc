@@ -55,6 +55,7 @@ match WhitespaceEOL /\s\+$/
 :map <C-k> :res -2<cr>
 
 " custom command
-command CRLF %s/\r\(\n\)/\r/g
+command TrimCRLF %s/\r\(\n\)/\r/g
+command TrimEOL %s/\s\+$//g
 
 " EOF
