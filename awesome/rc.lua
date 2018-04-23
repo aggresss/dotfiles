@@ -303,7 +303,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "p", function() menubar.show() end),
     
     --Modify by aggresss
-    awful.key({ modkey }, "F1", function () awful.util.spawn_with_shell("import ~/a_screen_window.png") end),
+    awful.key({ modkey }, "F1", function () awful.util.spawn_with_shell("import ~/a_screen_window.jpg") end),
     awful.key({ modkey }, "F2", function () awful.util.spawn_with_shell("gnome-screensaver-command -l") end),
     awful.key({ modkey }, "F3", function () awful.util.spawn_with_shell("emacs") end),
     awful.key({ modkey }, "F4", function () awful.util.spawn_with_shell("gpicview") end),
