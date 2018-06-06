@@ -1,0 +1,239 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?p2f version='1.0.0'?>
+<p2f version='1.0.0'>
+  <ius size='36'>
+    <iu id='org.eclipse.cdt.autotools.feature.group' name='C/C++ Autotools support' version='9.4.3.201802261533'>
+      <repositories size='3'>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+        <repository location='http://download.eclipse.org/tools/cdt/releases/9.4'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.cdt.feature.group' name='C/C++ Development Tools' version='9.4.3.201802261533'>
+      <repositories size='3'>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+        <repository location='http://download.eclipse.org/tools/cdt/releases/9.4'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.cdt.build.crossgcc.feature.group' name='C/C++ GCC Cross Compiler Support' version='9.4.3.201802261533'>
+      <repositories size='3'>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+        <repository location='http://download.eclipse.org/tools/cdt/releases/9.4'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.linuxtools.cdt.libhover.feature.feature.group' name='C/C++ Library API Documentation Hover Help' version='6.2.1.201803061555'>
+      <repositories size='2'>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.cdt.debug.ui.memory.feature.group' name='C/C++ Memory View Enhancements' version='9.4.3.201802261533'>
+      <repositories size='3'>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+        <repository location='http://download.eclipse.org/tools/cdt/releases/9.4'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.cdt.launch.remote.feature.group' name='C/C++ Remote Launch' version='9.4.3.201802261533'>
+      <repositories size='3'>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+        <repository location='http://download.eclipse.org/tools/cdt/releases/9.4'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.cdt.debug.standalone.feature.group' name='C/C++ Standalone Debugger' version='9.4.3.201802261533'>
+      <repositories size='3'>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+        <repository location='http://download.eclipse.org/tools/cdt/releases/9.4'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.linuxtools.changelog.c.feature.group' name='ChangeLog Management Tools for C/C++' version='6.2.1.201803061555'>
+      <repositories size='2'>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+      </repositories>
+    </iu>
+    <iu id='com.github.eclipsecolortheme.feature.feature.group' name='Eclipse Color Theme' version='1.0.0.201410260308'>
+      <repositories size='1'>
+        <repository location='http://eclipse-color-theme.github.com/update'/>
+      </repositories>
+    </iu>
+    <iu id='epp.package.cpp' name='Eclipse IDE for C/C++ Developers' version='4.7.3.20180405-1200'>
+      <repositories size='2'>
+        <repository location='http://download.eclipse.org/technology/epp/packages/oxygen/'/>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.platform.feature.group' name='Eclipse Platform' version='4.7.3.v20180330-0640'>
+      <repositories size='3'>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+        <repository location='http://download.eclipse.org/eclipse/updates/4.7'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.rcp.feature.group' name='Eclipse RCP' version='4.7.3.v20180330-0640'>
+      <repositories size='3'>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+        <repository location='http://download.eclipse.org/eclipse/updates/4.7'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.wst.web_ui.feature.feature.group' name='Eclipse Web Developer Tools' version='3.8.2.v201702270442'>
+      <repositories size='4'>
+        <repository location='http://download.eclipse.org/releases/neon/'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201712201001'/>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.linuxtools.gcov.feature.group' name='GCov Integration' version='6.2.1.201803061555'>
+      <repositories size='2'>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.tracecompass.gdbtrace.feature.group' name='GDB Tracepoint Analysis' version='3.3.0.201803071910'>
+      <repositories size='2'>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.egit.feature.group' name='Git integration for Eclipse' version='4.9.2.201712150930-r'>
+      <repositories size='3'>
+        <repository location='http://download.eclipse.org/releases/oxygen/201712201001'/>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.linuxtools.gprof.feature.feature.group' name='GProf Integration' version='6.2.1.201803061555'>
+      <repositories size='2'>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.linuxtools.cdt.libhover.devhelp.feature.feature.group' name='Library Hover help for devhelp documentation' version='6.2.1.201803061555'>
+      <repositories size='2'>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.tracecompass.lttng2.kernel.feature.group' name='LTTng Kernel Analysis' version='3.3.0.201803071910'>
+      <repositories size='2'>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.tracecompass.lttng2.control.feature.group' name='LTTng Tracer Control' version='3.3.0.201803071910'>
+      <repositories size='2'>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.tracecompass.lttng2.ust.feature.group' name='LTTng Userspace Analysis' version='3.3.0.201803071910'>
+      <repositories size='2'>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.cdt.mylyn.feature.group' name='Mylyn Context Connector: C/C++ Development' version='5.19.0.v20170411-2108'>
+      <repositories size='3'>
+        <repository location='http://download.eclipse.org/releases/oxygen/201712201001'/>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.mylyn.ide_feature.feature.group' name='Mylyn Context Connector: Eclipse IDE' version='3.23.0.v20170411-2108'>
+      <repositories size='3'>
+        <repository location='http://download.eclipse.org/releases/oxygen/201712201001'/>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.mylyn.team_feature.feature.group' name='Mylyn Context Connector: Team Support' version='3.23.0.v20170411-2108'>
+      <repositories size='3'>
+        <repository location='http://download.eclipse.org/releases/oxygen/201712201001'/>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.mylyn_feature.feature.group' name='Mylyn Task List' version='3.23.1.v20170623-0008'>
+      <repositories size='3'>
+        <repository location='http://download.eclipse.org/releases/oxygen/201712201001'/>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.mylyn.context_feature.feature.group' name='Mylyn Task-Focused Interface' version='3.23.0.v20170414-0629'>
+      <repositories size='3'>
+        <repository location='http://download.eclipse.org/releases/oxygen/201712201001'/>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.mylyn.bugzilla_feature.feature.group' name='Mylyn Tasks Connector: Bugzilla' version='3.23.1.v20170623-0008'>
+      <repositories size='3'>
+        <repository location='http://download.eclipse.org/releases/oxygen/201712201001'/>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.mylyn.wikitext_feature.feature.group' name='Mylyn WikiText' version='3.0.19.201711172000'>
+      <repositories size='3'>
+        <repository location='http://download.eclipse.org/releases/oxygen/201712201001'/>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.oomph.setup.feature.group' name='Oomph Setup' version='1.9.0.v20180504-1434'>
+      <repositories size='1'>
+        <repository location='http://download.eclipse.org/oomph/updates/milestone/latest'/>
+      </repositories>
+    </iu>
+    <iu id='org.python.pydev.feature.feature.group' name='PyDev for Eclipse' version='6.3.3.201805051638'>
+      <repositories size='1'>
+        <repository location='http://www.pydev.org/updates/'/>
+      </repositories>
+    </iu>
+    <iu id='org.python.pydev.mylyn.feature.feature.group' name='Pydev Mylyn Integration' version='0.6.0'>
+      <repositories size='1'>
+        <repository location='http://www.pydev.org/updates/'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.rse.feature.group' name='Remote System Explorer End-User Runtime' version='3.7.3.201704251225'>
+      <repositories size='3'>
+        <repository location='http://download.eclipse.org/releases/oxygen/201712201001'/>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.linuxtools.rpm.feature.group' name='RPM Tools' version='6.2.1.201803061555'>
+      <repositories size='2'>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.tm.terminal.feature.feature.group' name='TM Terminal' version='4.3.0.201706140544'>
+      <repositories size='3'>
+        <repository location='http://download.eclipse.org/releases/oxygen/201712201001'/>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.tm.terminal.connector.cdtserial.feature.feature.group' name='TM Terminal Serial Connector Extensions' version='4.3.0.201706140544'>
+      <repositories size='3'>
+        <repository location='http://download.eclipse.org/releases/oxygen/201712201001'/>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.linuxtools.valgrind.feature.group' name='Valgrind Tools Integration' version='6.2.1.201803061555'>
+      <repositories size='2'>
+        <repository location='http://download.eclipse.org/releases/oxygen'/>
+        <repository location='http://download.eclipse.org/releases/oxygen/201804111000'/>
+      </repositories>
+    </iu>
+  </ius>
+</p2f>
