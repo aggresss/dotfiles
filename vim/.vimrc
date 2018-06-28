@@ -25,6 +25,7 @@ colorscheme desert
 highlight Pmenu ctermfg=black ctermbg=darkcyan
 highlight PmenuSel ctermfg=black ctermbg=gray
 syntax on
+set encoding=utf-8
 set fileencodings=utf-8,gb2312,gbk,gb18030
 set noswapfile
 set number
