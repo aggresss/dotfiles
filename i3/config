@@ -30,11 +30,11 @@ font pango:monospace 8
 floating_modifier $mod
 
 # Set background
-exec feh --bg-scale ~/Wallpaper/default.jpg
+exec --no-startup-id feh --bg-scale ~/Wallpaper/default.jpg
 
 # Autostart
-exec gnome-session &
-exec nm-applet &
+exec --no-startup-id gnome-session
+exec --no-startup-id nm-applet
 
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
