@@ -30,5 +30,7 @@ let g:ycm_complete_in_string=0
 let g:ycm_complete_in_comment=0
 set completeopt=menu
 
+nnoremap <leader>y :let g:ycm_auto_trigger=0<CR>
+nnoremap <leader>Y :let g:ycm_auto_trigger=1<CR>
 
 " EOF

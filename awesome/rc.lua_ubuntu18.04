@@ -376,7 +376,7 @@ globalkeys = gears.table.join(
               {description = "show the menubar", group = "launcher"}),
 
     -- Fn key binging
-    awful.key({ modkey }, "F1", function () awful.util.spawn_with_shell("import ~/a_screen_window.jpg") end,
+    awful.key({ modkey }, "F1", function () awful.util.spawn_with_shell("import ~/ScreenShots/a_screen_window.jpg") end,
               {description = "launch screen shortcut", group = "launcher"}),
     awful.key({ modkey }, "F2", function () awful.util.spawn_with_shell("gnome-screensaver-command -l") end,
               {description = "launch gnome-screensaver", group = "launcher"}),
