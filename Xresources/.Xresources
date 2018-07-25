@@ -45,8 +45,8 @@ URxvt*title: urxvt
 ! scrollbar
 URxvt*scrollBar: False
 ! font
-URxvt*font: xft:WenQuanYi Micro Hei Mono:size=10:style=Regular:antialias=true,xft:WenQuanYi Micro Hei Mono:size=9:style=Regular:antialias=true
-URxvt*boldfont: xft:WenQuanYi Micro Hei Mono:size=10:style=BOld:antialias=true,xft:WenQuanYi Micro Hei Mono:size=9:style=Bold:antialias=true
+URxvt*font: xft:DejaVu Sans Mono:size=10:style=Regular:antialias=true,xft:WenQuanYi Micro Hei Mono:size=11:style=Regular:antialias=true
+URxvt*boldfont: xft:DejaVu Sans Mono:size=10:style=BOld:antialias=true,xft:WenQuanYi Micro Hei Mono:size=11:style=Bold:antialias=true
 
 
 ! EOF
