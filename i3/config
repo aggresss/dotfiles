@@ -35,6 +35,7 @@ exec --no-startup-id feh --bg-scale ~/Wallpaper/default.jpg
 # Autostart
 exec --no-startup-id gnome-session
 exec --no-startup-id nm-applet
+exec --no-startup-id xset dpms 1800 0 0
 
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal

@@ -1,3 +1,6 @@
+! ~/.Xresources config file
+
+
 ! xterm configuration file made by aggresss
 ! usage: xrdb ~/.Xresources
 ! See Also: man xterm or https://linux.die.net/man/1/xterm
@@ -13,7 +16,7 @@ xterm*scaleHeight: 1.10
 ! English font
 xterm*faceName: DejaVu Sans Mono:pixelsize=14
 ! Chinese font
-xterm*faceNameDoublesize: WenQuanYi Zen Hei:pixelsize=15
+xterm*faceNameDoublesize: WenQuanYi Micro Hei Mono:pixelsize=15
 ! Input method
 xterm*inputMethod:fcitx
 ! History line
@@ -23,5 +26,27 @@ xterm*SaveLines: 9999
 xterm*VT100.Translations: #override \
     <Btn1Up>: select-end(CLIPBOARD,PRIMARY,CUT_BUFFER0) \n\
     Ctrl <KeyPress> V: insert-selection(CLIPBOARD,PRIMARY,CUT_BUFFER0)
+
+
+! rxvt configuration file made by aggresss
+
+! urxvt setting
+URxvt*preeditType:Root
+URxvt*inputMethod:fcitx
+! theme setting
+URxvt*background: black
+URxvt*foreground: white
+URxvt*colorBD: blue
+URxvt*colorUL: red
+! line
+URxvt*shading: 100
+URxvt*saveLines: 9999
+URxvt*title: urxvt
+! scrollbar
+URxvt*scrollBar: False
+! font
+URxvt*font: xft:WenQuanYi Micro Hei Mono:size=10:style=Regular:antialias=true,xft:WenQuanYi Micro Hei Mono:size=9:style=Regular:antialias=true
+URxvt*boldfont: xft:WenQuanYi Micro Hei Mono:size=10:style=BOld:antialias=true,xft:WenQuanYi Micro Hei Mono:size=9:style=Bold:antialias=true
+
 
 ! EOF
