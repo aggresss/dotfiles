@@ -69,7 +69,7 @@ command TrimHnumber %s/^[0-9]\{1,}//g
 command TrimOnespace %s/^\s//g
 " Trim spaces at the head of line
 command Trimspaces %s/^\s*//g
-" Trim html Trimspaces->TrimHnumber->TrimOnespace->TrimEOL->TrimCRLF
-command Trimhtml %s/^\s*//g | %s/^[0-9]\{1,}//g | %s/^\s//g | %s/\s\+$//g | %s/\r\(\n\)/\r/g
+" Trim html Trimspaces->TrimHnumber->TrimOnespace->TrimEOL
+command Trimhtml %s/^\s*//g | %s/^[0-9]\{1,}//g | %s/^\s//g | %s/\s\+$//g
 
 " EOF
