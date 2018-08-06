@@ -55,8 +55,20 @@ match WhitespaceEOL /\s\+$/
 :map <C-j> :res +2<cr>
 :map <C-k> :res -2<cr>
 
-" custom command
+"
+" Custom command
+"
+" Trim CRLF to LF
 command TrimCRLF %s/\r\(\n\)/\r/g
+" Trim redundancy sapce at the end of line
 command TrimEOL %s/\s\+$//g
+" Trim number at the head of line
+command TrimHnumber %s/^[0-9]\{1,}//g
+" Trim one space at the head of line
+command TrimOnespace %s/^\s//g
+" Trim spaces at the head of line
+command Trimspaces %s/^\s*//g
+" Trim html Trimspaces->TrimHnumber->TrimOnespace->TrimEOL->TrimCRLF
+command Trimhtml %s/^\s*//g | %s/^[0-9]\{1,}//g | %s/^\s//g | %s/\s\+$//g | %s/\r\(\n\)/\r/g
 
 " EOF
