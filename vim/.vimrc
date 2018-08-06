@@ -2,6 +2,7 @@
 
 set nocompatible    " required
 filetype off        " required
+let mapleader="\\"
 
 " check if use bundle
 if filereadable(expand("~/.vimrc.bundles"))
