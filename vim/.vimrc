@@ -1,4 +1,5 @@
 " Vim config file composed by aggresss
+" https://raw.githubusercontent.com/aggresss/configuration/master/vim/.vimrc
 
 set nocompatible    " required
 filetype off        " required
