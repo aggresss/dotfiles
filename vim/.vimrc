@@ -57,6 +57,12 @@ match WhitespaceEOL /\s\+$/
 :map <C-j> :res +2<cr>
 :map <C-k> :res -2<cr>
 
+:map <leader>r :retab<cr>
+:map <leader>t :et<cr>
+:map <leader>T :noet<cr>
+:map <leader>p :paste<cr>
+:map <leader>P :nopaste<cr>
+
 "
 " Custom command
 "
