@@ -39,7 +39,18 @@ export -f proxy-cfg
 alias ssl='sslocal -c /etc/shadowsocks/config-client.json -d'
 alias sss='ssserver -c /etc/shadowsocks/config-server.json -d'
 
+# modify bash font color value
+# usage: cv 0-6 RGY BMC
+colorv(){
+  echo -e "\e[0;3${1}m"
+}
+export -f colorv
+
+##########################
 # modify for docker
+##########################
+
+# fast docker inside
 docker-inside(){
   docker exec -it $1 bash -c "stty cols $COLUMNS rows $LINES && bash";
 }
@@ -51,12 +62,22 @@ docker-inspect(){
 }
 export -f docker-inspect
 
-# modify bash font color value
-# usage: cv 0-6 RGY BMC
-colorv(){
-  echo -e "\e[0;3${1}m"
+
+##########################
+# modify for git
+##########################
+
+# signature for github repository
+git-sig(){
+  git config user.name  "aggresss"
+  git config user.email "aggress@gmail.com"
 }
-export -f colorv
+export -f git-sig
+
+
+##########################
+# modify for golang
+##########################
 
 # set $PWD append to $GOPATH
 gopath-pwd(){
