@@ -7,7 +7,8 @@
 alias fdf='find . -name "*" |grep -sin'
 # find file content
 alias fdc='find . -name "*" |xargs grep -sin'
-
+# count code line
+alias ccl='find . -name "*[.h|.c|.hpp|.cpp|.go|.py]" -type f | xargs cat | wc -l'
 # alias for some application special open
 alias calc='gnome-calculator'
 alias gterm='gnome-terminal'
