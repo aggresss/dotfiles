@@ -1,7 +1,8 @@
 
-# usage: cp /etc/skel/.bashrc ~/ && cat .bashrc >> ~/.bashrc && source ~/.bashrc
 # start of modify
 # modify by aggresss
+# wget https://raw.githubusercontent.com/aggresss/dotfiles/master/home/.bashrc.append
+# usage: cp /etc/skel/.bashrc ~/ && cat .bashrc.append >> ~/.bashrc && source ~/.bashrc && rm -rf .bashrc.append
 
 # find file
 alias fdf='find . -name "*" |grep -sin'
