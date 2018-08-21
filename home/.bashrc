@@ -94,7 +94,7 @@ if [ -d "$GOROOT/bin" ] ; then
     export PATH="$GOROOT/bin:$PATH"
 fi
 
-export GOPATH="$HOME/go"
+export GOPATH="$GOPATH:$HOME/go"
 if [ -d "$GOPATH/bin" ] ; then
     export PATH="$GOPATH/bin:$PATH"
 fi
