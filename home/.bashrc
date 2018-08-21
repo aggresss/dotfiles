@@ -36,9 +36,6 @@ proxy-cfg(){
 }
 export -f proxy-cfg
 
-# Shadowsocks
-alias ssl='sslocal -c /etc/shadowsocks/config-client.json -d'
-alias sss='ssserver -c /etc/shadowsocks/config-server.json -d'
 
 # modify bash font color value
 # usage: cv 0-6 RGY BMC
