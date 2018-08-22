@@ -61,6 +61,10 @@ docker-inspect(){
 }
 export -f docker-inspect
 
+docker-sync(){
+  cd ~/Documnets/docker && docker-sync $1
+}
+export -f docker-sync
 
 ##########################
 # modify for git
