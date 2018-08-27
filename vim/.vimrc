@@ -62,6 +62,8 @@ match WhitespaceEOL /\s\+$/
 :map <leader>T :set noet<cr>
 :map <leader>p :set paste<cr>
 :map <leader>P :set nopaste<cr>
+:map <leader>n :set nu<cr>
+:map <leader>N :set nonu<cr>
 
 "
 " Custom command
@@ -78,5 +80,29 @@ command TrimOnespace %s/^\s//g
 command Trimspaces %s/^\s*//g
 " Trim html Trimspaces->TrimHnumber->TrimOnespace->TrimEOL
 command Trimhtml %s/^\s*//g | %s/^[0-9]\{1,}//g | %s/^\s//g | %s/\s\+$//g
+
+"
+" Custom function
+"
+" Compile singleton file
+map <leader>c :call Compile()<CR>
+function! Compile()
+    exec "w"
+    if &filetype == 'c'
+        exec '!gcc % -o %<'
+        exec '!./%<'
+    elseif &filetype == 'cpp'
+        exec '!g++ -std=c++14 % -o %<.out'
+        exec '!./%<.out'
+     elseif &filetype == 'go'
+        exec '!go build -o %<.out %'
+        exec '!./%<.out'
+    elseif &filetype == 'python'
+        exec '!python %'
+    elseif &filetype == 'sh'
+        :!bash %
+    endif
+endfunc
+
 
 " EOF
