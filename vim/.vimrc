@@ -89,10 +89,10 @@ map <leader>c :call Compile()<CR>
 function! Compile()
     exec "w"
     if &filetype == 'c'
-        exec '!gcc % -o %<'
+        exec '!gcc -o %< %'
         exec '!./%<'
     elseif &filetype == 'cpp'
-        exec '!g++ -std=c++14 % -o %<.out'
+        exec '!g++ -std=c++14 -o %<.out %'
         exec '!./%<.out'
      elseif &filetype == 'go'
         exec '!go build -o %<.out %'
