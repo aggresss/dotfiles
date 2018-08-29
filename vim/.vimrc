@@ -62,8 +62,8 @@ match WhitespaceEOL /\s\+$/
 :map <leader>T :set noet<cr>
 :map <leader>p :set paste<cr>
 :map <leader>P :set nopaste<cr>
-:map <leader>n :set nu<cr>
-:map <leader>N :set nonu<cr>
+:map <leader>n :set nonu<cr>
+:map <leader>N :set nu<cr>
 
 "
 " Custom command
