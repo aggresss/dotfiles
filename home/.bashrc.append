@@ -61,6 +61,14 @@ docker-inspect(){
 }
 export -f docker-inspect
 
+docker-private(){
+  docker run --rm -it \
+    -v ~/.ssh:/root/.ssh \
+    -v ~/.vimrc:/root/.vimrc \
+    -v ~/.bashrc:/root/.bashrc \
+    $*
+}
+export -f docker-private
 
 ##########################
 # modify for git
