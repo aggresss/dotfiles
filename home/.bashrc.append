@@ -55,12 +55,14 @@ docker-inside(){
 }
 export -f docker-inside
 
+# inspect volumes and port
 docker-inspect(){
   docker inspect $1 | jq -r '.[0].ContainerConfig.Volumes'
   docker inspect $1 | jq -r '.[0].ContainerConfig.ExposedPorts'
 }
 export -f docker-inspect
 
+# run and mount private file
 docker-private(){
   docker run --rm -it \
     -v ~/.ssh:/root/.ssh \
