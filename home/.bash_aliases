@@ -1,15 +1,20 @@
-
+# file .bash_aliases
 # start of modify
 # modify by aggresss
-# wget https://raw.githubusercontent.com/aggresss/dotfiles/master/home/.bashrc.append
-# usage: cp /etc/skel/.bashrc ~/ && cat .bashrc.append >> ~/.bashrc && source ~/.bashrc && rm -rf .bashrc.append
+# wget https://raw.githubusercontent.com/aggresss/dotfiles/master/home/.bash_aliases
+
+##########################
+# modify for utility
+##########################
 
 # find file
 alias fdf='find . -name "*" |grep -sin'
 # find file content
 alias fdc='find . -name "*" |xargs grep -sin'
+
 # count code line
 alias ccl='find . -name "*[.h|.c|.hpp|.cpp|.go|.py]" -type f | xargs cat | wc -l'
+
 # alias for some application special open
 alias calc='gnome-calculator'
 alias gterm='gnome-terminal'
@@ -57,8 +62,9 @@ export -f docker-inside
 
 # inspect volumes and port
 docker-inspect(){
-  docker inspect $1 -f {{.Volumes}}
-  docker inspect $1 -f {{.ExposedPorts}}
+  echo "Volumes:" ; docker inspect $1 -f {{.Config.Volumes}}
+  echo "ExposedPorts:" ; docker inspect $1 -f {{.Config.ExposedPorts}}
+  echo "Labels:" ; docker inspect $1 -f {{.Config.Labels}}
 }
 export -f docker-inspect
 
@@ -67,7 +73,8 @@ docker-private(){
   docker run --rm -it \
     -v ~/.ssh:/root/.ssh \
     -v ~/.vimrc:/root/.vimrc \
-    -v ~/.bashrc:/root/.bashrc \
+    -v ~/.bash_aliases:/root/.bash_aliases \
+    -v ~/.inputrc:/root/.inputrc \
     $*
 }
 export -f docker-private
@@ -110,5 +117,4 @@ if [ -d "$GOPATH/bin" ] ; then
     export PATH="$GOPATH/bin:$PATH"
 fi
 
-
-# end of modify
+# end of .bash_aliases

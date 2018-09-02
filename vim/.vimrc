@@ -31,6 +31,7 @@ set encoding=utf-8
 set fileencodings=utf-8,gb2312,gbk,gb18030
 set noswapfile
 set number
+set ruler
 set nowrap
 set cursorline
 set ts=4 sts=4 sw=4 et

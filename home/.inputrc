@@ -1,0 +1,7 @@
+# readline configuration file
+# keyseq refs to https://tiswww.cwru.edu/php/chet/readline/readline.html
+# https://raw.githubusercontent.com/aggresss/dotfiles/master/home/.inputrc
+
+# use Ctrl+b to backword a word and Ctrl+f to forward a word
+"\C-b": backward-word
+"\C-f": forward-word
