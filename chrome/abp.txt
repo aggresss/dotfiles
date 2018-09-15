@@ -7,3 +7,4 @@
 ||pos.baidu.com/*
 ||360doc.com/ad*
 ||cee2.iteye.com/*
+||rabc2.iteye.com/*
