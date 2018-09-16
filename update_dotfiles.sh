@@ -33,9 +33,10 @@ if [ -z "$HAS_UPDATED" ]; then
 fi
 
 # Update commom dotfiles
-update_file ${BASE_URL}/vim/.vimrc ${HOME}/.vimrc
+update_file ${BASE_URL}/home/.bashrc ${HOME}/.bashrc
 update_file ${BASE_URL}/home/.bash_aliases ${HOME}/.bash_aliases
 update_file ${BASE_URL}/home/.inputrc ${HOME}/.inputrc
+update_file ${BASE_URL}/vim/.vimrc ${HOME}/.vimrc
 
 SYS_TYPE=`uname`
 case ${SYS_TYPE} in
@@ -45,7 +46,6 @@ case ${SYS_TYPE} in
     ;;
     Darwin)
         update_file ${BASE_URL}/home/.bash_profile ${HOME}/.bash_profile
-        update_file ${BASE_URL}/home/.bashrc ${HOME}/.bashrc
 
     ;;
     *)

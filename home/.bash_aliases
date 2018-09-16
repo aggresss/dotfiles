@@ -76,10 +76,8 @@ export -f docker-inspect
 # run and mount private file
 docker-private(){
   docker run --rm -it \
-    -v ~/.ssh:/root/.ssh \
-    -v ~/.vimrc:/root/.vimrc \
-    -v ~/.bash_aliases:/root/.bash_aliases \
-    -v ~/.inputrc:/root/.inputrc \
+    -v root:/root \
+    -v /etc/hosts:/etc/hosts \
     $*
 }
 export -f docker-private
