@@ -1,29 +1,14 @@
 #
-# bash file for MacOS
+# .bash_profile fork from Ubuntu:18.04 /etc/skel/.profile
 # wget https://raw.githubusercontent.com/aggresss/dotfiles/master/home/.bash_profile
 #
+# ~/.profile: executed by Bourne-compatible login shells.
 
-if [ -f ~/.bashrc ]; then
+if [ "$BASH" ]; then
+  if [ -f ~/.bashrc ]; then
     . ~/.bashrc
+  fi
 fi
 
-# environment for gcc
-alias gcc='gcc-7'
-alias g++='g++-7'
-alias c++='c++-7'
+mesg n || true
 
-# ls color
-export CLICOLOR=1
-export LSCOLORS=gxfxaxdxcxegedabagacad
-
-# environment for java
-export JAVA_HOME=`/usr/libexec/java_home`
-export PATH=$PATH:$JAVA_HOME/bin
-
-# environment for golang
-export GOROOT="/usr/local/go/go1.10.2"
-export PATH="$PATH:$GOROOT/bin:$HOME/go/bin"
-export GOPATH="$HOME/go:$HOME/go-workspace"
-
-# environment for ~/bin
-export PATH="$PATH:$HOME/bin"

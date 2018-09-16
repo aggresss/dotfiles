@@ -7,6 +7,9 @@
 # modify for utility
 ##########################
 
+# environment for ~/bin
+export PATH="$PATH:$HOME/bin"
+
 # find file
 alias fdf='find . -name "*" |grep -sin'
 # find file content
@@ -28,6 +31,9 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
+# Some more alias to avoid making mistakes
+alias rm='rm -i'
+
 # switch proxy on-off
 proxy-cfg(){
   if [ $1 == 1 ];then
@@ -41,7 +47,6 @@ proxy-cfg(){
     fi
 }
 export -f proxy-cfg
-
 
 # modify bash font color value
 # usage: cv 0-6 RGY BMC
@@ -116,5 +121,31 @@ export GOPATH="$GOPATH:$HOME/go"
 if [ -d "$GOPATH/bin" ] ; then
     export PATH="$GOPATH/bin:$PATH"
 fi
+
+##########################
+# specified for system type
+##########################
+SYS_TYPE=`uname`
+case ${SYS_TYPE} in
+    Darwin)
+        # ls color
+        export CLICOLOR=1
+        export LSCOLORS=gxfxaxdxcxegedabagacad
+        # environment for gcc
+        alias gcc='gcc-7'
+        alias g++='g++-7'
+        alias c++='c++-7'
+        # environment for java
+        export JAVA_HOME=`/usr/libexec/java_home`
+        export PATH=$PATH:$JAVA_HOME/bin
+
+    ;;
+    Linux)
+
+    ;;
+    *)
+
+    ;;
+esac
 
 # end of .bash_aliases
