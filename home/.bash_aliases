@@ -30,9 +30,11 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
 
 # Some more alias to avoid making mistakes
 alias rm='rm -i'
+alias mv='mv -i'
 
 # switch proxy on-off
 proxy-cfg(){
