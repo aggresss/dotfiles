@@ -79,7 +79,6 @@ export -f docker-inspect
 docker-private(){
   docker run --rm -it \
     -v root:/root \
-    -v /etc/hosts:/etc/hosts \
     $*
 }
 export -f docker-private
