@@ -79,6 +79,7 @@ export -f docker-inspect
 docker-private(){
   docker run --rm -it \
     -v root:/root \
+    -v ~/Downloads:/Downloads
     $*
 }
 export -f docker-private
