@@ -7,6 +7,7 @@
 # install necessary application
 #########################
 sudo apt-get update && sudo apt-get install -y \
+    apt-file \
     tree \
     curl \
     vim \
@@ -21,6 +22,7 @@ sudo apt-get update && sudo apt-get install -y \
     cmake \
     ccache \
     python \
+    default-jdk \
     pkg-config \
     flex \
     bison \
