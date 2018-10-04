@@ -34,6 +34,7 @@ sudo apt-get update && sudo apt-get install -y \
     nfs-kernel-server \
     shadowsocks \
     polipo \
+    exfat-utils \
     \
     fonts-wqy-microhei \
     fonts-wqy-zenhei \
