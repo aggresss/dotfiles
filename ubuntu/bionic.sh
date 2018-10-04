@@ -3,50 +3,49 @@
 # Normal installation and Install third-party software.
 # wget https://raw.githubusercontent.com/aggresss/dotfiles/master/ubuntu/bionic.sh
 
-sudo sed -i 's/archive.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list && \
-    sudo apt-get update && sudo apt-get install -y \
-        tree \
-        curl \
-        vim \
-        ssh \
-        git \
-        p7zip-full \
-        hexedit \
-        tmux \
-        build-essential \
-        automake \
-        libtool \
-        cmake \
-        ccache \
-        python \
-        pkg-config \
-        flex \
-        bison \
-        nasm \
-        yasm \
-        gawk \
-        net-tools \
-        netcat \
-        nfs-kernel-server \
-        \
-        fonts-wqy-microhei \
-        fonts-wqy-zenhei \
-        xclip \
-        vlc \
-        chromium-browser \
-        slock \
-        minicom \
-        okular \
-        xvnc4viwer \
-        flashplugin-installer \
-        scrot \
-        imagemagick \
-        meld \
-        xterm \
-        awesome \
-        i3 \
-        xmonad \
-        dwm
+sudo apt-get update && sudo apt-get install -y \
+    tree \
+    curl \
+    vim \
+    ssh \
+    git \
+    p7zip-full \
+    hexedit \
+    tmux \
+    build-essential \
+    automake \
+    libtool \
+    cmake \
+    ccache \
+    python \
+    pkg-config \
+    flex \
+    bison \
+    nasm \
+    yasm \
+    gawk \
+    net-tools \
+    netcat \
+    nfs-kernel-server \
+    \
+    fonts-wqy-microhei \
+    fonts-wqy-zenhei \
+    xclip \
+    vlc \
+    chromium-browser \
+    slock \
+    minicom \
+    okular \
+    xvnc4viewer \
+    flashplugin-installer \
+    scrot \
+    imagemagick \
+    meld \
+    xterm \
+    awesome \
+    i3 \
+    xmonad \
+    dwm
 
 #
 # install third-part applications
