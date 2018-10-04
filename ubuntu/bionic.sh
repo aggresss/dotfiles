@@ -3,9 +3,9 @@
 # Normal installation and Install third-party software.
 # wget https://raw.githubusercontent.com/aggresss/dotfiles/master/ubuntu/bionic.sh
 
-#
+#########################
 # install necessary application
-#
+#########################
 sudo apt-get update && sudo apt-get install -y \
     tree \
     curl \
@@ -45,15 +45,17 @@ sudo apt-get update && sudo apt-get install -y \
     imagemagick \
     meld \
     xterm \
+    gnome-tweak-tool \
     awesome \
     i3 \
     xmonad \
+    xmonbar \
     dwm
 
 
-#
+#########################
 # install third-part applications
-#
+#########################
 
 # docker
 # https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-repository
@@ -80,3 +82,11 @@ sudo apt-get install -y apt-transport-https
 sudo apt-get update
 sudo apt-get install -y code
 
+
+#########################
+# configuration
+#########################
+
+# grub
+sed -r -e 's/^GRUB_DEFAULT.*$/GRUB_DEFAULT=saved\nGRUB_SAVEDEFAULT=true/' -i /etc/default/grub.bak
+sed -r -e 's/^GRUB_CMDLINE_LINUX_DEFAULT.$/#\1/' -i /etc/default/grub.bak
