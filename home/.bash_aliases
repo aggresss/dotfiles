@@ -22,7 +22,7 @@ alias ccl='find . -name "*[.h|.c|.hpp|.cpp|.go|.py]" -type f | xargs cat | wc -l
 alias calc='gnome-calculator'
 alias gterm='gnome-terminal'
 alias em='emacs -nw'
-alias cbp='chromium-browser --proxy-server=socks5://127.0.0.1:10080'
+alias cbp='chromium-browser --proxy-server=socks5://127.0.0.1:1080'
 alias wine='env LANG=zh_CN.UTF8 wine'
 
 # short for cd ..
@@ -39,7 +39,7 @@ alias mv='mv -i'
 # switch proxy on-off
 proxy-cfg(){
   if [ $1 == 1 ];then
-    proxy_url="http://127.0.0.1:1080"
+    proxy_url="http://127.0.0.1:8123"
     export proxy=${proxy_url}
     export http_proxy=${proxy_url}
     export https_proxy=${proxy_url}
