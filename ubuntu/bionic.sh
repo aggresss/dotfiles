@@ -87,6 +87,10 @@ sudo apt-get install -y code
 # configuration
 #########################
 
-# grub
-sed -r -e 's/^GRUB_DEFAULT.*$/GRUB_DEFAULT=saved\nGRUB_SAVEDEFAULT=true/' -i /etc/default/grub.bak
-sed -r -e 's/^GRUB_CMDLINE_LINUX_DEFAULT.$/#\1/' -i /etc/default/grub.bak
+# GRUB
+# save the last choice
+sudo sed -r -e 's/^GRUB_DEFAULT.*$/GRUB_DEFAULT=saved\nGRUB_SAVEDEFAULT=true/' -i /etc/default/grub
+# remove the splash screen on shutdown an startup
+sudo sed -r -e 's/(^GRUB_CMDLINE_LINUX_DEFAULT.*$)/#\1/' -i /etc/default/grub
+sudo update-grub
+
