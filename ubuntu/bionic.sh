@@ -109,6 +109,7 @@ if [ -f /etc/dnsmasq.conf ]; then
 fi
 
 # polipo
+# see /usr/share/doc/polipo/examples/config.sample
 sudo chown `id -nu` /etc/polipo/config
 cat << END >> /etc/polipo/config
 
