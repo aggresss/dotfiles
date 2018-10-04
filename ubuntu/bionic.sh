@@ -3,6 +3,9 @@
 # Normal installation and Install third-party software.
 # wget https://raw.githubusercontent.com/aggresss/dotfiles/master/ubuntu/bionic.sh
 
+#
+# install necessary application
+#
 sudo apt-get update && sudo apt-get install -y \
     tree \
     curl \
@@ -46,6 +49,7 @@ sudo apt-get update && sudo apt-get install -y \
     i3 \
     xmonad \
     dwm
+
 
 #
 # install third-part applications
