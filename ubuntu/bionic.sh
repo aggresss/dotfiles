@@ -73,6 +73,8 @@ sudo apt-get remove -y docker docker-engine docker.io && \
         $(lsb_release -cs) \
         stable"
     sudo apt-get update && sudo apt-get install -y docker-ce
+# add docker access authority to system default user
+sudo usermod -a `id -nu 1000` -G docker
 
 # visual studio code
 # https://code.visualstudio.com/docs/setup/linux
