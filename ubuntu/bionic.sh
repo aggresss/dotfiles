@@ -109,7 +109,9 @@ if [ -f /etc/dnsmasq.conf ]; then
 fi
 
 # polipo
-sudo cat << END >> /etc/polipo/config
+sudo chown `id -nu` /etc/polipo/config
+cat << END >> /etc/polipo/config
+
 socksParentProxy = "127.0.0.1:1080"
 socksProxyType = socks5
 proxyPort = 8123
@@ -119,4 +121,4 @@ chunkHighMark = 50331648
 objectHighMark = 16384
 
 END
-
+sudo chown `id -nu 0` /etc/polipo/config
