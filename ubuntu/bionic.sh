@@ -32,6 +32,7 @@ sudo apt-get update && sudo apt-get install -y \
     net-tools \
     netcat \
     nfs-kernel-server \
+    shadowsocks \
     \
     fonts-wqy-microhei \
     fonts-wqy-zenhei \
