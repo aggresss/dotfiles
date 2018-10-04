@@ -45,6 +45,7 @@ sudo apt-get update && sudo apt-get install -y \
     imagemagick \
     meld \
     xterm \
+    fcitx-sunpinyin \
     gnome-tweak-tool \
     awesome \
     i3 \
