@@ -122,3 +122,7 @@ objectHighMark = 16384
 
 END
 sudo chown `id -nu 0` /etc/polipo/config
+
+# shadowsocks
+# modify shadowsock mode from server to client
+sed -r -e 's@DAEMON=/usr/bin/ssserver@DAEMON=/usr/bin/sslocal@' -i /etc/init.d/shadowsocks
