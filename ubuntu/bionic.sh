@@ -3,8 +3,8 @@
 # Normal installation and Install third-party software.
 # wget https://raw.githubusercontent.com/aggresss/dotfiles/master/ubuntu/bionic.sh
 
-sed -i 's/archive.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list && \
-    apt-get update && apt-get install -y \
+sudo sed -i 's/archive.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list && \
+    sudo apt-get update && sudo apt-get install -y \
         tree \
         curl \
         vim \
