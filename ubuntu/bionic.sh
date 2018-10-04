@@ -107,3 +107,16 @@ sudo update-grub
 if [ -f /etc/dnsmasq.conf ]; then
     sudo sed -r -e 's/^#(port=5353)/\1/' -i /etc/dnsmasq.conf
 fi
+
+# polipo
+cat << END >> /etc/polipo/config
+socksParentProxy = "127.0.0.1:1080"
+socksProxyType = socks5
+proxyPort = 8123
+allowedClients = 127.0.0.1
+
+chunkHighMark = 50331648
+objectHighMark = 16384
+
+END
+
