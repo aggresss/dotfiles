@@ -33,6 +33,7 @@ sudo apt-get update && sudo apt-get install -y \
     netcat \
     nfs-kernel-server \
     shadowsocks \
+    polipo \
     \
     fonts-wqy-microhei \
     fonts-wqy-zenhei \
@@ -101,3 +102,8 @@ sudo sed -r -e 's/^GRUB_DEFAULT.*$/GRUB_DEFAULT=saved\nGRUB_SAVEDEFAULT=true/' -
 sudo sed -r -e 's/(^GRUB_CMDLINE_LINUX_DEFAULT.*$)/#\1/' -i /etc/default/grub
 sudo update-grub
 
+# dnsmasq
+# config dnsmasq for polipo use
+if [ -f /etc/dnsmasq.conf ]; then
+    sudo sed -r -e 's/^#(port=5353)/\1/' -i /etc/dnsmasq.conf
+fi
