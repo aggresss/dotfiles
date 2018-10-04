@@ -109,7 +109,7 @@ if [ -f /etc/dnsmasq.conf ]; then
 fi
 
 # polipo
-cat << END >> /etc/polipo/config
+sudo cat << END >> /etc/polipo/config
 socksParentProxy = "127.0.0.1:1080"
 socksProxyType = socks5
 proxyPort = 8123
