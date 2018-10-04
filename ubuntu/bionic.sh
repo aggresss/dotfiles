@@ -1,29 +1,19 @@
 #!/bin/bash
 # ubuntu bionic configuration file
+# Normal installation and Install third-party software.
 # wget https://raw.githubusercontent.com/aggresss/dotfiles/master/ubuntu/bionic.sh
+
 sed -i 's/archive.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list && \
-    apt-get update && apt-get install -y --no-install-recommends \
-        sudo \
-        man \
-        tzdata \
-        locales \
+    apt-get update && apt-get install -y \
         tree \
         curl \
-        wget \
-        rsync \
         vim \
         ssh \
         git \
-        ca-certificates \
-        unzip \
-        xz-utils \
         p7zip-full \
         hexedit \
         tmux \
         build-essential \
-        gdb \
-        gdbserver \
-        autoconf \
         automake \
         libtool \
         cmake \
@@ -32,8 +22,58 @@ sed -i 's/archive.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list && \
         pkg-config \
         flex \
         bison \
+        nasm \
         yasm \
         gawk \
         net-tools \
-        iputils-ping \
-        netcat 
+        netcat \
+        nfs-kernel-server \
+        \
+        fonts-wqy-microhei \
+        fonts-wqy-zenhei \
+        xclip \
+        vlc \
+        chromium-browser \
+        slock \
+        minicom \
+        okular \
+        xvnc4viwer \
+        flashplugin-installer \
+        scrot \
+        imagemagick \
+        meld \
+        xterm \
+        awesome \
+        i3 \
+        xmonad \
+        dwm
+
+#
+# install third-part applications
+#
+
+# docker
+# https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-repository
+sudo apt-get remove docker docker-engine docker.io && \
+    sudo apt-get update && \
+    sudo apt-get install \
+        apt-transport-https \
+        ca-certificates \
+        curl \
+        software-properties-common
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo add-apt-repository \
+        "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+        $(lsb_release -cs) \
+        stable"
+    sudo apt-get update && sudo apt-get install docker-ce
+
+# visual studio code
+# https://code.visualstudio.com/docs/setup/linux
+curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
+sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
+sudo apt-get install apt-transport-https
+sudo apt-get update
+sudo apt-get install code
+
