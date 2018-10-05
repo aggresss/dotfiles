@@ -11,6 +11,8 @@ sudo apt-get update && sudo apt-get install -y \
     tree \
     curl \
     vim \
+    ctags \
+    cscope \
     ssh \
     git \
     p7zip-full \
