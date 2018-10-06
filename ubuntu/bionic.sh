@@ -113,7 +113,7 @@ fi
 
 # polipo
 # see /usr/share/doc/polipo/examples/config.sample
-sudo chown `id -nu` /etc/polipo/config
+sudo chown ${USER} /etc/polipo/config
 cat << END >> /etc/polipo/config
 
 socksParentProxy = "127.0.0.1:1080"
