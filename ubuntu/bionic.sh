@@ -55,6 +55,7 @@ sudo apt-get update && sudo apt-get install -y \
     xterm \
     fcitx-sunpinyin \
     gnome-tweak-tool \
+    gnome-screensaver \
     awesome \
     i3 \
     xmonad \
