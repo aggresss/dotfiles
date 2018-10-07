@@ -20,6 +20,7 @@ sudo apt-get update && sudo apt-get install -y \
     hexedit \
     tmux \
     build-essential \
+    gcc-multilib \
     automake \
     libtool \
     cmake \
@@ -38,6 +39,7 @@ sudo apt-get update && sudo apt-get install -y \
     shadowsocks \
     polipo \
     exfat-utils \
+    ffmpeg \
     \
     fonts-wqy-microhei \
     fonts-wqy-zenhei \
