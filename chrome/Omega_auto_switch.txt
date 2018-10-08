@@ -7,7 +7,7 @@
 *.python.org +proxy
 *.youtube.com +proxy
 *.golang.org +proxy
-*.avatars0.githubusercontent.com +proxy
+*.*.githubusercontent.com +proxy
 *.github.com +proxy
 *.google.co.jp +proxy
 *.googleusercontent.com +proxy
