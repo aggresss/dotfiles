@@ -89,9 +89,10 @@ export -f docker-private
 ##########################
 
 # signature for github repository
+# $1 user.email
 git-sig(){
-  git config user.name  "aggresss"
-  git config user.email "aggress@gmail.com"
+  git config user.name `echo "$1" | awk -F "@" '{print $1}'`
+  git config user.email $1
 }
 export -f git-sig
 
