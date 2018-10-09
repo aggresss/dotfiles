@@ -3,24 +3,6 @@
 # modify by aggresss
 # wget https://raw.githubusercontent.com/aggresss/dotfiles/master/home/.bash_aliases
 
-
-##########################
-# internal function
-##########################
-
-# update file utility
-# $1 download url
-# $2 local filepath
-function update_file()
-{
-    TMP_PATH="/tmp"
-    DOWN_FILE=`echo "$1" | awk -F "/" '{print $NF}'`
-    rm -rf ${TMP_PATH}/${DOWN_FILE}
-    wget -P ${TMP_PATH} $1
-    cp -f ${TMP_PATH}/${DOWN_FILE} $2
-    rm -f ${TMP_PATH}/${DOWN_FILE}
-}
-
 ##########################
 # modify for utility
 ##########################
@@ -53,6 +35,20 @@ alias ......='cd ../../../../..'
 # Some more alias to avoid making mistakes
 alias rm='rm -i'
 alias mv='mv -i'
+
+# update file utility
+# $1 download url
+# $2 local filepath
+function update_file()
+{
+    TMP_PATH="/tmp"
+    DOWN_FILE=`echo "$1" | awk -F "/" '{print $NF}'`
+    rm -rf ${TMP_PATH}/${DOWN_FILE}
+    wget -P ${TMP_PATH} $1
+    cp -f ${TMP_PATH}/${DOWN_FILE} $2
+    rm -f ${TMP_PATH}/${DOWN_FILE}
+}
+export -f update_file
 
 # switch proxy on-off
 proxy-cfg(){
