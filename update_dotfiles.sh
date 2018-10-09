@@ -3,12 +3,12 @@
 # wget https://raw.githubusercontent.com/aggresss/dotfiles/master/update_dotfiles.sh
 
 BASE_URL="https://raw.githubusercontent.com/aggresss/dotfiles/master"
-TMP_PATH="/tmp"
 
 # $1 download url
 # $2 local filepath
 function update_file()
 {
+    TMP_PATH="/tmp"
     DOWN_FILE=`echo "$1" | awk -F "/" '{print $NF}'`
     rm -rf ${TMP_PATH}/${DOWN_FILE}
     wget -P ${TMP_PATH} $1
