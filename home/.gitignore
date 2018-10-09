@@ -1,0 +1,9 @@
+# global gitignore file
+
+# eclipse project file
+.project
+.cproject
+.settings/
+
+# vscode project file
+.vscode/
