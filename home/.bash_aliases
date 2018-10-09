@@ -57,6 +57,19 @@ colorv(){
 }
 export -f colorv
 
+# update file utility
+# $1 download url
+# $2 local filepath
+function update_file()
+{
+    DOWN_FILE=`echo "$1" | awk -F "/" '{print $NF}'`
+    rm -rf ${TMP_PATH}/${DOWN_FILE}
+    wget -P ${TMP_PATH} $1
+    cp -f ${TMP_PATH}/${DOWN_FILE} $2
+    rm -f ${TMP_PATH}/${DOWN_FILE}
+}
+export -f update_file
+
 ##########################
 # modify for docker
 ##########################
@@ -96,6 +109,13 @@ git-sig(){
 }
 export -f git-sig
 
+# set global gitignore file
+git-ignore(){
+  BASE_URL="https://raw.githubusercontent.com/aggresss/dotfiles/master"
+  update_file ${BASE_URL}/.gitignore ${HOME}/.gitignore
+  git config --global core.excludesfile ${HOME}/.gitignore
+}
+export -f git-ignore
 
 ##########################
 # modify for golang
