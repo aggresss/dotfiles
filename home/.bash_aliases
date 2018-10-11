@@ -160,7 +160,7 @@ elif [ $1 == "off" ];then
         PROMPT_COMMAND=`cat $PCBAK`
     fi
     if [ -f $PSBAK ];then
-        PS1=`cat PSBAK`
+        PS1=`cat $PSBAK`
     fi
 fi
 }
