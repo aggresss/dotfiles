@@ -7,6 +7,17 @@
 # modify for utility
 ##########################
 
+# color configuration
+black=$'\[\e[1;30m\]'
+red=$'\[\e[1;31m\]'
+green=$'\[\e[1;32m\]'
+yellow=$'\[\e[1;33m\]'
+blue=$'\[\e[1;34m\]'
+magenta=$'\[\e[1;35m\]'
+cyan=$'\[\e[1;36m\]'
+white=$'\[\e[1;37m\]'
+normal=$'\[\e[m\]'
+
 # environment for ~/bin
 export PATH="$PATH:$HOME/bin"
 
@@ -64,12 +75,6 @@ proxy-cfg(){
 }
 export -f proxy-cfg
 
-# modify bash font color value
-# usage: cv 0-6 RGY BMC
-colorv(){
-  echo -e "\e[0;3${1}m"
-}
-export -f colorv
 
 ##########################
 # modify for docker
@@ -117,6 +122,40 @@ git-ignore(){
   git config --global core.excludesfile ${HOME}/.gitignore
 }
 export -f git-ignore
+
+git_branch(){
+    local dir=. head
+    until [ "$dir" -ef / ]; do
+        if [ -f "$dir/.git/HEAD" ]; then
+            head=$(< "$dir/.git/HEAD")
+                if [[ $head = ref:\ refs/heads/* ]]; then
+                    git_branch="${head#*/*/}"
+                elif [[ $head != '' ]]; then
+                    git_branch="detached"
+                else
+                    git_branch="unknow"
+                fi
+                git_name_left="git:("
+                git_name_right=")"
+                return
+            fi
+        dir="../$dir"
+    done
+    git_branch=''
+    git_name_left=""
+    git_name_right=""
+}
+export -f git_branch
+
+git_prompt(){
+if [ $1 == 1 ]; then
+    PROMPT_COMMAND="git_branch; $PROMPT_COMMAND"
+    PS1="$green➜ $cyan\W$blue \$git_name_left$red\$git_branch$blue\$git_name_right\$ $normal"
+else
+    PROMPT_COMMAND=""
+    PS1="\h:\W \u\$"
+fi
+}
 
 ##########################
 # modify for golang
@@ -169,5 +208,6 @@ case ${SYS_TYPE} in
 
     ;;
 esac
+
 
 # end of .bash_aliases
