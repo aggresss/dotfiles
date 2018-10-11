@@ -150,7 +150,9 @@ export -f git-branch
 git-prompt(){
     PCBAK="/tmpPROMPT_COMMAND.tmp"
     PSBAK="/tmp/PS1.tmp"
-if [ $1 == "on" ];then
+if [ $1 == "" ];then
+    echo usage: $0 on | off
+elif [ $1 == "on" ];then
     echo $PROMPT_COMMAND > $PCBAK
     echo $PS1 > $PSBAK
     PROMPT_COMMAND="git-branch; $PROMPT_COMMAND"
