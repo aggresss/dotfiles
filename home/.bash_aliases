@@ -148,7 +148,7 @@ git-branch(){
 export -f git-branch
 
 git-prompt(){
-    PCBAK="/tmpPROMPT_COMMAND.tmp"
+    PCBAK="/tmp/PROMPT_COMMAND.tmp"
     PSBAK="/tmp/PS1.tmp"
 if [ ! -n "$1" ];then
     echo "usage: git-prompt on | off"
