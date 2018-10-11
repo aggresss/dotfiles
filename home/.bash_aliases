@@ -156,7 +156,7 @@ elif [ $1 == "on" ];then
     echo $PROMPT_COMMAND > $PCBAK
     echo $PS1 > $PSBAK
     PROMPT_COMMAND="git-branch; $PROMPT_COMMAND"
-    PS1="$green➜ $cyan\W$blue \$git_name_left$red\$git_branch$blue\$git_name_right\$ $normal"
+    PS1="$PS1 $green➜ $cyan\W$blue \$git_name_left$red\$git_branch$blue\$git_name_right\$ $normal"
 elif [ $1 == "off" ];then
     if [ -f $PCBAK ];then
         PROMPT_COMMAND=`cat $PCBAK`
