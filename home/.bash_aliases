@@ -135,7 +135,7 @@ git-branch(){
                 else
                     git_branch="unknow"
                 fi
-                git_name_left="git:("
+                git_name_left=":git:("
                 git_name_right=")"
                 return
             fi
