@@ -159,7 +159,7 @@ elif [ $1 == "on" ];then
     fi
     if [ ! -f $PSBAK ];then
         echo $PS1 > $PSBAK
-        PS1="$PS1 $blue\$git_name_left$red\$git_branch$blue\$git_name_right\$ $normal"
+        PS1="$PS1$blue\$git_name_left$red\$git_branch$blue\$git_name_right\$ $normal"
     fi
 elif [ $1 == "off" ];then
     if [ -f $PCBAK ];then
