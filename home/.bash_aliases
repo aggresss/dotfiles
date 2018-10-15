@@ -26,7 +26,7 @@ alias fdf='find . -name "*" |grep -sin'
 # find file content
 alias fdc='find . -name "*" |xargs grep -sin'
 # cmake clean
-alias cmc='find . -iname \'*cmake*\' -not -name CMakeLists.txt -exec rm -rf {} +'
+alias cmc='find . -iname "*cmake*" -not -name CMakeLists.txt -exec rm -rf {} +'
 # count code line
 alias ccl='find . -name "*[.h|.c|.hpp|.cpp|.go|.py]" -type f | xargs cat | wc -l'
 # alias for some application special open
