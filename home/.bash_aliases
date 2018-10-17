@@ -198,7 +198,7 @@ fi
 if [ -d "$HOME/go" ];then
     export GOPATH="$GOPATH:$HOME/go"
     if [ ! -d $HOME/go/bin ];then
-        mkdir -p $GOPATH:$HOME/go/bin
+        mkdir -p $HOME/go/bin
     fi
     export PATH="$HOME/go/bin:$PATH"
 fi
