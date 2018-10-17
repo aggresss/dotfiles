@@ -190,14 +190,17 @@ gopath-pwd(){
 export -f gopath-pwd
 
 # environmnet for Golang
-export GOROOT="$HOME/.local/go"
-if [ -d "$GOROOT/bin" ] ; then
+if [ -d "$HOME/.local/go" ];then
+    export GOROOT="$HOME/.local/go"
     export PATH="$GOROOT/bin:$PATH"
 fi
 
-export GOPATH="$GOPATH:$HOME/go"
-if [ -d "$GOPATH/bin" ] ; then
-    export PATH="$GOPATH/bin:$PATH"
+if [ -d "$HOME/go" ];then
+    export GOPATH="$GOPATH:$HOME/go"
+    if [ ! -d $HOME/go/bin ];then
+        mkdir -p $GOPATH:$HOME/go/bin
+    fi
+    export PATH="$HOME/go/bin:$PATH"
 fi
 
 ##########################
