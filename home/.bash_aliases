@@ -87,7 +87,7 @@ docker_inside(){
 export -f docker_inside
 
 # inspect volumes and port
-docker-inspect(){
+docker_inspect(){
   echo "Volumes:" ; docker inspect $1 -f {{.Config.Volumes}}
   echo "ExposedPorts:" ; docker inspect $1 -f {{.Config.ExposedPorts}}
   echo "Labels:" ; docker inspect $1 -f {{.Config.Labels}}
@@ -95,7 +95,7 @@ docker-inspect(){
 export -f docker_inspect
 
 # run and mount private file
-docker-private(){
+docker_private(){
   docker run --rm -it \
     -v root:/root \
     -v ~/Downloads:/Downloads \
