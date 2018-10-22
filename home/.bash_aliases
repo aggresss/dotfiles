@@ -62,7 +62,7 @@ function update_file()
 export -f update_file
 
 # switch proxy on-off
-proxy-cfg(){
+proxy_cfg(){
   if [ $1 == 1 ];then
     proxy_url="http://127.0.0.1:8123"
     export proxy=${proxy_url}
@@ -73,7 +73,7 @@ proxy-cfg(){
     unset proxy http_proxy https_proxy ftp_proxy
     fi
 }
-export -f proxy-cfg
+export -f proxy_cfg
 
 
 ##########################
@@ -81,10 +81,10 @@ export -f proxy-cfg
 ##########################
 
 # fast docker inside
-docker-inside(){
+docker_inside(){
   docker exec -it $1 bash -c "stty cols $COLUMNS rows $LINES && bash";
 }
-export -f docker-inside
+export -f docker_inside
 
 # inspect volumes and port
 docker-inspect(){
@@ -92,7 +92,7 @@ docker-inspect(){
   echo "ExposedPorts:" ; docker inspect $1 -f {{.Config.ExposedPorts}}
   echo "Labels:" ; docker inspect $1 -f {{.Config.Labels}}
 }
-export -f docker-inspect
+export -f docker_inspect
 
 # run and mount private file
 docker-private(){
@@ -101,7 +101,7 @@ docker-private(){
     -v ~/Downloads:/Downloads \
     $*
 }
-export -f docker-private
+export -f docker_private
 
 ##########################
 # modify for git
@@ -109,21 +109,21 @@ export -f docker-private
 
 # signature for github repository
 # $1 user.email
-git-sig(){
+git_sig(){
   git config user.name `echo "$1" | awk -F "@" '{print $1}'`
   git config user.email $1
 }
-export -f git-sig
+export -f git_sig
 
 # set global gitignore file
-git-ignore(){
+git_ignore(){
   BASE_URL="https://raw.githubusercontent.com/aggresss/dotfiles/master"
   update_file ${BASE_URL}/.gitignore ${HOME}/.gitignore
   git config --global core.excludesfile ${HOME}/.gitignore
 }
-export -f git-ignore
+export -f git_ignore
 
-git-branch(){
+git_branch(){
     local dir=. head
     until [ "$dir" -ef / ]; do
         if [ -f "$dir/.git/HEAD" ]; then
@@ -145,9 +145,9 @@ git-branch(){
     git_name_left=""
     git_name_right=""
 }
-export -f git-branch
+export -f git_branch
 
-git-prompt(){
+git_prompt(){
     PCBAK="/tmp/PROMPT_COMMAND.tmp"
     PSBAK="/tmp/PS1.tmp"
 if [ ! -n "$1" ];then
@@ -172,14 +172,14 @@ elif [ $1 == "off" ];then
     fi
 fi
 }
-
+export -f git_prompt
 
 ##########################
 # modify for golang
 ##########################
 
 # set $PWD append to $GOPATH
-gopath-pwd(){
+gopath_pwd(){
   if [[ $GOPATH =~ .*$PWD.* ]];then
     echo "currnet dir is already in GOPATH"
   else
@@ -187,7 +187,7 @@ gopath-pwd(){
     echo "fininsh setting $PWD in GOPATH"
   fi
 }
-export -f gopath-pwd
+export -f gopath_pwd
 
 # environmnet for Golang
 if [ -d "$HOME/.local/go" ];then
