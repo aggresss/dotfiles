@@ -123,7 +123,7 @@ git_ignore(){
 }
 export -f git_ignore
 
-git_branch(){
+git_branch_internal(){
     local dir=. head
     until [ "$dir" -ef / ]; do
         if [ -f "$dir/.git/HEAD" ]; then
@@ -145,7 +145,7 @@ git_branch(){
     git_name_left=""
     git_name_right=""
 }
-export -f git_branch
+export -f git_branch_internal
 
 git_prompt(){
     PCBAK="/tmp/PROMPT_COMMAND.tmp"
@@ -155,7 +155,7 @@ if [ ! -n "$1" ];then
 elif [ $1 == "on" ];then
     if [ ! -f $PCBAK ];then
         echo $PROMPT_COMMAND > $PCBAK
-        PROMPT_COMMAND="git_branch; $PROMPT_COMMAND"
+        PROMPT_COMMAND="git_branch_internal; $PROMPT_COMMAND"
     fi
     if [ ! -f $PSBAK ];then
         echo $PS1 > $PSBAK
