@@ -151,11 +151,11 @@ git_prompt(){
     PCBAK="/tmp/PROMPT_COMMAND.tmp"
     PSBAK="/tmp/PS1.tmp"
 if [ ! -n "$1" ];then
-    echo "usage: git-prompt on | off"
+    echo "usage: git_prompt on | off"
 elif [ $1 == "on" ];then
     if [ ! -f $PCBAK ];then
         echo $PROMPT_COMMAND > $PCBAK
-        PROMPT_COMMAND="git-branch; $PROMPT_COMMAND"
+        PROMPT_COMMAND="git_branch; $PROMPT_COMMAND"
     fi
     if [ ! -f $PSBAK ];then
         echo $PS1 > $PSBAK
