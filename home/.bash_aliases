@@ -183,7 +183,7 @@ export -f git_prompt
 ##########################
 
 # set $PWD append to $GOPATH
-gopath_pwd(){
+go_pwd(){
   if [[ $GOPATH =~ .*$PWD.* ]]; then
     echo "currnet dir is already in GOPATH"
   else
@@ -191,7 +191,7 @@ gopath_pwd(){
     echo "fininsh setting $PWD in GOPATH"
   fi
 }
-export -f gopath_pwd
+export -f go_pwd
 
 # environmnet for Golang
 if [ -d "$HOME/.local/go" ]; then
