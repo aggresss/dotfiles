@@ -63,13 +63,13 @@ export -f update_file
 
 # switch proxy on-off
 proxy_cfg(){
-  if [ $1 == 1 ];then
+  if [ $1 == 1 ]; then
     proxy_url="http://127.0.0.1:8123"
     export proxy=${proxy_url}
     export http_proxy=${proxy_url}
     export https_proxy=${proxy_url}
     export ftp_proxy=${proxy_url}
-  elif [ $1 == 0 ];then
+  elif [ $1 == 0 ]; then
     unset proxy http_proxy https_proxy ftp_proxy
     fi
 }
@@ -150,32 +150,31 @@ export -f git_branch_internal
 git_prompt(){
     PCBAK="/tmp/PROMPT_COMMAND.tmp"
     PSBAK="/tmp/PS1.tmp"
-if [ ! -n "$1" ];then
-    echo "usage: git_prompt on | off"
-elif [ $1 == "on" ];then
-    if [ ! -f $PCBAK ];then
-        echo $PROMPT_COMMAND > $PCBAK  
+    if [ ! -n "$1" ]; then
+        echo "usage: git_prompt on | off"
+    elif [ $1 == "on" ]; then
+        if [ ! -f $PCBAK ]; then
+            echo $PROMPT_COMMAND > $PCBAK
+        fi
+        if [ ! -f $PSBAK ]; then
+            echo $PS1 > $PSBAK
+        fi
+        if [ -z $GIT_PROMPT ] ; then
+            PROMPT_COMMAND="git_branch_internal; $PROMPT_COMMAND"
+            PS1="$PS1$blue\$git_name_left$red\$git_branch$blue\$git_name_right\$ $normal"
+            export GIT_PROMPT=1
+        fi
+    elif [ $1 == "off" ]; then
+        if [ -f $PCBAK ]; then
+            PROMPT_COMMAND="`cat $PCBAK`"
+        fi
+        if [ -f $PSBAK ]; then
+            PS1="`cat $PSBAK` "
+        fi
+        if [ -n $GIT_PROMPT ]; then
+            unset GIT_PROMPT
+        fi
     fi
-    if [ ! -f $PSBAK ];then
-        echo $PS1 > $PSBAK
-    fi
-    if [ -z $GIT_PROMPT ] ; then
-        PROMPT_COMMAND="git_branch_internal; $PROMPT_COMMAND"
-        PS1="$PS1$blue\$git_name_left$red\$git_branch$blue\$git_name_right\$ $normal"
-        export GIT_PROMPT=1
-    fi
-
-elif [ $1 == "off" ];then
-    if [ -f $PCBAK ];then
-        PROMPT_COMMAND="`cat $PCBAK`"
-    fi
-    if [ -f $PSBAK ];then
-        PS1="`cat $PSBAK` "
-    fi
-    if [ -n $GIT_PROMPT ] ; then
-        unset GIT_PROMPT
-    fi
-fi
 }
 export -f git_prompt
 
@@ -185,7 +184,7 @@ export -f git_prompt
 
 # set $PWD append to $GOPATH
 gopath_pwd(){
-  if [[ $GOPATH =~ .*$PWD.* ]];then
+  if [[ $GOPATH =~ .*$PWD.* ]]; then
     echo "currnet dir is already in GOPATH"
   else
     export GOPATH=$GOPATH:$PWD
@@ -195,14 +194,14 @@ gopath_pwd(){
 export -f gopath_pwd
 
 # environmnet for Golang
-if [ -d "$HOME/.local/go" ];then
+if [ -d "$HOME/.local/go" ]; then
     export GOROOT="$HOME/.local/go"
     export PATH="$GOROOT/bin:$PATH"
 fi
 
 if [ -d "$HOME/go" ];then
     export GOPATH="$GOPATH:$HOME/go"
-    if [ ! -d $HOME/go/bin ];then
+    if [ ! -d $HOME/go/bin ]; then
         mkdir -p $HOME/go/bin
     fi
     export PATH="$HOME/go/bin:$PATH"
