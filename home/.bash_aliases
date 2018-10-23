@@ -154,21 +154,26 @@ if [ ! -n "$1" ];then
     echo "usage: git_prompt on | off"
 elif [ $1 == "on" ];then
     if [ ! -f $PCBAK ];then
-        echo $PROMPT_COMMAND > $PCBAK
-        PROMPT_COMMAND="git_branch_internal; $PROMPT_COMMAND"
+        echo $PROMPT_COMMAND > $PCBAK  
     fi
     if [ ! -f $PSBAK ];then
         echo $PS1 > $PSBAK
-        PS1="$PS1$blue\$git_name_left$red\$git_branch$blue\$git_name_right\$ $normal"
     fi
+    if [ -z $GIT_PROMPT ] ; then
+        PROMPT_COMMAND="git_branch_internal; $PROMPT_COMMAND"
+        PS1="$PS1$blue\$git_name_left$red\$git_branch$blue\$git_name_right\$ $normal"
+        export GIT_PROMPT=1
+    fi
+
 elif [ $1 == "off" ];then
     if [ -f $PCBAK ];then
         PROMPT_COMMAND="`cat $PCBAK`"
-        rm -rf $PCBAK
     fi
     if [ -f $PSBAK ];then
         PS1="`cat $PSBAK` "
-        rm -rf $PSBAK
+    fi
+    if [ -n $GIT_PROMPT ] ; then
+        unset GIT_PROMPT
     fi
 fi
 }
