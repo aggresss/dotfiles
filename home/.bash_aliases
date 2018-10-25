@@ -18,6 +18,16 @@ cyan=$'\[\e[1;36m\]'
 white=$'\[\e[1;37m\]'
 normal=$'\[\e[m\]'
 
+BLACK="\\033[30m"
+RED="\\033[31m"
+GREEN="\\033[32m"
+YELLOW="\\033[33m"
+BLUE="\\033[34m"
+MAGENTA="\\033[35m"
+CYAN="\\033[36m"
+WHITE="\\033[37m"
+NORMAL="\\033[m"
+
 # environment for ~/bin
 export PATH="$PATH:$HOME/bin"
 
@@ -188,7 +198,7 @@ go_pwd(){
     echo "currnet dir is already in GOPATH"
   else
     export GOPATH=$GOPATH:$PWD
-    echo "fininsh setting $PWD in GOPATH"
+    echo -e "$GREEN successful set $PWD in GOPATH $NORMAL"
   fi
 }
 export -f go_pwd
