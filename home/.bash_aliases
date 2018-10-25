@@ -200,7 +200,7 @@ if [ -d "$HOME/.local/go" ]; then
 fi
 
 if [ -d "$HOME/go" ];then
-    export GOPATH="$GOPATH:$HOME/go"
+    export GOPATH="$HOME/go:$GOPATH"
     if [ ! -d $HOME/go/bin ]; then
         mkdir -p $HOME/go/bin
     fi
