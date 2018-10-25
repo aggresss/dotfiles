@@ -195,7 +195,7 @@ export -f git_prompt
 # set $PWD append to $GOPATH
 go_pwd(){
   if [[ $GOPATH =~ .*$PWD.* ]]; then
-    echo "currnet dir is already in GOPATH"
+    echo -e "$RED currnet dir is already in GOPATH $NORMAL"
   else
     export GOPATH=$GOPATH:$PWD
     echo -e "$GREEN successful set $PWD in GOPATH $NORMAL"
