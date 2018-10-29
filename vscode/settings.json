@@ -6,6 +6,7 @@
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
-    "editor.renderWhitespace": "all",    
+    "editor.renderWhitespace": "all",
+    "go.inferGopath": true,
   }
   
