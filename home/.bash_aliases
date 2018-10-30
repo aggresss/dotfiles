@@ -220,7 +220,7 @@ fi
 go_clr(){
     if [ -f "$GOPATH_INIT_PATH" ]; then
         export GOPATH="`cat $GOPATH_INIT_PATH`"
-        echo -e "$GREEN successful clear GOPATH \n $RED GOPATH ==> $GOPATH $NORMAL"
+        echo -e "${GREEN}successful clear GOPATH \n${RED}GOPATH ==> ${GOPATH}${NORMAL}"
     fi
 }
 export -f go_clr
@@ -228,17 +228,23 @@ export -f go_clr
 # set $PWD insert to $GOPATH
 go_pwd(){
     if [[ $GOPATH =~ .*$PWD.* ]]; then
-        echo -e "$RED currnet dir is already in GOPATH $NORMAL"
+        echo -e "${RED}currnet dir is already in GOPATH${NORMAL}"
     else
         if [ -z "$GOPATH" ]; then
-            export GOPATH=$PWD
+            export GOPATH=${PWD}
         else
-            export GOPATH=$PWD:$GOPATH
+            export GOPATH=${PWD}:${GOPATH}
         fi
-        echo -e "$GREEN successful insert GOPATH \n $RED GOPATH ==> $GOPATH $NORMAL"
+        echo -e "${GREEN}successful insert GOPATH \n${RED} GOPATH ==> ${GOPATH}${NORMAL}"
     fi
 }
 export -f go_pwd
+
+# echo $GOPATH
+go_ls(){
+    echo -e "${GREEN}GOPATH ===> ${RED}${GOPATH}${NORMAL}"
+}
+export -f go_ls
 
 ##########################
 # specified for system type
