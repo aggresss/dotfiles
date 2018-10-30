@@ -235,7 +235,7 @@ go_pwd(){
         else
             export GOPATH=${PWD}:${GOPATH}
         fi
-        echo -e "${GREEN}successful insert GOPATH \n${RED} GOPATH ==> ${GOPATH}${NORMAL}"
+        echo -e "${GREEN}successful insert GOPATH \n${RED}GOPATH ==> ${GOPATH}${NORMAL}"
     fi
 }
 export -f go_pwd
