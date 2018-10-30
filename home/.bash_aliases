@@ -192,17 +192,6 @@ export -f git_prompt
 # modify for golang
 ##########################
 
-# set $PWD append to $GOPATH
-go_pwd(){
-  if [[ $GOPATH =~ .*$PWD.* ]]; then
-    echo -e "$RED currnet dir is already in GOPATH $NORMAL"
-  else
-    export GOPATH=$GOPATH:$PWD
-    echo -e "$GREEN successful set $PWD in GOPATH $NORMAL"
-  fi
-}
-export -f go_pwd
-
 # environmnet for Golang
 if [ -d "$HOME/.local/go" ]; then
     export GOROOT="$HOME/.local/go"
@@ -210,12 +199,46 @@ if [ -d "$HOME/.local/go" ]; then
 fi
 
 if [ -d "$HOME/go" ];then
-    export GOPATH="$HOME/go:$GOPATH"
-    if [ ! -d $HOME/go/bin ]; then
+    if [ -z "$GOPATH" ]; then
+        export GOPATH="$HOME/go"
+    else
+        export GOPATH="$HOME/go:$GOPATH"
+    fi
+
+    if [ ! -d "$HOME/go/bin" ]; then
         mkdir -p $HOME/go/bin
     fi
     export PATH="$HOME/go/bin:$PATH"
 fi
+
+GOPATH_INIT_PATH="/tmp/GOPATH_INIT.tmp"
+if [ ! -f "$GOPATH_INIT_PATH" ]; then
+    echo $GOPATH > $GOPATH_INIT_PATH
+fi
+
+# clear $GOPATH
+go_clr(){
+    if [ -f "$GOPATH_INIT_PATH" ]; then
+        export GOPATH="`cat $GOPATH_INIT_PATH`"
+        echo -e "$GREEN successful clear GOPATH \n $RED GOPATH ==> $GOPATH $NORMAL"
+    fi
+}
+export -f go_clr
+
+# set $PWD insert to $GOPATH
+go_pwd(){
+    if [[ $GOPATH =~ .*$PWD.* ]]; then
+        echo -e "$RED currnet dir is already in GOPATH $NORMAL"
+    else
+        if [ -z "$GOPATH" ]; then
+            export GOPATH=$PWD
+        else
+            export GOPATH=$PWD:$GOPATH
+        fi
+        echo -e "$GREEN successful insert GOPATH \n $RED GOPATH ==> $GOPATH $NORMAL"
+    fi
+}
+export -f go_pwd
 
 ##########################
 # specified for system type
