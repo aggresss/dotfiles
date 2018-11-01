@@ -15,6 +15,7 @@ sudo apt-get update && sudo apt-get install -y \
     ctags \
     cscope \
     ssh \
+    mosh \
     git \
     p7zip-full \
     hexedit \
