@@ -9,3 +9,4 @@
 ||cee2.iteye.com/*
 ||rabc2.iteye.com/*
 ||blog.csdn.net##.adblock
+||blog.csdn.net###layerd
