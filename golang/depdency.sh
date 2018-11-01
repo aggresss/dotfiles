@@ -28,6 +28,9 @@ go get -u -v github.com/sourcegraph/go-langserver
 go get -u -v github.com/derekparker/delve/cmd/dlv
 go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct
 
+# vscode -> go outliner
+go get -u -v github.com/766b/go-outliner
+
 # vendor tools
 go get -u -v github.com/Masterminds/glide
 go get -u -v github.com/golang/dep/cmd/dep
