@@ -45,6 +45,7 @@ alias gterm='gnome-terminal'
 alias em='emacs -nw'
 alias cbp='chromium-browser --proxy-server=socks5://127.0.0.1:1080'
 alias wine='env LANG=zh_CN.UTF8 wine'
+alias rm3='rm -rf *.zip *.tgz *.bz2 *.gz *.dmg *.7z *.tar'
 
 # short for cd ..
 alias ..='cd ..'
