@@ -66,7 +66,7 @@ function rm_rcs()
     for i in `seq 1 $#`
     do
         eval TMP_ARG=\$$i
-        echo -e "${RED} CLEAR ==> ${TMP_ARG}${NORMAL}"
+        echo -e "${RED}CLEAR ==> ${TMP_ARG}${NORMAL}"
         find . -name "${TMP_ARG}" -exec rm -rvf {} \;
     done
 }
