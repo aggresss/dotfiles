@@ -60,6 +60,18 @@ alias ......='cd ../../../../..'
 alias rm='rm -i'
 alias mv='mv -i'
 
+# remove recursive
+function rm_rcs()
+{
+    for i in `seq 1 $#`
+    do
+        eval TMP_ARG=\$$i
+        echo -e "${RED} CLEAR ==> ${TMP_ARG}${NORMAL}"
+        find . -name "${TMP_ARG}" -exec rm -rvf {} \;
+    done
+}
+export rm_rcs
+
 # update file utility
 # $1 download url
 # $2 local filepath
