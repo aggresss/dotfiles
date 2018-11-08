@@ -67,6 +67,8 @@ match WhitespaceEOL /\s\+$/
 :map <leader>N :set nu<cr>
 :map <leader>w :set wrap<cr>
 :map <leader>W :set nowrap<cr>
+:map <leader>l :set nolist<cr>
+:map <leader>L :set list<cr>
 
 "
 " Custom command
