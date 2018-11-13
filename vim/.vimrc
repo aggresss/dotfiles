@@ -1,6 +1,9 @@
 " Vim config file composed by aggresss
 " https://raw.githubusercontent.com/aggresss/dotfiles/master/vim/.vimrc
 
+"
+" Initial
+"
 set nocompatible    " required
 filetype off        " required
 let mapleader="\\"
@@ -22,6 +25,15 @@ endif
 
 filetype plugin indent on   " required
 
+"
+" internal function
+"
+" get current path and substitute ${HOME} to ~
+function! CurDir()
+    let curdir = substitute(getcwd(), $HOME, "~", "g")
+    return curdir
+endfunction
+
 " editor style list
 colorscheme desert
 highlight Pmenu ctermfg=black ctermbg=darkcyan
@@ -39,8 +51,14 @@ set list
 set listchars=tab:>-,trail:-
 highlight WhitespaceEOL ctermbg=red guibg=red
 match WhitespaceEOL /\s\+$/
+set laststatus=2
+highlight StatusLine cterm=bold ctermfg=yellow ctermbg=darkblue
+set statusline=[%n]\ %f%m%r%h\ \|\ \ pwd=\ %{CurDir()}\ \ \|%=\|\ %l,%c\ %p%%\ \|\ ascii=%b,hex=%b%{((&fenc==\"\")?\"\":\"\ \|\ \".&fenc)}\ \|
 
+
+"
 " keyboard shortcut list
+"
 :map <F1>  :TlistToggle<cr>
 :map <F2>  :NERDTreeToggle<cr>
 :map <F3>  :Vexplore<cr>
