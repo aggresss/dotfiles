@@ -26,15 +26,8 @@ endif
 filetype plugin indent on   " required
 
 "
-" internal function
-"
-" get current path and substitute ${HOME} to ~
-function! CurDir()
-    let curdir = substitute(getcwd(), $HOME, "~", "g")
-    return curdir
-endfunction
-
 " editor style list
+"
 colorscheme desert
 highlight Pmenu ctermfg=black ctermbg=darkcyan
 highlight PmenuSel ctermfg=black ctermbg=gray
@@ -51,10 +44,12 @@ set list
 set listchars=tab:>-,trail:-
 highlight WhitespaceEOL ctermbg=red guibg=red
 match WhitespaceEOL /\s\+$/
+
+" statusline
+" http://vimdoc.sourceforge.net/htmldoc/options.html#'statusline'
 set laststatus=2
 highlight StatusLine cterm=bold ctermfg=yellow ctermbg=darkblue
-" http://vimdoc.sourceforge.net/htmldoc/options.html#'statusline'
-set statusline=[%n]\ %f%m%r%h\ \|\ \ pwd=\ %{CurDir()}\ \ \|%=\|\ %l,%c\ %p%%\ \|\ value=%b,\ hex=%B%{((&fenc==\"\")?\"\":\"\ \|\ \".&fenc)}\ \|
+set statusline=[%n]\ %F%m%r%h\ \|%=\|\ %l,%c\ %p%%\ \|\ value=%b,\ hex=%B%{((&fenc==\"\")?\"\":\"\ \|\ \".&fenc)}\ \|
 
 "
 " keyboard shortcut list
