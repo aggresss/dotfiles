@@ -112,13 +112,13 @@ map <leader>c :call Compile()<CR>
 function! Compile()
     exec "w"
     if &filetype == 'c'
-        exec '!gcc -o %<.out %' <cr>
+        exec '!gcc -o %<.out %'<cr>
         exec '!%<.out'
     elseif &filetype == 'cpp'
-        exec '!g++ -std=c++14 -o %<.out %' <cr>
+        exec '!g++ -std=c++14 -o %<.out %'<cr>
         exec '!%<.out'
      elseif &filetype == 'go'
-        exec '!go build -o %<.out %' <cr>
+        exec '!go build -o %<.out %'<cr>
         exec '!%<.out'
     elseif &filetype == 'python'
         exec '!python %'
