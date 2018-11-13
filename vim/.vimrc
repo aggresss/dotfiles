@@ -87,6 +87,7 @@ set statusline=[%n]\ %f%m%r%h\ \|\ \ pwd=\ %{CurDir()}\ \ \|%=\|\ %l,%c\ %p%%\ \
 :map <leader>W :set nowrap<cr>
 :map <leader>l :set nolist<cr>
 :map <leader>L :set list<cr>
+:map <leader>c :call Compile<cr>
 
 "
 " Custom command
