@@ -53,8 +53,8 @@ highlight WhitespaceEOL ctermbg=red guibg=red
 match WhitespaceEOL /\s\+$/
 set laststatus=2
 highlight StatusLine cterm=bold ctermfg=yellow ctermbg=darkblue
-set statusline=[%n]\ %f%m%r%h\ \|\ \ pwd=\ %{CurDir()}\ \ \|%=\|\ %l,%c\ %p%%\ \|\ ascii=%b,hex=%b%{((&fenc==\"\")?\"\":\"\ \|\ \".&fenc)}\ \|
-
+" http://vimdoc.sourceforge.net/htmldoc/options.html#'statusline'
+set statusline=[%n]\ %F%m%r%h\ \|\ \ pwd=\ %{CurDir()}\ \ \|%=\|\ %l,%c\ %p%%\ \|\ ascii=%b,hex=%b%{((&fenc==\"\")?\"\":\"\ \|\ \".&fenc)}\ \|
 
 "
 " keyboard shortcut list
