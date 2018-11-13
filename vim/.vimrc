@@ -1,6 +1,6 @@
 " Vim config file composed by aggresss
 " https://raw.githubusercontent.com/aggresss/dotfiles/master/vim/.vimrc
-
+" reference: http://vimdoc.sourceforge.net/htmldoc/options.htm
 "
 " Initial
 "
@@ -46,10 +46,26 @@ highlight WhitespaceEOL ctermbg=red guibg=red
 match WhitespaceEOL /\s\+$/
 
 " statusline
-" http://vimdoc.sourceforge.net/htmldoc/options.html#'statusline'
 set laststatus=2
-highlight StatusLine cterm=bold ctermfg=yellow ctermbg=darkblue
-set statusline=[%n]\ %F%m%r%h\ \|%=\|\ %l,%c\ %p%%\ \|\ value=%b,\ hex=%B%{((&fenc==\"\")?\"\":\"\ \|\ \".&fenc)}\ \|
+set statusline=
+set statusline+=%1*\[%n]%m%r%w%h
+set statusline+=%2*\ %<%F
+set statusline+=\ %3*\ %y
+set statusline+=\ %4*\ %{''.(&fenc!=''?&fenc:&enc).''}
+set statusline+=%5*\%{(&bomb?\",BOM\":\"\")}
+set statusline+=\ %6*\ %{&ff}
+set statusline+=\ %7*\ %{&spelllang}
+set statusline+=\ %8*\ %=\|\ VALUE=%b,\ HEX=%B\ \|
+set statusline+=\ ROW:%l/%L\ (%03p%%)\ COL:%03c\ \|\ %P\ \|
+
+hi User1 ctermfg=darkred  ctermbg=blue  cterm=bold
+hi User2 ctermfg=white  ctermbg=darkred
+hi User3 ctermfg=cyan  ctermbg=58
+hi User4 ctermfg=white  ctermbg=100
+hi User5 ctermfg=white  ctermbg=100
+hi User6 ctermfg=darkred  ctermbg=95
+hi User7 ctermfg=darkred  ctermbg=77
+hi User8 ctermfg=231  ctermbg=blue
 
 "
 " keyboard shortcut list
@@ -82,6 +98,9 @@ set statusline=[%n]\ %F%m%r%h\ \|%=\|\ %l,%c\ %p%%\ \|\ value=%b,\ hex=%B%{((&fe
 :map <leader>W :set nowrap<cr>
 :map <leader>l :set nolist<cr>
 :map <leader>L :set list<cr>
+:map <leader>s :set laststatus=0<cr>
+:map <leader>S :set laststatus=2<cr>
+
 :map <leader>c :call Compile<cr>
 
 "
