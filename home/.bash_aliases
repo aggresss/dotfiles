@@ -207,7 +207,7 @@ export -f git_prompt
 # Git fast add->commit->push ! Deprecated
 git_fast(){
 git add .
-git commit -m "`date "+%F %T"`"
+git commit -m "`date "+%F %T %Z W%WD%u"`"
 git push origin master
 }
 export -f git_fast
