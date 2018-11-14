@@ -100,7 +100,6 @@ proxy_cfg(){
 }
 export -f proxy_cfg
 
-
 ##########################
 # modify for docker
 ##########################
