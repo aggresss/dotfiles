@@ -205,14 +205,14 @@ git_prompt(){
 export -f git_prompt
 
 # Git fast add->commit->fetch->rebase->push ! Deprecated
-git_fast(){
+git_haste(){
 git add .
 git commit -m "`date "+%F %T %Z W%WD%u"`"
 git fetch origin
 git rebase origin/master
 git push origin master
 }
-export -f git_fast
+export -f git_haste
 ##########################
 # modify for golang
 ##########################
