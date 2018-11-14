@@ -2,7 +2,7 @@
 " https://raw.githubusercontent.com/aggresss/dotfiles/master/vim/.vimrc
 " reference: http://vimdoc.sourceforge.net/htmldoc/options.htm
 "
-" Initial
+" Initial config
 "
 set nocompatible    " required
 filetype off        " required
@@ -26,7 +26,7 @@ endif
 filetype plugin indent on   " required
 
 "
-" editor style list
+" Editor style list
 "
 colorscheme desert
 highlight Pmenu ctermfg=black ctermbg=darkcyan
@@ -67,7 +67,7 @@ highlight User6 ctermfg=darkred  ctermbg=darkgreen
 highlight User7 ctermfg=yellow  ctermbg=darkblue
 
 "
-" keyboard shortcut list
+" Keyboard shortcut list
 "
 :map <F1>  :TlistToggle<cr>
 :map <F2>  :NERDTreeToggle<cr>
@@ -144,5 +144,5 @@ function! Compile()
     endif
 endfunc
 
-
 " EOF
+
