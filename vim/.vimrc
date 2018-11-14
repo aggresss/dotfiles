@@ -2,7 +2,7 @@
 " https://raw.githubusercontent.com/aggresss/dotfiles/master/vim/.vimrc
 " reference: http://vimdoc.sourceforge.net/htmldoc/options.htm
 "
-" Initial config
+" Initial configuration
 "
 set nocompatible    " required
 filetype off        " required
