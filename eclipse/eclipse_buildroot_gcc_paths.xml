@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdtprojectproperties>
+    <section name="org.eclipse.cdt.internal.ui.wizards.settingswizards.IncludePaths">
+        <language name="holder for library settings">
+        </language>
+        <language name="Assembly">
+        </language>
+        <language name="GNU C++">
+            <includepath>/Users/yujia/toolchain/x86_64-buildroot-linux-uclibc/lib/gcc/x86_64-buildroot-linux-uclibc/6.4.0/../../../../x86_64-buildroot-linux-uclibc/include/c++/6.4.0</includepath>
+            <includepath>/Users/yujia/toolchain/x86_64-buildroot-linux-uclibc/lib/gcc/x86_64-buildroot-linux-uclibc/6.4.0/../../../../x86_64-buildroot-linux-uclibc/include/c++/6.4.0/x86_64-buildroot-linux-uclibc</includepath>
+            <includepath>/Users/yujia/toolchain/x86_64-buildroot-linux-uclibc/lib/gcc/x86_64-buildroot-linux-uclibc/6.4.0/../../../../x86_64-buildroot-linux-uclibc/include/c++/6.4.0/backward</includepath>
+            <includepath>/Users/yujia/toolchain/x86_64-buildroot-linux-uclibc/lib/gcc/x86_64-buildroot-linux-uclibc/6.4.0/include</includepath>
+            <includepath>/Users/yujia/toolchain/x86_64-buildroot-linux-uclibc/lib/gcc/x86_64-buildroot-linux-uclibc/6.4.0/include-fixed</includepath>
+            <includepath>/Users/yujia/toolchain/x86_64-buildroot-linux-uclibc/lib/gcc/x86_64-buildroot-linux-uclibc/6.4.0/../../../../x86_64-buildroot-linux-uclibc/include</includepath>
+            <includepath>/Users/yujia/toolchain/x86_64-buildroot-linux-uclibc/x86_64-buildroot-linux-uclibc/sysroot/usr/include</includepath>
+        </language>
+        <language name="GNU C">
+            <includepath>/Users/yujia/toolchain/x86_64-buildroot-linux-uclibc/lib/gcc/x86_64-buildroot-linux-uclibc/6.4.0/include</includepath>
+            <includepath>/Users/yujia/toolchain/x86_64-buildroot-linux-uclibc/lib/gcc/x86_64-buildroot-linux-uclibc/6.4.0/include-fixed</includepath>
+            <includepath>/Users/yujia/toolchain/x86_64-buildroot-linux-uclibc/x86_64-buildroot-linux-uclibc/sysroot/usr/include</includepath>
+        </language>
+    </section>
+    <section name="org.eclipse.cdt.internal.ui.wizards.settingswizards.Macros">
+        <language name="holder for library settings">
+        </language>
+        <language name="Assembly">
+        </language>
+        <language name="GNU C++">
+            <macro><name>__GNUC__</name><value>7</value></macro>
+            <macro><name>__linux</name><value>1</value></macro>
+            <macro><name>__linux__</name><value>1</value></macro>
+            <macro><name>__gnu_linux__</name><value>1</value></macro>
+            <macro><name>linux</name><value>1</value></macro>
+        </language>
+        <language name="GNU C">
+            <macro><name>__GNUC__</name><value>7</value></macro>
+            <macro><name>__linux</name><value>1</value></macro>
+            <macro><name>__linux__</name><value>1</value></macro>
+            <macro><name>__gnu_linux__</name><value>1</value></macro>
+            <macro><name>linux</name><value>1</value></macro>
+        </language>
+    </section>
+</cdtprojectproperties>
