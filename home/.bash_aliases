@@ -208,11 +208,14 @@ export -f git_prompt
 git_haste(){
 git add .
 git commit -m "`date "+%F %T %Z W%WD%u"`"
-git fetch origin
-git rebase origin/master
+elif [ $1 == "rebase" ]; then
+    git fetch origin
+    git rebase origin/master
+fi
 git push origin master
 }
 export -f git_haste
+
 ##########################
 # modify for golang
 ##########################
