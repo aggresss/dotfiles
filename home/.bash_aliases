@@ -105,13 +105,13 @@ export -f proxy_cfg
 # modify for docker
 ##########################
 
-# fast docker inside
+# Fast docker inside
 docker_inside(){
   docker exec -it $1 bash -c "stty cols $COLUMNS rows $LINES && bash";
 }
 export -f docker_inside
 
-# inspect volumes and port
+# Inspect volumes and port
 docker_inspect(){
   echo "Volumes:" ; docker inspect $1 -f {{.Config.Volumes}}
   echo "ExposedPorts:" ; docker inspect $1 -f {{.Config.ExposedPorts}}
@@ -119,7 +119,7 @@ docker_inspect(){
 }
 export -f docker_inspect
 
-# run and mount private file
+# Run and mount private file
 docker_private(){
   docker run --rm -it \
     -v root:/root \
@@ -132,7 +132,7 @@ export -f docker_private
 # modify for git
 ##########################
 
-# signature for github repository
+# Signature for github repository
 # $1 user.email
 git_sig(){
   git config user.name `echo "$1" | awk -F "@" '{print $1}'`
@@ -140,7 +140,7 @@ git_sig(){
 }
 export -f git_sig
 
-# set global gitignore file
+# Set global gitignore file
 git_ignore(){
   BASE_URL="https://raw.githubusercontent.com/aggresss/dotfiles/master"
   update_file ${BASE_URL}/.gitignore ${HOME}/.gitignore
@@ -172,6 +172,7 @@ git_branch_internal(){
 }
 export -f git_branch_internal
 
+# Git branch perception
 git_prompt(){
     PCBAK="/tmp/PROMPT_COMMAND.tmp"
     PSBAK="/tmp/PS1.tmp"
@@ -203,6 +204,13 @@ git_prompt(){
 }
 export -f git_prompt
 
+# Git fast add->commit->push ! Deprecated
+git_fast(){
+git add .
+git commit -m "`date "+%F %T"`"
+git push origin master
+}
+export -f git_fast
 ##########################
 # modify for golang
 ##########################
