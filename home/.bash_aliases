@@ -207,7 +207,7 @@ export -f git_prompt
 git_haste(){
 git add .
 git commit -m "`date "+%F %T %Z W%WD%u"`"
-elif [ $1 == "rebase" ]; then
+if [ $1 == "rebase" ]; then
     git fetch origin
     git rebase origin/master
 fi
