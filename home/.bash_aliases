@@ -73,6 +73,13 @@ function rm_rcs()
 }
 export rm_rcs
 
+# fast find process
+# $1 process name
+function psgrep()
+{
+    ps -elf | grep $1 | grep -v grep
+}
+
 # update file utility
 # $1 download url
 # $2 local filepath
