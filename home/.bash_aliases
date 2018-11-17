@@ -206,13 +206,22 @@ export -f git_prompt
 
 # Git fast add->commit->fetch->rebase->push ! Deprecated
 git_haste(){
-git add .
-git commit -m "`date "+%F %T %Z W%WD%u"`"
-if [ X_$1 == "X_rebase" ]; then
-    git fetch origin
-    git rebase origin/master
-fi
-git push origin master
+    git_branch_internal;
+    if [ -z ${git_branch} ]; then
+        echo -e "${RED}Not in a git repo${NORMAL}"
+    elif [ ${git_branch} = "detached" -o ${git_branch} = "unknow" ]; then
+        echo -e "${MAGENTA}Not on a regular branch${NORMAL}"
+    else
+        echo -e "${CYAN}add->push->commit to origin on branch ${YELLOW}${git_branch}${NORMAL}"
+        git add .
+        git commit -m "`date "+%F %T %Z W%WD%u"`"
+        if [ X_$1 == "X_rebase" ]; then
+            echo -e "${GREEN}fetch->rebase to origin on branch ${MAGENTA}${git_branch}${NORMAL}"
+            git fetch origin
+            git rebase origin/${git_branch}
+        fi
+        git push origin ${git_branch}:${git_branch}
+    fi
 }
 export -f git_haste
 
