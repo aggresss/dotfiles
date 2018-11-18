@@ -76,7 +76,7 @@ export rm_rcs
 
 # fast find process
 # $1 process name
-function psgrep()
+function ps_grep()
 {
     ps aux | grep $1 | grep -v grep
 }
@@ -228,15 +228,15 @@ git_haste(){
     if [ -z ${GIT_NAME_TITLE} ]; then
         echo -e "${RED}Not in a git repo${NORMAL}"
     elif [ ${GIT_NAME_TITLE} = "branch" ]; then
-        echo -e "${CYAN}add->push->commit to origin on branch ${YELLOW}${git_branch}${NORMAL}"
+        echo -e "${CYAN}add->push->commit to origin on branch ${YELLOW}${GIT_NAME_CONTENT}${NORMAL}"
         git add .
         git commit -m "`date "+%F %T %Z W%WD%u"`"
         if [ X_$1 == "X_rebase" ]; then
-            echo -e "${GREEN}fetch->rebase to origin on branch ${MAGENTA}${git_branch}${NORMAL}"
+            echo -e "${GREEN}fetch->rebase to origin on branch ${MAGENTA}${GIT_NAME_CONTENT}${NORMAL}"
             git fetch origin
-            git rebase origin/${git_branch}
+            git rebase origin/${GIT_NAME_CONTENT}
         fi
-        git push origin ${git_branch}:${git_branch}
+        git push origin ${GIT_NAME_CONTENT}:${GIT_NAME_CONTENT}
     else
         echo -e "${MAGENTA}Not on a regular branch${NORMAL}"
     fi
