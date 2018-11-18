@@ -161,19 +161,30 @@ git_branch_internal(){
         if [ -f "$dir/.git/HEAD" ]; then
             head=$(< "$dir/.git/HEAD")
                 if [[ $head = ref:\ refs/heads/* ]]; then
-                    git_branch="${head#*/*/}"
+                    git_name_title="branch"
+                    git_name_content="${head#*/*/}"
                 elif [[ $head != '' ]]; then
-                    git_branch="detached"
+                    tag=`git describe --tags`
+                    if [[ $tag = *No\ tags*  ]]; then
+                        git_name_title="commit"
+                        git_name_content=`git rev-parse --short HEAD`
+                    else
+                        git_name_title="tag"
+                        git_name_content=$tag
+                    fi
                 else
-                    git_branch="unknow"
+                    git_name_title="git"
+                    git_name_content="unknow"
                 fi
-                git_name_left="git:("
-                git_name_right=")"
-                return
-            fi
+            git_name_left=":("
+            git_name_right=")"
+            return
+        fi
         dir="../$dir"
     done
-    git_branch=''
+    git_name_title=''
+    git_name_content=''
+    git_name_title=""
     git_name_left=""
     git_name_right=""
 }
@@ -194,7 +205,7 @@ git_prompt(){
         fi
         if [ -z $GIT_PROMPT ] ; then
             PROMPT_COMMAND="git_branch_internal; $PROMPT_COMMAND"
-            PS1="$PS1$blue\$git_name_left$red\$git_branch$blue\$git_name_right\$ $normal"
+            PS1="$PS1$blue$git_name_title$git_name_left$red$git_name_content$blue$git_name_right\$ $normal"
             export GIT_PROMPT=1
         fi
     elif [ $1 == "off" ]; then
