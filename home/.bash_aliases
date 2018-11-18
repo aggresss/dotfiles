@@ -64,11 +64,12 @@ alias mv='mv -i'
 # remove recursive
 function rm_rcs()
 {
+    local tmp_arg
     for i in `seq 1 $#`
     do
-        eval TMP_ARG=\$$i
-        echo -e "${RED}CLEAR ==> ${TMP_ARG}${NORMAL}"
-        find . -name "${TMP_ARG}" -exec rm -rvf {} \;
+        eval tmp_arg=\$$i
+        echo -e "${RED}CLEAR ==> ${tmp_arg}${NORMAL}"
+        find . -name "${tmp_arg}" -exec rm -rvf {} \;
     done
 }
 export rm_rcs
@@ -77,7 +78,7 @@ export rm_rcs
 # $1 process name
 function psgrep()
 {
-    ps -elf | grep $1 | grep -v grep
+    ps aux | grep $1 | grep -v grep
 }
 
 # update file utility
@@ -85,19 +86,19 @@ function psgrep()
 # $2 local filepath
 function update_file()
 {
-    TMP_PATH="/tmp"
-    DOWN_FILE=`echo "$1" | awk -F "/" '{print $NF}'`
-    rm -rf ${TMP_PATH}/${DOWN_FILE}
-    wget -P ${TMP_PATH} $1
-    cp -f ${TMP_PATH}/${DOWN_FILE} $2
-    rm -f ${TMP_PATH}/${DOWN_FILE}
+    local tmp_path="/tmp"
+    local down_file=`echo "$1" | awk -F "/" '{print $NF}'`
+    rm -rf ${tmp_path}/${down_file}
+    wget -P ${tmp_path} $1
+    cp -f ${tmp_path}/${down_file} $2
+    rm -f ${tmp_path}/${down_file}
 }
 export -f update_file
 
 # switch proxy on-off
 proxy_cfg(){
   if [ $1 == 1 ]; then
-    proxy_url="http://127.0.0.1:8123"
+    local proxy_url="http://127.0.0.1:8123"
     export proxy=${proxy_url}
     export http_proxy=${proxy_url}
     export https_proxy=${proxy_url}
@@ -149,8 +150,8 @@ export -f git_sig
 
 # Set global gitignore file
 git_ignore(){
-  BASE_URL="https://raw.githubusercontent.com/aggresss/dotfiles/master"
-  update_file ${BASE_URL}/.gitignore ${HOME}/.gitignore
+  local base_url="https://raw.githubusercontent.com/aggresss/dotfiles/master"
+  update_file ${base_url}/.gitignore ${HOME}/.gitignore
   git config --global core.excludesfile ${HOME}/.gitignore
 }
 export -f git_ignore
@@ -190,16 +191,16 @@ export -f git_branch_internal
 
 # Git branch perception
 git_prompt(){
-    PCBAK="/tmp/PROMPT_COMMAND.tmp"
-    PSBAK="/tmp/PS1.tmp"
+    local pcbak="/tmp/PROMPT_COMMAND.tmp"
+    local psbak="/tmp/PS1.tmp"
     if [ ! -n "$1" ]; then
         echo "usage: git_prompt on | off"
     elif [ $1 == "on" ]; then
-        if [ ! -f $PCBAK ]; then
-            echo $PROMPT_COMMAND > $PCBAK
+        if [ ! -f $pcbak ]; then
+            echo $PROMPT_COMMAND > $pcbak
         fi
-        if [ ! -f $PSBAK ]; then
-            echo $PS1 > $PSBAK
+        if [ ! -f $psbak ]; then
+            echo $PS1 > $psbak
         fi
         if [ -z $GIT_PROMPT ] ; then
             PROMPT_COMMAND="git_branch_internal; $PROMPT_COMMAND"
@@ -207,11 +208,11 @@ git_prompt(){
             export GIT_PROMPT=1
         fi
     elif [ $1 == "off" ]; then
-        if [ -f $PCBAK ]; then
-            PROMPT_COMMAND="`cat $PCBAK`"
+        if [ -f $pcbak ]; then
+            PROMPT_COMMAND="`cat $pcbak`"
         fi
-        if [ -f $PSBAK ]; then
-            PS1="`cat $PSBAK` "
+        if [ -f $psbak ]; then
+            PS1="`cat $psbak` "
         fi
         if [ -n $GIT_PROMPT ]; then
             unset GIT_PROMPT
