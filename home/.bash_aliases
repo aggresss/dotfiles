@@ -159,34 +159,32 @@ git_branch_internal(){
     local dir=. head
     until [ "$dir" -ef / ]; do
         if [ -f "$dir/.git/HEAD" ]; then
-            head=$(< "$dir/.git/HEAD")
+            local head=$(< "$dir/.git/HEAD")
                 if [[ $head = ref:\ refs/heads/* ]]; then
-                    git_name_title="branch"
-                    git_name_content="${head#*/*/}"
+                    GIT_NAME_TITLE="branch"
+                    GIT_NAME_CONTENT="${head#*/*/}"
                 elif [[ $head != '' ]]; then
-                    tag=`git describe --tags`
-                    if [[ $tag = *No\ tags*  ]]; then
-                        git_name_title="commit"
-                        git_name_content=`git rev-parse --short HEAD`
+                    local tag=`git describe --always --tags`
+                    if [[ $head = $tag* ]]; then
+                        GIT_NAME_TITLE="commit"
                     else
-                        git_name_title="tag"
-                        git_name_content=$tag
+                        GIT_NAME_TITLE="tag"
                     fi
+                    GIT_NAME_CONTENT=$tag
                 else
-                    git_name_title="git"
-                    git_name_content="unknow"
+                    GIT_NAME_TITLE="git"
+                    GIT_NAME_CONTENT="unknow"
                 fi
-            git_name_left=":("
-            git_name_right=")"
+            GIT_NAME_LEFT=":("
+            GIT_NAME_RIGHT=")"
             return
         fi
         dir="../$dir"
     done
-    git_name_title=''
-    git_name_content=''
-    git_name_title=""
-    git_name_left=""
-    git_name_right=""
+    GIT_NAME_TITLE=''
+    GIT_NAME_CONTENT=''
+    GIT_NAME_LEFT=''
+    GIT_NAME_RIGHT=''
 }
 export -f git_branch_internal
 
@@ -205,7 +203,7 @@ git_prompt(){
         fi
         if [ -z $GIT_PROMPT ] ; then
             PROMPT_COMMAND="git_branch_internal; $PROMPT_COMMAND"
-            PS1="$PS1$blue$git_name_title$git_name_left$red$git_name_content$blue$git_name_right\$ $normal"
+            PS1="$PS1$blue\$GIT_NAME_TITLE\$GIT_NAME_LEFT$red\$GIT_NAME_CONTENT$blue\$GIT_NAME_RIGHT\$ $normal"
             export GIT_PROMPT=1
         fi
     elif [ $1 == "off" ]; then
@@ -223,13 +221,12 @@ git_prompt(){
 export -f git_prompt
 
 # Git fast add->commit->fetch->rebase->push ! Deprecated
+# $1 operation: rebase
 git_haste(){
     git_branch_internal;
-    if [ -z ${git_branch} ]; then
+    if [ -z ${GIT_NAME_TITLE} ]; then
         echo -e "${RED}Not in a git repo${NORMAL}"
-    elif [ ${git_branch} = "detached" -o ${git_branch} = "unknow" ]; then
-        echo -e "${MAGENTA}Not on a regular branch${NORMAL}"
-    else
+    elif [ ${GIT_NAME_TITLE} = "branch" ]; then
         echo -e "${CYAN}add->push->commit to origin on branch ${YELLOW}${git_branch}${NORMAL}"
         git add .
         git commit -m "`date "+%F %T %Z W%WD%u"`"
@@ -239,6 +236,8 @@ git_haste(){
             git rebase origin/${git_branch}
         fi
         git push origin ${git_branch}:${git_branch}
+    else
+        echo -e "${MAGENTA}Not on a regular branch${NORMAL}"
     fi
 }
 export -f git_haste
