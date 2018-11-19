@@ -40,26 +40,28 @@ alias cmc='find . -iname "*cmake*" -not -name CMakeLists.txt -exec rm -rf {} +'
 # count code line
 alias ccl='find . -name "*[.h|.c|.hpp|.cpp|.go|.py]" -type f | xargs cat | wc -l'
 # alias for some application special open
-alias calc='gnome-calculator'
-alias gterm='gnome-terminal'
-alias em='emacs -nw'
-alias cbp='chromium-browser --proxy-server=socks5://127.0.0.1:1080'
-alias wine='env LANG=zh_CN.UTF8 wine'
+alias calc="gnome-calculator"
+alias gterm="gnome-terminal"
+alias em="emacs -nw"
+alias cbp="chromium-browser --proxy-server=socks5://127.0.0.1:1080"
+alias wine="env LANG=zh_CN.UTF8 wine"
 alias sagt="eval `ssh-agent`"
-alias rm_3rd='rm -rvf *.zip *.tgz *.bz2 *.gz *.dmg *.7z *.xz *.tar'
-alias rm_pic='rm -rvf *.jpg *.jpeg *.png *.bmp *.gif'
-alias rm_doc='rm -rvf *.doc *.docx *.xls *.xlsx *.ppt *.pptx *.numbers *.pages *.key'
+
+# alias for remove fast
+alias rm_3rd="rm -rvf *.zip *.tgz *.bz2 *.gz *.dmg *.7z *.xz *.tar"
+alias rm_pic="rm -rvf *.jpg *.jpeg *.png *.bmp *.gif"
+alias rm_doc="rm -rvf *.doc *.docx *.xls *.xlsx *.ppt *.pptx *.numbers *.pages *.key"
 
 # short for cd ..
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-alias ......='cd ../../../../..'
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
 
 # Some more alias to avoid making mistakes
-alias rm='rm -i'
-alias mv='mv -i'
+alias rm="rm -i"
+alias mv="mv -i"
 
 # remove recursive
 function rm_rcs()
@@ -139,6 +141,9 @@ export -f docker_private
 ##########################
 # modify for git
 ##########################
+
+# fast change directry to git top level path
+alias git_top="cd `git rev-parse --show-toplevel`"
 
 # Signature for github repository
 # $1 user.email
