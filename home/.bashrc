@@ -1,5 +1,5 @@
 #
-# fork from ubuntu:18.04 -> /etc/skel/.bashrc 
+# fork from ubuntu:18.04 -> /etc/skel/.bashrc
 # wget https://raw.githubusercontent.com/aggresss/dotfiles/master/home/.bashrc
 #
 
