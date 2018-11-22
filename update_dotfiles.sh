@@ -5,7 +5,6 @@ set -euxo pipefail
 shopt -s nullglob
 
 BASE_URL="https://raw.githubusercontent.com/aggresss/dotfiles/master"
-HAS_UPDATED=
 
 # $1 download url
 # $2 local filepath
@@ -27,7 +26,7 @@ function update_file()
 echo "=== Update dotfiles from git@github.com:aggresss/dotfiles.git master branch  ==="
 
 # Update self
-if [ -z "$HAS_UPDATED" ]; then
+if [ ${HAS_UPDATED-NotDefine} = "NotDefine" ]; then
     FILE_PATH=${HOME}/bin
     FILE_NAME=update_dotfiles.sh
     update_file ${BASE_URL}/${FILE_NAME} ${FILE_PATH}/${FILE_NAME}
