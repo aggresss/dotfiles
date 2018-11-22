@@ -5,6 +5,7 @@ set -euxo pipefail
 shopt -s nullglob
 
 BASE_URL="https://raw.githubusercontent.com/aggresss/dotfiles/master"
+HAS_UPDATED=
 
 # $1 download url
 # $2 local filepath
