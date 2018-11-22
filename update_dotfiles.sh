@@ -1,6 +1,8 @@
 #!/bin/bash
 # Update dotfiles from git@github.com:aggresss/dotfiles.git master branch
 # wget https://raw.githubusercontent.com/aggresss/dotfiles/master/update_dotfiles.sh
+set -euxo pipefail
+shopt -s nullglob
 
 BASE_URL="https://raw.githubusercontent.com/aggresss/dotfiles/master"
 
@@ -13,12 +15,12 @@ function update_file()
     DOWN_FILE=`echo "$1" | awk -F "/" '{print $NF}'`
     DOWN_PATH=`echo "$2" | awk 'BEGIN{res=""; FS="/";}{ for(i=2;i<=NF-1;i++) res=(res"/"$i);} END{print res}'`
     if [ ! -d ${DOWN_PATH} ]; then
-        mkdir -p ${DOWN_PATH}
+        mkdir -vp ${DOWN_PATH}
     fi
-    rm -rf ${TMP_PATH}/${DOWN_FILE}
+    rm -rvf ${TMP_PATH}/${DOWN_FILE}
     wget -P ${TMP_PATH} $1
-    cp -f ${TMP_PATH}/${DOWN_FILE} $2
-    rm -f ${TMP_PATH}/${DOWN_FILE}
+    cp -vf ${TMP_PATH}/${DOWN_FILE} $2
+    rm -vf ${TMP_PATH}/${DOWN_FILE}
 }
 
 echo "=== Update dotfiles from git@github.com:aggresss/dotfiles.git master branch  ==="
@@ -27,7 +29,6 @@ echo "=== Update dotfiles from git@github.com:aggresss/dotfiles.git master branc
 if [ -z "$HAS_UPDATED" ]; then
     FILE_PATH=${HOME}/bin
     FILE_NAME=update_dotfiles.sh
-    mkdir -p ${FILE_PATH}
     update_file ${BASE_URL}/${FILE_NAME} ${FILE_PATH}/${FILE_NAME}
     chmod +x ${FILE_PATH}/${FILE_NAME}
     echo "--- Use updated update_dotfiles.sh to update dotfiles  ---"
