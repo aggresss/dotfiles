@@ -131,10 +131,16 @@ export -f docker_inspect
 
 # Run and mount private file
 docker_private(){
-  docker run --rm -it \
-    -v root:/root \
-    -v ~/Downloads:/Downloads \
-    $*
+    if [ ! "$(docker volume ls | grep root)" ]; then
+        docker volume create root
+    elif [ ! "$(docker volume ls | grep secrets)" ]; then
+        docker volume create secrets
+    fi
+    docker run --rm -it \
+        -v root:/root \
+        -v secrets:/var/run/secrets \
+        -v ~/Downloads:/Downloads \
+        $*
 }
 export -f docker_private
 
