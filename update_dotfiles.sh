@@ -4,7 +4,8 @@
 set -euxo pipefail
 shopt -s nullglob
 
-BASE_URL="https://raw.githubusercontent.com/aggresss/dotfiles/master"
+DOTFILES_URL="https://raw.githubusercontent.com/aggresss/dotfiles/master"
+BASH_URL="https://raw.githubusercontent.com/aggresss/playground-bash/master"
 
 # $1 download url
 # $2 local filepath
@@ -21,6 +22,9 @@ function update_file()
     wget -P ${TMP_PATH} $1
     cp -vf ${TMP_PATH}/${DOWN_FILE} $2
     rm -vf ${TMP_PATH}/${DOWN_FILE}
+    if [ ${DOWN_FILE##*.} = "sh" ]; then
+        chmod +x $2
+    fi
 }
 
 echo "=== Update dotfiles from git@github.com:aggresss/dotfiles.git master branch  ==="
@@ -29,7 +33,7 @@ echo "=== Update dotfiles from git@github.com:aggresss/dotfiles.git master branc
 if [ ${HAS_UPDATED-NotDefine} = "NotDefine" ]; then
     FILE_PATH=${HOME}/bin
     FILE_NAME=update_dotfiles.sh
-    update_file ${BASE_URL}/${FILE_NAME} ${FILE_PATH}/${FILE_NAME}
+    update_file ${DOTFILES_URL}/${FILE_NAME} ${FILE_PATH}/${FILE_NAME}
     chmod +x ${FILE_PATH}/${FILE_NAME}
     echo "--- Use updated update_dotfiles.sh to update dotfiles  ---"
     export HAS_UPDATED=1
@@ -39,20 +43,23 @@ if [ ${HAS_UPDATED-NotDefine} = "NotDefine" ]; then
 fi
 
 # Update commom dotfiles
-update_file ${BASE_URL}/home/.bashrc ${HOME}/.bashrc
-update_file ${BASE_URL}/home/.bash_aliases ${HOME}/.bash_aliases
-update_file ${BASE_URL}/home/.inputrc ${HOME}/.inputrc
-update_file ${BASE_URL}/vim/.vimrc ${HOME}/.vimrc
-update_file ${BASE_URL}/pip/pip.conf ${HOME}/.pip/pip.conf
+update_file ${DOTFILES_URL}/home/.bashrc ${HOME}/.bashrc
+update_file ${DOTFILES_URL}/home/.bash_aliases ${HOME}/.bash_aliases
+update_file ${DOTFILES_URL}/home/.inputrc ${HOME}/.inputrc
+update_file ${DOTFILES_URL}/vim/.vimrc ${HOME}/.vimrc
+update_file ${DOTFILES_URL}/pip/pip.conf ${HOME}/.pip/pip.conf
+
+# Update common bash utility
+update_file ${BASH_URL}/hello.sh ${HOME}/bin/hello.sh
 
 SYS_TYPE=`uname`
 case ${SYS_TYPE} in
     Linux)
-        update_file ${BASE_URL}/home/.Xresources ${HOME}/.Xresources
+        update_file ${DOTFILES_URL}/home/.Xresources ${HOME}/.Xresources
 
     ;;
     Darwin)
-        update_file ${BASE_URL}/home/.bash_profile ${HOME}/.bash_profile
+        update_file ${DOTFILES_URL}/home/.bash_profile ${HOME}/.bash_profile
 
     ;;
     *)
