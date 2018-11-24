@@ -40,11 +40,7 @@ alias cmc='find . -iname "*cmake*" -not -name CMakeLists.txt -exec rm -rf {} +'
 # count code line
 alias ccl='find . -name "*[.h|.c|.hpp|.cpp|.go|.py]" -type f | xargs cat | wc -l'
 # alias for some application special open
-alias calc='gnome-calculator'
-alias gterm='gnome-terminal'
 alias em='emacs -nw'
-alias cbp='chromium-browser --proxy-server=socks5://127.0.0.1:1080'
-alias wine='env LANG=zh_CN.UTF8 wine'
 alias sagt='eval `ssh-agent`'
 
 # alias for remove fast
@@ -323,9 +319,15 @@ case ${SYS_TYPE} in
         # environment for java
         export JAVA_HOME=`/usr/libexec/java_home`
         export PATH=$PATH:$JAVA_HOME/bin
+        # wine chinese character
+        alias wine='env LANG=zh_CN.UTF8 wine'
 
     ;;
     Linux)
+        # alias for access easy in Gnome environment
+        alias cbp='chromium-browser --proxy-server=socks5://127.0.0.1:1080'
+        alias calc='gnome-calculator'
+        alias gterm='gnome-terminal'
 
     ;;
     *)
