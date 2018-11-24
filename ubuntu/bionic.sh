@@ -41,6 +41,8 @@ sudo apt-get update && sudo apt-get install -y \
     polipo \
     exfat-utils \
     ffmpeg \
+    htop \
+    nmon \
     \
     fonts-wqy-microhei \
     fonts-wqy-zenhei \
