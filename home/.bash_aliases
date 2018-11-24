@@ -132,7 +132,7 @@ docker_private(){
     fi
     docker run --rm -it \
         -v root:/root \
-        -v ~/Downloads:/Downloads \
+        -v ${HOME}/Downloads:/root/Downloads \
         $*
 }
 export -f docker_private
