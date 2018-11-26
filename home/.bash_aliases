@@ -247,7 +247,7 @@ git_haste(){
 export -f git_haste
 
 ##########################
-# modify for golang
+# modify for Golang
 ##########################
 
 # environmnet for Golang
@@ -257,11 +257,7 @@ if [ -d "$HOME/.local/go" ]; then
 fi
 
 if [ -d "$HOME/go" ];then
-    if [ -z "$GOPATH" ]; then
-        export GOPATH="$HOME/go"
-    else
-        export GOPATH="$HOME/go:$GOPATH"
-    fi
+    export GOPATH="$HOME/go:${GOPATH:+\:}${GOPATH-}"
 
     if [ ! -d "$HOME/go/bin" ]; then
         mkdir -p $HOME/go/bin
@@ -271,7 +267,7 @@ fi
 
 GOPATH_INIT_PATH="/tmp/GOPATH_INIT.tmp"
 if [ ! -f "$GOPATH_INIT_PATH" ]; then
-    echo $GOPATH > $GOPATH_INIT_PATH
+    echo ${GOPATH-} > $GOPATH_INIT_PATH
 fi
 
 # clear $GOPATH
@@ -285,7 +281,7 @@ export -f go_clr
 
 # set $PWD to $GOPATH
 go_pwd(){
-    if [[ $GOPATH =~ .*$PWD.* ]]; then
+    if [[ ${GOPATH-} =~ .*$PWD.* ]]; then
         echo -e "${RED}currnet dir is already in GOPATH${NORMAL}"
     else
         export GOPATH=${PWD}
