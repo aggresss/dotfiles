@@ -14,7 +14,7 @@ function update_file()
     TMP_PATH="/tmp"
     # can replace by dirname and basename command
     DOWN_FILE=`echo "$1" | awk -F "/" '{print $NF}'`
-    DOWN_PATH=`echo "$2" | awk 'BEGIN{res=""; FS="/";}{ for(i=2;i<=NF-1;i++) res=(res"/"$i);} END{print res}'`
+    DOWN_PATH=`echo "$2" | awk 'BEGIN{res=""; FS="/";}{for(i=2;i<=NF-1;i++) res=(res"/"$i);} END{print res}'`
     if [ ! -d ${DOWN_PATH} ]; then
         mkdir -vp ${DOWN_PATH}
     fi
