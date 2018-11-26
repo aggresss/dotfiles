@@ -48,6 +48,10 @@ update_file ${DOTFILES_URL}/home/.bash_aliases ${HOME}/.bash_aliases
 update_file ${DOTFILES_URL}/home/.inputrc ${HOME}/.inputrc
 update_file ${DOTFILES_URL}/vim/.vimrc ${HOME}/.vimrc
 update_file ${DOTFILES_URL}/vim/.vimrc.bundles ${HOME}/.vimrc.bundles
+if [ ! -d ${HOME}/.vim/bundle ]; then
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    vim +BundleInstall +qall
+fi
 update_file ${DOTFILES_URL}/pip/pip.conf ${HOME}/.pip/pip.conf
 
 # Update common bash utility
