@@ -47,6 +47,7 @@ update_file ${DOTFILES_URL}/home/.bashrc ${HOME}/.bashrc
 update_file ${DOTFILES_URL}/home/.bash_aliases ${HOME}/.bash_aliases
 update_file ${DOTFILES_URL}/home/.inputrc ${HOME}/.inputrc
 update_file ${DOTFILES_URL}/vim/.vimrc ${HOME}/.vimrc
+update_file ${DOTFILES_URL}/vim/.vimrc.bundles ${HOME}/.vimrc.bundles
 update_file ${DOTFILES_URL}/pip/pip.conf ${HOME}/.pip/pip.conf
 
 # Update common bash utility
