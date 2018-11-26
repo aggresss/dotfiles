@@ -17,7 +17,7 @@ if filereadable(expand("~/.vimrc.bundles"))
   Plugin 'taglist.vim'    " require install exuberant-ctags
   Plugin 'cscope.vim'     " require install cscope
   Plugin 'scrooloose/nerdtree'
-  Plugin 'Valloric/YouCompleteMe'     " require compile
+"  Plugin 'Valloric/YouCompleteMe'     " require compile
 
   call vundle#end()
   source ~/.vimrc.bundles    " source the plugin config

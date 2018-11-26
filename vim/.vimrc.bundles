@@ -1,36 +1,36 @@
 " resource file for Vim bundle plugin
 
-"VundleVim/Vundle.vim
+" VundleVim/Vundle.vim
 let g:vundle_default_git_proto = 'git'
 
 
-"taglist.vim
+" taglist.vim
 let g:Tlist_Show_One_File=1
 let g:Tlist_Exit_OnlyWindow=1
 let g:Tlist_WinWidth = 40
 set tags=tags;/
 
 
-"cscope.vim
+" cscope.vim
 let g:cscope_auto_update = 0
 
 
-"scrooloose/nerdtree
+" scrooloose/nerdtree
 let g:NERDTreeShowHidden=1
 let g:NERDTreeWinSize=40
 
 
-"Valloric/YouCompleteMe
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-let g:ycm_seed_identifiers_with_syntax=1
-let g:ycm_auto_trigger=1
-let g:ycm_enable_diagnostic_signs=0
-let g:ycm_enable_diagnostic_highlighting=0
-let g:ycm_complete_in_string=0
-let g:ycm_complete_in_comment=0
-set completeopt=menu
-
-nnoremap <leader>y :let g:ycm_auto_trigger=0<CR>
-nnoremap <leader>Y :let g:ycm_auto_trigger=1<CR>
+" Valloric/YouCompleteMe
+"let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+"let g:ycm_seed_identifiers_with_syntax=1
+"let g:ycm_auto_trigger=1
+"let g:ycm_enable_diagnostic_signs=0
+"let g:ycm_enable_diagnostic_highlighting=0
+"let g:ycm_complete_in_string=0
+"let g:ycm_complete_in_comment=0
+"set completeopt=menu
+"
+"nnoremap <leader>y :let g:ycm_auto_trigger=0<CR>
+"nnoremap <leader>Y :let g:ycm_auto_trigger=1<CR>
 
 " EOF
