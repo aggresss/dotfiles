@@ -274,7 +274,7 @@ if [ -d "$HOME/.local/go" ]; then
 fi
 
 if [ -d "$HOME/go" ];then
-    export GOPATH="$HOME/go:${GOPATH:+\:}${GOPATH-}"
+    env_insert "GOPATH" "$HOME/go"
 
     if [ ! -d "$HOME/go/bin" ]; then
         mkdir -p $HOME/go/bin
