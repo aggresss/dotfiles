@@ -314,9 +314,6 @@ go_ls(){
 # specified
 ##########################
 
-# environment for ~/bin
-env_insert "PATH" "$HOME/bin"
-
 # specified for system type
 SYS_TYPE=`uname`
 case ${SYS_TYPE} in
@@ -333,6 +330,8 @@ case ${SYS_TYPE} in
         env_append "PATH" "$JAVA_HOME/bin"
         # wine chinese character
         alias wine='env LANG=zh_CN.UTF8 wine'
+        # environment for ~/bin
+        env_insert "PATH" "$HOME/bin"
 
     ;;
     Linux)
