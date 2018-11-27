@@ -36,6 +36,7 @@ sudo apt-get update && sudo apt-get install -y \
     gawk \
     net-tools \
     netcat \
+    socat \
     nfs-kernel-server \
     shadowsocks \
     polipo \
