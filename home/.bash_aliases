@@ -105,8 +105,8 @@ proxy_cfg(){
 # $1 enviroment variable
 # $2 new element
 env_append() {
-    eval env_var=\$\{${1}\-\}
-    new_element=${2%/}
+    eval local env_var=\$\{${1}\-\}
+    local new_element=${2%/}
     if [ -d "$new_element" ] && ! echo $env_var | grep -E -q "(^|:)$new_element($|:)" ; then
         eval export $1="\${$1-}\${$1:+\:}${new_element}"
     fi
@@ -116,8 +116,8 @@ env_append() {
 # $1 enviroment variable
 # $2 new element
 env_insert() {
-    eval env_var=\$\{${1}\-\}
-    new_element=${2%/}
+    eval local env_var=\$\{${1}\-\}
+    local new_element=${2%/}
     if [ -d "$new_element" ] && ! echo $env_var | grep -E -q "(^|:)$new_element($|:)" ; then
         eval export $1="${new_element}\${$1:+\:}\${$1-}"
     fi
@@ -127,7 +127,7 @@ env_insert() {
 # $1 enviroment variable
 # $2 delete element
 env_del() {
-    eval env_var=\$\{${1}\-\}
+    eval local env_var=\$\{${1}\-\}
     eval $1="$(echo $env_var | sed -e "s;\(^\|:\)${2%/}\(:\|\$\);\1\2;g" -e 's;^:\|:$;;g' -e 's;::;:;g')"
 }
 
