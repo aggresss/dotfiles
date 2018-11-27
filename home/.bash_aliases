@@ -104,7 +104,7 @@ proxy_cfg(){
 # add new element to environment variable append mode
 # $1 enviroment variable
 # $2 new element
-env_add_append() {
+env_append() {
     eval env_var=\$\{${1}\-\}
     new_element=${2%/}
     if [ -d "$new_element" ] && ! echo $env_var | grep -E -q "(^|:)$new_element($|:)" ; then
@@ -115,7 +115,7 @@ env_add_append() {
 # add new element to environment variable insert mode
 # $1 enviroment variable
 # $2 new element
-env_add_insert() {
+env_insert() {
     eval env_var=\$\{${1}\-\}
     new_element=${2%/}
     if [ -d "$new_element" ] && ! echo $env_var | grep -E -q "(^|:)$new_element($|:)" ; then
@@ -270,7 +270,7 @@ git_haste(){
 # environmnet for Golang
 if [ -d "$HOME/.local/go" ]; then
     export GOROOT="$HOME/.local/go"
-    env_add_insert "PATH" "$GOROOT/bin"
+    env_insert "PATH" "$GOROOT/bin"
 fi
 
 if [ -d "$HOME/go" ];then
@@ -279,7 +279,7 @@ if [ -d "$HOME/go" ];then
     if [ ! -d "$HOME/go/bin" ]; then
         mkdir -p $HOME/go/bin
     fi
-    env_add_insert "PATH" "$HOME/go/bin"
+    env_insert "PATH" "$HOME/go/bin"
 fi
 
 GOPATH_INIT_PATH="/tmp/GOPATH_INIT.tmp"
@@ -315,7 +315,7 @@ go_ls(){
 ##########################
 
 # environment for ~/bin
-env_add_insert "PATH" "$HOME/bin"
+env_insert "PATH" "$HOME/bin"
 
 # specified for system type
 SYS_TYPE=`uname`
@@ -330,7 +330,7 @@ case ${SYS_TYPE} in
         alias c++='c++-7'
         # environment for java
         export JAVA_HOME=`/usr/libexec/java_home`
-        env_add_append "PATH" "$JAVA_HOME/bin"
+        env_append "PATH" "$JAVA_HOME/bin"
         # wine chinese character
         alias wine='env LANG=zh_CN.UTF8 wine'
 
