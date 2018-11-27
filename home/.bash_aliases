@@ -28,9 +28,6 @@ CYAN="\\033[36m"
 WHITE="\\033[37m"
 NORMAL="\\033[m"
 
-# environment for ~/bin
-export PATH="$PATH:$HOME/bin"
-
 # find file
 alias fdf='find . -name "*" |grep -sin'
 # find file content
@@ -60,7 +57,7 @@ alias rm='rm -i'
 alias mv='mv -i'
 
 # remove recursive
-function rm_rcs()
+rm_rcs()
 {
     local tmp_arg
     for i in `seq 1 $#`
@@ -70,11 +67,10 @@ function rm_rcs()
         find . -name "${tmp_arg}" -exec rm -rvf {} \;
     done
 }
-export rm_rcs
 
 # fast find process
 # $1 process name
-function ps_grep()
+ps_grep()
 {
     ps aux | grep -sin $1 | grep -v grep
 }
@@ -82,7 +78,7 @@ function ps_grep()
 # update file utility
 # $1 download url
 # $2 local filepath
-function update_file()
+update_file()
 {
     local tmp_path="/tmp"
     local down_file=`echo "$1" | awk -F "/" '{print $NF}'`
@@ -91,7 +87,6 @@ function update_file()
     cp -f ${tmp_path}/${down_file} $2
     rm -f ${tmp_path}/${down_file}
 }
-export -f update_file
 
 # switch proxy on-off
 proxy_cfg(){
@@ -105,7 +100,37 @@ proxy_cfg(){
     unset proxy http_proxy https_proxy ftp_proxy
     fi
 }
-export -f proxy_cfg
+
+# add new element to environment variable append mode
+# $1 enviroment variable
+# $2 new element
+env_add_append() {
+    eval env_var=\$\{${1}\-\}
+    new_element=${2%/}
+    if [ -d "$new_element" ] && ! echo $env_var | grep -E -q "(^|:)$new_element($|:)" ; then
+        eval export $1="\${$1-}\${$1:+\:}${new_element}"
+    fi
+}
+
+# add new element to environment variable insert mode
+# $1 enviroment variable
+# $2 new element
+env_add_insert() {
+    eval env_var=\$\{${1}\-\}
+    new_element=${2%/}
+    if [ -d "$new_element" ] && ! echo $env_var | grep -E -q "(^|:)$new_element($|:)" ; then
+        eval export $1="${new_element}\${$1:+\:}\${$1-}"
+    fi
+}
+
+# delete element from environment variable
+# $1 enviroment variable
+# $2 delete element
+env_del() {
+    eval env_var=\$\{${1}\-\}
+    eval $1="$(echo $env_var | sed -e "s;\(^\|:\)${2%/}\(:\|\$\);\1\2;g" -e 's;^:\|:$;;g' -e 's;::;:;g')"
+}
+
 
 ##########################
 # modify for docker
@@ -115,7 +140,6 @@ export -f proxy_cfg
 docker_inside(){
   docker exec -it $1 bash -c "stty cols $COLUMNS rows $LINES && bash";
 }
-export -f docker_inside
 
 # Inspect volumes and port
 docker_inspect(){
@@ -123,7 +147,6 @@ docker_inspect(){
   echo "ExposedPorts:" ; docker inspect $1 -f {{.Config.ExposedPorts}}
   echo "Labels:" ; docker inspect $1 -f {{.Config.Labels}}
 }
-export -f docker_inspect
 
 # Run and mount private file
 docker_private(){
@@ -135,7 +158,6 @@ docker_private(){
         -v ${HOME}/Downloads:/root/Downloads \
         $*
 }
-export -f docker_private
 
 ##########################
 # modify for git
@@ -150,7 +172,6 @@ git_sig(){
   git config user.name `echo "$1" | awk -F "@" '{print $1}'`
   git config user.email $1
 }
-export -f git_sig
 
 # Set global gitignore file
 git_ignore(){
@@ -158,7 +179,6 @@ git_ignore(){
   update_file ${base_url}/.gitignore ${HOME}/.gitignore
   git config --global core.excludesfile ${HOME}/.gitignore
 }
-export -f git_ignore
 
 git_branch_internal(){
     local dir=. head
@@ -191,7 +211,6 @@ git_branch_internal(){
     GIT_NAME_LEFT=''
     GIT_NAME_RIGHT=''
 }
-export -f git_branch_internal
 
 # Git branch perception
 git_prompt(){
@@ -201,13 +220,13 @@ git_prompt(){
         echo "usage: git_prompt on | off"
     elif [ $1 == "on" ]; then
         if [ ! -f $pcbak ]; then
-            echo $PROMPT_COMMAND > $pcbak
+            echo ${PROMPT_COMMAND-} > $pcbak
         fi
         if [ ! -f $psbak ]; then
             echo $PS1 > $psbak
         fi
-        if [ -z $GIT_PROMPT ] ; then
-            PROMPT_COMMAND="git_branch_internal; $PROMPT_COMMAND"
+        if [ -z ${GIT_PROMPT-} ] ; then
+            PROMPT_COMMAND="git_branch_internal;${PROMPT_COMMAND-}"
             PS1="$PS1$blue\$GIT_NAME_TITLE\$GIT_NAME_LEFT$red\$GIT_NAME_CONTENT$blue\$GIT_NAME_RIGHT\$ $normal"
             export GIT_PROMPT=1
         fi
@@ -218,12 +237,11 @@ git_prompt(){
         if [ -f $psbak ]; then
             PS1="`cat $psbak` "
         fi
-        if [ -n $GIT_PROMPT ]; then
+        if [ -n ${GIT_PROMPT-} ]; then
             unset GIT_PROMPT
         fi
     fi
 }
-export -f git_prompt
 
 # Git fast add->commit->fetch->rebase->push ! Deprecated
 # $1 operation: rebase
@@ -244,7 +262,6 @@ git_haste(){
         echo -e "${MAGENTA}Not on a regular branch${NORMAL}"
     fi
 }
-export -f git_haste
 
 ##########################
 # modify for Golang
@@ -253,7 +270,7 @@ export -f git_haste
 # environmnet for Golang
 if [ -d "$HOME/.local/go" ]; then
     export GOROOT="$HOME/.local/go"
-    export PATH="$GOROOT/bin:$PATH"
+    env_add_insert "PATH" "$GOROOT/bin"
 fi
 
 if [ -d "$HOME/go" ];then
@@ -262,7 +279,7 @@ if [ -d "$HOME/go" ];then
     if [ ! -d "$HOME/go/bin" ]; then
         mkdir -p $HOME/go/bin
     fi
-    export PATH="$HOME/go/bin:$PATH"
+    env_add_insert "PATH" "$HOME/go/bin"
 fi
 
 GOPATH_INIT_PATH="/tmp/GOPATH_INIT.tmp"
@@ -277,7 +294,6 @@ go_clr(){
         echo -e "${GREEN}successful clear GOPATH \n${RED}GOPATH ==> ${GOPATH}${NORMAL}"
     fi
 }
-export -f go_clr
 
 # set $PWD to $GOPATH
 go_pwd(){
@@ -288,17 +304,20 @@ go_pwd(){
         echo -e "${GREEN}successful set GOPATH \n${RED}GOPATH ==> ${GOPATH}${NORMAL}"
     fi
 }
-export -f go_pwd
 
 # echo $GOPATH
 go_ls(){
     echo -e "${GREEN}GOPATH ===> ${RED}${GOPATH}${NORMAL}"
 }
-export -f go_ls
 
 ##########################
-# specified for system type
+# specified
 ##########################
+
+# environment for ~/bin
+env_add_insert "PATH" "$HOME/bin"
+
+# specified for system type
 SYS_TYPE=`uname`
 case ${SYS_TYPE} in
     Darwin)
@@ -311,7 +330,7 @@ case ${SYS_TYPE} in
         alias c++='c++-7'
         # environment for java
         export JAVA_HOME=`/usr/libexec/java_home`
-        export PATH=$PATH:$JAVA_HOME/bin
+        env_add_append "PATH" "$JAVA_HOME/bin"
         # wine chinese character
         alias wine='env LANG=zh_CN.UTF8 wine'
 
