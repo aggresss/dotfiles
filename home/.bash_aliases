@@ -150,28 +150,20 @@ docker_inspect(){
 
 # Run and mount private file
 docker_private(){
+    xhost + localhost
     if [ ! "$(docker volume ls | grep root)" ]; then
         docker volume create root
+    elif [ ! "$(docker volume ls | grep home)" ]; then
+        docker volume create home
     fi
     docker run --rm -it \
         -v root:/root \
-        -v ${HOME}/Downloads:/root/Downloads \
+        -v home:/home \
+        -v ${HOME}/Downloads:/mnt/Downloads \
+        -e DISPLAY=host.docker.internal:0 \
         $*
 }
 
-# Run x11 apps in docker container
-docker_x11(){
-    xhost + localhost
-    if [ ! "$(docker volume ls | grep home)" ]; then
-        docker volume create home
-    fi
-    docker run -it \
-        -u aggresss
-        -v home:/home \
-        -v ${HOME}/Downloads:/home/aggresss/Downloads \
-        -e DISPLAY=host.docker.internal:0
-        $*
-}
 
 ##########################
 # modify for git
