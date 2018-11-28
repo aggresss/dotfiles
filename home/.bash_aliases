@@ -326,8 +326,11 @@ go_ls(){
 # specified
 ##########################
 
-# environment for ~/bin
-env_insert "PATH" "$HOME/bin"
+# specified for docker container
+if [ -f /.dockerenv ]; then
+    # environment for ~/bin
+    env_append "PATH" "$HOME/bin"
+fi
 
 # specified for system type
 SYS_TYPE=`uname`
