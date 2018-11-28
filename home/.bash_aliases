@@ -123,10 +123,10 @@ env_insert() {
     fi
 }
 
-# delete element from environment variable
+# prune element from environment variable
 # $1 enviroment variable
-# $2 delete element
-env_del() {
+# $2 prune element
+env_prune() {
     eval local env_var=\$\{${1}\-\}
     eval $1="$(echo $env_var | sed -e "s;\(^\|:\)${2%/}\(:\|\$\);\1\2;g" -e 's;^:\|:$;;g' -e 's;::;:;g')"
 }
@@ -314,6 +314,9 @@ go_ls(){
 # specified
 ##########################
 
+# environment for ~/bin
+env_insert "PATH" "$HOME/bin"
+
 # specified for system type
 SYS_TYPE=`uname`
 case ${SYS_TYPE} in
@@ -330,9 +333,6 @@ case ${SYS_TYPE} in
         env_append "PATH" "$JAVA_HOME/bin"
         # wine chinese character
         alias wine='env LANG=zh_CN.UTF8 wine'
-        # environment for ~/bin
-        env_insert "PATH" "$HOME/bin"
-
     ;;
     Linux)
         # alias for access easy in Gnome environment
