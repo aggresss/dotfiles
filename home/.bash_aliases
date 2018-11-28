@@ -150,7 +150,7 @@ docker_inspect(){
 
 # Run and mount private file
 docker_private(){
-    xhost + localhost
+    xhost + localhost > /dev/null
     if [ ! "$(docker volume ls | grep root)" ]; then
         docker volume create root
     elif [ ! "$(docker volume ls | grep home)" ]; then
