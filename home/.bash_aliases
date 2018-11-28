@@ -159,6 +159,18 @@ docker_private(){
         $*
 }
 
+# Run x11 apps in docker container
+docker_x11(){
+    if [ ! "$(docker volume ls | grep home)" ]; then
+        docker volume create home
+    fi
+    docker run -it \
+        -v home:/home \
+        -v ${HOME}/Downloads:/home/aggresss/Downloads \
+        -e DISPLAY=host.docker.internal:0
+        $*
+}
+
 ##########################
 # modify for git
 ##########################
