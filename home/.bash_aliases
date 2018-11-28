@@ -161,10 +161,12 @@ docker_private(){
 
 # Run x11 apps in docker container
 docker_x11(){
+    xhost + localhost
     if [ ! "$(docker volume ls | grep home)" ]; then
         docker volume create home
     fi
     docker run -it \
+        -u aggresss
         -v home:/home \
         -v ${HOME}/Downloads:/home/aggresss/Downloads \
         -e DISPLAY=host.docker.internal:0
