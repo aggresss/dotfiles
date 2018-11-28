@@ -350,6 +350,9 @@ case ${SYS_TYPE} in
         env_append "PATH" "$JAVA_HOME/bin"
         # wine chinese character
         alias wine='env LANG=zh_CN.UTF8 wine'
+        # environment for ~/bin
+        env_append "PATH" "$HOME/bin"
+
     ;;
     Linux)
         # alias for access easy in Gnome environment
