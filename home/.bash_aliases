@@ -36,6 +36,9 @@ alias fdc='find . -name "*" |xargs grep -sin'
 alias cmc='find . -iname "*cmake*" -not -name CMakeLists.txt -exec rm -rf {} +'
 # count code line
 alias ccl='find . -name "*[.h|.c|.hpp|.cpp|.go|.py]" -type f | xargs cat | wc -l'
+# echo ${PATH}
+alias path='echo -e ${PATH//:/\\n}'
+
 # alias for some application special open
 alias em='emacs -nw'
 alias sagt='eval `ssh-agent`'
