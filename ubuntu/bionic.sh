@@ -44,6 +44,8 @@ sudo apt-get update && sudo apt-get install -y \
     ffmpeg \
     htop \
     nmon \
+    supervisor \
+    stow \
     \
     fonts-wqy-microhei \
     fonts-wqy-zenhei \
