@@ -316,7 +316,7 @@ go_pwd(){
 
 # echo $GOPATH
 go_ls(){
-    echo -e "${GREEN}GOPATH ===> ${RED}${GOPATH}${NORMAL}"
+    echo -e "${GREEN}GOPATH ===> \n${RED}${GOPATH//:/\\n}${NORMAL}"
 }
 
 ##########################
