@@ -32,7 +32,6 @@
             <macro><name>__gnu_linux__</name><value>1</value></macro>
             <macro><name>linux</name><value>1</value></macro>
             <macro><name>__x86_64__</name><value>1</value></macro>
-            <macro><name>__cplusplus</name><value>1</value></macro>
         </language>
         <language name="GNU C">
             <macro><name>__GNUC__</name><value>7</value></macro>
