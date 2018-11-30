@@ -37,7 +37,7 @@ alias cmc='find . -iname "*cmake*" -not -name CMakeLists.txt -exec rm -rf {} +'
 # count code line
 alias ccl='find . -name "*[.h|.c|.hpp|.cpp|.go|.py]" -type f | xargs cat | wc -l'
 # echo ${PATH}
-alias path='echo -e ${PATH//:/\\n}'
+alias envp='echo -e ${RED}PATH:\\n${GREEN}${PATH//:/\\n}${NORMAL}'
 
 # alias for some application special open
 alias em='emacs -nw'
@@ -316,7 +316,7 @@ go_pwd(){
 
 # echo $GOPATH
 go_ls(){
-    echo -e "${GREEN}GOPATH ===> \n${RED}${GOPATH//:/\\n}${NORMAL}"
+    echo -e "${RED}GOPATH:\n${GREEN}${GOPATH//:/\\n}${NORMAL}"
 }
 
 ##########################
