@@ -170,10 +170,7 @@ docker_private(){
 # killall containers
 docker_kill(){
     if [ -n "`docker ps -a -q`" ]; then
-        docker stop `docker ps -a -q`
-    fi
-    if [ -n "`docker ps -a -q`" ]; then
-        docker rm `docker ps -a -q`
+        docker rm -f `docker ps -a -q`
     fi
 }
 
