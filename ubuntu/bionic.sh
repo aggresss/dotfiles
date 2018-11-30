@@ -46,6 +46,7 @@ sudo apt-get update && sudo apt-get install -y \
     nmon \
     supervisor \
     stow \
+    minicom \
     \
     fonts-wqy-microhei \
     fonts-wqy-zenhei \
@@ -53,7 +54,6 @@ sudo apt-get update && sudo apt-get install -y \
     vlc \
     chromium-browser \
     slock \
-    minicom \
     okular \
     xvnc4viewer \
     remmina \
