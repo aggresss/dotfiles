@@ -11,18 +11,18 @@ BASH_URL="https://raw.githubusercontent.com/aggresss/playground-bash/master"
 # $2 local filepath
 function update_file()
 {
-    TMP_PATH="/tmp"
+    local tmp_path="/tmp"
     # can replace by dirname and basename command
-    DOWN_FILE=`echo "$1" | awk -F "/" '{print $NF}'`
-    DOWN_PATH=`echo "$2" | awk 'BEGIN{res=""; FS="/";}{for(i=2;i<=NF-1;i++) res=(res"/"$i);} END{print res}'`
-    if [ ! -d ${DOWN_PATH} ]; then
-        mkdir -vp ${DOWN_PATH}
+    local down_file=`echo "$1" | awk -F "/" '{print $NF}'`
+    local down_path=`echo "$2" | awk 'BEGIN{res=""; FS="/";}{for(i=2;i<=NF-1;i++) res=(res"/"$i);} END{print res}'`
+    if [ ! -d ${down_path} ]; then
+        mkdir -vp ${down_path}
     fi
-    rm -rvf ${TMP_PATH}/${DOWN_FILE}
-    wget -P ${TMP_PATH} $1
-    cp -vf ${TMP_PATH}/${DOWN_FILE} $2
-    rm -vf ${TMP_PATH}/${DOWN_FILE}
-    if [ ${DOWN_FILE##*.} = "sh" ]; then
+    rm -rvf ${tmp_path}/${down_file}
+    wget -P ${tmp_path} $1
+    cp -vf ${tmp_path}/${down_file} $2
+    rm -vf ${tmp_path}/${down_file}
+    if [ ${down_file##*.} = "sh" ]; then
         chmod +x $2
     fi
 }
@@ -31,13 +31,13 @@ echo "=== Update dotfiles from git@github.com:aggresss/dotfiles.git master branc
 
 # Update self
 if [ ${HAS_UPDATED:-NoDefine} = "NoDefine" ]; then
-    FILE_PATH=${HOME}/bin
-    FILE_NAME=update_dotfiles.sh
-    update_file ${DOTFILES_URL}/${FILE_NAME} ${FILE_PATH}/${FILE_NAME}
-    chmod +x ${FILE_PATH}/${FILE_NAME}
+    local file_path=${HOME}/bin
+    local file_name=update_dotfiles.sh
+    update_file ${DOTFILES_URL}/${file_name} ${file_path}/${file_name}
+    chmod +x ${file_path}/${file_name}
     echo "--- Use updated update_dotfiles.sh to update dotfiles  ---"
     export HAS_UPDATED=1
-    eval ${FILE_PATH}/${FILE_NAME}
+    eval ${file_path}/${file_name}
     unset HAS_UPDATED
     exit 0
 fi
