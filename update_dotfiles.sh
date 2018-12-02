@@ -31,8 +31,8 @@ echo "=== Update dotfiles from git@github.com:aggresss/dotfiles.git master branc
 
 # Update self
 if [ ${HAS_UPDATED:-NoDefine} = "NoDefine" ]; then
-    local file_path=${HOME}/bin
-    local file_name=update_dotfiles.sh
+    file_path=${HOME}/bin
+    file_name=update_dotfiles.sh
     update_file ${DOTFILES_URL}/${file_name} ${file_path}/${file_name}
     chmod +x ${file_path}/${file_name}
     echo "--- Use updated update_dotfiles.sh to update dotfiles  ---"
