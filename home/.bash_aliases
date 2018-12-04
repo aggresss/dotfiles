@@ -330,10 +330,16 @@ go_ls(){
 # specified
 ##########################
 
+# specified for ${HOME}/.local/bin
+if [ -d ${HOME}/.local/bin ]; then
+    mkdir -p ${HOME}/.local/bin
+    env_append "PATH" "${HOME}/.local/bin"
+fi
+
 # specified for docker container
 if [ -f /.dockerenv ]; then
     # environment for ~/bin
-    env_append "PATH" "$HOME/bin"
+    env_append "PATH" "${HOME}/bin"
 fi
 
 # specified for system type
