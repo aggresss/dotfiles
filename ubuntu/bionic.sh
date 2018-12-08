@@ -108,6 +108,11 @@ sudo apt-get install -y code
 # configuration
 #########################
 
+# fix: A stop job is runing ...
+sudo sed -r -e 's/#DefaultTimeoutStartSec=90s/DefaultTimeoutStartSec=10s/' -i /etc/systemd/system.conf
+sudo sed -r -e 's/#DefaultTimeoutStopSec=90s/DefaultTimeoutStopSec=10s/' -i /etc/systemd/system.conf
+sudo systemctl daemon-reload
+
 # GRUB
 # save the last choice
 sudo sed -r -e 's/^GRUB_DEFAULT.*$/GRUB_DEFAULT=saved\nGRUB_SAVEDEFAULT=true/' -i /etc/default/grub
@@ -139,3 +144,4 @@ sudo chown `id -nu 0` /etc/polipo/config
 # shadowsocks
 # modify shadowsock mode from server to client
 sudo sed -r -e 's@DAEMON=/usr/bin/ssserver@DAEMON=/usr/bin/sslocal@' -i /etc/init.d/shadowsocks
+
