@@ -343,8 +343,7 @@ if [ -f /.dockerenv ]; then
 fi
 
 # specified for system type
-SYS_TYPE=`uname`
-case ${SYS_TYPE} in
+case $(uname) in
     Darwin)
         # ls color
         export CLICOLOR=1
