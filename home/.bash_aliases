@@ -45,7 +45,7 @@ alias sagt='eval `ssh-agent`'
 
 # alias for remove fast
 alias rm_3rd='rm -rvf *.zip *.tgz *.bz2 *.gz *.dmg *.7z *.xz *.tar'
-alias rm_pic='rm -rvf *.jpg *.jpeg *.png *.bmp *.gif'
+alias rm_mda='rm -rvf *.jpg *.jpeg *.png *.bmp *.gif *.mp3 *.acc *.wav *.mp4 *.flv *.mov *.avi *.ts *.wmv *.mkv'
 alias rm_doc='rm -rvf *.doc *.docx *.xls *.xlsx *.ppt *.pptx *.numbers *.pages *.key'
 
 # short for cd ..
@@ -60,7 +60,7 @@ alias rm='rm -i'
 alias mv='mv -i'
 
 # remove recursive
-rm_rcs()
+function rm_rcs()
 {
     local tmp_arg
     for i in `seq 1 $#`
@@ -70,10 +70,11 @@ rm_rcs()
         find . -name "${tmp_arg}" -exec rm -rvf {} \;
     done
 }
+alias rm_ds='rm_rcs .DS_Store'
 
 # fast find process
 # $1 process name
-ps_grep()
+function ps_grep()
 {
     ps aux | grep -sin $1 | grep -v grep
 }
@@ -81,7 +82,7 @@ ps_grep()
 # update file utility
 # $1 download url
 # $2 local filepath
-update_file()
+function update_file()
 {
     local tmp_path="/tmp"
     local down_file=`echo "$1" | awk -F "/" '{print $NF}'`
@@ -92,7 +93,8 @@ update_file()
 }
 
 # switch proxy on-off
-proxy_cfg(){
+function proxy_cfg()
+{
   if [ $1 == 1 ]; then
     local proxy_url="http://127.0.0.1:8123"
     export proxy=${proxy_url}
@@ -107,7 +109,8 @@ proxy_cfg(){
 # add new element to environment variable append mode
 # $1 enviroment variable
 # $2 new element
-env_append() {
+function env_append()
+{
     eval local env_var=\$\{${1}\-\}
     local new_element=${2%/}
     if [ -d "$new_element" ] && ! echo $env_var | grep -E -q "(^|:)$new_element($|:)" ; then
@@ -118,7 +121,8 @@ env_append() {
 # add new element to environment variable insert mode
 # $1 enviroment variable
 # $2 new element
-env_insert() {
+function env_insert()
+{
     eval local env_var=\$\{${1}\-\}
     local new_element=${2%/}
     if [ -d "$new_element" ] && ! echo $env_var | grep -E -q "(^|:)$new_element($|:)" ; then
@@ -129,7 +133,8 @@ env_insert() {
 # prune element from environment variable
 # $1 enviroment variable
 # $2 prune element
-env_prune() {
+function env_prune()
+{
     eval local env_var=\$\{${1}\-\}
     eval $1="$(echo $env_var | sed -e "s;\(^\|:\)${2%/}\(:\|\$\);\1\2;g" -e 's;^:\|:$;;g' -e 's;::;:;g')"
 }
@@ -140,19 +145,22 @@ env_prune() {
 ##########################
 
 # Fast docker inside
-docker_inside(){
+function docker_inside()
+{
   docker exec -it $1 bash -c "stty cols $COLUMNS rows $LINES && bash";
 }
 
 # Inspect volumes and port
-docker_inspect(){
+function docker_inspect()
+{
   echo "Volumes:" ; docker inspect $1 -f {{.Config.Volumes}}
   echo "ExposedPorts:" ; docker inspect $1 -f {{.Config.ExposedPorts}}
   echo "Labels:" ; docker inspect $1 -f {{.Config.Labels}}
 }
 
 # Run and mount private file
-docker_private(){
+function docker_private()
+{
     xhost + localhost > /dev/null
     if ! docker volume ls | grep -q root; then
         docker volume create root
@@ -168,7 +176,8 @@ docker_private(){
 }
 
 # killall containers
-docker_kill(){
+function docker_kill()
+{
     if [ -n "`docker ps -a -q`" ]; then
         docker rm -f `docker ps -a -q`
     fi
@@ -184,19 +193,22 @@ alias git_top='cd `git rev-parse --show-toplevel`'
 
 # Signature for github repository
 # $1 user.email
-git_sig(){
+function git_sig()
+{
   git config user.name `echo "$1" | awk -F "@" '{print $1}'`
   git config user.email $1
 }
 
 # Set global gitignore file
-git_ignore(){
+function git_ignore()
+{
   local base_url="https://raw.githubusercontent.com/aggresss/dotfiles/master"
   update_file ${base_url}/.gitignore ${HOME}/.gitignore
   git config --global core.excludesfile ${HOME}/.gitignore
 }
 
-git_branch_internal(){
+function git_branch_internal()
+{
     local dir=. head
     until [ "$dir" -ef / ]; do
         if [ -f "$dir/.git/HEAD" ]; then
@@ -229,7 +241,8 @@ git_branch_internal(){
 }
 
 # Git branch perception
-git_prompt(){
+function git_prompt()
+{
     local pcbak="/tmp/PROMPT_COMMAND.tmp"
     local psbak="/tmp/PS1.tmp"
     if [ ! -n "$1" ]; then
@@ -261,7 +274,8 @@ git_prompt(){
 
 # Git fast add->commit->fetch->rebase->push ! Deprecated
 # $1 operation: rebase
-git_haste(){
+function git_haste()
+{
     git_branch_internal;
     if [ -z ${GIT_NAME_TITLE} ]; then
         echo -e "${RED}Not in a git repo${NORMAL}"
@@ -304,7 +318,8 @@ if [ ! -f "$GOPATH_INIT_PATH" ]; then
 fi
 
 # clear $GOPATH
-go_clr(){
+function go_clr()
+{
     if [ -f "$GOPATH_INIT_PATH" ]; then
         export GOPATH="`cat $GOPATH_INIT_PATH`"
         echo -e "${GREEN}successful clear GOPATH \n${RED}GOPATH ==> ${GOPATH}${NORMAL}"
@@ -312,7 +327,8 @@ go_clr(){
 }
 
 # set $PWD to $GOPATH
-go_pwd(){
+function go_pwd()
+{
     if [[ ${GOPATH-} =~ .*$PWD.* ]]; then
         echo -e "${RED}currnet dir is already in GOPATH${NORMAL}"
     else
@@ -322,7 +338,8 @@ go_pwd(){
 }
 
 # echo $GOPATH
-go_ls(){
+function go_ls()
+{
     echo -e "${RED}GOPATH:\n${GREEN}${GOPATH//:/\\n}${NORMAL}"
 }
 
