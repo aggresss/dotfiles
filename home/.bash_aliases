@@ -297,24 +297,28 @@ function git_haste()
 # $1 url
 function git_down()
 {
-    local git_url=$1
-    local git_vendor=$(echo "${git_url}" | awk -F'[/:]' '{print $4}')
-    local git_uri=$(echo "${git_url}" | cut -d/ -f4-)
-    local git_user=$(echo "${git_uri}" | cut -d/ -f1)
-    local git_repo=$(echo "${git_uri}" | cut -d/ -f2)
-    local git_branch=$(echo "${git_uri}" | cut -d/ -f4)
-    local git_path=$(echo "${git_uri}" | cut -d/ -f5-)
+    local url=$1
+    local vendor=$(echo "${url}" | awk -F'[/:]' '{print $4}')
+    local uri=$(echo "${url}" | cut -d/ -f4-)
+    local user=$(echo "${uri}" | cut -d/ -f1)
+    local repo=$(echo "${uri}" | cut -d/ -f2)
+    local branch=$(echo "${uri}" | cut -d/ -f4)
+    local path=$(echo "${uri}" | cut -d/ -f5-)
 
-    case ${git_vendor} in
+    if [[ -z ${url} || -z ${vendor} || -z ${uri} || -z ${user} || -z ${repo} || -z ${branch} || -z ${path} ]]; then
+        echo -e "Invalid URL: $1"
+        return 1
+    fi
+
+    case ${vendor} in
         gitlab.com | github.com)
-            wget https://${git_vendor}/${git_user}/${git_repo}/raw/${git_branch}/${git_path}
+            wget https://${vendor}/${user}/${repo}/raw/${branch}/${path}
         ;;
         *)
             echo -e "Not support URL: $1"
         ;;
     esac
 }
-
 
 ##########################
 # modify for Golang
