@@ -4,8 +4,8 @@
 set -euxo pipefail
 shopt -s nullglob
 
-DOTFILES_URL="https://raw.githubusercontent.com/aggresss/dotfiles/master"
-BASH_URL="https://raw.githubusercontent.com/aggresss/playground-bash/master"
+DOTFILES_URL="https://github.com/aggresss/dotfiles/blob/master"
+BASH_URL="https://github.com/aggresss/playground-bash/blob/master"
 
 # $1 download url
 # $2 local filepath

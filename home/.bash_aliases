@@ -293,6 +293,29 @@ function git_haste()
     fi
 }
 
+# Git fast download file from url
+# $1 url
+function git_down()
+{
+    local git_url=$1
+    local git_vendor=$(echo "${git_url}" | awk -F'[/:]' '{print $4}')
+    local git_uri=$(echo "${git_url}" | cut -d/ -f4-)
+    local git_user=$(echo "${git_uri}" | cut -d/ -f1)
+    local git_repo=$(echo "${git_uri}" | cut -d/ -f2)
+    local git_branch=$(echo "${git_uri}" | cut -d/ -f4)
+    local git_path=$(echo "${git_uri}" | cut -d/ -f5-)
+
+    case ${git_vendor} in
+        gitlab.com | github.com)
+            wget https://${git_vendor}/${git_user}/${git_repo}/raw/${git_branch}/${git_path}
+        ;;
+        *)
+            echo -e "Not support URL: $1"
+        ;;
+    esac
+}
+
+
 ##########################
 # modify for Golang
 ##########################
