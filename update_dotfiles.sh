@@ -53,17 +53,34 @@ if [ ! -d ${HOME}/.vim/bundle ]; then
 fi
 update_file ${DOTFILES_URL}/pip/pip.conf ${HOME}/.pip/pip.conf
 
+if [ ! -d ${HOME}/.bashrc ]; then
+    if [ -d /etc/skel/.bashrc ]; then
+        cp /etc/skel/.bashrc ${HOME}/
+    else
+        update_file ${DOTFILES_URL}/home/.bashrc ${HOME}/.bashrc
+    fi
+fi
+
+if ! cat ${HOME}/.bashrc | grep -q ".bash_alias"; then
+     cat << END >> ${HOME}/.bashrc
+
+# modify by aggresss
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+END
+fi
+
 # Update common bash utility
 update_file ${BASH_URL}/hello.sh ${HOME}/bin/hello.sh
 
-SYS_TYPE=`uname`
-case ${SYS_TYPE} in
+case $(uname) in
     Linux)
         update_file ${DOTFILES_URL}/home/.Xresources ${HOME}/.Xresources
 
     ;;
     Darwin)
-        update_file ${DOTFILES_URL}/home/.bashrc ${HOME}/.bashrc
         update_file ${DOTFILES_URL}/home/.bash_profile ${HOME}/.bash_profile
 
     ;;
