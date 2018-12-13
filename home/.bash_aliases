@@ -129,16 +129,16 @@ function env_insert()
         eval export $1="${new_element}\${$1:+\:}\${$1-}"
     fi
 }
-
+alias enva="env_insert PATH $PWD"
 # prune element from environment variable
 # $1 enviroment variable
 # $2 prune element
 function env_prune()
 {
     eval local env_var=\$\{${1}\-\}
-    eval $1="$(echo $env_var | sed -e "s;\(^\|:\)${2%/}\(:\|\$\);\1\2;g" -e 's;^:\|:$;;g' -e 's;::;:;g')"
+    eval export $1="$(echo $env_var | sed -e "s;\(^\|:\)${2%/}\(:\|\$\);\1\2;g" -e 's;^:\|:$;;g' -e 's;::;:;g')"
 }
-
+alias envd="env_prune PATH $PWD"
 
 ##########################
 # modify for docker
