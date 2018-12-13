@@ -53,8 +53,8 @@ if [ ! -d ${HOME}/.vim/bundle ]; then
 fi
 update_file ${DOTFILES_URL}/pip/pip.conf ${HOME}/.pip/pip.conf
 
-if [ ! -d ${HOME}/.bashrc ]; then
-    if [ -d /etc/skel/.bashrc ]; then
+if [ ! -f ${HOME}/.bashrc ]; then
+    if [ -f /etc/skel/.bashrc ]; then
         cp /etc/skel/.bashrc ${HOME}/
     else
         update_file ${DOTFILES_URL}/home/.bashrc ${HOME}/.bashrc
