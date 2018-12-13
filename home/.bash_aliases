@@ -382,9 +382,11 @@ env_append "PATH" "${HOME}/.local/bin"
 
 # specified for docker container
 if [ -f /.dockerenv ]; then
-    # environment for ~/bin
-    env_append "PATH" "${HOME}/bin"
+    echo ${DOCKER_IMAGE}
 fi
+
+# environment for ~/bin
+env_append "PATH" "${HOME}/bin"
 
 # specified for system type
 case $(uname) in
@@ -401,8 +403,6 @@ case $(uname) in
         env_append "PATH" "$JAVA_HOME/bin"
         # wine chinese character
         alias wine='env LANG=zh_CN.UTF8 wine'
-        # environment for ~/bin
-        env_append "PATH" "$HOME/bin"
 
     ;;
     Linux)
