@@ -43,7 +43,6 @@ if [ ${HAS_UPDATED:-NoDefine} = "NoDefine" ]; then
 fi
 
 # Update commom dotfiles
-update_file ${DOTFILES_URL}/home/.bashrc ${HOME}/.bashrc
 update_file ${DOTFILES_URL}/home/.bash_aliases ${HOME}/.bash_aliases
 update_file ${DOTFILES_URL}/home/.inputrc ${HOME}/.inputrc
 update_file ${DOTFILES_URL}/vim/.vimrc ${HOME}/.vimrc
@@ -64,6 +63,7 @@ case ${SYS_TYPE} in
 
     ;;
     Darwin)
+        update_file ${DOTFILES_URL}/home/.bashrc ${HOME}/.bashrc
         update_file ${DOTFILES_URL}/home/.bash_profile ${HOME}/.bash_profile
 
     ;;
