@@ -106,8 +106,10 @@ function proxy_cfg()
         export http_proxy=${proxy_url}
         export https_proxy=${proxy_url}
         export ftp_proxy=${proxy_url}
+        echo -e "${GREEN}${proxy_url}${NORMAL}"
     else
         unset proxy http_proxy https_proxy ftp_proxy
+        echo -e "${RED}porxy cloesd.${NORMAL}"
     fi
 }
 
