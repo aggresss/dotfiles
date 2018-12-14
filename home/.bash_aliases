@@ -95,14 +95,19 @@ function update_file()
 # switch proxy on-off
 function proxy_cfg()
 {
-  if [ $1 == 1 ]; then
-    local proxy_url="http://127.0.0.1:8123"
-    export proxy=${proxy_url}
-    export http_proxy=${proxy_url}
-    export https_proxy=${proxy_url}
-    export ftp_proxy=${proxy_url}
-  elif [ $1 == 0 ]; then
-    unset proxy http_proxy https_proxy ftp_proxy
+    local port=$1
+    if [ ${port:=0} -gt 0  -a ${port} -lt 65536 ]; then
+        if [ -f /.dockerenv ]; then
+            local proxy_url="http://host.docker.internal:${port}"
+        else
+            local proxy_url="http://localhost:${port}"
+        fi
+        export proxy=${proxy_url}
+        export http_proxy=${proxy_url}
+        export https_proxy=${proxy_url}
+        export ftp_proxy=${proxy_url}
+    else
+        unset proxy http_proxy https_proxy ftp_proxy
     fi
 }
 
