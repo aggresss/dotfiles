@@ -163,15 +163,21 @@ alias envd='env_prune PATH $PWD'
 # Fast docker inside
 function docker_inside()
 {
-  docker exec -it $1 bash -c "stty cols $COLUMNS rows $LINES && bash";
+    docker exec -it $1 bash -c "stty cols $COLUMNS rows $LINES && bash";
 }
 
 # Inspect volumes and port
 function docker_inspect()
 {
-  echo "Volumes:" ; docker inspect $1 -f {{.Config.Volumes}}
-  echo "ExposedPorts:" ; docker inspect $1 -f {{.Config.ExposedPorts}}
-  echo "Labels:" ; docker inspect $1 -f {{.Config.Labels}}
+    echo -e "${GREEN}Volumes:"
+    docker inspect --format='{{range  .Mounts }}{{println .}}{{end}}' $1
+    echo -e "${YELLOW}Ports:"
+    docker inspect --format='{{range $p, $conf := .NetworkSettings.Ports}}{{$p}} -> {{$conf}}{{println}}{{end}}' $1
+    echo -e "${CYAN}Env:"
+    docker inspect --format='{{range .Config.Env}}{{println .}}{{end}}' $1
+    echo -e "${MAGENTA}Command:"
+    docker inspect  --format='{{.Config.Cmd}}' $1
+    echo -e "${NORMAL}"
 }
 
 # Run and mount private file
