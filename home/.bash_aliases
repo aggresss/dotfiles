@@ -199,6 +199,16 @@ function docker_kill()
     fi
 }
 
+# display docker images
+function docker_ls()
+{
+    if [ -n "${DOCKER_IMAGE-}" ]; then
+        echo -e "${GREEN}${DOCKER_IMAGE}${NORMAL}"
+    else
+        echo -e "${RED}Not support this image.${NORMAL}"
+    fi
+}
+
 
 ##########################
 # modify for git
