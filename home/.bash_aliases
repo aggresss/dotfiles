@@ -28,6 +28,10 @@ CYAN="\\033[36m"
 WHITE="\\033[37m"
 NORMAL="\\033[m"
 
+# alias for fast command
+alias s='cd ${HOME}/workspace-scratch'
+alias f='cd ${HOME}/workspace-formal'
+
 # find file
 alias fdf='find . -name "*" |grep -sin'
 # find file content
@@ -146,6 +150,7 @@ function env_insert()
     fi
 }
 alias enva='env_insert PATH $PWD'
+
 # prune element from environment variable
 # $1 enviroment variable
 # $2 prune element
@@ -161,7 +166,7 @@ alias envd='env_prune PATH $PWD'
 ##########################
 
 # Fast docker inside
-function docker_inside()
+function docker_shell()
 {
     docker exec -it $1 bash -c "stty cols $COLUMNS rows $LINES && bash";
 }
@@ -170,10 +175,10 @@ function docker_inside()
 function docker_inspect()
 {
     echo -e "${GREEN}Volumes:"
-    docker inspect --format='{{range  .Mounts }}{{println .}}{{end}}' $1
+    docker inspect --format='{{range .Mounts }}{{println .}}{{end}}' $1
     echo -e "${YELLOW}Ports:"
     docker inspect --format='{{range $p, $conf := .NetworkSettings.Ports}}{{$p}} -> {{$conf}}{{println}}{{end}}' $1
-    echo -e "${CYAN}Env:"
+    echo -e "${CYAN}Environment:"
     docker inspect --format='{{range .Config.Env}}{{println .}}{{end}}' $1
     echo -e "${MAGENTA}Command:"
     docker inspect  --format='{{.Config.Cmd}}' $1
@@ -193,6 +198,7 @@ function docker_private()
         -v root:/root \
         -v home:/home \
         -v ${HOME}/Downloads:/mnt/Downloads \
+        -v ${HOME}/workspace-scratch:/mnt/workspace-scratch \
         -e DISPLAY=host.docker.internal:0 \
         $*
 }
