@@ -41,8 +41,8 @@ alias cmc='find . -iname "*cmake*" -not -name CMakeLists.txt -exec rm -rf {} +'
 alias ccl='find . -name "*[.h|.c|.hpp|.cpp|.go|.py]" -type f | xargs cat | wc -l'
 # alias for ${PATH}
 alias envp='echo -e ${RED}PATH:\\n${GREEN}${PATH//:/\\n}${NORMAL}'
-alias enva='env_insert PATH $PWD'
-alias envd='env_prune PATH $PWD'
+alias enva='env_insert PATH ${PWD}'
+alias envd='env_prune PATH ${PWD}'
 # alias for some application special open
 alias em='emacs -nw'
 alias sagt='eval `ssh-agent`'
@@ -153,7 +153,8 @@ function env_insert()
 function env_prune()
 {
     eval local env_var=\$\{${1}\-\}
-    eval export $1="$(echo $env_var | sed -e "s;\(^\|:\)${2%/}\(:\|\$\);\1\2;g" -e 's;^:\|:$;;g' -e 's;::;:;g')"
+    local del_element=${2%/}
+    eval export $1="$(echo ${env_var} | sed -e 's;\(^\|:\)${del_element}\(:\|\$\);\1\2;g' -e 's;^:\|:$;;g' -e 's;::;:;g')"
 }
 
 ##########################
