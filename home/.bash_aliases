@@ -31,7 +31,6 @@ NORMAL="\\033[m"
 # alias for fast command
 alias s='cd ${HOME}/workspace-scratch'
 alias f='cd ${HOME}/workspace-formal'
-
 # find file
 alias fdf='find . -name "*" |grep -sin'
 # find file content
@@ -40,25 +39,23 @@ alias fdc='find . -name "*" |xargs grep -sin'
 alias cmc='find . -iname "*cmake*" -not -name CMakeLists.txt -exec rm -rf {} +'
 # count code line
 alias ccl='find . -name "*[.h|.c|.hpp|.cpp|.go|.py]" -type f | xargs cat | wc -l'
-# echo ${PATH}
+# alias for ${PATH}
 alias envp='echo -e ${RED}PATH:\\n${GREEN}${PATH//:/\\n}${NORMAL}'
-
+alias enva='env_insert PATH $PWD'
+alias envd='env_prune PATH $PWD'
 # alias for some application special open
 alias em='emacs -nw'
 alias sagt='eval `ssh-agent`'
-
 # alias for remove fast
 alias rm_3rd='rm -rvf *.zip *.tgz *.bz2 *.gz *.dmg *.7z *.xz *.tar'
 alias rm_mda='rm -rvf *.jpg *.jpeg *.png *.bmp *.gif *.mp3 *.acc *.wav *.mp4 *.flv *.mov *.avi *.ts *.wmv *.mkv'
 alias rm_doc='rm -rvf *.doc *.docx *.xls *.xlsx *.ppt *.pptx *.numbers *.pages *.key'
-
 # short for cd ..
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
-
 # Some more alias to avoid making mistakes
 alias rm='rm -i'
 alias mv='mv -i'
@@ -149,7 +146,6 @@ function env_insert()
         eval export $1="${new_element}\${$1:+\:}\${$1-}"
     fi
 }
-alias enva='env_insert PATH $PWD'
 
 # prune element from environment variable
 # $1 enviroment variable
@@ -159,7 +155,6 @@ function env_prune()
     eval local env_var=\$\{${1}\-\}
     eval export $1="$(echo $env_var | sed -e "s;\(^\|:\)${2%/}\(:\|\$\);\1\2;g" -e 's;^:\|:$;;g' -e 's;::;:;g')"
 }
-alias envd='env_prune PATH $PWD'
 
 ##########################
 # modify for docker
@@ -281,32 +276,15 @@ function git_branch_internal()
 # Git branch perception
 function git_prompt()
 {
-    local pcbak="/tmp/PROMPT_COMMAND.tmp"
-    local psbak="/tmp/PS1.tmp"
-    if [ ! -n "$1" ]; then
-        echo "usage: git_prompt on | off"
-    elif [ $1 == "on" ]; then
-        if [ ! -f $pcbak ]; then
-            echo ${PROMPT_COMMAND-} > $pcbak
-        fi
-        if [ ! -f $psbak ]; then
-            echo $PS1 > $psbak
-        fi
-        if [ -z ${GIT_PROMPT-} ] ; then
-            PROMPT_COMMAND="git_branch_internal;${PROMPT_COMMAND-}"
-            PS1="$PS1$blue\$GIT_NAME_TITLE\$GIT_NAME_LEFT$red\$GIT_NAME_CONTENT$blue\$GIT_NAME_RIGHT\$ $normal"
-            export GIT_PROMPT=1
-        fi
-    elif [ $1 == "off" ]; then
-        if [ -f $pcbak ]; then
-            PROMPT_COMMAND="`cat $pcbak`"
-        fi
-        if [ -f $psbak ]; then
-            PS1="`cat $psbak` "
-        fi
-        if [ -n ${GIT_PROMPT-} ]; then
-            unset GIT_PROMPT
-        fi
+    if [ "${PROMPT_COMMAND_BAK-NotDefine}" = "NotDefine" ] ; then
+        PROMPT_COMMAND_BAK=${PROMPT_COMMAND-}
+        PS1_BAK=${PS1-}
+        PROMPT_COMMAND="git_branch_internal;${PROMPT_COMMAND-}"
+        PS1="$PS1$blue\$GIT_NAME_TITLE\$GIT_NAME_LEFT$red\$GIT_NAME_CONTENT$blue\$GIT_NAME_RIGHT\$ $normal"
+    else
+        PROMPT_COMMAND=${PROMPT_COMMAND_BAK-}
+        PS1=${PS1_BAK-}
+        unset PROMPT_COMMAND_BAK PS1_BAK
     fi
 }
 
@@ -377,18 +355,13 @@ if [ -d "$HOME/go" ];then
     env_insert "PATH" "$HOME/go/bin"
 fi
 
-GOPATH_INIT_PATH="/tmp/GOPATH_INIT.tmp"
-if [ ! -f "$GOPATH_INIT_PATH" ]; then
-    echo ${GOPATH-} > $GOPATH_INIT_PATH
-fi
+GOPATH_BAK=${GOPATH-}
 
 # clear $GOPATH
 function go_clr()
 {
-    if [ -f "$GOPATH_INIT_PATH" ]; then
-        export GOPATH="`cat $GOPATH_INIT_PATH`"
-        echo -e "${GREEN}successful clear GOPATH \n${RED}GOPATH ==> ${GOPATH}${NORMAL}"
-    fi
+    export GOPATH=${GOPATH_BAK-}
+    echo -e "${GREEN}successful clear GOPATH \n${RED}GOPATH ==> ${GOPATH}${NORMAL}"
 }
 
 # set $PWD to $GOPATH
