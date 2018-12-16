@@ -7,7 +7,7 @@
 # modify for utility
 ##########################
 
-# color configuration
+# color for PS1
 black=$'\[\e[1;30m\]'
 red=$'\[\e[1;31m\]'
 green=$'\[\e[1;32m\]'
@@ -18,6 +18,7 @@ cyan=$'\[\e[1;36m\]'
 white=$'\[\e[1;37m\]'
 normal=$'\[\e[m\]'
 
+# color for echo
 BLACK="\\033[30m"
 RED="\\033[31m"
 GREEN="\\033[32m"
