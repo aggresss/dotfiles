@@ -10,6 +10,7 @@ sudo apt-get update && sudo apt-get install -y \
     apt-file \
     tree \
     curl \
+    jq \
     emacs \
     vim \
     ctags \
