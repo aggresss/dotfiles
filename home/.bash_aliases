@@ -154,7 +154,7 @@ function env_prune()
 {
     eval local env_var=\$\{${1}\-\}
     local del_element=${2%/}
-    eval export $1="$(echo ${env_var} | sed -e 's;\(^\|:\)${del_element}\(:\|\$\);\1\2;g' -e 's;^:\|:$;;g' -e 's;::;:;g')"
+    eval export $1="$(echo ${env_var} | sed -e "s;\(^\|:\)${del_element}\(:\|\$\);\1\2;g" -e 's;^:\|:$;;g' -e 's;::;:;g')"
 }
 
 ##########################
@@ -415,6 +415,8 @@ case $(uname) in
         env_append "PATH" "$JAVA_HOME/bin"
         # wine chinese character
         alias wine='env LANG=zh_CN.UTF8 wine'
+        # use "brew install gnu-sed" instead of bsd-sed
+        alias sed='gsed'
 
     ;;
     Linux)
