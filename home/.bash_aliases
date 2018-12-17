@@ -31,7 +31,7 @@ NORMAL="\\033[m"
 
 # alias for fast command
 if [ -f /.dockerenv ]; then
-    alias s='cd /mnt/workspace-formal'
+    alias s='cd /mnt/workspace-scratch'
     alias d='cd /mnt/Downloads'
 else
     alias s='cd ${HOME}/workspace-scratch'
