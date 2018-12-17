@@ -58,6 +58,7 @@ alias sagt='eval `ssh-agent`'
 alias rm_3rd='rm -rvf *.zip *.tgz *.bz2 *.gz *.dmg *.7z *.xz *.tar'
 alias rm_mda='rm -rvf *.jpg *.jpeg *.png *.bmp *.gif *.mp3 *.acc *.wav *.mp4 *.flv *.mov *.avi *.ts *.wmv *.mkv'
 alias rm_doc='rm -rvf *.doc *.docx *.xls *.xlsx *.ppt *.pptx *.numbers *.pages *.key'
+alias rm_ds='rm_rcs .DS_Store'
 # short for cd ..
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -79,7 +80,6 @@ function rm_rcs()
         find . -name "${tmp_arg}" -exec rm -rvf {} \;
     done
 }
-alias rm_ds='rm_rcs .DS_Store'
 
 # fast find process
 # $1 process name
