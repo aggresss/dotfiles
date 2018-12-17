@@ -38,7 +38,7 @@ else
     alias d='cd ${HOME}/Downloads'
 fi
 # git_prompt fast
-alias gp='git_prompt'
+alias gpt='git_prompt'
 # find file
 alias fdf='find . -name "*" |grep -sin'
 # find file content
@@ -52,7 +52,7 @@ alias envp='echo -e ${RED}PATH:\\n${GREEN}${PATH//:/\\n}${NORMAL}'
 alias enva='env_insert PATH ${PWD}'
 alias envd='env_prune PATH ${PWD}'
 # alias for some application special open
-alias em='emacs -nw'
+alias enw='emacs -nw'
 alias sagt='eval `ssh-agent`'
 # alias for remove fast
 alias rm_3rd='rm -rvf *.zip *.tgz *.bz2 *.gz *.dmg *.7z *.xz *.tar'
