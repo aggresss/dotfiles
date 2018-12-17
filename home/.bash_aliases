@@ -30,8 +30,12 @@ WHITE="\\033[37m"
 NORMAL="\\033[m"
 
 # alias for fast command
-alias s='cd ${HOME}/workspace-scratch'
-alias f='cd ${HOME}/workspace-formal'
+if [ -f /.dockerenv ]; then
+    alias s='cd /mnt/workspace-formal'
+else
+    alias s='cd ${HOME}/workspace-scratch'
+fi
+alias g='git_prompt'
 # find file
 alias fdf='find . -name "*" |grep -sin'
 # find file content
