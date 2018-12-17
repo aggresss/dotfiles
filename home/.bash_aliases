@@ -37,8 +37,8 @@ else
     alias s='cd ${HOME}/workspace-scratch'
     alias d='cd ${HOME}/Downloads'
 fi
-
-alias g='git_prompt'
+# git_prompt fast
+alias gp='git_prompt'
 # find file
 alias fdf='find . -name "*" |grep -sin'
 # find file content
