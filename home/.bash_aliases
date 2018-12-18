@@ -39,6 +39,8 @@ else
 fi
 # fast switch to git top level
 alias t='git_top'
+# fast refresh bash env
+alias b='source ${HOME}/.bash_aliases'
 # git_prompt fast
 alias gpt='git_prompt'
 # find file
