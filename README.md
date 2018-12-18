@@ -1,5 +1,8 @@
 # dotfiles
 
+[![GitHub version](https://badge.fury.io/gh/aggresss%2Fdotfiles.svg)](https://badge.fury.io/gh/aggresss%2Fdotfiles)
+[![Build Status](https://www.travis-ci.org/aggresss/dotfiles.svg?branch=master)](https://www.travis-ci.org/aggresss/dotfiles)
+[![](https://img.shields.io/github/license/:user/:repo.svg)](https://github.com/aggresss/dotfiles)
 
 
 ## $HOME Directory Specification
