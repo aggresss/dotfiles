@@ -1,7 +1,5 @@
 os: linux
 
-dist: bionic
-
 script:
   - ./update_dotfiles.sh
   - source home/.bashrc
