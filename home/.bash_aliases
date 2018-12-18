@@ -406,13 +406,14 @@ env_append "PATH" "${HOME}/.local/bin"
 
 # specified for docker container
 if [ -f /.dockerenv ]; then
-    echo ${DOCKER_IMAGE}
+    echo "images: ${DOCKER_IMAGE}"
 fi
 
 # environment for ~/bin
 env_append "PATH" "${HOME}/bin"
 
 # specified for system type
+echo "os: $(uname)"
 case $(uname) in
     Darwin)
         # ls color
@@ -445,3 +446,4 @@ esac
 
 
 # end of .bash_aliases
+
