@@ -37,6 +37,8 @@ else
     alias s='cd ${HOME}/workspace-scratch'
     alias d='cd ${HOME}/Downloads'
 fi
+# fast switch to git top level
+alias t='git_top'
 # git_prompt fast
 alias gpt='git_prompt'
 # find file
