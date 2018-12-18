@@ -34,7 +34,7 @@
 | Drectory | Type | Illustrate |
 |---|---|---|
 | `~/go` | *Auto Generation* | default GOPATH directory |
-| `~/./local/go` | *Auto Generation* | default GOROOT directory |
+| `~/.local/go` | *Auto Generation* | default GOROOT directory |
 
 #### Eclipse
 | Drectory | Type | Illustrate |
