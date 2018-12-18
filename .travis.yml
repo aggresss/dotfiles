@@ -1,5 +1,13 @@
 os: linux
 
+dist: bionic
+
+before_install:
+  - sudo apt-get install -y ctags csope
+addons:
+  apt:
+    update: true
+
 script:
   - ./update_dotfiles.sh
   - source home/.bashrc
