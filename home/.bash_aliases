@@ -42,7 +42,8 @@ alias t='git_top'
 # fast refresh bash env
 alias b='source ${HOME}/.bash_aliases'
 # git_prompt fast
-alias gpt='git_prompt'
+alias p='git_prompt'
+
 # find file
 alias fdf='find . -name "*" |grep -sin'
 # find file content
