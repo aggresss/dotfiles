@@ -37,12 +37,12 @@ else
     alias s='cd ${HOME}/workspace-scratch'
     alias d='cd ${HOME}/Downloads'
 fi
-# fast switch to git top level
-alias t='git_top'
 # fast refresh bash env
 alias b='source ${HOME}/.bash_aliases'
 # git_prompt fast
 alias p='git_prompt'
+# fast switch to git top level
+alias t='git_top'
 
 # find file
 alias fdf='find . -name "*" |grep -sin'
