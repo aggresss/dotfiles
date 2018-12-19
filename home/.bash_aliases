@@ -407,14 +407,14 @@ env_append "PATH" "${HOME}/.local/bin"
 
 # specified for docker container
 if [ -f /.dockerenv ]; then
-    echo "images: ${DOCKER_IMAGE}"
+    echo -e "${YELLOW}images: ${DOCKER_IMAGE}${NORMAL}"
 fi
 
 # environment for ~/bin
 env_append "PATH" "${HOME}/bin"
 
 # specified for system type
-echo "os: $(uname)"
+echo -e "${GREEN}os: $(uname)${NORMAL}"
 case $(uname) in
     Darwin)
         # ls color
