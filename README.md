@@ -11,23 +11,20 @@
 
 | Drectory | Type | Illustrate |
 |---|---|---|
-| `~/Downloads` | **Delete Anytime** | common downloads repository |
-| `~/Documents` | ***Periodic Backup*** | common documents repository |
-| `~/Pictures` | ***Periodic Backup*** | common pictures repository |
+| `~/Downloads/` | **Delete Anytime** | common downloads repository |
+| `~/Documents/` | ***Periodic Backup*** | common documents repository |
+| `~/Pictures/` | ***Periodic Backup*** | common pictures repository |
 
 ### 2. Customized
 
 | Drectory | Type | Illustrate |
 |---|---|---|
-| `~/bin` | *Auto Generation* | user executable files |
-| `~/bak` | ***Periodic Backup*** | backup cache |
-| `~/tmp` | **Delete Anytime** | temporary cache |
-| `~/workspace-scratch` | *Auto Generation* | code workbench |
-| `~/workspace-formal` | *Auto Generation* | code reference |
-| `~/toolchain` | *Auto Generation* | toolchain repository |
-
-| File | Type | Illustrate |
-|---|---|---|
+| `~/bin/` | *Auto Generation* | user executable files |
+| `~/bak/` | ***Periodic Backup*** | backup cache |
+| `~/tmp/` | **Delete Anytime** | temporary cache |
+| `~/workspace-scratch/` | *Auto Generation* | code workbench |
+| `~/workspace-formal/` | *Auto Generation* | code reference |
+| `~/toolchain/` | *Auto Generation* | toolchain repository |
 | `~/note.*` | ***Periodic Backup*** | notebook sort by classify |
 
 ### 3. Software
@@ -36,10 +33,17 @@
 
 | Drectory | Type | Illustrate |
 |---|---|---|
-| `~/go` | *Auto Generation* | default GOPATH directory |
-| `~/.local/go` | *Auto Generation* | default GOROOT directory |
+| `~/go/` | *Auto Generation* | default GOPATH directory |
+| `~/.local/go/` | *Auto Generation* | default GOROOT directory |
+
+#### Python
+
+| Drectory | Type | Illustrate |
+|---|---|---|
+| `~/env/` | **Delete Anytime** | python virtualenv directory |
+| `~/.local/` | *Auto Generation* | pip user directory |
 
 #### Eclipse
 | Drectory | Type | Illustrate |
 |---|---|---|
-| `~/eclipse-workspace` | *Auto Generation* | default eclipse workspace |
+| `~/eclipse-workspace/` | *Auto Generation* | default eclipse workspace |
