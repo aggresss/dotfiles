@@ -78,6 +78,7 @@ update_file ${BASH_URL}/hello.sh ${HOME}/bin/hello.sh
 case $(uname) in
     Linux)
         update_file ${DOTFILES_URL}/home/.Xresources ${HOME}/.Xresources
+        update_file ${BASH_URL}/switch_mirror.sh ${HOME}/bin/switch_mirror.sh
 
     ;;
     Darwin)
