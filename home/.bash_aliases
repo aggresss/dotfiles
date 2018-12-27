@@ -346,6 +346,7 @@ function git_down()
         ;;
         *)
             echo -e "Not support URL: $1"
+            echo -e "Maybe: https://${vendor}/${user}/${repo}/raw/${branch}/${path}"
         ;;
     esac
 }
