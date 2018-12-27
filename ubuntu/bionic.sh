@@ -19,6 +19,7 @@ sudo apt-get update && sudo apt-get install -y \
     mosh \
     git \
     p7zip-full \
+    unrar \
     hexedit \
     tmux \
     build-essential \
