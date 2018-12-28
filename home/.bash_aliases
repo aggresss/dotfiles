@@ -74,6 +74,16 @@ alias ......='cd ../../../../..'
 alias rm='rm -i'
 alias mv='mv -i'
 
+# fast unzip
+function un_zip()
+{
+    if [ $# -gt 1 -o $1 = "-h" -o $1 = "--help" ]; then
+        unzip $@
+    else
+        unzip $1 -d ${1%.zip}
+    fi
+}
+
 # remove recursive
 function rm_rcs()
 {
