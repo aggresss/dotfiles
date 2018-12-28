@@ -77,10 +77,21 @@ alias mv='mv -i'
 # fast unzip
 function un_zip()
 {
-    if [[ $# -gt 1 || $1 =~ ^-.* ]]; then
+    if [[ $# -ne 1 || $1 =~ ^-.* ]]; then
         unzip $@
     else
         unzip $1 -d ${1%.zip}
+    fi
+}
+
+# fast unrar
+function un_rar()
+{
+    if [[ $# -ne 1 ]]; then
+        unrar $@
+    else
+        mkdir -p ${1%.rar}
+        unrar x $1 ${1%.rar}
     fi
 }
 
