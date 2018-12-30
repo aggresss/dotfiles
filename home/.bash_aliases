@@ -131,8 +131,7 @@ function source_file()
             # operate file
             case $1 in
                 copy)
-
-                echo -e ${CYAN}; cat -n ${source_file}; echo -e ${NORMAL}
+                    echo -e ${CYAN}; cat -n ${source_file}; echo -e ${NORMAL}
                     case $(uname) in
                         Linux)
                             xclip -selection clipboard < ${source_file}
