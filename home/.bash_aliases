@@ -421,11 +421,11 @@ function git_down()
     case ${vendor} in
         gitlab.com | github.com)
             wget https://${vendor}/${user}/${repo}/raw/${branch}/${path}
-        ;;
+            ;;
         *)
             echo -e "Not support URL: $1"
             echo -e "Maybe: https://${vendor}/${user}/${repo}/raw/${branch}/${path}"
-        ;;
+            ;;
     esac
 }
 
@@ -511,17 +511,17 @@ case $(uname) in
         # use "brew install gnu-sed" instead of bsd-sed
         alias sed='gsed'
 
-    ;;
+        ;;
     Linux)
         # alias for access easy in Gnome environment
         alias cbp='chromium-browser --proxy-server=socks5://127.0.0.1:1080'
         alias calc='gnome-calculator'
         alias gterm='gnome-terminal'
 
-    ;;
+        ;;
     *)
 
-    ;;
+        ;;
 esac
 
 
