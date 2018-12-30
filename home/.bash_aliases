@@ -97,35 +97,57 @@ function un_rar()
     fi
 }
 
-# fast run file content as command
-# $1: filename or ~/note.* index
-# $2-: lines to execute
-function run_file()
+# fast source file content
+# $1: copy source
+# $2: filename or ~/note.* index
+# $3-: lines to execute
+function source_file()
 {
     local index_range=$(ls -l ${HOME}/note.* | sed -n '$=')
-    if [ $# = 0 ]; then
+    if [ $# -le 1 ]; then
         echo -e ${YELLOW}
         ls -l ${HOME}/note.* | awk '{print $NF}' | cat -n
         echo -e ${NORMAL}
     else
-        if [ ! -f $1 -a $1 -ge 1 -a $1 -le ${index_range} ] 2>/dev/null; then
-            local index_file=$(ls -l ${HOME}/note.* | awk '{print $NF}' | sed -n "${1}p")
+        if [ ! -f $2 -a $2 -ge 1 -a $2 -le ${index_range} ] 2>/dev/null; then
+            local index_file=$(ls -l ${HOME}/note.* | awk '{print $NF}' | sed -n "${2}p")
         else
-            local index_file=${1}
+            local index_file=${2}
         fi
-        if [ $# = 1 ]; then
+        if [ $# -eq 2 ]; then
             echo -e ${GREEN}
             cat -n ${index_file}
             echo -e ${NORMAL}
         else
             local source_file=$(mktemp)
             local i
-            for ((i=2; i<=$#; i++))
+            for ((i=3; i<=$#; i++))
             do
                 eval local line_range=\$\{${i}\}
                 sed -n "${line_range}p" ${index_file} >> ${source_file}
             done
-            source ${source_file}
+            # operate file
+            case $1 in
+                copy)
+                    case $(uname) in
+                        Linux)
+                            xclip -selection clipboard < ${source_file}
+                            ;;
+                        Darwin)
+                            pbcopy < ${source_file}
+                            ;;
+                        *)
+                            echo -e "${RED}No support this OS.${NORMAL}"
+                            ;;
+                    esac
+                    ;;
+                exec)
+                    source ${source_file}
+                    ;;
+                *)
+                    echo -e "${RED}No support this command.${NORMAL}"
+                    ;;
+            esac
         fi
     fi
 }
