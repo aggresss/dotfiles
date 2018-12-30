@@ -43,8 +43,10 @@ alias b='source ${HOME}/.bash_aliases'
 alias p='git_prompt'
 # fast switch to git top level
 alias t='git_top'
-# fast run_file
-alias r='run_file'
+# fast execute file content
+alias r='source_file exec'
+# fast copy file content
+alias c='source_file copy'
 
 # find file
 alias fdf='find . -name "*" |grep -sin'
