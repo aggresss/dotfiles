@@ -43,6 +43,8 @@ alias b='source ${HOME}/.bash_aliases'
 alias p='git_prompt'
 # fast switch to git top level
 alias t='git_top'
+# fast run_file
+alias r='run_file'
 
 # find file
 alias fdf='find . -name "*" |grep -sin'
@@ -92,6 +94,39 @@ function un_rar()
         unrar x $1 ${1%.rar}
     else
         unrar $@
+    fi
+}
+
+# fast run file content as command
+# $1: filename or ~/note.* index
+# $2-: lines to execute
+function run_file()
+{
+    local index_range=$(ls -l ${HOME}/note.* | sed -n '$=')
+    if [ $# = 0 ]; then
+        echo -e ${YELLOW}
+        ls -l ${HOME}/note.* | awk '{print $NF}' | cat -n
+        echo -e ${NORMAL}
+    else
+        if [ ! -f $1 -a $1 -ge 1 -a $1 -le ${index_range} ] 2>/dev/null; then
+            local index_file=$(ls -l ${HOME}/note.* | awk '{print $NF}' | sed -n "${1}p")
+        else
+            local index_file=${1}
+        fi
+        if [ $# = 1 ]; then
+            echo -e ${GREEN}
+            cat -n ${index_file}
+            echo -e ${NORMAL}
+        else
+            local source_file=$(mktemp)
+            local i
+            for ((i=2; i<=$#; i++))
+            do
+                eval local line_range=\$\{${i}\}
+                sed -n "${line_range}p" ${index_file} >> ${source_file}
+            done
+            source ${source_file}
+        fi
     fi
 }
 
