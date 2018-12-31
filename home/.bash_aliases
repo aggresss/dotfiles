@@ -105,22 +105,29 @@ function un_rar()
 # $3-: lines to execute
 function source_file()
 {
-    local index_range=$(ls -l ${HOME}/note.* | sed -n '$=')
+    local index_range=$(ls -l ${HOME}/note.* 2>/dev/null | sed -n '$=')
     if [ $# -le 1 ]; then
         echo -e ${YELLOW}
-        ls -l ${HOME}/note.* | awk '{print $NF}' | cat -n
+        ls -l ${HOME}/note.* 2>/dev/null | awk '{print $NF}' | cat -n
         echo -e ${NORMAL}
     else
+        # arguments >= 2
         if [ ! -f $2 -a $2 -ge 1 -a $2 -le ${index_range} ] 2>/dev/null; then
             local index_file=$(ls -l ${HOME}/note.* | awk '{print $NF}' | sed -n "${2}p")
         else
             local index_file=${2}
         fi
+        if [ ! -f ${index_file} ]; then
+            echo -e "${RED} \nFile not exist.\n${NORMAL}"
+            return 1
+        fi
+        # arguments = 2
         if [ $# -eq 2 ]; then
             echo -e ${GREEN}
             cat -n ${index_file}
             echo -e ${NORMAL}
         else
+            # arguments > 2
             local source_file=$(mktemp)
             local i
             for ((i=3; i<=$#; i++))
