@@ -294,18 +294,19 @@ function docker_private()
     case $(uname) in
         Linux)
             local docker_host=$(docker network inspect --format='{{range .IPAM.Config}}{{.Gateway}}{{end}}' bridge)
-            xhost + ${docker_host} > /dev/null
+            xhost +local:docker > /dev/null
             docker run --rm -it \
                 --add-host=host.docker.internal:${docker_host} \
+                -v /tmp/.X11-unix/:/tmp/.X11-unix \
                 -v root:/root \
                 -v home:/home \
                 -v ${HOME}/Downloads:/mnt/Downloads \
                 -v ${HOME}/workspace-scratch:/mnt/workspace-scratch \
-                -e DISPLAY=host.docker.internal:0 \
+                -e DISPLAY \
                 $*
             ;;
         Darwin)
-            xhost + localhost > /dev/null
+            xhost +localhost > /dev/null
             docker run --rm -it \
                 -v root:/root \
                 -v home:/home \

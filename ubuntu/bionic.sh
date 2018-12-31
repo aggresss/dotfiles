@@ -109,6 +109,8 @@ sudo apt-get install -y code
 #########################
 # configuration
 #########################
+# gdm3
+sudo sed -r -e 's/^(\[security\])/\1\nDisallowTCP=false/' -i /etc/gdm3/custom.conf
 
 # fix: A stop job is runing ...
 sudo sed -r -e 's/#DefaultTimeoutStartSec=90s/DefaultTimeoutStartSec=10s/' -i /etc/systemd/system.conf
@@ -137,10 +139,11 @@ fi
 sudo chown ${USER} /etc/polipo/config
 cat << END >> /etc/polipo/config
 
+proxyAddress = "0.0.0.0"
 socksParentProxy = "127.0.0.1:1080"
 socksProxyType = socks5
 proxyPort = 8123
-allowedClients = 127.0.0.1
+allowedClients = 127.0.0.1, 172.17.0.0/16
 chunkHighMark = 50331648
 objectHighMark = 16384
 
