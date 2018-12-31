@@ -118,7 +118,7 @@ function source_file()
             local index_file=${2}
         fi
         if [ ! -f ${index_file} ]; then
-            echo -e "${RED} \nFile not exist.\n${NORMAL}"
+            echo -e "${RED}\nFile not exist.\n${NORMAL}"
             return 1
         fi
         # arguments = 2
