@@ -292,13 +292,31 @@ function docker_private()
     elif ! docker volume ls | grep -q home ; then
         docker volume create home
     fi
-    docker run --rm -it \
-        -v root:/root \
-        -v home:/home \
-        -v ${HOME}/Downloads:/mnt/Downloads \
-        -v ${HOME}/workspace-scratch:/mnt/workspace-scratch \
-        -e DISPLAY=host.docker.internal:0 \
-        $*
+    case $(uname) in
+        Linux)
+            local docker_host=$(docker network inspect --format='{{range .IPAM.Config}}{{.Gateway}}{{end}}' bridge)
+            docker run --rm -it \
+                --add-host=host.docker.internal:${docker_host} \
+                -v root:/root \
+                -v home:/home \
+                -v ${HOME}/Downloads:/mnt/Downloads \
+                -v ${HOME}/workspace-scratch:/mnt/workspace-scratch \
+                -e DISPLAY=host.docker.internal:0 \
+                $*
+            ;;
+        Darwin)
+            docker run --rm -it \
+                -v root:/root \
+                -v home:/home \
+                -v ${HOME}/Downloads:/mnt/Downloads \
+                -v ${HOME}/workspace-scratch:/mnt/workspace-scratch \
+                -e DISPLAY=host.docker.internal:0 \
+                $*
+            ;;
+        *)
+            echo "No support OS."
+            ;;
+    esac
 }
 
 # killall containers
