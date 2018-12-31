@@ -286,7 +286,6 @@ function docker_inspect()
 # Run and mount private file
 function docker_private()
 {
-    xhost + localhost > /dev/null
     if ! docker volume ls | grep -q root; then
         docker volume create root
     elif ! docker volume ls | grep -q home ; then
@@ -295,6 +294,7 @@ function docker_private()
     case $(uname) in
         Linux)
             local docker_host=$(docker network inspect --format='{{range .IPAM.Config}}{{.Gateway}}{{end}}' bridge)
+            xhost + ${docker_host} > /dev/null
             docker run --rm -it \
                 --add-host=host.docker.internal:${docker_host} \
                 -v root:/root \
@@ -305,6 +305,7 @@ function docker_private()
                 $*
             ;;
         Darwin)
+            xhost + localhost > /dev/null
             docker run --rm -it \
                 -v root:/root \
                 -v home:/home \
