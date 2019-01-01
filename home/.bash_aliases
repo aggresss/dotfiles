@@ -141,10 +141,10 @@ function source_file()
                     echo -e ${CYAN}; cat -n ${source_file}; echo -e ${NORMAL}
                     case $(uname) in
                         Linux)
-                            xclip -selection clipboard < ${source_file}
+                            awk 'NR==1{("sed -n '$=' " FILENAME) | getline NL} NR < NL; END{printf "%s", $0}' ${source_file} | xclip -selection clipboard
                             ;;
                         Darwin)
-                            pbcopy < ${source_file}
+                            awk 'NR==1{("sed -n '$=' " FILENAME) | getline NL} NR < NL; END{printf "%s", $0}' ${source_file} | pbcopy
                             ;;
                         *)
                             echo -e "${RED}No support this OS.${NORMAL}"
