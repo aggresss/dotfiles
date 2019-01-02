@@ -58,12 +58,19 @@ alias cmc='find . -iname "*cmake*" -not -name CMakeLists.txt -exec rm -rf {} +'
 alias ccl='find . -name "*[.h|.c|.hpp|.cpp|.go|.py]" -type f | xargs cat | wc -l'
 # alias for ${LD_LIBRARY_PATH}
 alias env_ld_p='echo -e ${RED}LD_LIBRARY_PATH:\\n${GREEN}${LD_LIBRARY_PATH//:/\\n}${NORMAL}'
-alias env_ld_a='env_insert LD_LIBRARY_PATH ${PWD}'
+alias env_ld_i='env_insert LD_LIBRARY_PATH ${PWD}'
+alias env_ld_a='env_append LD_LIBRARY_PATH ${PWD}'
 alias env_ld_d='env_prune LD_LIBRARY_PATH ${PWD}'
 # alias for ${PATH}
 alias env_path_p='echo -e ${RED}PATH:\\n${GREEN}${PATH//:/\\n}${NORMAL}'
-alias env_path_a='env_insert PATH ${PWD}'
+alias env_path_i='env_insert PATH ${PWD}'
+alias env_path_a='env_append PATH ${PWD}'
 alias env_path_d='env_prune PATH ${PWD}'
+# alias for ${GOPATH}
+alias env_go_p='echo -e ${RED}GOPATH:\\n${GREEN}${GOPATH//:/\\n}${NORMAL}'
+alias env_go_i='env_insert GOPATH ${PWD}'
+alias env_go_a='env_append GOPATH ${PWD}'
+alias env_go_d='env_prune GOPATH ${PWD}'
 # alias for some application special open
 alias enw='emacs -nw'
 alias sagt='eval `ssh-agent`'
@@ -485,8 +492,8 @@ fi
 
 GOPATH_BAK=${GOPATH-}
 
-# clear $GOPATH
-function go_clr()
+# reset $GOPATH
+function go_reset()
 {
     export GOPATH=${GOPATH_BAK-}
     echo -e "${GREEN}successful clear GOPATH \n${RED}GOPATH ==> ${GOPATH}${NORMAL}"
@@ -503,11 +510,6 @@ function go_pwd()
     fi
 }
 
-# echo $GOPATH
-function go_ls()
-{
-    echo -e "${RED}GOPATH:\n${GREEN}${GOPATH//:/\\n}${NORMAL}"
-}
 
 ##########################
 # specified
