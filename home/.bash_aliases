@@ -56,10 +56,14 @@ alias fdc='find . -name "*" |xargs grep -sin'
 alias cmc='find . -iname "*cmake*" -not -name CMakeLists.txt -exec rm -rf {} +'
 # count code line
 alias ccl='find . -name "*[.h|.c|.hpp|.cpp|.go|.py]" -type f | xargs cat | wc -l'
+# alias for ${LD_LIBRARY_PATH}
+alias env_ld_p='echo -e ${RED}LD_LIBRARY_PATH:\\n${GREEN}${LD_LIBRARY_PATH//:/\\n}${NORMAL}'
+alias env_ld_a='env_insert LD_LIBRARY_PATH ${PWD}'
+alias env_ld_d='env_prune LD_LIBRARY_PATH ${PWD}'
 # alias for ${PATH}
-alias envp='echo -e ${RED}PATH:\\n${GREEN}${PATH//:/\\n}${NORMAL}'
-alias enva='env_insert PATH ${PWD}'
-alias envd='env_prune PATH ${PWD}'
+alias env_path_p='echo -e ${RED}PATH:\\n${GREEN}${PATH//:/\\n}${NORMAL}'
+alias env_path_a='env_insert PATH ${PWD}'
+alias env_path_d='env_prune PATH ${PWD}'
 # alias for some application special open
 alias enw='emacs -nw'
 alias sagt='eval `ssh-agent`'
