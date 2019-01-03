@@ -170,6 +170,7 @@ function source_file()
                     echo -e "${RED}No support this command.${NORMAL}"
                     ;;
             esac
+            rm -rf ${source_file}
         fi
     fi
 }
