@@ -364,6 +364,8 @@ function docker_ls()
 
 # fast change directry to git top level path
 alias git_top='cd `git rev-parse --show-toplevel`'
+# fast git diff file status
+alias git_diff='git diff --name-status'
 
 # Signature for github repository
 # $1 user.email
