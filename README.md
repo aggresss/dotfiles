@@ -25,7 +25,7 @@
 | `~/workspace-scratch/` | *Auto Generation* | code workbench |
 | `~/workspace-formal/` | *Auto Generation* | code reference |
 | `~/toolchain/` | *Auto Generation* | toolchain repository |
-| `~/note.*` | ***Periodic Backup*** | notebook sort by classify |
+| `~/note/` | ***Periodic Backup*** | notebook sort by classify |
 
 ### 3. Software
 
