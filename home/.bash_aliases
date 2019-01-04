@@ -47,7 +47,8 @@ alias t='git_top'
 alias r='source_file exec'
 # fast copy file content
 alias c='source_file copy'
-
+# fast edit index note file
+alias e='source_file edit'
 # find file
 alias fdf='find . -name "*" |grep -sin'
 # find file content
@@ -112,25 +113,30 @@ function un_rar()
 
 # fast source file content
 # $1: copy source
-# $2: filename or ~/note.* index
+# $2: filename or ~/note/* index
 # $3-: lines to execute
 function source_file()
 {
-    local index_range=$(ls -l ${HOME}/note.* 2>/dev/null | sed -n '$=')
+    local index_range=$(ls -l ${HOME}/note/* 2>/dev/null | sed -n '$=')
     if [ $# -le 1 ]; then
         echo -e ${YELLOW}
-        ls -l ${HOME}/note.* 2>/dev/null | awk '{print $NF}' | cat -n
+        ls -l ${HOME}/note/* 2>/dev/null | awk '{print $NF}' | cat -n
         echo -e ${NORMAL}
     else
         # arguments >= 2
         if [ ! -f $2 -a $2 -ge 1 -a $2 -le ${index_range} ] 2>/dev/null; then
-            local index_file=$(ls -l ${HOME}/note.* | awk '{print $NF}' | sed -n "${2}p")
+            local index_file=$(ls -l ${HOME}/note/* | awk '{print $NF}' | sed -n "${2}p")
         else
             local index_file=${2}
         fi
         if [ ! -f ${index_file} ]; then
             echo -e "${RED}\nFile not exist.\n${NORMAL}"
             return 1
+        fi
+        # edit command
+        if [ "$1" = "edit" ]; then
+            vim ${index_file}
+            return 0
         fi
         # arguments = 2
         if [ $# -eq 2 ]; then
