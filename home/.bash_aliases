@@ -117,15 +117,15 @@ function un_rar()
 # $3-: lines to execute
 function source_file()
 {
-    local index_range=$(ls -l ${HOME}/note/* 2>/dev/null | sed -n '$=')
+    local index_range=$(ls -1p ${HOME}/note/* 2>/dev/null | sed -n '$=')
     if [ $# -le 1 ]; then
         echo -e ${YELLOW}
-        ls -l ${HOME}/note/* 2>/dev/null | awk '{print $NF}' | cat -n
+        ls -1p ${HOME}/note/* 2>/dev/null | cat -n
         echo -e ${NORMAL}
     else
         # arguments >= 2
         if [ ! -f $2 -a $2 -ge 1 -a $2 -le ${index_range} ] 2>/dev/null; then
-            local index_file=$(ls -l ${HOME}/note/* | awk '{print $NF}' | sed -n "${2}p")
+            local index_file=$(ls -1p ${HOME}/note/* | sed -n "${2}p")
         else
             local index_file=${2}
         fi
