@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/github/license/aggresss/dotfiles.svg)](https://github.com/aggresss/dotfiles)
 
 
-## $HOME Directory Specification
+## $HOME Filesystem Hierarchy Standard
 
 ### 1. Common
 
