@@ -562,7 +562,7 @@ case $(uname) in
         if [ -f /.dockerenv ]; then
             echo -e "${YELLOW}DOCKER_IMAGE: ${DOCKER_IMAGE}${NORMAL}"
             if [ "${release_info}" = "linuxkit" ]; then
-                echo -e "${YELLOW}Host is not Linux.${NORMAL}"
+                echo -e "${CYAN}HOST: ${release_info}${NORMAL}"
             fi
         fi
         # Specified for Microsoft WSL
