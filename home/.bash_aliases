@@ -533,16 +533,11 @@ if [ ! -d ${HOME}/.local/bin ]; then
 fi
 env_append "PATH" "${HOME}/.local/bin"
 
-# specified for docker container
-if [ -f /.dockerenv ]; then
-    echo -e "${YELLOW}DOCKER_IMAGE: ${DOCKER_IMAGE}${NORMAL}"
-fi
-
 # environment for ~/bin
 env_append "PATH" "${HOME}/bin"
 
 # specified for system type
-echo -e "${GREEN}OS: $(uname)${NORMAL}"
+echo -e "${GREEN}ENV: $(uname)${NORMAL}"
 case $(uname) in
     Darwin)
         # ls color
@@ -562,10 +557,24 @@ case $(uname) in
 
         ;;
     Linux)
-        # alias for access easy in Gnome environment
-        alias cbp='chromium-browser --proxy-server=socks5://127.0.0.1:1080'
-        alias calc='gnome-calculator'
-        alias gterm='gnome-terminal'
+        release_info=$(uname -r | awk -F'-' '{print $NF}')
+        # specified for docker container
+        if [ -f /.dockerenv ]; then
+            echo -e "${YELLOW}DOCKER_IMAGE: ${DOCKER_IMAGE}${NORMAL}"
+            if [ "${release_info}" = "linuxkit" ]; then
+                echo -e "${YELLOW}Host is not Linux.${NORMAL}"
+            fi
+        fi
+        # Specified for Microsoft WSL
+        if [ "${release_info}" = "Microsoft" ]; then
+            export DISPLAY=localhost:0
+        fi
+        # Specified for Gnome environment
+        if [ command -v gnome-terminal >/dev/null 2>&1 ]; then
+            alias cbp='chromium-browser --proxy-server=socks5://127.0.0.1:1080'
+            alias calc='gnome-calculator'
+            alias gterm='gnome-terminal'
+        fi
 
         ;;
     *)
