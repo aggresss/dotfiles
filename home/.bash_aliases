@@ -567,6 +567,7 @@ case $(uname) in
         fi
         # Specified for Microsoft WSL
         if [ "${release_info}" = "Microsoft" ]; then
+            echo -e "${CYAN}HOST: ${release_info}${NORMAL}"
             export DISPLAY=localhost:0
         fi
         # Specified for Gnome environment
