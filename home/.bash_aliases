@@ -37,6 +37,7 @@ if [ -f /.dockerenv ]; then
 else
     alias s='cd ${HOME}/workspace-scratch'
     alias d='cd ${HOME}/Downloads'
+    alias v='cd ${HOME}/Vagrant'
 fi
 # fast refresh bash env
 alias b='source ${HOME}/.bash_aliases'
@@ -575,7 +576,6 @@ case $(uname) in
         alias wine='env LANG=zh_CN.UTF8 wine'
         # use "brew install gnu-sed" instead of bsd-sed
         alias sed='gsed'
-
         ;;
     Linux)
         release_info=$(uname -r | awk -F'-' '{print $NF}')
@@ -597,7 +597,6 @@ case $(uname) in
             alias calc='gnome-calculator'
             alias gterm='gnome-terminal'
         fi
-
         ;;
     FreeBSD)
         # ls colours
@@ -605,7 +604,7 @@ case $(uname) in
         export LSCOLORS=ExGxFxDxCxegedabagacad
         ;;
     *)
-
+        echo "No support this ENV."
         ;;
 esac
 

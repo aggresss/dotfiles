@@ -29,6 +29,12 @@
 
 ### 3. Software
 
+### Vagrant
+
+| Drectory | Type | Illustrate |
+|---|---|---|
+| `~/Vagrant/` | *Auto Generation* | default Vagarant workspace |
+
 #### Golang
 
 | Drectory | Type | Illustrate |
