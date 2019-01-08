@@ -53,16 +53,21 @@ if [ ! -d ${HOME}/.vim/bundle ]; then
 fi
 update_file ${DOTFILES_URL}/pip/pip.conf ${HOME}/.pip/pip.conf
 
-if [ ! -f ${HOME}/.bashrc ]; then
-    if [ -f /etc/skel/.bashrc ]; then
-        cp /etc/skel/.bashrc ${HOME}/
-    else
-        update_file ${DOTFILES_URL}/home/.bashrc ${HOME}/.bashrc
+# update bash bootstrap file
+if [ "$(uname)" = "FreeBSD" ];then
+    rc_file=".shrc"
+else
+    if [ ! -f ${HOME}/.bashrc ]; then
+        if [ -f /etc/skel/.bashrc ]; then
+            cp /etc/skel/.bashrc ${HOME}/
+        else
+            update_file ${DOTFILES_URL}/home/.bashrc ${HOME}/.bashrc
+        fi
     fi
 fi
 
-if ! cat ${HOME}/.bashrc | grep -q ".bash_alias"; then
-     cat << END >> ${HOME}/.bashrc
+if ! cat ${HOME}/${rc_file} | grep -q ".bash_aliases"; then
+     cat << END >> ${HOME}/${rc_file}
 
 # modify by aggresss
 if [ -f ~/.bash_aliases ]; then
