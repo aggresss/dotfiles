@@ -3,5 +3,7 @@
 sudo pkg update && pkg install \
     bash \
     git \
+    wget \
+    curl \
     vim
 

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Update dotfiles from git@github.com:aggresss/dotfiles.git master branch
 # wget https://raw.githubusercontent.com/aggresss/dotfiles/master/update_dotfiles.sh
 set -euxo pipefail
