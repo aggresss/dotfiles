@@ -51,6 +51,7 @@ brew install \
     xz
 
 brew cask install \
+    virtualbox \
     vagrant \
     docker \
     xquartz \
