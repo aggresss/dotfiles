@@ -280,6 +280,26 @@ function env_prune()
     eval export $1="$(echo ${env_var} | sed -e "s;\(^\|:\)${del_element}\(:\|\$\);\1\2;g" -e 's;^:\|:$;;g' -e 's;::;:;g')"
 }
 
+
+##########################
+# modify for vagrant
+##########################
+
+# Fast list vagrant status
+function vagrant_ls()
+{
+    command vagrant >/dev/null 2>&1
+    if [ $? -ne 0 ]; then
+        echo -e ${YELLOW}; echo -e "vagrant box list:"
+        vagrant box list
+        echo -e ${GREEN}; echo -e "vagrant global-status:"
+        vagrant global-status
+        echo -e ${NORMAL}
+    fi
+
+}
+
+
 ##########################
 # modify for docker
 ##########################
@@ -540,9 +560,9 @@ env_append "PATH" "${HOME}/bin"
 echo -e "${GREEN}ENV: $(uname)${NORMAL}"
 case $(uname) in
     Darwin)
-        # ls color
+        # ls colours
         export CLICOLOR=1
-        export LSCOLORS=gxfxaxdxcxegedabagacad
+        export LSCOLORS=ExGxFxDxCxegedabagacad
         # environment for gcc
         alias gcc='gcc-7'
         alias g++='g++-7'
@@ -579,8 +599,9 @@ case $(uname) in
 
         ;;
     FreeBSD)
-            alias ls='ls -G'
-            alias ll='ls -al'
+        # ls colours
+        export CLICOLOR=1
+        export LSCOLORS=ExGxFxDxCxegedabagacad
         ;;
     *)
 

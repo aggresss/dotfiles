@@ -72,20 +72,6 @@ fi
 END
 fi
 
-if [ "$(uname)" = "FreeBSD" ];then
-    if ! cat ${HOME}/.profile | grep -q ".bashrc"; then
-        cat << END >> ${HOME}/.profile
-
-# modify by aggresss
-shell_name=`echo $SHELL | awk -F'/' '{print $NF}'`
-if [ -f ~/.bashrc && "${shell_name}" = "bash" ]; then
-    . ~/.bashrc
-fi
-
-END
-
-    fi
-fi
 
 # Update common bash utility
 update_file ${BASH_URL}/hello.sh ${HOME}/bin/hello.sh
@@ -100,6 +86,8 @@ case $(uname) in
         update_file ${DOTFILES_URL}/home/.bash_profile ${HOME}/.bash_profile
 
     ;;
+    FreeBSD)
+
     *)
 
     ;;
