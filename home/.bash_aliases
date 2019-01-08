@@ -578,6 +578,9 @@ case $(uname) in
         fi
 
         ;;
+    FreeBSD)
+
+        ;;
     *)
 
         ;;
