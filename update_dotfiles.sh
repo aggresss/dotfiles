@@ -88,6 +88,7 @@ case $(uname) in
     ;;
     FreeBSD)
         echo "FreeBSD"
+    ;;
     *)
         echo ""
     ;;
