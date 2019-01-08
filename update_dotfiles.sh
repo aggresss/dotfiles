@@ -53,21 +53,16 @@ if [ ! -d ${HOME}/.vim/bundle ]; then
 fi
 update_file ${DOTFILES_URL}/pip/pip.conf ${HOME}/.pip/pip.conf
 
-# update bash bootstrap file
-if [ "$(uname)" = "FreeBSD" ];then
-    rc_file=".shrc"
-else
-    if [ ! -f ${HOME}/.bashrc ]; then
-        if [ -f /etc/skel/.bashrc ]; then
-            cp /etc/skel/.bashrc ${HOME}/
-        else
-            update_file ${DOTFILES_URL}/home/.bashrc ${HOME}/.bashrc
-        fi
+if [ ! -f ${HOME}/.bashrc ]; then
+    if [ -f /etc/skel/.bashrc ]; then
+        cp /etc/skel/.bashrc ${HOME}/
+    else
+        update_file ${DOTFILES_URL}/home/.bashrc ${HOME}/.bashrc
     fi
 fi
 
-if ! cat ${HOME}/${rc_file} | grep -q ".bash_aliases"; then
-     cat << END >> ${HOME}/${rc_file}
+if ! cat ${HOME}/.bashrc | grep -q ".bash_aliases"; then
+    cat << END >> ${HOME}/.bashrc
 
 # modify by aggresss
 if [ -f ~/.bash_aliases ]; then
@@ -75,6 +70,21 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 END
+fi
+
+if [ "$(uname)" = "FreeBSD" ];then
+    if ! cat ${HOME}/.profile | grep -q ".bashrc"; then
+        cat << END >> ${HOME}/.profile
+
+# modify by aggresss
+shell_name=`echo $SHELL | awk -F'/' '{print $NF}'`
+if [ -f ~/.bashrc && "${shell_name}" = "bash" ]; then
+    . ~/.bashrc
+fi
+
+END
+
+    fi
 fi
 
 # Update common bash utility
