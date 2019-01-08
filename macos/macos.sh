@@ -46,6 +46,7 @@ brew install \
     unrar \
     unzip \
     wget \
+    curl \
     wine \
     xz
 
