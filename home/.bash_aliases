@@ -156,6 +156,7 @@ function source_file()
                     line_range="1,$"
                 fi
                 sed -n "${line_range}p" ${index_file} >> ${source_file}
+                local file_index=$(sed -n '$=' ${source_file})
             done
             # operate file
             case $1 in
@@ -163,10 +164,18 @@ function source_file()
                     echo -e ${CYAN}; cat -n ${source_file}; echo -e ${NORMAL}
                     case $(uname) in
                         Linux)
-                            awk 'NR==1{("sed -n '$=' " FILENAME) | getline NL} NR < NL; END{printf "%s", $0}' ${source_file} | xclip -selection clipboard
+                            if [ ${file_index} -eq 1 ]; then
+                                 cat ${source_file} | tr -d \\n | xclip -selection clipboard
+                            else
+                                 cat ${source_file} | xclip -selection clipboard
+                            fi
                             ;;
                         Darwin)
-                            awk 'NR==1{("sed -n '$=' " FILENAME) | getline NL} NR < NL; END{printf "%s", $0}' ${source_file} | pbcopy
+                            if [ ${file_index} -eq 1 ]; then
+                                 cat ${source_file} | tr -d \\n | pbcopy
+                            else
+                                 cat ${source_file} | pbcopy
+                            fi
                             ;;
                         *)
                             echo -e "${RED}No support this OS.${NORMAL}"
