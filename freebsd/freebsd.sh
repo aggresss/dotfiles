@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # FreeBSD 12.0 install command
 
 sudo pkg update && pkg install \
