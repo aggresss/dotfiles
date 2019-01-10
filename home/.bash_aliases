@@ -108,8 +108,7 @@ function un_ball()
         unrar x $1 ${1%.rar}
     elif [[ $1 =~ .*\.tar.xz$ ]]; then
         # *.tar.xz
-        xz -d $1
-        tar vxf ${1%.xz}
+        tar Jvxf $1
     elif [[ $1 =~ .*\.tar.gz$ || $1 =~ .*\.tgz$ ]]; then
         # *.tar.gz or *.tgz
         tar zvxf $1
