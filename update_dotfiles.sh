@@ -19,7 +19,16 @@ function update_file()
         mkdir -vp ${down_path}
     fi
     rm -rvf ${tmp_path}/${down_file}
-    wget -P ${tmp_path} $1
+    if [ $(command -v wget > /dev/null; echo $?) -eq 0 ]; then
+        wget -P ${tmp_path} $1
+    elif [ $(command -v curl > /dev/null; echo $?) -eq 0 ]; then
+        cd ${tmp_path}
+        curl -OL $1
+        cd -
+    else
+        echo "No http requeset tool."
+        exit 1;
+    fi
     cp -vf ${tmp_path}/${down_file} $2
     rm -vf ${tmp_path}/${down_file}
     if [ ${down_file##*.} = "sh" ]; then
