@@ -56,12 +56,21 @@ update_file ${DOTFILES_URL}/home/.bash_aliases ${HOME}/.bash_aliases
 update_file ${DOTFILES_URL}/home/.inputrc ${HOME}/.inputrc
 update_file ${DOTFILES_URL}/vim/.vimrc ${HOME}/.vimrc
 update_file ${DOTFILES_URL}/vim/.vimrc.bundles ${HOME}/.vimrc.bundles
+# vim
 if [ ! -d ${HOME}/.vim/bundle ]; then
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim \
     && vim +BundleInstall +qall
 fi
 update_file ${DOTFILES_URL}/pip/pip.conf ${HOME}/.pip/pip.conf
-
+# .bash_profile
+if [ ! -f ${HOME}/.bash_profile ]; then
+    if [ -f /etc/skel/.bash_profile ]; then
+        cp /etc/skel/.bash_profile ${HOME}/
+    else
+        update_file ${DOTFILES_URL}/home/.bash_profile ${HOME}/.bash_profile
+    fi
+fi
+# .bashrc
 if [ ! -f ${HOME}/.bashrc ]; then
     if [ -f /etc/skel/.bashrc ]; then
         cp /etc/skel/.bashrc ${HOME}/
@@ -81,7 +90,6 @@ fi
 END
 fi
 
-
 # Update common bash utility
 update_file ${BASH_URL}/hello.sh ${HOME}/bin/hello.sh
 
@@ -89,11 +97,9 @@ case $(uname) in
     Linux)
         update_file ${DOTFILES_URL}/home/.Xresources ${HOME}/.Xresources
         update_file ${BASH_URL}/switch_mirror.sh ${HOME}/bin/switch_mirror.sh
-
     ;;
     Darwin)
-        update_file ${DOTFILES_URL}/home/.bash_profile ${HOME}/.bash_profile
-
+        echo "Darwin"
     ;;
     FreeBSD)
         echo "FreeBSD"
