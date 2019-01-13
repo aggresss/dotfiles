@@ -611,7 +611,7 @@ case $(uname) in
             export DISPLAY=localhost:0
         fi
         # Specified for Gnome environment
-        if [ command -v gnome-terminal >/dev/null 2>&1 ]; then
+        if [ $(command -v gnome-terminal >/dev/null; echo $?) -eq 0 ]; then
             alias cbp='chromium-browser --proxy-server=socks5://127.0.0.1:1080'
             alias calc='gnome-calculator'
             alias gterm='gnome-terminal'
