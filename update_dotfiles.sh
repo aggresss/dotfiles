@@ -98,8 +98,11 @@ case $(uname) in
     FreeBSD)
         echo "FreeBSD"
     ;;
+    MINGW*)
+        echo "MINGW"
+    ;;
     *)
-        echo ""
+        echo "No support this ENV"
     ;;
 esac
 

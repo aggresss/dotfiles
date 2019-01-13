@@ -622,6 +622,8 @@ case $(uname) in
         export CLICOLOR=1
         export LSCOLORS=ExGxFxDxCxegedabagacad
         ;;
+    MINGW*)
+        ;;
     *)
         echo "No support this ENV."
         ;;
