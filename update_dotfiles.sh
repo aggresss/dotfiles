@@ -26,7 +26,7 @@ function update_file()
         curl -OL $1
         cd -
     else
-        echo "No http requeset tool."
+        echo "No http request tool."
         exit 1;
     fi
     cp -vf ${tmp_path}/${down_file} $2
