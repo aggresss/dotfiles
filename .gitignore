@@ -4,6 +4,7 @@
 .project
 .cproject
 .settings/
+.autotools
 
 # vscode project file
 .vscode/
