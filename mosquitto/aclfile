@@ -4,6 +4,6 @@ user admin
 # read/write topic
 topic gateway/test0
 
-user read_user
+user username
 # read only topic
 topic read gateway/test0

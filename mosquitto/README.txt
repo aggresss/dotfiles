@@ -1,4 +1,5 @@
 create passwd file
+mosquitto_passwd -b pwfile admin admin
 mosquitto_passwd -c pwfile admin
 mosquitto_passwd pwfile admin
 
