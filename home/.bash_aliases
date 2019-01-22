@@ -100,7 +100,7 @@ function find_bin()
     for i in `seq 1 $#`
     do
         eval tmp_arg=\$$i
-        eval find {${PATH//:/,}} -name '${tmp_arg}' -printf "%f'\n'"
+        eval find {${PATH//:/,}} -name '${tmp_arg}'
     done
     echo -e "${NORMAL}"
 }
