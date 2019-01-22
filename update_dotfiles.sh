@@ -117,6 +117,7 @@ case $(uname) in
     Linux)
         update_file ${DOTFILES_URL}/home/.Xresources ${HOME}/.Xresources
         update_file ${BASH_URL}/switch_mirror.sh ${HOME}/bin/switch_mirror.sh
+        update_file ${BASH_URL}/cmake_build.sh ${HOME}/bin/cmake_build.sh
     ;;
     Darwin)
         echo "Darwin"
