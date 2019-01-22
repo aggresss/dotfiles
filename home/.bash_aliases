@@ -93,14 +93,16 @@ alias rm='rm -i'
 alias mv='mv -i'
 
 # search file on $PATH
-function find_path()
+function find_bin()
 {
+    echo -e "${GREEN}"
     local tmp_arg
     for i in `seq 1 $#`
     do
         eval tmp_arg=\$$i
         eval find {${PATH//:/,}} -name '${tmp_arg}' -printf "%f'\n'"
     done
+    echo -e "${NORMAL}"
 }
 
 # fast decompression archives
