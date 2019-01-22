@@ -170,7 +170,7 @@ function source_file()
             echo -e ${NORMAL}
         else
             # arguments > 2
-            local source_file=$(mktemp)
+            local tmp_src_file=$(mktemp)
             local i
             for ((i=3; i<=$#; i++))
             do
@@ -178,26 +178,26 @@ function source_file()
                 if [ "${line_range}" = "@" ]; then
                     line_range="1,$"
                 fi
-                sed -n "${line_range}p" ${index_file} >> ${source_file}
-                local file_index=$(sed -n '$=' ${source_file})
+                sed -n "${line_range}p" ${index_file} >> ${tmp_src_file}
+                local file_index=$(sed -n '$=' ${tmp_src_file})
             done
             # operate file
             case $1 in
                 copy)
-                    echo -e ${CYAN}; cat -n ${source_file}; echo -e ${NORMAL}
+                    echo -e ${CYAN}; cat -n ${tmp_src_file}; echo -e ${NORMAL}
                     case $(uname) in
                         Linux)
                             if [ ${file_index} -eq 1 ]; then
-                                 cat ${source_file} | tr -d \\n | xclip -selection clipboard
+                                 cat ${tmp_src_file} | tr -d \\n | xclip -selection clipboard
                             else
-                                 cat ${source_file} | xclip -selection clipboard
+                                 cat ${tmp_src_file} | xclip -selection clipboard
                             fi
                             ;;
                         Darwin)
                             if [ ${file_index} -eq 1 ]; then
-                                 cat ${source_file} | tr -d \\n | pbcopy
+                                 cat ${tmp_src_file} | tr -d \\n | pbcopy
                             else
-                                 cat ${source_file} | pbcopy
+                                 cat ${tmp_src_file} | pbcopy
                             fi
                             ;;
                         *)
@@ -206,14 +206,14 @@ function source_file()
                     esac
                     ;;
                 exec)
-                    echo -e ${MAGENTA}; cat -n ${source_file}; echo -e ${NORMAL}
-                    source ${source_file}
+                    echo -e ${MAGENTA}; cat -n ${tmp_src_file}; echo -e ${NORMAL}
+                    source ${tmp_src_file}
                     ;;
                 *)
                     echo -e "${RED}No support this command.${NORMAL}"
                     ;;
             esac
-            rm -rf ${source_file}
+            rm -rf ${tmp_src_file}
         fi
     fi
 }
