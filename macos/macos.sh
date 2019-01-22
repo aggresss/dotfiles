@@ -19,6 +19,8 @@ brew install \
     gettext \
     git \
     gnu-sed \
+    gnu-tar \
+    gawk \
     gnutls \
     graphviz \
     hexedit \
