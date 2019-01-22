@@ -89,6 +89,26 @@ fi
 
 END
 fi
+# .bashr_logout
+if [ ! -f ${HOME}/.bash_logout ]; then
+    if [ -f /etc/skel/.bash_logout ]; then
+        cp /etc/skel/.bash_logout ${HOME}/
+    else
+        update_file ${DOTFILES_URL}/home/.bash_logout ${HOME}/.bash_logout
+    fi
+fi
+
+if ! cat ${HOME}/.bash_logout | grep -q "ssh-agent -k"; then
+    cat << END >> ${HOME}/.bash_logout
+
+# modify by aggresss
+# ssh-agent
+if [ ${SSH_AGENT_PID:-NoDefine} != "NoDefine" ] ; then
+  eval `ssh-agent -k`
+fi
+
+END
+fi
 
 # Update common bash utility
 update_file ${BASH_URL}/hello.sh ${HOME}/bin/hello.sh
