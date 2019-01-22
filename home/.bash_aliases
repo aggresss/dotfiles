@@ -638,6 +638,7 @@ case $(uname) in
             alias calc='gnome-calculator'
             alias gterm='gnome-terminal'
         fi
+        alias cb='cmake_build.sh'
         ;;
     FreeBSD)
         # ls colours
