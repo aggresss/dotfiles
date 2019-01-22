@@ -615,6 +615,8 @@ case $(uname) in
         alias wine='env LANG=zh_CN.UTF8 wine'
         # use "brew install gnu-sed" instead of bsd-sed
         alias sed='gsed'
+        alias awk='gawk'
+        alias tar='gtar'
         ;;
     Linux)
         release_info=$(uname -r | awk -F'-' '{print $NF}')
