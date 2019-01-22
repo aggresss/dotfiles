@@ -92,6 +92,17 @@ alias ......='cd ../../../../..'
 alias rm='rm -i'
 alias mv='mv -i'
 
+# search file on $PATH
+function find_path()
+{
+    local tmp_arg
+    for i in `seq 1 $#`
+    do
+        eval tmp_arg=\$$i
+        eval find {${PATH//:/,}} -name '${tmp_arg}' -printf "%f'\n'"
+    done
+}
+
 # fast decompression archives
 function un_ball()
 {
