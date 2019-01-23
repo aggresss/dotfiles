@@ -640,6 +640,7 @@ case $(uname) in
             alias gterm='gnome-terminal'
         fi
         alias cb='cmake_build.sh'
+        alias ab='autotools_build.sh'
         ;;
     FreeBSD)
         # ls colours
