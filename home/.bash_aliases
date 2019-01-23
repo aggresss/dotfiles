@@ -37,6 +37,7 @@ if [ -f /.dockerenv ]; then
 else
     alias s='cd ${HOME}/workspace-scratch'
     alias d='cd ${HOME}/Downloads'
+    alias m='cd ${HOME}/Documents'
     alias v='cd ${HOME}/Vagrant'
 fi
 # fast refresh bash env
