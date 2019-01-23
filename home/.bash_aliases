@@ -77,7 +77,8 @@ alias env_go_a='env_append GOPATH ${PWD}'
 alias env_go_d='env_prune GOPATH ${PWD}'
 # alias for some application special open
 alias enw='emacs -nw'
-alias sagt='eval `ssh-agent`; ssh-add'
+alias sagt='ssh_agent'
+alias ksagt='eval `ssh-agent -k`'
 # alias for remove fast
 alias rm_3rd='rm -rvf *.zip *.tgz *.bz2 *.gz *.dmg *.7z *.xz *.tar'
 alias rm_mda='rm -rvf *.jpg *.jpeg *.png *.bmp *.gif *.mp3 *.acc *.wav *.mp4 *.flv *.mov *.avi *.ts *.wmv *.mkv'
@@ -92,6 +93,18 @@ alias ......='cd ../../../../..'
 # Some more alias to avoid making mistakes
 alias rm='rm -i'
 alias mv='mv -i'
+
+
+# fast ssh-agent
+function ssh_agent()
+{
+    if [ ${SSH_AGENT_PID-NoDefine} = "NoDefine" ]; then
+        eval `ssh-agent`
+        ssh-add
+    else
+        echo -e "${YELLOW}SSH_AGENT_PID: ${SSH_AGENT_PID}${NORMAL}"
+    fi
+}
 
 # search file on $PATH
 function find_bin()
