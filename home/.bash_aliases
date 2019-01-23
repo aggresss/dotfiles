@@ -52,6 +52,9 @@ alias r='source_file exec'
 alias c='source_file copy'
 # fast edit index note file
 alias e='source_file edit'
+#fast ssh-agent
+alias a='ssh_agent'
+alias k='eval `ssh-agent -k`'
 # find file
 alias fdf='find . -name "*" |grep -sin'
 # find file content
@@ -77,8 +80,6 @@ alias env_go_a='env_append GOPATH ${PWD}'
 alias env_go_d='env_prune GOPATH ${PWD}'
 # alias for some application special open
 alias enw='emacs -nw'
-alias sagt='ssh_agent'
-alias ksagt='eval `ssh-agent -k`'
 # alias for remove fast
 alias rm_3rd='rm -rvf *.zip *.tgz *.bz2 *.gz *.dmg *.7z *.xz *.tar'
 alias rm_mda='rm -rvf *.jpg *.jpeg *.png *.bmp *.gif *.mp3 *.acc *.wav *.mp4 *.flv *.mov *.avi *.ts *.wmv *.mkv'
