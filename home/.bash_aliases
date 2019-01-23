@@ -98,7 +98,7 @@ alias mv='mv -i'
 # fast ssh-agent
 function ssh_agent()
 {
-    if [ ${SSH_AGENT_PID-NoDefine} = "NoDefine" ]; then
+    if [ ${SSH_AGENT_PID-NoDefine} = "NoDefine" ] || ! ps aux | grep -q ssh-agent; then
         eval `ssh-agent`
         ssh-add
     else
