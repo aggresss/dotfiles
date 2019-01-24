@@ -55,6 +55,9 @@ alias e='source_file edit'
 #fast ssh-agent
 alias a='ssh_agent'
 alias k='eval `ssh-agent -k`'
+#fast git status
+alias y='git status; git stash list'
+
 # find file
 alias fdf='find . -name "*" |grep -sin'
 # find file content
