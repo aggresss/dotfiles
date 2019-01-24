@@ -100,7 +100,7 @@ alias mv='mv -i'
 function ssh_agent()
 {
     if [ ${SSH_AGENT_PID:-NOCONFIG} = "NOCONFIG" ] || ! ps aux | grep -q ssh-agent; then
-        eval `ssh-agent`
+        eval `ssh-agent` && ssh-add
     elif ! ssh-add -l > /dev/null 2>&1; then
         ssh-add
     else
