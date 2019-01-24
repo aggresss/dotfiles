@@ -99,7 +99,7 @@ alias mv='mv -i'
 # fast ssh-agent
 function ssh_agent()
 {
-    if [ ${SSH_AGENT_PID-NoDefine} = "NoDefine" ] || ! ps aux | grep -q ssh-agent; then
+    if [ ${SSH_AGENT_PID:-NOCONFIG} = "NOCONFIG" ] || ! ps aux | grep -q ssh-agent; then
         eval `ssh-agent`
         ssh-add
     else
@@ -269,7 +269,7 @@ function update_file()
 # $1: port 1-65536; null to display; else to close
 function proxy_cfg()
 {
-    if [ ${1:-NoDefine} = "NoDefine" ]; then
+    if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
         if [ -n "${proxy-}" ]; then
             echo -e "${YELLOW}${proxy}${NORMAL}"
         else
@@ -498,7 +498,7 @@ function git_branch_internal()
 # Git branch perception
 function git_prompt()
 {
-    if [ "${PROMPT_COMMAND_BAK-NotDefine}" = "NotDefine" ] ; then
+    if [ "${PROMPT_COMMAND_BAK-NODEFINE}" = "NODEFINE" ] ; then
         PROMPT_COMMAND_BAK=${PROMPT_COMMAND-}
         PS1_BAK=${PS1-}
         PROMPT_COMMAND="git_branch_internal;${PROMPT_COMMAND-}"
