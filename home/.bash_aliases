@@ -28,7 +28,9 @@ BLUE="\\033[34m"
 MAGENTA="\\033[35m"
 CYAN="\\033[36m"
 WHITE="\\033[37m"
-NORMAL="\\033[m"
+NORMAL="\\033[0m"
+HIGHLIGHT="\\033[1m"
+INVERT="\\033[7m"
 
 # alias for fast command
 if [ -f /.dockerenv ]; then
