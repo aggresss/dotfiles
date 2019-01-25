@@ -639,6 +639,7 @@ case $(uname) in
         alias sed='gsed'
         alias awk='gawk'
         alias tar='gtar'
+        alias find='gfind'
         ;;
     Linux)
         release_info=$(uname -r | awk -F'-' '{print $NF}')

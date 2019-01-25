@@ -21,6 +21,7 @@ brew install \
     gnu-sed \
     gnu-tar \
     gawk \
+    findutils \
     gnutls \
     graphviz \
     hexedit \
