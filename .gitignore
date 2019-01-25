@@ -1,5 +1,9 @@
 # global gitignore file
 
+# cmake project file
+CMakeCache.txt
+CMakeFiles/
+
 # eclipse project file
 .project
 .cproject
