@@ -88,7 +88,8 @@ alias ......='cd ../../../../..'
 # Some more alias to avoid making mistakes
 alias rm='rm -i'
 alias mv='mv -i'
-
+# Generate GNU standard files
+alias iamgnu='touch AUTHORS COPYING ChangeLog NEWS README'
 
 # fast ssh-agent
 function ssh_agent()
