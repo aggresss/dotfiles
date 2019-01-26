@@ -4,6 +4,12 @@
 CMakeCache.txt
 CMakeFiles/
 
+# autotools project file
+autoscan.log
+config.log
+configure.scan
+autom4te.cache/
+
 # eclipse project file
 .project
 .cproject
