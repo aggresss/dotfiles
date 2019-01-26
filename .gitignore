@@ -5,10 +5,13 @@ CMakeCache.txt
 CMakeFiles/
 
 # autotools project file
+configure.scan
 autoscan.log
 config.log
-configure.scan
 autom4te.cache/
+stamp-h1
+.deps/
+config.status
 
 # eclipse project file
 .project
