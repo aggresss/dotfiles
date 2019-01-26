@@ -8,17 +8,6 @@
 # modify for utility
 ##########################
 
-# color for PS1
-black=$'\[\e[1;30m\]'
-red=$'\[\e[1;31m\]'
-green=$'\[\e[1;32m\]'
-yellow=$'\[\e[1;33m\]'
-blue=$'\[\e[1;34m\]'
-magenta=$'\[\e[1;35m\]'
-cyan=$'\[\e[1;36m\]'
-white=$'\[\e[1;37m\]'
-normal=$'\[\e[m\]'
-
 # color for echo
 BLACK="\\033[30m"
 RED="\\033[31m"
@@ -503,6 +492,18 @@ function git_branch_internal()
 }
 
 # Git branch perception
+
+# color for PS1
+black=$'\[\e[1;30m\]'
+red=$'\[\e[1;31m\]'
+green=$'\[\e[1;32m\]'
+yellow=$'\[\e[1;33m\]'
+blue=$'\[\e[1;34m\]'
+magenta=$'\[\e[1;35m\]'
+cyan=$'\[\e[1;36m\]'
+white=$'\[\e[1;37m\]'
+normal=$'\[\e[m\]'
+
 function git_prompt()
 {
     if [ "${PROMPT_COMMAND_BAK-NODEFINE}" = "NODEFINE" ] ; then
