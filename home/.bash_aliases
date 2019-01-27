@@ -94,7 +94,7 @@ alias make_gnu='touch AUTHORS COPYING ChangeLog NEWS README'
 # fast ssh-agent
 function ssh_agent()
 {
-    if [ ${SSH_AGENT_PID:-NOCONFIG} = "NOCONFIG" ] || ! ps aux | grep -q ssh-agent; then
+    if [ ${SSH_AGENT_PID:-NOCONFIG} = "NOCONFIG" ] || ! ps aux | grep ssh-agent | grep -vq grep; then
         eval `ssh-agent` && ssh-add
     elif ! ssh-add -l > /dev/null 2>&1; then
         ssh-add
