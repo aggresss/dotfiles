@@ -52,4 +52,6 @@
 #### Eclipse
 | Drectory | Type | Illustrate |
 |---|---|---|
-| `~/eclipse-workspace/` | *Auto Generation* | default eclipse workspace |
+| `~/.local/eclipse/` | *Auto Generation* | default eclipse install directory |
+| `~/eclipse-workspace/` | *Auto Generation* | default eclipse workspace directory |
+
