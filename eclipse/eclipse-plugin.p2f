@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?p2f version='1.0.0'?>
+<p2f version='1.0.0'>
+  <ius size='3'>
+    <iu id='com.cthing.cmakeed.feature.feature.group' name='CMake Editor' version='1.10.0'>
+      <repositories size='1'>
+        <repository location='https://raw.githubusercontent.com/15knots/cmakeed/master/cmakeed-update/'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.dltk.sh.feature.group' name='Dynamic Languages Toolkit - ShellEd IDE' version='5.10.0.201808292040'>
+      <repositories size='3'>
+        <repository location='http://download.eclipse.org/technology/dltk/updates-dev/latest/'/>
+        <repository location='http://download.eclipse.org/releases/2018-09'/>
+        <repository location='http://download.eclipse.org/releases/2018-12'/>
+      </repositories>
+    </iu>
+    <iu id='org.gna.eclox.feature.feature.group' name='Eclox' version='0.12.1.v20180118-1753'>
+      <repositories size='1'>
+        <repository location='http://anb0s.github.io/eclox'/>
+      </repositories>
+    </iu>
+  </ius>
+</p2f>
