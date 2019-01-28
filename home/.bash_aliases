@@ -451,6 +451,20 @@ function git_sig()
   git config user.email $1
 }
 
+# Get pull request to local branch
+# $1 remote name
+# $2 pull request index No.
+function git_pr()
+{
+    if [ $# != 2 ]; then
+        echo -e "${HIGHLIGHT}${RED}Please input remote name and pull request No.${NORMAL}"
+    fi
+    local remote_name=$1
+    local remote_pr=$2
+    git fetch ${remote_name} pull/${remote_pr}/head:pull/${remote_name}/${remote_pr} && \
+    git checkout pull/${remote_name}/${remote_pr}
+}
+
 # Set global gitignore file
 function git_ignore()
 {
