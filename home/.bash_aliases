@@ -458,6 +458,7 @@ function git_pr()
 {
     if [ $# != 2 ]; then
         echo -e "${HIGHLIGHT}${RED}Please input remote name and pull request No.${NORMAL}"
+        return 1
     fi
     local remote_name=$1
     local remote_pr=$2
