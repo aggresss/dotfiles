@@ -332,7 +332,7 @@ function env_prune()
 ##########################
 
 # Fast list vagrant status
-function vagrant_ls()
+function vagrant_ps()
 {
     command vagrant >/dev/null 2>&1
     if [ $? -ne 0 ]; then
@@ -454,7 +454,7 @@ function git_sig()
 # Get pull request to local branch
 # $1 remote name
 # $2 pull request index No.
-function git_pr()
+function git_pull()
 {
     if [ $# != 2 ]; then
         echo -e "${HIGHLIGHT}${RED}Please input remote name and pull request No.${NORMAL}"
