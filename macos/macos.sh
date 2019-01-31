@@ -30,6 +30,7 @@ brew install \
     lua \
     md5sha1sum \
     minicom \
+    mosquitto \
     mosh \
     openssl \
     p7zip \
