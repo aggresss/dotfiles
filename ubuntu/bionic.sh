@@ -53,6 +53,7 @@ sudo apt-get update && sudo apt-get install -y \
     fonts-wqy-microhei \
     fonts-wqy-zenhei \
     xclip \
+    xbacklight \
     vlc \
     chromium-browser \
     slock \
@@ -130,6 +131,19 @@ fi
 #########################
 # configuration
 #########################
+# backlight
+sudo touch /usr/share/X11/xorg.conf.d/20-intel.conf
+sudo chown ${USER} /usr/share/X11/xorg.conf.d/20-intel.conf
+sudo cat << END > /usr/share/X11/xorg.conf.d/20-intel.conf
+Section "Device"
+        Identifier  "card0"
+        Driver      "intel"
+        Option      "Backlight"  "intel_backlight"
+EndSection
+
+END
+sudo chown `id -nu 0` /usr/share/X11/xorg.conf.d/20-intel.conf
+
 # gdm3
 sudo sed -r -e 's/^(\[security\])/\1\nDisallowTCP=false/' -i /etc/gdm3/custom.conf
 
