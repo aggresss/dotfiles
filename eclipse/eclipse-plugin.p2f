@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <?p2f version='1.0.0'?>
 <p2f version='1.0.0'>
-  <ius size='4'>
+  <ius size='5'>
     <iu id='com.cthing.cmakeed.feature.feature.group' name='CMake Editor' version='1.10.0'>
       <repositories size='1'>
         <repository location='https://raw.githubusercontent.com/15knots/cmakeed/master/cmakeed-update/'/>
@@ -22,6 +22,11 @@
     <iu id='org.brainwy.liclipsetext.feature.feature.group' name='LiClipseText Feature' version='2.1.3.201805051308'>
       <repositories size='1'>
         <repository location='http://www.liclipse.com/text/updates'/>
+      </repositories>
+    </iu>
+    <iu id='org.dadacoalition.yedit.feature.feature.group' name='YEdit Feature' version='1.0.20.201509041456-RELEASE'>
+      <repositories size='1'>
+        <repository location='http://dadacoalition.org/yedit'/>
       </repositories>
     </iu>
   </ius>
