@@ -136,9 +136,13 @@ sudo touch /usr/share/X11/xorg.conf.d/20-intel.conf
 sudo chown ${USER} /usr/share/X11/xorg.conf.d/20-intel.conf
 sudo cat << END > /usr/share/X11/xorg.conf.d/20-intel.conf
 Section "Device"
-        Identifier  "card0"
-        Driver      "intel"
-        Option      "Backlight"  "intel_backlight"
+    Identifier  "card0"
+    Driver      "intel"
+    Option      "Backlight"  "intel_backlight"
+    Option      "AccelMethod" "sna"
+    Option      "TearFree" "true"
+    Option      "DRI" "3"
+    BusID       "PCI:0:2:0"
 EndSection
 
 END
