@@ -174,8 +174,8 @@ bindsym $mod+F12 exec "cd ~/ScreenShots/ && scrot"
 
 # Modify for user-defined
 bindsym $mod+Tab workspace back_and_forth
-bindsym XF86MonBrightnessUp exec xbacklight -inc 1 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 1 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
 
 
 # Start i3bar to display a workspace bar (plus the system information i3status
