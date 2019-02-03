@@ -30,7 +30,7 @@ font pango:monospace 8
 floating_modifier $mod
 
 # Set background
-exec --no-startup-id feh --bg-scale ~/Wallpaper/default.jpg
+exec --no-startup-id feh --bg-scale ~/Pictures/Wallpaper/default.jpg
 
 # Autostart
 exec --no-startup-id gnome-session
