@@ -37,6 +37,9 @@ sudo apt-get update && sudo apt-get install -y \
     yasm \
     gawk \
     net-tools \
+    samba \
+    smbclient \
+    cifs-utils \
     netcat \
     socat \
     nfs-kernel-server \
