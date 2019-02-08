@@ -53,6 +53,7 @@ sudo apt-get update && sudo apt-get install -y \
     stow \
     minicom \
     valgrind \
+    oprofile \
     \
     fonts-wqy-microhei \
     fonts-wqy-zenhei \
