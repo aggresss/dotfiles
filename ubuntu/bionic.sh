@@ -77,7 +77,8 @@ sudo apt-get update && sudo apt-get install -y \
     xmonad \
     xmonbar \
     dwm \
-    valkyrie
+    valkyrie \
+    cmake-gui
 
 
 #########################
