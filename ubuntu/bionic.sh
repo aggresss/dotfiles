@@ -78,6 +78,7 @@ sudo apt-get update && sudo apt-get install -y \
     xmonbar \
     dwm \
     valkyrie \
+    gpicview \
     cmake-gui
 
 
