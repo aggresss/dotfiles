@@ -52,6 +52,7 @@ sudo apt-get update && sudo apt-get install -y \
     supervisor \
     stow \
     minicom \
+    valgrind \
     \
     fonts-wqy-microhei \
     fonts-wqy-zenhei \
@@ -75,7 +76,8 @@ sudo apt-get update && sudo apt-get install -y \
     i3 \
     xmonad \
     xmonbar \
-    dwm
+    dwm \
+    valkyrie
 
 
 #########################
