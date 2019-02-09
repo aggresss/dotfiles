@@ -83,7 +83,9 @@ sudo apt-get update && sudo apt-get install -y \
     dwm \
     valkyrie \
     gpicview \
-    cmake-gui
+    cmake-gui \
+    graphviz \
+    kcachegrind
 
 
 #########################
