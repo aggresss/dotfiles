@@ -52,6 +52,7 @@ sudo apt-get update && sudo apt-get install -y \
     supervisor \
     stow \
     minicom \
+    systemtap \
     valgrind \
     oprofile \
     linux-tools-generic \
