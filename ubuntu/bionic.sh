@@ -54,6 +54,8 @@ sudo apt-get update && sudo apt-get install -y \
     minicom \
     valgrind \
     oprofile \
+    linux-tools-generic \
+    linux-tools-common \
     \
     fonts-wqy-microhei \
     fonts-wqy-zenhei \
