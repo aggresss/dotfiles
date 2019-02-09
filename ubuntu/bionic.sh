@@ -56,6 +56,7 @@ sudo apt-get update && sudo apt-get install -y \
     systemtap \
     valgrind \
     oprofile \
+    lttng-tools \
     linux-tools-generic \
     linux-tools-common \
     \
