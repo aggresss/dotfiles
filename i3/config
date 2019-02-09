@@ -159,7 +159,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Modify for app launch
-bindsym $mod+F1  --release exec "import ~/ScreenShots/a_screen_window.jpg"
+bindsym $mod+F1  exec "nautilus"
 bindsym $mod+F2  exec "gnome-screensaver-command -l"
 bindsym $mod+F3  exec "okular"
 bindsym $mod+F4  exec "gpicview"
@@ -168,15 +168,23 @@ bindsym $mod+F6  exec "code"
 bindsym $mod+F7  exec "thunderbird"
 bindsym $mod+F8  exec "firefox"
 bindsym $mod+F9  exec "chromium-browser"
-bindsym $mod+F10 exec "nautilus"
-bindsym $mod+F11 exec "cd ~/ScreenShots/ && scrot -u"
-bindsym $mod+F12 exec "cd ~/ScreenShots/ && scrot"
 
+#########################
 # Modify for user-defined
+#########################
+# swith workspace
 bindsym $mod+Tab workspace back_and_forth
+# adjust screen light
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
-
+# print screen
+bindsym --release Print exec "scrot -b -m /tmp/screenshot.png && xclip -selection clipoard -t 'image/png' /tmp/screenshot.png"
+bindsym --release $mod+Print exec "scrot -u -b -m /tmp/screenshot.png && xclip -selection clipoard -t 'image/png' /tmp/screenshot.png"
+bindsym --release $mod+Shift+Print exec "scrot -s -b -m /tmp/screenshot.png && xclip -selection clipoard -t 'image/png' /tmp/screenshot.png"
+# volume control alsamixer
+bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer -c 1 -q sset Master 5%+"
+bindsym XF86AudioLowerVolume exec --no-startup-id "amixer -c 1 -q sset Master 5%-"
+bindsym XF86AudioMute exec --no-startup-id "amixer -c 1 -q sset Master toggle"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
