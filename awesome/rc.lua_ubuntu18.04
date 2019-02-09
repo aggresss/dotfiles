@@ -390,10 +390,13 @@ globalkeys = gears.table.join(
               {description = "Volume mute", group = "launcher"}),
 
     -- Print screen
-    awful.key({ }, "Print", function () awful.util.spawn({"scrot", "-b", "-m", "/tmp/screenshot.png", "-e", "xclip -selection clipoard -t 'image/png' /tmp/screenshot.png"}) end,
+    awful.key({ }, "Print", function () awful.util.spawn_with_shell("scrot -b -m /tmp/screenshot.png && xclip -selection clipoard -t 'image/png' /tmp/screenshot.png") end,
               {description = "Print full screen", group = "launcher"}),
-    awful.key({ modkey }, "Print", function () awful.util.spawn({"scrot", "-u", "-b", "-m", "/tmp/screenshot.png", "-e", "xclip -selection clipoard -t 'image/png' /tmp/screenshot.png"}) end,
+    awful.key({ modkey }, "Print", function () awful.util.spawn_with_shell("scrot -u -b -m /tmp/screenshot.png && xclip -selection clipoard -t 'image/png' /tmp/screenshot.png") end,
               {description = "Print window screen", group = "launcher"}),
+    awful.key({ modkey, "Shift" }, "Print", function () awful.util.spawn_with_shell("sleep 0.5 && scrot -s -b -m /tmp/screenshot.png && xclip -selection clipoard -t 'image/png' /tmp/screenshot.png") end,
+              {description = "Print selection screen", group = "launcher"}),
+
 
     -- Fn key binging
     awful.key({ modkey }, "F1", function () awful.util.spawn_with_shell("nautilus") end,
