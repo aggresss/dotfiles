@@ -375,16 +375,36 @@ globalkeys = gears.table.join(
     awful.key({ modkey }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"}),
 
+    -- Brightness control
+    awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 5") end,
+              {description = "backlight down", group = "launcher"}),
+    awful.key({ }, "XF86MonBrightnessUp", function () awful.util.spawn("xbacklight -inc 5") end,
+              {description = "backlight up", group = "launcher"}),
+
+    -- Audio control
+    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -c 0 -q sset Master 5%+") end,
+              {description = "Volume up", group = "launcher"}),
+    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -c 0 -q sset Master 5%-") end,
+              {description = "Volume down", group = "launcher"}),
+    awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer -c 0 -q sset Master toggle") end,
+              {description = "Volume mute", group = "launcher"}),
+
+    -- Print screen
+    awful.key({ }, "Print", function () awful.util.spawn({"scrot", "-b", "-m", "/tmp/screenshot.png", "-e", "xclip -selection clipoard -t 'image/png' /tmp/screenshot.png"}) end,
+              {description = "Print full screen", group = "launcher"}),
+    awful.key({ modkey }, "Print", function () awful.util.spawn({"scrot", "-u", "-b", "-m", "/tmp/screenshot.png", "-e", "xclip -selection clipoard -t 'image/png' /tmp/screenshot.png"}) end,
+              {description = "Print window screen", group = "launcher"}),
+
     -- Fn key binging
-    awful.key({ modkey }, "F1", function () awful.util.spawn_with_shell("import ~/ScreenShots/a_screen_window.jpg") end,
-              {description = "launch screen shortcut", group = "launcher"}),
+    awful.key({ modkey }, "F1", function () awful.util.spawn_with_shell("nautilus") end,
+              {description = "launch file explorer", group = "launcher"}),
     awful.key({ modkey }, "F2", function () awful.util.spawn_with_shell("gnome-screensaver-command -l") end,
               {description = "launch gnome-screensaver", group = "launcher"}),
     awful.key({ modkey }, "F3", function () awful.util.spawn_with_shell("emacs") end,
               {description = "launch emacs", group = "launcher"}),
-    awful.key({ modkey }, "F4", function () awful.util.spawn_with_shell("gpicview") end,
+    awful.key({ modkey }, "F4", function () awful.util.spawn_with_shell("okular") end,
               {description = "launch gpicview", group = "launcher"}),
-    awful.key({ modkey }, "F5", function () awful.util.spawn_with_shell("okular") end,
+    awful.key({ modkey }, "F5", function () awful.util.spawn_with_shell("eclipse") end,
               {description = "launch okular", group = "launcher"}),
     awful.key({ modkey }, "F6", function () awful.util.spawn_with_shell("code") end,
               {description = "launch code", group = "launcher"}),
@@ -394,9 +414,9 @@ globalkeys = gears.table.join(
               {description = "launch firefox", group = "launcher"}),
     awful.key({ modkey }, "F9", function () awful.util.spawn_with_shell("chromium-browser") end,
               {description = "launch chromium-browser", group = "launcher"}),
-    awful.key({ modkey }, "F10", function () awful.util.spawn_with_shell("nautilus") end,
+    awful.key({ modkey }, "F10", function () awful.util.spawn_with_shell("") end,
               {description = "launch nautilus", group = "launcher"}),
-    awful.key({ modkey }, "F11", function () awful.util.spawn("scrot") end,
+    awful.key({ modkey }, "F11", function () awful.util.spawn("") end,
               {description = "launch scrot", group = "launcher"}),
     awful.key({ modkey }, "F12", function () awful.util.spawn("") end,
               {description = "launch nothing", group = "launcher"})

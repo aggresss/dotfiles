@@ -175,12 +175,12 @@ bindsym $mod+F9  exec "chromium-browser"
 # swith workspace
 bindsym $mod+Tab workspace back_and_forth
 # print screen
-bindsym --release Print exec "scrot -b -m /tmp/screenshot.png && xclip -selection clipoard -t 'image/png' /tmp/screenshot.png"
-bindsym --release $mod+Print exec "scrot -u -b -m /tmp/screenshot.png && xclip -selection clipoard -t 'image/png' /tmp/screenshot.png"
-bindsym --release $mod+Shift+Print exec "scrot -s -b -m /tmp/screenshot.png && xclip -selection clipoard -t 'image/png' /tmp/screenshot.png"
+bindsym --release Print exec scrot -b -m /tmp/screenshot.png -e "xclip -selection clipoard -t 'image/png' /tmp/screenshot.png"
+bindsym --release $mod+Print exec scrot -u -b -m /tmp/screenshot.png -e "xclip -selection clipoard -t 'image/png' /tmp/screenshot.png"
+bindsym --release $mod+Shift+Print exec scrot -s -b -m /tmp/screenshot.png -e "xclip -selection clipoard -t 'image/png' /tmp/screenshot.png"
 # adjust screen light
-bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 # volume control alsamixer
 bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer -c 0 -q sset Master 5%+"
 bindsym XF86AudioLowerVolume exec --no-startup-id "amixer -c 0 -q sset Master 5%-"
