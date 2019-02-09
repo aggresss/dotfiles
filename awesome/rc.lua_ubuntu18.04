@@ -376,15 +376,15 @@ globalkeys = gears.table.join(
               {description = "show the menubar", group = "launcher"}),
 
     -- Brightness control
-    awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 5") end,
+    awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 1") end,
               {description = "backlight down", group = "launcher"}),
-    awful.key({ }, "XF86MonBrightnessUp", function () awful.util.spawn("xbacklight -inc 5") end,
+    awful.key({ }, "XF86MonBrightnessUp", function () awful.util.spawn("xbacklight -inc 1") end,
               {description = "backlight up", group = "launcher"}),
 
     -- Audio control
-    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -c 0 -q sset Master 5%+") end,
+    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -c 0 -q sset Master 2%+") end,
               {description = "Volume up", group = "launcher"}),
-    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -c 0 -q sset Master 5%-") end,
+    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -c 0 -q sset Master 2%-") end,
               {description = "Volume down", group = "launcher"}),
     awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer -c 0 -q sset Master toggle") end,
               {description = "Volume mute", group = "launcher"}),
