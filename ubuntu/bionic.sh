@@ -79,6 +79,7 @@ sudo apt-get update && sudo apt-get install -y \
     fcitx-sunpinyin \
     gnome-tweak-tool \
     gnome-screensaver \
+    libnotify-bin \
     awesome \
     i3 \
     xmonad \

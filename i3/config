@@ -175,16 +175,41 @@ bindsym $mod+F9  exec "chromium-browser"
 # swith workspace
 bindsym $mod+Tab workspace back_and_forth
 # print screen
-bindsym --release Print exec "scrot -b -m /tmp/screenshot.png && xclip -selection clipoard -t 'image/png' /tmp/screenshot.png"
-bindsym --release $mod+Print exec "scrot -u -b -m /tmp/screenshot.png && xclip -selection clipoard -t 'image/png' /tmp/screenshot.png"
-bindsym --release $mod+Shift+Print exec "scrot -s -b -m /tmp/screenshot.png && xclip -selection clipoard -t 'image/png' /tmp/screenshot.png"
+bindsym --release Print exec \
+    scrot -b -m /tmp/screenshot.png \
+    && xclip -selection clipoard -t 'image/png' /tmp/screenshot.png \
+    && notify-send -t 3000 -u normal "Full Screen Print Complete."
+bindsym --release $mod+Print exec \
+    scrot -u -b -m /tmp/screenshot.png \
+    && xclip -selection clipoard -t 'image/png' /tmp/screenshot.png \
+    && notify-send -t 3000 -u normal "Window Screen Print Complete."
+bindsym --release $mod+Shift+Print exec \
+    scrot -s -b -m /tmp/screenshot.png \
+    && xclip -selection clipoard -t 'image/png' /tmp/screenshot.png \
+    && notify-send -t 3000 -u normal "Selection Screen Print Complete."
 # adjust screen light
-bindsym XF86MonBrightnessUp exec "xbacklight -inc 1"
-bindsym XF86MonBrightnessDown exec "xbacklight -dec 1"
+bindsym XF86MonBrightnessUp exec \
+    xbacklight -inc 1 \
+    && bv=$(xbacklight -get) \
+    && notify-send -t 300 -u normal "Brightness: $(echo $bv / 1 | bc)%"
+
+bindsym XF86MonBrightnessDown exec \
+    xbacklight -dec 1 \
+    && bv=$(xbacklight -get) \
+    && notify-send -t 300 -u normal "Brightness: $(echo $bv / 1 | bc)%"
+
 # volume control alsamixer
-bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer -c 0 -q sset Master 2%+"
-bindsym XF86AudioLowerVolume exec --no-startup-id "amixer -c 0 -q sset Master 2%-"
-bindsym XF86AudioMute exec --no-startup-id "amixer -c 0 -q sset Master toggle"
+bindsym XF86AudioRaiseVolume exec --no-startup-id \
+    vol=$(amixer -c 0 sset Master 2%+ | grep -o '\[.*%' | cut -d '[' -f2) \
+    && notify-send -t 250 -u normal "Volume: $vol"
+
+bindsym XF86AudioLowerVolume exec --no-startup-id \
+    vol=$(amixer -c 0 sset Master 2%- | grep -o '\[.*%' | cut -d '[' -f2) \
+    && notify-send -t 250 -u normal "Volume: $vol"
+
+bindsym XF86AudioMute exec --no-startup-id \
+    mute=$(amixer -c 0 sset Master toggle | grep -o '\[o.*\]' | cut -d '[' -f2 | cut -d ']' -f1) \
+    && notify-send -t 1000 -u normal "Sound Toggle: $mute"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
