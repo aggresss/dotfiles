@@ -184,7 +184,8 @@ bindsym --release $mod+Print exec \
     && xclip -selection clipoard -t 'image/png' /tmp/screenshot.png \
     && notify-send -t 3000 -u normal "Window Screen Print Complete."
 bindsym --release $mod+Shift+Print exec \
-    scrot -s -b -m /tmp/screenshot.png \
+    notify-send -t 1000 -u normal "Selection Screen Print Start." \
+    && scrot -s -b -m /tmp/screenshot.png \
     && xclip -selection clipoard -t 'image/png' /tmp/screenshot.png \
     && notify-send -t 3000 -u normal "Selection Screen Print Complete."
 # adjust screen light
