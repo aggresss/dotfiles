@@ -109,7 +109,13 @@ function ssh_agent()
 # $1 process name to kill
 function kill_all()
 {
-     ps x | grep $1 | grep -v grep | awk '{print $1}' | xargs kill -9
+    process_id=$(ps ax | grep $1 | grep -v grep | awk '{print $1}')
+    if [ "x$process_id" != "x" ]; then
+        for id in $process_id
+        do
+            kill -9 $id
+        done
+    fi
 }
 
 # search file on $PATH
