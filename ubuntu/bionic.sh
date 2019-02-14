@@ -61,6 +61,7 @@ sudo apt-get update && sudo apt-get install -y \
     lttng-tools \
     linux-tools-generic \
     linux-tools-common \
+    imagemagick \
     \
     fonts-wqy-microhei \
     fonts-wqy-zenhei \
@@ -86,6 +87,7 @@ sudo apt-get update && sudo apt-get install -y \
     xmonad \
     xmonbar \
     dwm \
+    gimp \
     valkyrie \
     gpicview \
     cmake-gui \
