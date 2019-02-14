@@ -97,9 +97,7 @@ function ssh_agent()
     if [ ${SSH_AGENT_PID:-NOCONFIG} = "NOCONFIG" ] || ! ps aux | grep ssh-agent | grep -vq grep; then
         eval `ssh-agent` && ssh-add
     elif ! ssh-add -l > /dev/null 2>&1; then
-        if ! ssh-add > /dev/null 2>&1; then
-            eval `ssh-agent` && ssh-add
-        fi
+        ssh-add || eval `ssh-agent` && ssh-add
     else
         echo -e "${YELLOW}SSH_AGENT_PID: ${SSH_AGENT_PID}${NORMAL}"
         ssh-add -l
