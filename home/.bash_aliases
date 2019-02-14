@@ -46,6 +46,7 @@ alias e='source_file edit'
 #fast ssh-agent
 alias a='ssh_agent'
 alias k='eval `ssh-agent -k`'
+alias ak='kill_all ssh-agent'
 #fast git status
 alias y='git status; git stash list'
 
@@ -102,6 +103,13 @@ function ssh_agent()
         echo -e "${YELLOW}SSH_AGENT_PID: ${SSH_AGENT_PID}${NORMAL}"
         ssh-add -l
     fi
+}
+
+# kill all
+# $1 process name to kill
+function kill_all()
+{
+     ps x | grep $1 | grep -v grep | awk '{print $1}' | xargs kill -9
 }
 
 # search file on $PATH
