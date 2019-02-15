@@ -261,7 +261,7 @@ function rm_rcs()
 # $1 process name
 function ps_grep()
 {
-    ps aux | grep -sin $1 | grep -v grep
+    ps aux | grep -si $1 | grep -v grep
 }
 
 # update file utility
