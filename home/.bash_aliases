@@ -113,11 +113,13 @@ function kill_all()
     local process_id_2=$(ps ax | grep "[/\ ]$1[\ ]" | grep -v grep | awk '{print $1}')
     local process_id="${process_id_1} ${process_id_2}"
     if [ "x$process_id" != "x " ]; then
+        echo -e "PID KILLED:${RED}"
         for id in $process_id
         do
             kill -9 $id > /dev/null 2>&1
+            echo $id
         done
-        echo -e "PID: ${RED}${process_id}${NORMAL} KILLED"
+        echo -e "${NORMAL}"
     fi
 }
 
