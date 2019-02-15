@@ -109,7 +109,9 @@ function ssh_agent()
 # $1 process name to kill
 function kill_all()
 {
-    local process_id=$(ps ax | grep "$1\$" | grep -v grep | awk '{print $1}')
+    local process_id_1=$(ps ax | grep "[/\ ]$1\$" | grep -v grep | awk '{print $1}')
+    local process_id_2=$(ps ax | grep "[/\ ]$1[\ ]" | grep -v grep | awk '{print $1}')
+    local process_id="${process_id_1} ${process_id_2}"
     if [ "x$process_id" != "x" ]; then
         for id in $process_id
         do
