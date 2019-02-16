@@ -695,7 +695,7 @@ case $(uname) in
         fi
         alias cb='cmake_build.sh'
         alias ab='autotools_build.sh'
-        alias vmc='valgrind --tool=memcheck --leak-check=yes --error-exitcode=2'
+        alias vmc='valgrind --tool=memcheck --leak-check=yes --track-fds=yes --trace-children=yes --error-exitcode=1'
         ;;
     FreeBSD)
         # ls colours
