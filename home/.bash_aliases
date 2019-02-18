@@ -48,7 +48,7 @@ alias a='ssh_agent'
 alias k='eval `ssh-agent -k`'
 alias ak='kill_all ssh-agent'
 #fast git status
-alias y='git status; git stash list'
+alias y='git status; git stash list; echo'
 
 # find file
 alias fdf='find . -name "*" |grep -sin'
