@@ -62,6 +62,7 @@ sudo apt-get update && sudo apt-get install -y \
     linux-tools-generic \
     linux-tools-common \
     imagemagick \
+    doxygen \
     \
     fonts-wqy-microhei \
     fonts-wqy-zenhei \
@@ -92,7 +93,8 @@ sudo apt-get update && sudo apt-get install -y \
     gpicview \
     cmake-gui \
     graphviz \
-    kcachegrind
+    kcachegrind \
+    doxygen-gui
 
 
 #########################
