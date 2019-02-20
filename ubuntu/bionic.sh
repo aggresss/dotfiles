@@ -51,6 +51,7 @@ sudo apt-get update && sudo apt-get install -y \
     ffmpeg \
     htop \
     nmon \
+    bmon \
     supervisor \
     stow \
     minicom \
