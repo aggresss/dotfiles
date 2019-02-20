@@ -26,6 +26,7 @@ brew install \
     graphviz \
     hexedit \
     htop \
+    bmon \
     jq \
     lua \
     md5sha1sum \
