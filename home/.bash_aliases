@@ -485,16 +485,26 @@ function git_pull()
 # $1 git branch
 function git_del()
 {
-    if git branch | grep -q $1; then
-        git branch -D $1
-    else
-        echo -e "${RED}No branch $1 on local.${NORMAL}"
-        return 1
-    fi
-    if git branch -r | grep -q origin/$1; then
-        git push origin :$1
-    else
-        echo -e "${RED}No branch $1 on remote origin.${NORMAL}"
+    local cur_branch
+    local del_remote=0
+    for i in `seq 1 $#`
+    do
+        eval cur_branch=\$$i
+        if git branch | grep -q ${cur_branch}; then
+            git branch -D ${cur_branch}
+        else
+            echo -e "${RED}No branch ${cur_branch} on local.${NORMAL}"
+            continue
+        fi
+        if git branch -r | grep -q origin/${cur_branch}; then
+            git push origin :${cur_branch}
+            del_remote=1
+        else
+            echo -e "${RED}No branch ${cur_branch} on remote origin.${NORMAL}"
+        fi
+    done
+    if [ ${del_remote} -eq 1 ]; then
+        git remote update origin
     fi
 }
 
