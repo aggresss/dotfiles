@@ -481,6 +481,23 @@ function git_pull()
     git checkout pull/${remote_name}/${remote_pr}
 }
 
+# Delete git branch on local and remote
+# $1 git branch
+function git_del()
+{
+    if git branch | grep -q $1; then
+        git branch -D $1
+    else
+        echo -e "${RED}No branch $1 on local.${NORMAL}"
+        return 1
+    fi
+    if git branch -r | grep -q origin/$1; then
+        git push origin :$1
+    else
+        echo -e "${RED}No branch $1 on remote origin.${NORMAL}"
+    fi
+}
+
 # Set global gitignore file
 function git_ignore()
 {
