@@ -31,14 +31,14 @@ else
     alias m='cd ${HOME}/Documents'
     alias v='cd ${HOME}/Vagrant'
 fi
-# fast refresh bash env
-alias b='source ${HOME}/.bash_aliases'
+# fast update bash env
+alias u='source ${HOME}/.bash_aliases'
 # git_prompt fast
 alias p='git_prompt'
 # fast switch to git top level
 alias t='git_top'
 # fast show git branch
-alias h='git branch'
+alias b='git branch'
 # fast execute file content
 alias r='source_file exec'
 # fast copy file content
