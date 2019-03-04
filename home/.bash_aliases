@@ -95,6 +95,15 @@ alias mv='mv -i'
 # Generate GNU standard files
 alias make_gnu='touch AUTHORS COPYING ChangeLog NEWS README'
 
+# conversion number
+#$1 obase
+#$2 ibase
+#$3 number
+function conv_num()
+{
+    echo "obase=$1; ibase=$2; $3" | bc
+}
+
 # fast ssh-agent
 function ssh_agent()
 {
