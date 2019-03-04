@@ -468,6 +468,22 @@ function git_sig()
   git config user.email $1
 }
 
+# clone repo in hierarchy directory as site/org/repo
+# $1 repo URI
+function git_clone()
+{
+    local clone_path=$1
+    # https
+    clone_path=${clone_path#*://}
+    # ssh
+    clone_path=${clone_path#*@}
+    clone_path=${clone_path/:/\/}
+    # trim .git suffix
+    clone_path=${clone_path%.git}
+    git clone $@ ${clone_path} && \
+    echo -e "\n${GREEN} Clone $1 on ${PWD}/${clone_path} successfully.${NORMAL}\n"
+}
+
 # Get pull request to local branch
 # $1 remote name
 # $2 pull request index No.
