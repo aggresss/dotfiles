@@ -24,11 +24,12 @@ INVERT="\\033[7m"
 # alias for fast command
 if [ -f /.dockerenv ]; then
     alias s='cd /mnt/workspace-scratch'
+    alias f='cd /mnt/workspace-formal'
     alias d='cd /mnt/Downloads'
 else
     alias s='cd ${HOME}/workspace-scratch'
-    alias d='cd ${HOME}/Downloads'
     alias f='cd ${HOME}/workspace-formal'
+    alias d='cd ${HOME}/Downloads'
     alias m='cd ${HOME}/Documents'
     alias v='cd ${HOME}/Vagrant'
 fi
@@ -416,6 +417,7 @@ function docker_private()
                 -v home:/home \
                 -v ${HOME}/Downloads:/mnt/Downloads \
                 -v ${HOME}/workspace-scratch:/mnt/workspace-scratch \
+                -v ${HOME}/workspace-formal:/mnt/workspace-formal \
                 -e DISPLAY \
                 $*
             ;;
@@ -426,6 +428,7 @@ function docker_private()
                 -v home:/home \
                 -v ${HOME}/Downloads:/mnt/Downloads \
                 -v ${HOME}/workspace-scratch:/mnt/workspace-scratch \
+                -v ${HOME}/workspace-formal:/mnt/workspace-formal \
                 -e DISPLAY=host.docker.internal:0 \
                 $*
             ;;
