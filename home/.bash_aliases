@@ -18,7 +18,7 @@ MAGENTA="\\033[35m"
 CYAN="\\033[36m"
 WHITE="\\033[37m"
 NORMAL="\\033[0m"
-HIGHLIGHT="\\033[1m"
+LIGHT="\\033[1m"
 INVERT="\\033[7m"
 
 # alias for fast command
@@ -503,7 +503,7 @@ function git_clone()
 function git_pull()
 {
     if [ $# != 2 ]; then
-        echo -e "${HIGHLIGHT}${RED}Please input remote name and pull request No.${NORMAL}"
+        echo -e "${LIGHT}${RED}Please input remote name and pull request No.${NORMAL}"
         return 1
     fi
     local remote_name=$1
