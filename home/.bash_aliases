@@ -728,11 +728,13 @@ case $(uname) in
         env_append "PATH" "$JAVA_HOME/bin"
         # wine chinese character
         alias wine='env LANG=zh_CN.UTF8 wine'
-        # use "brew install gnu-sed" instead of bsd-sed
+        # use "brew install gnu-*" instead of bsd-*
         alias sed='gsed'
         alias awk='gawk'
         alias tar='gtar'
         alias find='gfind'
+        # open application from command
+        alias typora='open -a typora'
         ;;
     Linux)
         release_info=$(uname -r | awk -F'-' '{print $NF}')
