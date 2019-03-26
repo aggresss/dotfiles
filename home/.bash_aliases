@@ -40,7 +40,7 @@ alias p='git_prompt'
 # fast switch to git top level
 alias t='git_top'
 # fast show git branch
-alias b='git branch'
+alias b='git branch -vv'
 # fast execute file content
 alias r='source_file exec'
 # fast copy file content
