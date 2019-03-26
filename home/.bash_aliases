@@ -734,9 +734,10 @@ case $(uname) in
         alias tar='gtar'
         alias find='gfind'
         # open application from command
-        alias typora='open -a typora'
-        alias diffmerge='open -a diffmerge'
+        alias typora='open -a Typora'
+        alias diffmerge='open -a DiffMerge'
         alias code='open -a Visual\ Studio\ Code'
+        alias vlc='open -a VLC'
         ;;
     Linux)
         release_info=$(uname -r | awk -F'-' '{print $NF}')
