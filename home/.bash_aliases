@@ -735,6 +735,7 @@ case $(uname) in
         alias find='gfind'
         # open application from command
         alias typora='open -a typora'
+        alias diffmerge='open -a diffmerge'
         ;;
     Linux)
         release_info=$(uname -r | awk -F'-' '{print $NF}')
