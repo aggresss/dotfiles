@@ -736,6 +736,7 @@ case $(uname) in
         # open application from command
         alias typora='open -a typora'
         alias diffmerge='open -a diffmerge'
+        alias code='open -a Visual\ Studio\ Code'
         ;;
     Linux)
         release_info=$(uname -r | awk -F'-' '{print $NF}')
