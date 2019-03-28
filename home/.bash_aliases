@@ -375,6 +375,14 @@ function vagrant_ps()
 
 
 ##########################
+# modify for VirtualBox
+##########################
+
+# alias for VirtualBox
+alias vb='VBoxManage'
+
+
+##########################
 # modify for docker
 ##########################
 
