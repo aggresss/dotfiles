@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 # Update dotfiles from git@github.com:aggresss/dotfiles.git master branch
 # wget https://raw.githubusercontent.com/aggresss/dotfiles/master/update_dotfiles.sh
-set -euxo pipefail
-shopt -s nullglob
 
 DOTFILES_URL="https://github.com/aggresss/dotfiles/raw/master"
 BASH_URL="https://github.com/aggresss/playground-bash/raw/master"
