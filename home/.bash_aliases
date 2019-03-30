@@ -61,7 +61,7 @@ alias fdc='find . -name "*" |xargs grep -sin'
 # cmake clean
 alias cmc='find . -iname "*cmake*" -not -name CMakeLists.txt -exec rm -rf {} +'
 # count code line
-alias ccl='find . -name "*[.h|.c|.hpp|.cpp|.go|.py]" -type f | xargs cat | wc -l'
+alias ccl='find . -name "*[.h|.c|.hpp|.cpp|.go|.rs|.py]" -type f | xargs cat | wc -l'
 # alias for ${LD_LIBRARY_PATH}
 alias env_ld_p='echo -e ${RED}LD_LIBRARY_PATH:\\n${GREEN}${LD_LIBRARY_PATH//:/\\n}${NORMAL}'
 alias env_ld_i='env_insert LD_LIBRARY_PATH ${PWD}'
@@ -705,6 +705,16 @@ function go_pwd()
         echo -e "${GREEN}successful set GOPATH \n${RED}GOPATH ==> ${GOPATH}${NORMAL}"
     fi
 }
+
+
+##########################
+# modify for Rust
+##########################
+
+# environmnet for Rust
+if [ -d "$HOME/.cargo/bin" ]; then
+    env_insert "PATH" "$HOME/.cargo/bin"
+fi
 
 
 ##########################
