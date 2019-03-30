@@ -42,6 +42,12 @@
 | `~/go/` | *Auto Generation* | default GOPATH directory |
 | `~/.local/go/` | *Auto Generation* | default GOROOT directory |
 
+### Rust
+
+| Drectory | Type | Illustrate |
+|---|---|---|
+|`~/.cargo/bin`| *Auto Generation* | default Rust binary directory |
+
 #### Python
 
 | Drectory | Type | Illustrate |
