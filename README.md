@@ -29,7 +29,7 @@
 
 ### 3. Software
 
-### Vagrant
+#### Vagrant
 
 | Drectory | Type | Illustrate |
 |---|---|---|
@@ -42,7 +42,7 @@
 | `~/go/` | *Auto Generation* | default GOPATH directory |
 | `~/.local/go/` | *Auto Generation* | default GOROOT directory |
 
-### Rust
+#### Rust
 
 | Drectory | Type | Illustrate |
 |---|---|---|
