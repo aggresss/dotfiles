@@ -52,7 +52,7 @@
 
 | Drectory | Type | Illustrate |
 |---|---|---|
-|`~/.cargo/bin`| *Auto Generation* | default Rust binary directory |
+|`~/.cargo/`| *Auto Generation* | default Rust directory |
 
 #### Python
 
