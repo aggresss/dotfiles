@@ -29,6 +29,12 @@
 
 ### 3. Software
 
+#### VirtualBox
+
+| Drectory | Type | Illustrate |
+|---|---|---|
+| `~/VirtualBox VMs/` | *Auto Generation* | default VirtualBox virtual machine directory |
+
 #### Vagrant
 
 | Drectory | Type | Illustrate |
