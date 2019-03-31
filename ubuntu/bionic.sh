@@ -30,7 +30,9 @@ sudo apt-get update && sudo apt-get install -y \
     libtool \
     cmake \
     ccache \
-    python \
+    python-dev \
+    python3-dev \
+    virtualenv \
     default-jdk \
     pkg-config \
     flex \
@@ -216,3 +218,20 @@ sudo chown `id -nu 0` /etc/polipo/config
 # modify shadowsock mode from server to client
 sudo sed -r -e 's@DAEMON=/usr/bin/ssserver@DAEMON=/usr/bin/sslocal@' -i /etc/init.d/shadowsocks
 
+# python pip
+curl https://bootstrap.pypa.io/get-pip.py -sSf | sudo python
+curl https://bootstrap.pypa.io/get-pip.py -sSf | sudo python3
+
+mkdir -p ${HOME}/.pip
+cat << END > ${HOME}/.pip/pip.conf
+[global]
+index-url = https://mirrors.aliyun.com/pypi/simple/
+[install]
+trusted-host = mirrors.aliyun.com
+
+END
+
+# Rust
+curl https://sh.rustup.rs -sSf | sh
+
+# EOF
