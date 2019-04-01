@@ -102,7 +102,8 @@ alias make_gnu='touch AUTHORS COPYING ChangeLog NEWS README'
 #$3 number
 function conv_num()
 {
-    echo "obase=$1; ibase=$2; $3" | bc
+    local num=$(echo $3 | tr '[a-z]' '[A-Z]')
+    echo "obase=$1; ibase=$2; $num" | bc
 }
 
 # fast ssh-agent
