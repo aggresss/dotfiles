@@ -26,6 +26,7 @@ if [ -f /.dockerenv ]; then
     alias s='cd /mnt/workspace-scratch'
     alias f='cd /mnt/workspace-formal'
     alias d='cd /mnt/Downloads'
+    alias m='cd /mnt/Documents'
 else
     alias s='cd ${HOME}/workspace-scratch'
     alias f='cd ${HOME}/workspace-formal'
@@ -425,6 +426,7 @@ function docker_private()
                 -v root:/root \
                 -v home:/home \
                 -v ${HOME}/Downloads:/mnt/Downloads \
+                -v ${HOME}/Documents:/mnt/Documents \
                 -v ${HOME}/workspace-scratch:/mnt/workspace-scratch \
                 -v ${HOME}/workspace-formal:/mnt/workspace-formal \
                 -e DISPLAY \
@@ -436,6 +438,7 @@ function docker_private()
                 -v root:/root \
                 -v home:/home \
                 -v ${HOME}/Downloads:/mnt/Downloads \
+                -v ${HOME}/Documents:/mnt/Documents \
                 -v ${HOME}/workspace-scratch:/mnt/workspace-scratch \
                 -v ${HOME}/workspace-formal:/mnt/workspace-formal \
                 -e DISPLAY=host.docker.internal:0 \
