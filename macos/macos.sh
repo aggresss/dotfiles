@@ -68,3 +68,6 @@ brew cask install \
     typora \
     wireshark
 
+sudo gem install \
+    iStats
+
