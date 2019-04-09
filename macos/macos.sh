@@ -66,7 +66,8 @@ brew cask install \
     qt-creator \
     skim \
     typora \
-    wireshark
+    wireshark \
+    sequel-pro
 
 sudo gem install \
     iStats
