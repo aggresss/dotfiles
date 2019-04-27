@@ -450,20 +450,11 @@ function docker_private()
     esac
 }
 
-# Run private as debug
-function docker_debug()
-{
-    docker_private \
-        --cap-add=SYS_PTRACE \
-        --security-opt seccomp=unconfined \
-        $*
-}
-
 # Run private with super privilage
 function docker_sudo()
 {
     docker_private \
-        --privileged \
+        --privileged=true \
         $*
 }
 
