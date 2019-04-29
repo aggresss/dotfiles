@@ -34,6 +34,7 @@ brew install \
     mosquitto \
     mosh \
     openssl \
+    gpg \
     p7zip \
     pandoc \
     protobuf \
