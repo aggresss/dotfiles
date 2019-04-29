@@ -161,6 +161,9 @@ function un_ball()
         # *.rar
         mkdir -p ${1%.rar}
         unrar x $1 ${1%.rar}
+    elif [[ $1 =~ .*\.7z$ ]]; then
+        # *.7z
+        7z x $1
     elif [[ $1 =~ .*\.tar.xz$ ]]; then
         # *.tar.xz
         tar Jvxf $1
