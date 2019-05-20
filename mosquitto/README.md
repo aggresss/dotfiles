@@ -31,7 +31,7 @@ mosquitto_pub -d \
     -m {"message":"THIS_IS_A_TEST_MESSAGE"}
 ```
 
-## secure pub one-way no check CA common name
+## secure pub one-way and no-check CA common name
 
 ```shell
 mosquitto_pub -d \
