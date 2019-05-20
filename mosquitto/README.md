@@ -3,8 +3,11 @@
 ## create passwd file
 
 ```shell
-mosquitto_passwd -b pwfile admin admin
+# create pwfile and add user admin
 mosquitto_passwd -c pwfile admin
+# add user on pwfile with password
+mosquitto_passwd -b pwfile admin admin
+# add user on pwfile
 mosquitto_passwd pwfile admin
 ```
 
