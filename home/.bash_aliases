@@ -28,6 +28,8 @@ if [ -f /.dockerenv ]; then
     alias d='cd /mnt/Downloads'
     alias m='cd /mnt/Documents'
 else
+    mkdir -p ${HOME}/workspace-scratch
+    mkdir -p ${HOME}/workspace-formal
     alias s='cd ${HOME}/workspace-scratch'
     alias f='cd ${HOME}/workspace-formal'
     alias d='cd ${HOME}/Downloads'
