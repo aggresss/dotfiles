@@ -41,6 +41,7 @@ sudo apt-get update && sudo apt-get install -y \
     yasm \
     gawk \
     net-tools \
+    wireless-tools \
     samba \
     smbclient \
     cifs-utils \
