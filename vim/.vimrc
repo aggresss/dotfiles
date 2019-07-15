@@ -71,9 +71,6 @@ highlight User7 ctermfg=yellow  ctermbg=darkblue
 "
 :map <F2>  :TlistToggle<cr>
 :map <F3>  :NERDTreeToggle<cr>
-:map <F5>  :Vexplore<cr>
-:map <F6>  :Sexplore<cr>
-:map <F7>  :Texplore<cr>
 
 :map <C-l> :vertical res +4<cr>
 :map <C-h> :vertical res -4<cr>
