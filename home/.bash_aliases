@@ -463,6 +463,15 @@ function docker_sudo()
         $*
 }
 
+# Run private with user
+function docker_user()
+{
+    docker_private \
+        --privileged=true \
+        --user docker \
+        $*
+}
+
 # killall containers
 function docker_kill()
 {
