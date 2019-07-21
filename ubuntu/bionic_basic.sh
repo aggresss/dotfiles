@@ -95,6 +95,7 @@ sudo apt-get update && sudo apt-get install -y \
     i3 \
     i3status \
     xmonad \
+    xmobar \
     dwm \
     gimp \
     valkyrie \
