@@ -84,7 +84,9 @@ sudo apt-get update && sudo apt-get install -y \
     imagemagick \
     meld \
     xterm \
+    fcitx-libpinyin \
     fcitx-sunpinyin \
+    fcitx-ui-light \
     gnome-tweak-tool \
     gnome-screensaver \
     libnotify-bin \
