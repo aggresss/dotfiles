@@ -74,6 +74,9 @@ sudo chown `id -nu 0` /usr/share/X11/xorg.conf.d/20-intel.conf
 # gdm3
 sudo sed -r -e 's/^(\[security\])/\1\nDisallowTCP=false/' -i /etc/gdm3/custom.conf
 
+# fcitx
+sudo fcitx-autostart
+
 # fix: A stop job is runing ...
 sudo sed -r -e 's/#DefaultTimeoutStartSec=90s/DefaultTimeoutStartSec=10s/' -i /etc/systemd/system.conf
 sudo sed -r -e 's/#DefaultTimeoutStopSec=90s/DefaultTimeoutStopSec=10s/' -i /etc/systemd/system.conf
