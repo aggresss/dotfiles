@@ -1,59 +1,7 @@
 #########################
-# install third-part applications
-#########################
-
-# docker
-# https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-repository
-sudo apt-get remove -y docker docker-engine docker.io && \
-    sudo apt-get update && \
-    sudo apt-get install -y \
-        apt-transport-https \
-        ca-certificates \
-        curl \
-        software-properties-common
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-    sudo add-apt-repository \
-        "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-        $(lsb_release -cs) \
-        stable"
-    sudo apt-get update && sudo apt-get install -y docker-ce
-# add docker access authority to system default user
-sudo usermod -a `id -nu 1000` -G docker
-
-# visual studio code
-# https://code.visualstudio.com/docs/setup/linux
-curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
-sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-sudo apt-get install -y apt-transport-https
-sudo apt-get update
-sudo apt-get install -y code
-
-# virtualbox
-# https://www.virtualbox.org/wiki/Linux_Downloads
-sudo add-apt-repository \
-    "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian \
-    $(lsb_release -cs) \
-    contrib"
-wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
-wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
-sudo apt-get update
-sudo apt-get install virtualbox-6.0
-
-# vagrant
-# https://www.vagrantup.com/downloads.html
-VAGRANT_VERSION="2.2.3"
-wget -P ${HOME}/Downloads tmp https://releases.hashicorp.com/vagrant/2.2.3/vagrant_${VAGRANT_VERSION}_x86_64.deb
-sudo dpkg -i ${HOME}/Downloads/vagrant_${VAGRANT_VERSION}_x86_64.deb
-if [ $? -ne 0 ]; then
-    sudo apt-get -f -y install
-    sudo dpkg -i ${HOME}/Downloads/vagrant_${VAGRANT_VERSION}_x86_64.deb
-fi
-
-
-#########################
 # configuration
 #########################
+
 # backlight
 sudo touch /usr/share/X11/xorg.conf.d/20-intel.conf
 sudo chown ${USER} /usr/share/X11/xorg.conf.d/20-intel.conf
