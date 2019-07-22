@@ -556,12 +556,13 @@ function git_del()
     fi
 }
 
-# Set global gitignore file
-function git_ignore()
+# Set git global set
+function git_global_set()
 {
   local base_url="https://raw.githubusercontent.com/aggresss/dotfiles/master"
   update_file ${base_url}/.gitignore ${HOME}/.gitignore
   git config --global core.excludesfile ${HOME}/.gitignore
+  git config --global core.editor "vim"
 }
 
 function git_branch_internal()
