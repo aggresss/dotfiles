@@ -172,6 +172,7 @@ bindsym $mod+F6  exec "code"
 bindsym $mod+F7  exec "thunderbird"
 bindsym $mod+F8  exec "firefox"
 bindsym $mod+F9  exec "chromium-browser"
+bindsym $mod+F10 exec "meld"
 
 #########################
 # Modify for user-defined
