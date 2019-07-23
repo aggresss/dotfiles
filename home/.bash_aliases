@@ -791,7 +791,14 @@ case $(uname) in
         fi
         alias cb='cmake_build.sh'
         alias ab='autotools_build.sh'
-        alias vmc='valgrind --tool=memcheck --leak-check=yes --track-fds=yes --trace-children=yes --show-reachable=yes --error-exitcode=255'
+        alias vmc='valgrind \
+            --tool=memcheck \
+            --leak-check=yes \
+            --track-fds=yes \
+            --trace-children=yes \
+            --show-reachable=yes \
+            --undef-value-errors=no \
+            --error-exitcode=255'
         ;;
     FreeBSD)
         # ls colours
