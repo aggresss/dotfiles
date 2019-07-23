@@ -47,7 +47,7 @@
         <setting id="org.eclipse.cdt.core.formatter.comment.never_indent_line_comments_on_first_column" value="true"/>
         <setting id="org.eclipse.cdt.core.formatter.insert_new_line_before_else_in_if_statement" value="do not insert"/>
         <setting id="org.eclipse.cdt.core.formatter.insert_space_after_comma_in_expression_list" value="insert"/>
-        <setting id="org.eclipse.cdt.core.formatter.brace_position_for_block" value="next_line"/>
+        <setting id="org.eclipse.cdt.core.formatter.brace_position_for_block" value="end_of_line"/>
         <setting id="org.eclipse.cdt.core.formatter.insert_space_before_closing_bracket" value="do not insert"/>
         <setting id="org.eclipse.cdt.core.formatter.alignment_for_base_clause_in_type_declaration" value="80"/>
         <setting id="org.eclipse.cdt.core.formatter.insert_space_before_closing_angle_bracket_in_template_parameters" value="do not insert"/>
