@@ -798,6 +798,7 @@ case $(uname) in
             --trace-children=yes \
             --show-reachable=yes \
             --undef-value-errors=no \
+            --gen-suppressions=all \
             --error-exitcode=255'
         ;;
     FreeBSD)
