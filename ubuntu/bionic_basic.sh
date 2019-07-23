@@ -67,6 +67,8 @@ sudo apt-get update && sudo apt-get install -y \
     linux-tools-common \
     imagemagick \
     doxygen \
+    mtp-tools \
+    jmtpfs \
     \
     gnome \
     fonts-dejavu \
