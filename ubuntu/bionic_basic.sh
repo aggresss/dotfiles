@@ -24,6 +24,7 @@ sudo apt-get update && sudo apt-get install -y \
     unrar \
     hexedit \
     tmux \
+    expect \
     build-essential \
     gcc-multilib \
     automake \
