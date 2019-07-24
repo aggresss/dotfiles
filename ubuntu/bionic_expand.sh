@@ -25,6 +25,13 @@ sudo sed -r -e 's/^(\[security\])/\1\nDisallowTCP=false/' -i /etc/gdm3/custom.co
 # fcitx
 sudo fcitx-autostart
 
+# nfs-kernel-server
+if [ -f /etc/default/nfs-kernel-server ]; then
+    sudo cat << END >> /etc/default/nfs-kernel-server
+RPCNFSDOPTS="--nfs-version 2,3,4"
+END
+fi
+
 # fix: A stop job is runing ...
 sudo sed -r -e 's/#DefaultTimeoutStartSec=90s/DefaultTimeoutStartSec=10s/' -i /etc/systemd/system.conf
 sudo sed -r -e 's/#DefaultTimeoutStopSec=90s/DefaultTimeoutStopSec=10s/' -i /etc/systemd/system.conf
