@@ -19,6 +19,9 @@ EndSection
 END
 sudo chown `id -nu 0` /usr/share/X11/xorg.conf.d/20-intel.conf
 
+# timezone
+sudo timedatectl set-timezone Asia/Shanghai
+
 # gdm3
 sudo sed -r -e 's/^(\[security\])/\1\nDisallowTCP=false/' -i /etc/gdm3/custom.conf
 
