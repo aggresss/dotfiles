@@ -191,6 +191,10 @@ function source_file()
 {
     local index_range=$(ls -1p ${HOME}/note/* 2>/dev/null | sed -n '$=')
     if [ $# -le 1 ]; then
+        if [ ! -d ${HOME}/note ];then
+            mkdir -p ${HOME}/note
+            touch ${HOME}/note/note.common
+        fi
         echo -e ${YELLOW}
         ls -1p ${HOME}/note/* 2>/dev/null | cat -n
         echo -e ${NORMAL}
