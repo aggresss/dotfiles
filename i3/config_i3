@@ -33,6 +33,10 @@ font pango:DejaVu Sans Mono 8
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# Set monitor arrangement
+# exec --no-startup-id xrandr --output DVI-D-1 --primary
+# exec --no-startup-id xrandr --output DP-1 --left-of DVI-D-1 --rotate left
+
 # Set background
 exec --no-startup-id feh --bg-scale ~/Pictures/Wallpaper/default.jpg
 
