@@ -70,6 +70,11 @@ sudo apt-get update && sudo apt-get install -y \
     doxygen \
     mtp-tools \
     jmtpfs \
+    gettext \
+    libssl-dev \
+    libproxy-dev \
+    libxml2-dev \
+    vpnc-scripts \
     \
     gnome \
     fonts-dejavu \
