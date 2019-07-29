@@ -111,5 +111,6 @@ sudo apt-get update && sudo apt-get install -y \
     cmake-gui \
     graphviz \
     kcachegrind \
-    doxygen-gui
+    doxygen-gui \
+    wireshark
 
