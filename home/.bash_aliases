@@ -672,7 +672,7 @@ function git_down()
 
     case ${vendor} in
         gitlab.com | github.com)
-            wget https://${vendor}/${user}/${repo}/raw/${branch}/${path}
+            curl -OL https://${vendor}/${user}/${repo}/raw/${branch}/${path}
             ;;
         *)
             echo -e "Not support URL: $1"
