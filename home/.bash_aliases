@@ -50,11 +50,11 @@ alias r='source_file exec'
 alias c='source_file copy'
 # fast edit index note file
 alias e='source_file edit'
-#fast ssh-agent
+# fast ssh-agent
 alias a='ssh_agent'
 alias k='eval `ssh-agent -k`'
 alias ak='kill_all ssh-agent'
-#fast git status
+# fast git status
 alias y='git status; git stash list; echo'
 
 # find file
