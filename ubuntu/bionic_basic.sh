@@ -80,6 +80,7 @@ sudo apt-get update && sudo apt-get install -y \
     fonts-dejavu \
     fonts-wqy-microhei \
     fonts-wqy-zenhei \
+    xinput \
     xclip \
     xbacklight \
     vlc \
