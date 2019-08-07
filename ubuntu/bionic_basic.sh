@@ -56,6 +56,7 @@ sudo apt-get update && sudo apt-get install -y \
     htop \
     nmon \
     bmon \
+    sysstat \
     supervisor \
     stow \
     minicom \
