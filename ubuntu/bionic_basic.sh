@@ -30,6 +30,7 @@ sudo apt-get update && sudo apt-get install -y \
     automake \
     libtool \
     cmake \
+    cmake-curses-gui \
     ccache \
     python-dev \
     python3-dev \
