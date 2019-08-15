@@ -54,6 +54,7 @@ sudo apt-get update && sudo apt-get install -y \
     polipo \
     exfat-utils \
     ffmpeg \
+    cpu-checker \
     htop \
     nmon \
     bmon \
