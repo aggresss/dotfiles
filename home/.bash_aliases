@@ -567,6 +567,7 @@ function git_global_set()
   update_file ${base_url}/.gitignore ${HOME}/.gitignore
   git config --global core.excludesfile ${HOME}/.gitignore
   git config --global core.editor "vim"
+  git config --global core.autocrlf false
 }
 
 function git_branch_internal()
