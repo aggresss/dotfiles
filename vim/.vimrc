@@ -14,9 +14,17 @@ if filereadable(expand("~/.vimrc.bundles"))
   set rtp+=~/.vim/bundle/Vundle.vim
   call vundle#begin()
   Plugin 'VundleVim/Vundle.vim' " required
-  Plugin 'taglist.vim'    " require install exuberant-ctags
-  Plugin 'cscope.vim'     " require install cscope
   Plugin 'scrooloose/nerdtree'
+  if filereadable(expand("/usr/bin/ctags"))
+      \ || filereadable(expand("/usr/local/bin/ctags"))
+      \ || filereadable(expand("~/bin/ctags"))
+    Plugin 'taglist.vim'    " require install exuberant-ctags
+  endif
+  if filereadable(expand("/usr/bin/cscope"))
+      \ || filereadable(expand("/usr/local/bin/cscope"))
+      \ || filereadable(expand("~/bin/cscope"))
+    Plugin 'cscope.vim'     " require install cscope
+  endif
 "  Plugin 'Valloric/YouCompleteMe'     " require compile
 
   call vundle#end()
