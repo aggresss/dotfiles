@@ -794,8 +794,7 @@ case $(uname) in
             alias calc='gnome-calculator'
             alias gterm='gnome-terminal'
         fi
-        alias cb='cmake_build.sh'
-        alias ab='autotools_build.sh'
+        alias xclock='xclock -bg cyan -update 1'
         alias vmc='valgrind \
             --tool=memcheck \
             --leak-check=yes \
