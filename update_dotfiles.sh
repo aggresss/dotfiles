@@ -87,7 +87,7 @@ fi
 
 END
 fi
-# .bashr_logout
+# .bash_logout
 if [ ! -f ${HOME}/.bash_logout ]; then
     if [ -f /etc/skel/.bash_logout ]; then
         cp /etc/skel/.bash_logout ${HOME}/
