@@ -35,6 +35,7 @@ floating_modifier $mod
 
 # Set monitor arrangement
 # exec --no-startup-id xrandr --output DVI-D-1 --primary --output DP-1 --left-of DVI-D-1 --rotate left
+# exec --no-startup-id xrandr --output HDMI-1 --primary --output VGA-1 --left-of DVI-D-1 --rotate left
 
 # Set background
 exec --no-startup-id feh --bg-scale ~/Pictures/Wallpaper/default.jpg
