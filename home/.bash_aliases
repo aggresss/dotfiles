@@ -493,6 +493,8 @@ function docker_kill()
 alias git_top='cd `git rev-parse --show-toplevel`'
 # fast git diff file status
 alias git_diff='git diff --name-status'
+# git log oneline
+alias git_log='git log --oneline'
 
 # Signature for github repository
 # $1 user.email
