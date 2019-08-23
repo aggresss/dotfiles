@@ -83,6 +83,7 @@ sudo apt-get update && sudo apt-get install -y \
     fonts-dejavu \
     fonts-wqy-microhei \
     fonts-wqy-zenhei \
+    x11-apps \
     xinput \
     xclip \
     xbacklight \
