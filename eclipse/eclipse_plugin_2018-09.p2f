@@ -1,10 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <?p2f version='1.0.0'?>
 <p2f version='1.0.0'>
-  <ius size='4'>
-    <iu id='com.cthing.cmakeed.feature.feature.group' name='CMake Editor' version='1.11.0'>
+  <ius size='5'>
+    <iu id='com.cthing.cmakeed.feature.feature.group' name='CMake Editor' version='1.12.0'>
       <repositories size='1'>
         <repository location='https://raw.githubusercontent.com/15knots/cmakeed/master/cmakeed-update/'/>
+      </repositories>
+    </iu>
+    <iu id='org.gna.eclox.feature.feature.group' name='Eclox' version='0.12.1.v20180118-1753'>
+      <repositories size='1'>
+        <repository location='http://anb0s.github.io/eclox'/>
       </repositories>
     </iu>
     <iu id='net.certiv.tools.indentguide.feature.feature.group' name='IndentGuide' version='1.5.0.20180902-2249'>
@@ -12,14 +17,12 @@
         <repository location='http://www.certiv.net/updates/net.certiv.indentguide.site'/>
       </repositories>
     </iu>
+    <iu id='net.sourceforge.javahexeditor.feature.group' name='Java Hex Editor' version='0.5.1.201901120339'>
+      <repositories size='0'/>
+    </iu>
     <iu id='org.brainwy.liclipsetext.feature.feature.group' name='LiClipseText Feature' version='2.1.3.201805051308'>
       <repositories size='1'>
         <repository location='http://www.liclipse.com/text/updates'/>
-      </repositories>
-    </iu>
-    <iu id='org.gna.eclox.feature.feature.group' name='Eclox' version='0.12.1.v20180118-1753'>
-      <repositories size='1'>
-        <repository location='http://anb0s.github.io/eclox'/>
       </repositories>
     </iu>
   </ius>
