@@ -87,6 +87,7 @@ sudo apt-get update && sudo apt-get install -y \
     xinput \
     xclip \
     xbacklight \
+    xkbset \
     vlc \
     chromium-browser \
     slock \
