@@ -40,6 +40,10 @@ sudo sed -r -e 's/#DefaultTimeoutStartSec=90s/DefaultTimeoutStartSec=10s/' -i /e
 sudo sed -r -e 's/#DefaultTimeoutStopSec=90s/DefaultTimeoutStopSec=10s/' -i /etc/systemd/system.conf
 sudo systemctl daemon-reload
 
+# Change Behavior of Power Button
+sudo sed -r -e 's/#HandlePowerKey=poweroff/HandlePowerKey=ignore/' -i /etc/systemd/logind.conf
+sudo systemctl daemon-reload
+
 # disable apport
 sudo sed -r -e 's/enabled=1/enabled=0/' -i /etc/default/apport
 sudo systemctl daemon-reload
