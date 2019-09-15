@@ -797,6 +797,7 @@ case $(uname) in
             alias cbp='chromium-browser --proxy-server=socks5://127.0.0.1:1080'
             alias calc='gnome-calculator'
             alias gterm='gnome-terminal'
+            alias mks='setxkbmap -option keypad:pointerkeys; xkbset ma 60 10 15 15 10'
         fi
         alias xclock='xclock -bg cyan -update 1'
         alias vmc='valgrind \
