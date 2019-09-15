@@ -798,8 +798,8 @@ case $(uname) in
             alias calc='gnome-calculator'
             alias gterm='gnome-terminal'
             alias mks='setxkbmap -option keypad:pointerkeys; xkbset ma 60 10 15 15 10'
+            alias xck='xclock -bg cyan -update 1 &'
         fi
-        alias xclock='xclock -bg cyan -update 1'
         alias vmc='valgrind \
             --tool=memcheck \
             --leak-check=yes \
