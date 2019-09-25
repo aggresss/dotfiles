@@ -90,6 +90,7 @@ sudo apt-get update && sudo apt-get install -y \
     xkbset \
     xdotool \
     vlc \
+    pavucontrol \
     chromium-browser \
     slock \
     okular \
