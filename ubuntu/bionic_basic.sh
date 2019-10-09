@@ -13,6 +13,7 @@ sudo apt-get update && sudo apt-get install -y \
     tree \
     curl \
     jq \
+    zsh \
     emacs \
     vim \
     ctags \
