@@ -122,10 +122,14 @@ case $(uname) in
         echo "Darwin"
         if [[ ${SHELL} =~ .*zsh$ ]]; then
             if [ ! -f ${HOME}/.zshrc ]; then
-                ln -s ${HOME}/.bashrc ${HOME}/.zshrc
+                cd ${HOME}
+                ln -s .bashrc .zshrc
+                cd -
             fi
             if [ ! -f ${HOME}/.zprofile ]; then
-                ln -s ${HOME}/.profile ${HOME}/.zprofile
+                cd ${HOME}
+                ln -s .profile .zprofile
+                cd -
             fi
         fi
     ;;
