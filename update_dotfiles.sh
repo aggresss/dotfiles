@@ -112,7 +112,7 @@ fi
 if [[ ${SHELL} =~ .*zsh$ ]]; then
     if [ ! -f ${HOME}/.zshrc ]; then
         cd ${HOME}
-        ln -s .bashrc .zshrc
+        ln -s .bash_aliases .zshrc
         cd -
     fi
     if [ ! -f ${HOME}/.zprofile ]; then
