@@ -575,10 +575,10 @@ function git_global_set()
 }
 
 
-export GIT_NAME_TITLE=''
-export GIT_NAME_CONTENT=''
-export GIT_NAME_LEFT=''
-export GIT_NAME_RIGHT=''
+GIT_NAME_TITLE=''
+GIT_NAME_CONTENT=''
+GIT_NAME_LEFT=''
+GIT_NAME_RIGHT=''
 
 function git_branch_internal()
 {
@@ -615,31 +615,20 @@ function git_branch_internal()
 
 # Git branch perception
 
-# color for PS1
-black=$'\e[1;30m'
-red=$'\e[1;31m'
-green=$'\e[1;32m'
-yellow=$'\e[1;33m'
-blue=$'\e[1;34m'
-magenta=$'\e[1;35m'
-cyan=$'\e[1;36m'
-white=$'\e[1;37m'
-normal=$'\e[m'
-
 function git_zsh_precmd()
 {
     git_branch_internal
-    PS1="${PS1_BAK}${blue}${GIT_NAME_TITLE}${GIT_NAME_LEFT}${red}${GIT_NAME_CONTENT}${blue}${GIT_NAME_RIGHT}$ ${normal}"
+    PS1="${PS1_BAK}${LIGHT}${BLUE}${GIT_NAME_TITLE}${GIT_NAME_LEFT}${RED}${GIT_NAME_CONTENT}${BLUE}${GIT_NAME_RIGHT}$ ${NORMAL}"
 }
 
 function git_prompt()
 {
     if [ "${PS1_BAK-NODEFINE}" = "NODEFINE" ] ; then
-        export PS1_BAK=${PS1-}
+        PS1_BAK=${PS1-}
         if [[ ${SHELL} =~ .*bash$ ]]; then
             PROMPT_COMMAND_BAK=${PROMPT_COMMAND-}
             PROMPT_COMMAND="git_branch_internal;${PROMPT_COMMAND-}"
-            PS1="$PS1_BAK$blue\$GIT_NAME_TITLE\$GIT_NAME_LEFT$red\$GIT_NAME_CONTENT$blue\$GIT_NAME_RIGHT\$ $normal"
+            PS1="$PS1_BAK$LIGHT$BLUE\$GIT_NAME_TITLE\$GIT_NAME_LEFT$RED\$GIT_NAME_CONTENT$BLUE\$GIT_NAME_RIGHT\$ $NORMAL"
         elif [[ ${SHELL} =~ .*zsh$ ]]; then
             precmd_functions=(git_zsh_precmd)
         fi

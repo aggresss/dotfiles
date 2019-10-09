@@ -108,6 +108,20 @@ fi
 END
 fi
 
+# Link zsh config file
+if [[ ${SHELL} =~ .*zsh$ ]]; then
+    if [ ! -f ${HOME}/.zshrc ]; then
+        cd ${HOME}
+        ln -s .bashrc .zshrc
+        cd -
+    fi
+    if [ ! -f ${HOME}/.zprofile ]; then
+        cd ${HOME}
+        ln -s .profile .zprofile
+        cd -
+    fi
+fi
+
 # Update common bash utility
 update_file ${BASH_URL}/hello.sh ${HOME}/bin/hello.sh
 
@@ -120,18 +134,6 @@ case $(uname) in
     ;;
     Darwin)
         echo "Darwin"
-        if [[ ${SHELL} =~ .*zsh$ ]]; then
-            if [ ! -f ${HOME}/.zshrc ]; then
-                cd ${HOME}
-                ln -s .bashrc .zshrc
-                cd -
-            fi
-            if [ ! -f ${HOME}/.zprofile ]; then
-                cd ${HOME}
-                ln -s .profile .zprofile
-                cd -
-            fi
-        fi
     ;;
     FreeBSD)
         echo "FreeBSD"
