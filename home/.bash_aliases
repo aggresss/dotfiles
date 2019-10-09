@@ -574,6 +574,12 @@ function git_global_set()
   git config --global core.autocrlf false
 }
 
+
+export GIT_NAME_TITLE=''
+export GIT_NAME_CONTENT=''
+export GIT_NAME_LEFT=''
+export GIT_NAME_RIGHT=''
+
 function git_branch_internal()
 {
     local dir=. head
@@ -625,8 +631,13 @@ function git_prompt()
     if [ "${PROMPT_COMMAND_BAK-NODEFINE}" = "NODEFINE" ] ; then
         PROMPT_COMMAND_BAK=${PROMPT_COMMAND-}
         PS1_BAK=${PS1-}
-        PROMPT_COMMAND="git_branch_internal;${PROMPT_COMMAND-}"
-        PS1="$PS1$blue\$GIT_NAME_TITLE\$GIT_NAME_LEFT$red\$GIT_NAME_CONTENT$blue\$GIT_NAME_RIGHT\$ $normal"
+        if [[ ${SHELL} =~ .*bash$ ]]; then
+            PROMPT_COMMAND="git_branch_internal;${PROMPT_COMMAND-}"
+            PS1="$PS1$blue\$GIT_NAME_TITLE\$GIT_NAME_LEFT$red\$GIT_NAME_CONTENT$blue\$GIT_NAME_RIGHT\$ $normal"
+        elif [[ ${SHELL} =~ .*zsh$ ]]; then
+            precmd_functions=git_branch_internal
+            PS1="$PS1$blue${GIT_NAME_TITLE}${GIT_NAME_LEFT}$red${GIT_NAME_CONTENT}$blue${GIT_NAME_RIGHT}$ $normal"
+        fi
     else
         PROMPT_COMMAND=${PROMPT_COMMAND_BAK-}
         PS1=${PS1_BAK-}
