@@ -621,6 +621,17 @@ function git_zsh_precmd()
     PS1="${PS1_BAK}${LIGHT}${BLUE}${GIT_NAME_TITLE}${GIT_NAME_LEFT}${RED}${GIT_NAME_CONTENT}${BLUE}${GIT_NAME_RIGHT}$ ${NORMAL}"
 }
 
+# color for PS1
+black=$'\[\e[1;30m\]'
+red=$'\[\e[1;31m\]'
+green=$'\[\e[1;32m\]'
+yellow=$'\[\e[1;33m\]'
+blue=$'\[\e[1;34m\]'
+magenta=$'\[\e[1;35m\]'
+cyan=$'\[\e[1;36m\]'
+white=$'\[\e[1;37m\]'
+normal=$'\[\e[m\]'
+
 function git_prompt()
 {
     if [ "${PS1_BAK-NODEFINE}" = "NODEFINE" ] ; then
@@ -628,7 +639,7 @@ function git_prompt()
         if [[ ${SHELL} =~ .*bash$ ]]; then
             PROMPT_COMMAND_BAK=${PROMPT_COMMAND-}
             PROMPT_COMMAND="git_branch_internal;${PROMPT_COMMAND-}"
-            PS1="$PS1_BAK$LIGHT$BLUE\$GIT_NAME_TITLE\$GIT_NAME_LEFT$RED\$GIT_NAME_CONTENT$BLUE\$GIT_NAME_RIGHT\$ $NORMAL"
+            PS1="$PS1$blue\$GIT_NAME_TITLE\$GIT_NAME_LEFT$red\$GIT_NAME_CONTENT$blue\$GIT_NAME_RIGHT\$ $normal"
         elif [[ ${SHELL} =~ .*zsh$ ]]; then
             precmd_functions=(git_zsh_precmd)
         fi
