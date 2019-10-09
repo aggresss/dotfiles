@@ -655,11 +655,11 @@ function git_haste()
     elif [ ${GIT_NAME_TITLE} = "branch" ]; then
         echo -e "${CYAN}add->push->commit to origin on branch ${YELLOW}${GIT_NAME_CONTENT}${NORMAL}"
         git commit -m "`date "+%F %T %Z W%WD%u"`"
-        if [ ${1-NODEFINE} == "commit" ]; then
+        if [[ $1 == "commit" ]]; then
             return 0
         fi
 
-        if [ ${1-NODEFINE} == "rebase" ]; then
+        if [[ $1 == "rebase" ]]; then
             echo -e "${GREEN}fetch->rebase to origin on branch ${MAGENTA}${GIT_NAME_CONTENT}${NORMAL}"
             git fetch origin
             git rebase origin/${GIT_NAME_CONTENT}
