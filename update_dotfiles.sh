@@ -120,6 +120,14 @@ case $(uname) in
     ;;
     Darwin)
         echo "Darwin"
+        if [[ ${SHELL} =~ .*zsh$ ]]; then
+            if [ ! -f ${HOME}/.zshrc ]; then
+                ln -s ${HOME}/.bashrc ${HOME}/.zshrc
+            fi
+            if [ ! -f ${HOME}/.zprofile ]; then
+                ln -s ${HOME}/.profile ${HOME}/.zprofile
+            fi
+        fi
     ;;
     FreeBSD)
         echo "FreeBSD"
