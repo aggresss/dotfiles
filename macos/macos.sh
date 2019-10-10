@@ -54,7 +54,8 @@ brew install \
     wget \
     curl \
     wine \
-    xz
+    xz \
+    nodejs
 
 brew cask install \
     virtualbox \
