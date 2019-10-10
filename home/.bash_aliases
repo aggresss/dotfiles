@@ -21,6 +21,11 @@ NORMAL=$'\e[0m'
 LIGHT=$'\e[1m'
 INVERT=$'\e[7m'
 
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
 # alias for fast command
 if [ -f /.dockerenv ]; then
     alias s='cd /mnt/workspace-scratch'
