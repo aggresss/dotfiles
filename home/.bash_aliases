@@ -623,7 +623,7 @@ function git_branch_internal()
 function git_zsh_precmd()
 {
     git_branch_internal
-    PS1="${PS1_BAK}${LIGHT}${BLUE}${GIT_NAME_TITLE}${GIT_NAME_LEFT}${RED}${GIT_NAME_CONTENT}${BLUE}${GIT_NAME_RIGHT}$ ${NORMAL}"
+    PS1="${PS1_BAK}%{$fg[blue]%}${GIT_NAME_TITLE}${GIT_NAME_LEFT}%{$fg[red]%}${GIT_NAME_CONTENT}%{$fg[blue]%}${GIT_NAME_RIGHT}$ %{$reset_color%}"
 }
 
 # color for PS1
@@ -646,6 +646,7 @@ function git_prompt()
             PROMPT_COMMAND="git_branch_internal;${PROMPT_COMMAND-}"
             PS1="$PS1$blue\$GIT_NAME_TITLE\$GIT_NAME_LEFT$red\$GIT_NAME_CONTENT$blue\$GIT_NAME_RIGHT\$ $normal"
         elif [[ ${SHELL} =~ .*zsh$ ]]; then
+            autoload -U colors && colors
             precmd_functions=(git_zsh_precmd)
         fi
     else
