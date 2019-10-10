@@ -68,17 +68,15 @@ if [ ! -f ${HOME}/.bash_profile ]; then
         update_file ${DOTFILES_URL}/home/.bash_profile ${HOME}/.bash_profile
     fi
 fi
-# .bashrc
-if [ ! -f ${HOME}/.bashrc ]; then
-    if [ -f /etc/skel/.bashrc ]; then
-        cp /etc/skel/.bashrc ${HOME}/
-    else
-        update_file ${DOTFILES_URL}/home/.bashrc ${HOME}/.bashrc
-    fi
-fi
 
-if ! cat ${HOME}/.bashrc | grep -q ".bash_aliases"; then
-    cat << END >> ${HOME}/.bashrc
+# shell rc
+if [[ ${SHELL} =~ .*zsh$ ]]; then
+    if [ ! -f ${HOME}/.zshrc ]; then
+        update_file ${DOTFILES_URL}/home/.zshrc ${HOME}/.zshrc
+    fi
+
+    if ! cat ${HOME}/.zshrc | grep -q ".bash_aliases"; then
+        cat << END >> ${HOME}/.zshrc
 
 # modify by aggresss
 if [ -f ~/.bash_aliases ]; then
@@ -86,6 +84,30 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 END
+
+    fi
+
+
+elif [[ ${SHELL} =~ .*bash$ ]]; then
+    if [ ! -f ${HOME}/.bashrc ]; then
+        if [ -f /etc/skel/.bashrc ]; then
+            cp /etc/skel/.bashrc ${HOME}/
+        else
+            update_file ${DOTFILES_URL}/home/.bashrc ${HOME}/.bashrc
+        fi
+    fi
+
+    if ! cat ${HOME}/.bashrc | grep -q ".bash_aliases"; then
+        cat << END >> ${HOME}/.bashrc
+
+# modify by aggresss
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+END
+
+    fi
 fi
 # .bash_logout
 if [ ! -f ${HOME}/.bash_logout ]; then
@@ -106,20 +128,6 @@ if [ ${SSH_AGENT_PID:-NoDefine} != "NoDefine" ] ; then
 fi
 
 END
-fi
-
-# Link zsh config file
-if [[ ${SHELL} =~ .*zsh$ ]]; then
-    if [ ! -f ${HOME}/.zshrc ]; then
-        cd ${HOME}
-        ln -s .bash_aliases .zshrc
-        cd -
-    fi
-    if [ ! -f ${HOME}/.zprofile ]; then
-        cd ${HOME}
-        ln -s .profile .zprofile
-        cd -
-    fi
 fi
 
 # Update common bash utility
