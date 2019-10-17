@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 #
 # wget https://raw.githubusercontent.com/aggresss/dotfiles/master/home/.zshrc
 #

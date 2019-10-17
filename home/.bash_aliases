@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 # file .bash_aliases
 # start of modify
 # modify by aggresss

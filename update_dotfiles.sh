@@ -73,6 +73,7 @@ fi
 if [[ ${SHELL} =~ .*zsh$ ]]; then
     if [ ! -f ${HOME}/.zshrc ]; then
         update_file ${DOTFILES_URL}/home/.zshrc ${HOME}/.zshrc
+        update_file ${DOTFILES_URL}/home/.zprofile ${HOME}/.zprofile
     fi
 
     if ! cat ${HOME}/.zshrc | grep -q ".bash_aliases"; then
