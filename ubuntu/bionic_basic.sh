@@ -75,6 +75,7 @@ sudo apt-get update && sudo apt-get install -y \
     mtp-tools \
     jmtpfs \
     gettext \
+    nodejs \
     libssl-dev \
     libproxy-dev \
     libxml2-dev \
