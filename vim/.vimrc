@@ -15,6 +15,7 @@ if filereadable(expand("~/.vimrc.bundles"))
   call vundle#begin()
   Plugin 'VundleVim/Vundle.vim' " required
   Plugin 'scrooloose/nerdtree'
+  Plugin 'editorconfig/editorconfig-vim'
   if filereadable(expand("/usr/bin/ctags"))
       \ || filereadable(expand("/usr/local/bin/ctags"))
       \ || filereadable(expand("~/bin/ctags"))
