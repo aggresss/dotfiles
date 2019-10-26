@@ -26,10 +26,8 @@ if filereadable(expand("~/.vimrc.bundles"))
       \ || filereadable(expand("~/bin/cscope"))
     Plugin 'cscope.vim'     " require install cscope
   endif
-"  Plugin 'Valloric/YouCompleteMe'     " require compile
-
   call vundle#end()
-  source ~/.vimrc.bundles    " source the plugin config
+  source ~/.vimrc.bundles   " source the plugin config
 endif
 
 filetype plugin indent on   " required
