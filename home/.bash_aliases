@@ -506,8 +506,13 @@ alias git_log='git log --oneline'
 # $1 user.email
 function git_sig()
 {
-  git config user.name `echo "$1" | awk -F "@" '{print $1}'`
-  git config user.email $1
+    if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
+        echo "user.name: `git config --get user.name`"
+        echo "user.email: `git config --get user.email`"
+    else
+        git config user.name `echo "$1" | awk -F "@" '{print $1}'`
+        git config user.email $1
+    fi
 }
 
 # clone repo in hierarchy directory as site/org/repo
