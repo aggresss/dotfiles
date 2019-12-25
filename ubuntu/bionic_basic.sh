@@ -122,5 +122,7 @@ sudo apt-get update && sudo apt-get install -y \
     graphviz \
     kcachegrind \
     doxygen-gui \
+    virt-manager \
+    qemu \
     wireshark
 
