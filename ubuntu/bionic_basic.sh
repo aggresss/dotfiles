@@ -30,6 +30,7 @@ sudo apt-get update && sudo apt-get install -y \
     gcc-multilib \
     automake \
     libtool \
+    libtool-bin \
     cmake \
     cmake-curses-gui \
     ccache \
