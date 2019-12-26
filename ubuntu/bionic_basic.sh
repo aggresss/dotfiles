@@ -37,7 +37,6 @@ sudo apt-get update && sudo apt-get install -y \
     python-dev \
     python3-dev \
     virtualenv \
-    default-jdk \
     pkg-config \
     flex \
     bison \
@@ -81,8 +80,10 @@ sudo apt-get update && sudo apt-get install -y \
     libssl-dev \
     libproxy-dev \
     libxml2-dev \
-    vpnc-scripts \
-    \
+    vpnc-scripts
+
+sudo apt-get update && sudo apt-get install -y \
+    default-jdk \
     gnome \
     fonts-dejavu \
     fonts-wqy-microhei \
