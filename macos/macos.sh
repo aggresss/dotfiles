@@ -69,6 +69,7 @@ brew cask install \
     skim \
     typora \
     wireshark \
+    insomnia \
     sequel-pro
 
 sudo gem install \
