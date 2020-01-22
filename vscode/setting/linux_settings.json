@@ -1,5 +1,6 @@
 {
     "workbench.startupEditor": "newUntitledFile",
     "workbench.colorTheme": "Visual Studio Light",
-    "window.zoomLevel": 0
+    "window.zoomLevel": 0,
+    "editor.renderWhitespace": "all"
 }
