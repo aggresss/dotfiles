@@ -10,4 +10,8 @@ echo "Update i3status config ..."
 mkdir -p ${HOME}/.config/i3status
 cp -f config_i3status ${HOME}/.config/i3status/config
 
+echo "Update dunst config ..."
+mkdir -p ${HOME}/.config/dunst
+cp -f dunstrc ${HOME}/.config/dunst/dunstrc
+
 echo "Update i3 config successful."
