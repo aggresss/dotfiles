@@ -623,7 +623,6 @@ function git_branch_internal()
 }
 
 # Git branch perception
-
 function git_zsh_precmd()
 {
     git_branch_internal
@@ -641,6 +640,7 @@ cyan=$'\[\e[1;36m\]'
 white=$'\[\e[1;37m\]'
 normal=$'\[\e[m\]'
 
+# Git prompt for branch infomation
 function git_prompt()
 {
     if [ "${PS1_BAK-NODEFINE}" = "NODEFINE" ] ; then
@@ -759,6 +759,26 @@ function go_pwd()
     fi
 }
 
+##########################
+# modify for vscode
+##########################
+
+# go to vscode default workspace
+function code_workspace {
+    local DEFAULT_WORKSPACE="."
+    case $(uname) in
+        Darwin)
+            DEFAULT_WORKSPACE="${HOME}/Library/Application Support/Code/User"
+            ;;
+        Linux)
+            DEFAULT_WORKSPACE="${HOME}/.config/Code/User"
+            ;;
+        MINGW*)
+            DEFAULT_WORKSPACE="%APPDATA%\Code\User"
+            ;;
+    esac
+    cd ${DEFAULT_WORKSPACE}
+}
 
 ##########################
 # modify for Rust
@@ -795,7 +815,7 @@ case $(uname) in
         alias g++='g++-7'
         alias c++='c++-7'
         # environment for java
-        export JAVA_HOME=`/usr/libexec/java_home`
+        export JAVA_HOME="/usr/libexec/java_home"
         env_append "PATH" "$JAVA_HOME/bin"
         # wine chinese character
         alias wine='env LANG=zh_CN.UTF8 wine'
