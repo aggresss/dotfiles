@@ -763,20 +763,29 @@ function go_pwd()
 # modify for vscode
 ##########################
 
-# go to vscode default workspace
-function code_workspace {
-    local DEFAULT_WORKSPACE="."
+# go to vscode global workspace
+function code_global_workspace {
+    local GLOBAL_WORKSPACE="."
     case $(uname) in
         Darwin)
-            DEFAULT_WORKSPACE="${HOME}/Library/Application Support/Code/User"
+            GLOBAL_WORKSPACE="${HOME}/Library/Application Support/Code/User"
             ;;
         Linux)
-            DEFAULT_WORKSPACE="${HOME}/.config/Code/User"
+            GLOBAL_WORKSPACE="${HOME}/.config/Code/User"
             ;;
         MINGW*)
-            DEFAULT_WORKSPACE="%APPDATA%\Code\User"
+            GLOBAL_WORKSPACE="%APPDATA%\Code\User"
             ;;
     esac
+    cd ${GLOBAL_WORKSPACE}
+}
+
+# go to vscode default workspace
+function code_default_workspace {
+    local DEFAULT_WORKSPACE="${HOME}/code-workspace"
+    if [ ! -f ${DEFAULT_WORKSPACE} ]; then
+        mkdir -p ${DEFAULT_WORKSPACE}
+    fi
     cd ${DEFAULT_WORKSPACE}
 }
 
