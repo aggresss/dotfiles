@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "/Users/yujia/workspace-scratch/playground-js"
+		}
+	],
+	"settings": {
+		"C_Cpp.default.compilerPath": "/usr/local/bin/gcc-7",
+		"C_Cpp.default.macFrameworkPath": [],
+		"C_Cpp.default.intelliSenseMode": "gcc-x64",
+		"C_Cpp.default.cStandard": "c11",
+		"C_Cpp.default.cppStandard": "c++14",
+		"C_Cpp.default.defines": [],
+		"C_Cpp.default.includePath": [
+			"${workspaceFolder}/**"
+		],
+		"C_Cpp.errorSquiggles": "Enabled",
+		"C_Cpp.enhancedColorization": "Enabled",
+		"C_Cpp.dimInactiveRegions": true,
+		"C_Cpp.inactiveRegionOpacity": 0.8,
+		"C_Cpp.inactiveRegionBackgroundColor": "#E0E0E0"
+	}
+}
