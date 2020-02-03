@@ -25,4 +25,5 @@ yzhang.markdown-all-in-one
 donjayamanne.githistory
 # docker
 ms-azuretools.vscode-docker
-
+# editorconfig
+editorconfig.editorconfig
