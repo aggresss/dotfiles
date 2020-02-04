@@ -1,7 +1,7 @@
 {
 	"folders": [
 		{
-			"path": "/Users/yujia/workspace-scratch/playground-js"
+			"path": "/Users/yujia/workspace-scratch/dotfiles"
 		}
 	],
 	"settings": {
@@ -18,6 +18,15 @@
 		"C_Cpp.enhancedColorization": "Enabled",
 		"C_Cpp.dimInactiveRegions": true,
 		"C_Cpp.inactiveRegionOpacity": 0.8,
-		"C_Cpp.inactiveRegionBackgroundColor": "#E0E0E0"
+		"C_Cpp.inactiveRegionBackgroundColor": "#E0E0E0",
+		"go.inferGopath": false,
+		"go.gopath": "${workspaceFolder}",
+		"go.toolsGopath": "${env:GOPATH}",
+		"go.useLanguageServer": false,
+		"python.pythonPath": "/usr/local/bin/python3",
+		"python.formatting.provider": "yapf",
+		"python.linting.enabled": true,
+		"python.linting.pylintEnabled": false,
+		"python.linting.flake8Enabled": true
 	}
 }

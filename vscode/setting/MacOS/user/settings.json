@@ -1,12 +1,19 @@
 {
     "editor.fontSize": 14,
+    "editor.minimap.enabled": false,
     "terminal.integrated.fontSize": 14,
-    "python.pythonPath": "/usr/local/bin/python3",
-    "python.formatting.provider": "yapf",
-    "python.linting.enabled": true,
-    "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": true,
     "editor.renderWhitespace": "all",
-    "go.inferGopath": true,
+    "window.zoomLevel": 0,
+    "workbench.statusBar.feedback.visible": false,
+    "workbench.startupEditor": "newUntitledFile",
+    "explorer.confirmDragAndDrop": false,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "java.configuration.checkProjectSettingsExclusions": false,
+    "vsicons.dontShowNewVersionMessage": true,
+    "workbench.colorTheme": "Visual Studio Light - C++",
+    "files.autoSaveDelay": 1001,
+    "cmake.configureOnOpen": false,
+    "liveServer.settings.donotShowInfoMsg": true
   }
   
