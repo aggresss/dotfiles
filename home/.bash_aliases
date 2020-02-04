@@ -724,6 +724,9 @@ function git_down()
 # modify for Golang
 ##########################
 
+# echo current GOPATH
+alias go_path='env_go_p'
+
 # environmnet for Golang
 if [ -d "$HOME/.local/go" ]; then
     export GOROOT="$HOME/.local/go"
@@ -759,12 +762,20 @@ function go_pwd()
     fi
 }
 
+function go_proxy()
+{
+    if [ ${GOPROXY:-NOCONFIG} = "NOCONFIG" ]; then
+        export GOPROXY=https://goproxy.cn
+        echo -e "${YELLOW}GOPROXY: ${GOPROXY}${NORMAL}"
+    else
+        unset GOPROXY
+        echo -e "${YELLOW}GOPROXY: disabled${NORMAL}"
+    fi
+}
+
 ##########################
 # modify for vscode
 ##########################
-
-# echo current GOPATH
-alias go_path='env_go_p'
 
 # go to vscode global workspace
 function code_global_workspace {
