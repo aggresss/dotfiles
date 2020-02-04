@@ -763,6 +763,9 @@ function go_pwd()
 # modify for vscode
 ##########################
 
+# echo current GOPATH
+alias go_path='env_go_p'
+
 # go to vscode global workspace
 function code_global_workspace {
     local GLOBAL_WORKSPACE="."
