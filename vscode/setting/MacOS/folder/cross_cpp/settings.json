@@ -1,13 +1,7 @@
 {
     "C_Cpp.default.cStandard": "c11",
     "C_Cpp.default.cppStandard": "c++14",
-    "C_Cpp.default.compilerPath": "",
     "C_Cpp.default.intelliSenseMode": "gcc-x64",
-    "C_Cpp.errorSquiggles": "Enabled",
-    "C_Cpp.enhancedColorization": "Enabled",
-    "C_Cpp.dimInactiveRegions": true,
-    "C_Cpp.inactiveRegionOpacity": 0.8,
-    "C_Cpp.inactiveRegionBackgroundColor": "#E0E0E0",
     "files.associations": {
         "*.h": "c",
         "*.c": "c",
