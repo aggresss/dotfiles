@@ -5,6 +5,7 @@
 		}
 	],
 	"settings": {
+		"C_Cpp.default.compilerPath": "",
 		"C_Cpp.default.cStandard": "c11",
 		"C_Cpp.default.cppStandard": "c++14",
 		"C_Cpp.default.intelliSenseMode": "gcc-x64",
