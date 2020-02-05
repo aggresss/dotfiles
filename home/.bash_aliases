@@ -726,24 +726,10 @@ function git_down()
 
 # echo current GOPATH
 alias go_path='env_go_p'
-
-# environmnet for Golang
-if [ -d "$HOME/.local/go" ]; then
-    export GOROOT="$HOME/.local/go"
-    env_insert "PATH" "$GOROOT/bin"
-fi
-
-if [ -d "$HOME/go" ];then
-    env_insert "GOPATH" "$HOME/go"
-
-    if [ ! -d "$HOME/go/bin" ]; then
-        mkdir -p $HOME/go/bin
-    fi
-    env_insert "PATH" "$HOME/go/bin"
-fi
+# mkdir for golang workspace
+alias go_workspace='mkdir -p src pkg bin'
 
 GOPATH_BAK=${GOPATH-}
-
 # reset $GOPATH
 function go_reset()
 {
@@ -772,6 +758,21 @@ function go_proxy()
         echo -e "${YELLOW}GOPROXY: disabled${NORMAL}"
     fi
 }
+
+# environmnet for Golang
+if [ -d "$HOME/.local/go" ]; then
+    export GOROOT="$HOME/.local/go"
+    env_insert "PATH" "$GOROOT/bin"
+fi
+
+if [ -d "$HOME/go" ];then
+    env_insert "GOPATH" "$HOME/go"
+
+    if [ ! -d "$HOME/go/bin" ]; then
+        mkdir -p $HOME/go/bin
+    fi
+    env_insert "PATH" "$HOME/go/bin"
+fi
 
 ##########################
 # modify for vscode
