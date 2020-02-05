@@ -8,6 +8,7 @@
 #########################
 sudo apt-get update && sudo apt-get install -y \
     apt-file \
+    trash-cli \
     alsa-utils \
     mc \
     tree \

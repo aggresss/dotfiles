@@ -1,5 +1,6 @@
 # install command
 brew install \
+    rmtrash \
     autoconf \
     automake \
     libtool \
