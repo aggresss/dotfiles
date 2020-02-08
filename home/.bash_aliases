@@ -62,6 +62,8 @@ alias ak='kill_all ssh-agent'
 alias y='git status; git stash list; echo'
 # fast echo app return
 alias o='echo $?'
+# fast echo gopath
+alias g='go_path'
 
 # find file
 alias fdf='find . -name "*" |grep -sin'
