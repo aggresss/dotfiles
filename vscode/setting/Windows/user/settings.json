@@ -1,0 +1,12 @@
+{
+    "editor.fontSize": 16,
+    "editor.renderWhitespace": "all",
+    "workbench.colorTheme": "Visual Studio Light - C++",
+    "workbench.statusBar.feedback.visible": false,
+    "workbench.startupEditor": "newUntitledFile",
+	"go.inferGopath": false,
+	"go.gopath": "${workspaceFolder}",
+	"go.toolsGopath": "${env:GOPATH}",
+	"go.useLanguageServer": false,
+	"go.formatTool": "goimports"
+}
