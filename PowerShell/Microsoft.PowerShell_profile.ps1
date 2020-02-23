@@ -4,11 +4,14 @@
  # Before import this ps1 file, you need run these command:
  #     New-Item -Path "$profile" -ItemType "file" -Force
  #     Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Confirm
+ #     Install-Module posh-git
  #>
 
 <# PoSH for Common #>
-set-alias vim "${Env:ProgramFiles(x86)}\Vim\vim82\vim.exe"
+Set-Alias grep Select-String
+function touch {New-Item "$args" -ItemType File}
 
+Set-Alias vim "${Env:ProgramFiles(x86)}\Vim\vim82\vim.exe"
 function code {
     $code_path="${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe"
     if ($args.Count -eq 0) {
@@ -17,9 +20,6 @@ function code {
         Start-Process -Wait -FilePath $code_path -ArgumentList "$args"
     }
 }
-
-function touch {New-Item "$args" -ItemType File}
-Set-Alias grep Select-String
 
 function s {set-location ${env:USERPROFILE}\workspace-scratch}
 
@@ -43,3 +43,6 @@ function vs_env {
     Write-Host "`nVisual Studio Command Prompt variables set." -ForegroundColor Yellow
 }
 
+<# Echo Envronment #>
+Write-Host "ENV:" (Get-WmiObject Win32_OperatingSystem).Caption -ForegroundColor DarkGreen
+Write-Host "PowerShell Version:" ${PSVersionTable}.PSVersion.ToString() -ForegroundColor DarkGreen
