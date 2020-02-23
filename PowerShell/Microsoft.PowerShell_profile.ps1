@@ -43,7 +43,20 @@ function git_top {
 Set-Alias t git_top
 
 function git_haste {
-    git commit -m $(get-date -uformat "%Y-%m-%d %T %Z W%WD%u")
+    $branch = Get-GitBranch
+    if (-not $branch) {
+        Write-Host "Not a git repository"
+        return
+    }
+    if ($args -eq "commit") {
+        git commit -m $(get-date -uformat "%Y-%m-%d %T %Z W%WD%u")
+    } elseif ($args -eq "rebase") {
+        git fetch origin
+        git rebase origin/${branch}
+    } else {
+        git commit -m $(get-date -uformat "%Y-%m-%d %T %Z W%WD%u")
+        git push origin ${branch}:${branch}
+    }
 }
 
 
