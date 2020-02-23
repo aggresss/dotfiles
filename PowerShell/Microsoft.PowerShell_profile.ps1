@@ -78,11 +78,11 @@ function git_log {
 
 <# PoSH for Golang #>
 
-$GOPATH_BAK=${env:GOPATH}
+$GOPATH_BAK = ${env:GOPATH}
 # reset $GOPATH
 function go_reset()
 {
-    ${env:GOPATH}=${GOPATH_BAK}
+    ${env:GOPATH} = ${GOPATH_BAK}
     Write-Host "Successful clear GOPATH: ${env:GOPATH}"
 }
 function go_pwd {$Env:GOPATH="${PWD}"}
