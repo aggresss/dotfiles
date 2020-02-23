@@ -59,7 +59,6 @@ function git_haste {
     }
 }
 
-
 function git_sig {
     if ($args.Count -eq 0) {
         Write-Host "user.name: $(git config --get user.name)"
