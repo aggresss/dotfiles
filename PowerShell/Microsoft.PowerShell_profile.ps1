@@ -31,6 +31,35 @@ function git_prompt {
 }
 Set-Alias p git_prompt
 
+function git_status {
+    git status
+    git stash list
+}
+Set-Alias y git_status
+
+function git_top {
+    git rev-parse --show-toplevel | Set-Location
+}
+Set-Alias t git_top
+
+function git_haste {
+
+}
+
+
+function git_sig {
+    if ($args.Count -eq 0) {
+        Write-Host "user.name: $(git config --get user.name)"
+        Write-Host "user.email: $(git config --get user.email)"
+    } elseif ($args -match "@") {
+        $v = $args.split("@")
+        git config user.name $v[0]
+        git config user.email $args
+    } else {
+        Write-Host "Arguments error."
+    }
+}
+
 <# PoSH for Golang #>
 function go_pwd {$Env:GOPATH="${PWD}"}
 
