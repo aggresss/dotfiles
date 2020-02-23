@@ -4,10 +4,11 @@
  # Before import this ps1 file, you need run these command:
  #     New-Item -Path "$profile" -ItemType "file" -Force
  #     Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Confirm
- #     Install-Module posh-git
  #>
 
 <# PoSH for Common #>
+Import-Module posh-git
+
 Set-Alias grep Select-String
 function touch {New-Item "$args" -ItemType File}
 
@@ -24,6 +25,11 @@ function code {
 function s {set-location ${env:USERPROFILE}\workspace-scratch}
 
 <# PoSH for Git #>
+
+function git_prompt {
+        $GitPromptSettings.EnablePromptStatus = -not $GitPromptSettings.EnablePromptStatus
+}
+Set-Alias p git_prompt
 
 <# PoSH for Golang #>
 function go_pwd {$Env:GOPATH="${PWD}"}
