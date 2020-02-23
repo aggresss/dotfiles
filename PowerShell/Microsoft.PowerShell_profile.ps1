@@ -77,7 +77,20 @@ function git_log {
 }
 
 <# PoSH for Golang #>
+
+$GOPATH_BAK=${env:GOPATH}
+# reset $GOPATH
+function go_reset()
+{
+    ${env:GOPATH}=${GOPATH_BAK}
+    Write-Host "Successful clear GOPATH: ${env:GOPATH}"
+}
 function go_pwd {$Env:GOPATH="${PWD}"}
+
+function go_path {
+    Write-Host "GOPATH: ${env:GOPATH}" -ForegroundColor DarkGreen
+}
+Set-Alias g go_path
 
 <# PoSH for Visual Studio #>
 function vs_env {
