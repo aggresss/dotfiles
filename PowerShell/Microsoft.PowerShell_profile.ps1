@@ -43,7 +43,7 @@ function git_top {
 Set-Alias t git_top
 
 function git_haste {
-
+    git commit -m $(get-date -uformat "%Y-%m-%d %T %Z W%WD%u")
 }
 
 
@@ -58,6 +58,10 @@ function git_sig {
     } else {
         Write-Host "Arguments error."
     }
+}
+
+function git_log {
+    git log --oneline
 }
 
 <# PoSH for Golang #>
