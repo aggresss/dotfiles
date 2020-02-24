@@ -52,6 +52,24 @@ function cd_formal {
 }
 Set-Alias f cd_formal
 
+function cd_documents {
+    $doc_path = "${env:USERPROFILE}\Documents"
+    if (-not $(Test-Path $doc_path)) {
+        New-Item $doc_path -ItemType directory -Force
+    }
+    set-location $doc_path
+}
+Set-Alias m cd_documents
+
+function cd_downloads {
+    $down_path = "${env:USERPROFILE}\Downloads"
+    if (-not $(Test-Path $down_path)) {
+        New-Item $down_path -ItemType directory -Force
+    }
+    set-location $down_path
+}
+Set-Alias d cd_downloads
+
 #TODO source_file
 function source_file {
 
