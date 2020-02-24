@@ -18,9 +18,9 @@ Set-Alias vim "${Env:ProgramFiles(x86)}\Vim\vim82\vim.exe"
 function code {
     $code_path="${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe"
     if ($args.Count -eq 0) {
-        Start-Process -Wait -FilePath $code_path
+        Start-Process -FilePath $code_path
     } else {
-        Start-Process -Wait -FilePath $code_path -ArgumentList "$args"
+        Start-Process -FilePath $code_path -ArgumentList "$args"
     }
 }
 
