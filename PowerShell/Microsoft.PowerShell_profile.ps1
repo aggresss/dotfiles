@@ -156,7 +156,12 @@ function source_file {
             }
             Set-Clipboard $output_clipboard
         } elseif ($args[0] -eq "exec") {
-
+            $output_exec = ""
+            foreach ($str in $ReadyCacheArray) {
+                $output_exec += $str.Content.ToString()
+                $output_exec += ";"
+            }
+            $output_exec | Invoke-Expression
         }
     } 
 }
