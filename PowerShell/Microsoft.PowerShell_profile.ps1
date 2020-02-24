@@ -22,6 +22,8 @@ function ..... {Set-Location ../../../../}
 
 
 Set-Alias grep Select-String
+
+function u {. $profile}
 function touch {New-Item "$args" -ItemType File}
 
 Set-Alias vim "${Env:ProgramFiles(x86)}\Vim\vim82\vim.exe"
@@ -39,7 +41,7 @@ function cd_scratch {
     if (-not $(Test-Path $s_path)) {
         New-Item $s_path -ItemType directory -Force
     }
-    set-location $s_path
+    Set-Location $s_path
 }
 Set-Alias s cd_scratch
 
@@ -48,7 +50,7 @@ function cd_formal {
     if (-not $(Test-Path $f_path)) {
         New-Item $f_path -ItemType directory -Force
     }
-    set-location $f_path
+    Set-Location $f_path
 }
 Set-Alias f cd_formal
 
@@ -57,7 +59,7 @@ function cd_documents {
     if (-not $(Test-Path $doc_path)) {
         New-Item $doc_path -ItemType directory -Force
     }
-    set-location $doc_path
+    Set-Location $doc_path
 }
 Set-Alias m cd_documents
 
@@ -66,15 +68,63 @@ function cd_downloads {
     if (-not $(Test-Path $down_path)) {
         New-Item $down_path -ItemType directory -Force
     }
-    set-location $down_path
+    Set-Location $down_path
 }
 Set-Alias d cd_downloads
 
 #TODO source_file
+# args[0] run/copy/edit
+# args[1] file
+# args[2..-1] lines
 function source_file {
+    $note_dir = "${env:USERPROFILE}\note\"
+    function add_index {
+        Begin { $i = 1}
+        Process {
+            $_ | Add-Member -NotePropertyName "Index" -NotePropertyValue $i
+            $i++
+        }
+        End {}
+    }
+    function number_line{
+        Get-content $args | Out-String -Stream | Select-String '.*' | Select-Object LineNumber, Line
+    }
+
+    if ($args.Count -eq 0) {
+        Write-Host "Arguments error."
+    } elseif ($args.Count -eq 1) {
+        $file_index = Get-ChildItem -Path $note_dir -Exclude .*
+        $file_index | add_index
+        $file_index | Format-Table -Property Index,Name -AutoSize
+    } else {
+        $filepath = ""
+        if ($args[1] -match '^[0-9]+$') {
+            $file_index = Get-ChildItem -Path $note_dir -Exclude .*
+            $file_index | add_index
+            $index = $args[1]
+            $filename = $file_index | Where-Object {$_.Index -eq $index}
+            $filepath = $note_dir + $filename.Name.ToString()
+        } else {
+            $filepath = $args[1]
+        }
+
+        if ( ($args.Count -eq 2) -or (($args.Count -ge 2) -and ($args[0] -eq "edit")) ) {
+            if ($args[0] -eq "edit") {
+                vim $filepath
+            } else {
+                number_line $filepath
+            }
+            return
+        }
+
+        #TODO operate information
+
+    } 
 
 }
-
+function source_file_run {source_file "run $args"}
+function source_file_copy {source_file "copy $args"}
+function source_file_edit {source_file "edit $args"}
 
 <########################
  # PoSH for Git
