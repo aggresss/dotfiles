@@ -6,7 +6,10 @@
  #     Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Confirm
  #>
 
-<# PoSH for Common #>
+<########################
+ # PoSH for Common
+ ########################>
+
 Import-Module posh-git
 
 $GitPromptSettings.EnablePromptStatus = $false
@@ -26,7 +29,15 @@ function code {
 
 function s {set-location ${env:USERPROFILE}\workspace-scratch}
 
-<# PoSH for Git #>
+#TODO source_file
+function source_file {
+
+}
+
+
+<########################
+ # PoSH for Git
+ ########################>
 
 function git_prompt {
         $GitPromptSettings.EnablePromptStatus = -not $GitPromptSettings.EnablePromptStatus
@@ -78,7 +89,14 @@ function git_log {
     git log --oneline
 }
 
-<# PoSH for Golang #>
+# TODO
+funtion git_clone {
+
+}
+
+<########################
+ # PoSH for Golang
+ ########################>
 
 $GOPATH_BAK = ${env:GOPATH}
 # reset $GOPATH
@@ -94,7 +112,15 @@ function go_path {
 }
 Set-Alias g go_path
 
-<# PoSH for Visual Studio #>
+# TODO go_clone
+function go_clone {
+
+}
+
+<########################
+ # PoSH for Visual Studio
+ ########################>
+
 function vs_env {
     $vs_path = "${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\Community\Common7\Tools"
     Push-Location $vs_path
@@ -109,6 +135,9 @@ function vs_env {
     Write-Host "`nVisual Studio Command Prompt variables set." -ForegroundColor Yellow
 }
 
-<# Echo Envronment #>
+<########################
+ # Echo Envronment
+ ########################>
+
 Write-Host "ENV:" (Get-WmiObject Win32_OperatingSystem).Caption -ForegroundColor DarkGreen
 Write-Host "PowerShell Version:" ${PSVersionTable}.PSVersion.ToString() -ForegroundColor DarkGreen
