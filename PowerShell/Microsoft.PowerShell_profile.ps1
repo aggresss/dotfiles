@@ -98,9 +98,13 @@ function source_file {
         $file_index | Format-Table -Property Index,Name -AutoSize
     } else {
         $filepath = ""
-        if ($args[1] -match '^[0-9]+$') {
-            $file_index = Get-ChildItem -Path $note_dir -Exclude .*
-            $file_index | add_index
+        $file_index = Get-ChildItem -Path $note_dir -Exclude .*
+        $file_index | add_index
+        if (($args[1] -match '^[0-9]+$') -and ($args[1] -gt $file_index.Count)) {
+            Write-Host "File index out of range."
+            return
+        }
+        if (($args[1] -match '^[0-9]+$') -and ($args[1] -le $file_index.Count)) {
             $index = $args[1]
             $filename = $file_index | Where-Object {$_.Index -eq $index}
             $filepath = $note_dir + $filename.Name.ToString()
