@@ -14,6 +14,13 @@ Import-Module posh-git
 
 $GitPromptSettings.EnablePromptStatus = $false
 
+# short for cd ..
+function .. {Set-Location ..}
+function ... {Set-Location ../..}
+function .... {Set-Location ../../../}
+function ..... {Set-Location ../../../../}
+
+
 Set-Alias grep Select-String
 function touch {New-Item "$args" -ItemType File}
 
