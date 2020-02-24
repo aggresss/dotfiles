@@ -107,7 +107,6 @@ function source_file {
         } else {
             $filepath = $args[1]
         }
-
         if ( ($args.Count -eq 2) -or (($args.Count -ge 2) -and ($args[0] -eq "edit")) ) {
             if ($args[0] -eq "edit") {
                 vim $filepath
@@ -116,19 +115,48 @@ function source_file {
             }
             return
         }
+        if (-not $(Test-Path $filepath)) {
+            Write-Host "File not exist." -ForegroundColor Red
+            return
+        }
+        # Process index of spesical file
+        $ReadyCacheArray = @()
+        $file_cache = Get-Content -Path $filepath
 
-        #TODO operate information
+        for ($k = 2; $k -lt $args.Count; $k++) {
+            if ($args[$k] -eq "all") {
+                for($j = 0; $j -lt $file_cache.Count; $j++) {
+                    $data = [ordered]@{LineNumber=$j + 1;Content=$file_cache[$j].ToString()}
+                    $ReadyCacheArray += New-Object -TypeName PSCustomObject -Property $data
+                }
+            } elseif (($args[$k] -match '^[0-9]+$') -and ($args[$k] -le $file_cache.Count)) {
+                $data = [ordered]@{LineNumber=$args[$k];Content=$file_cache[$args[$k] - 1].ToString()}
+                $ReadyCacheArray += New-Object -TypeName PSCustomObject -Property $data
+            } elseif ($args[$k] -match '-') {
+                $from = $args[$k].split('-', 2)[0]
+                $to = $args[$k].split('-', 2)[1]
+                if (($from -match '^[0-9]+$') -and ($to -match '^[0-9]+$') -and ($from -le $file_cache.Count) -and ($to -le $file_cache.Count)) {
+                    $range = $from..$to
+                    foreach ($item in $range) {
+                        $data = [ordered]@{LineNumber=$item;Content=$file_cache[$item - 1].ToString()}
+                        $ReadyCacheArray += New-Object -TypeName PSCustomObject -Property $data
+                    }
+                }
+            }
+        }
+
+        $ReadyCacheArray
 
     } 
-
 }
-function source_file_run {
-    $run_script="source_file run"
+function source_file_exec {
+    $run_script="source_file exec"
     foreach($a in $args){
         $run_script += " $a"
     }
     $run_script | Invoke-Expression
 }
+Set-Alias x source_file_run
 function source_file_copy {
     $run_script="source_file copy"
     foreach($a in $args){
@@ -136,6 +164,8 @@ function source_file_copy {
     }
     $run_script | Invoke-Expression
 }
+Set-Alias c source_file_copy
+
 function source_file_edit {
     $run_script="source_file edit"
     foreach($a in $args){
@@ -143,6 +173,7 @@ function source_file_edit {
     }
     $run_script | Invoke-Expression
 }
+Set-Alias e source_file_edit
 
 <########################
  # PoSH for Git
