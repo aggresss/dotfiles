@@ -122,7 +122,6 @@ function source_file {
         # Process index of spesical file
         $ReadyCacheArray = @()
         $file_cache = Get-Content -Path $filepath
-
         for ($k = 2; $k -lt $args.Count; $k++) {
             if ($args[$k] -eq "all") {
                 for($j = 0; $j -lt $file_cache.Count; $j++) {
@@ -144,9 +143,17 @@ function source_file {
                 }
             }
         }
+        # Process Action
+        if ($ReadyCacheArray.Count -eq 0) {
+            return
+        } else {
+            $ReadyCacheArray
+        }
+        if ($args[0] -eq "copy") {
+            
+        } elseif ($args[0] -eq "exec") {
 
-        $ReadyCacheArray
-
+        }
     } 
 }
 function source_file_exec {
@@ -156,7 +163,7 @@ function source_file_exec {
     }
     $run_script | Invoke-Expression
 }
-Set-Alias x source_file_run
+Set-Alias x source_file_exec
 function source_file_copy {
     $run_script="source_file copy"
     foreach($a in $args){
