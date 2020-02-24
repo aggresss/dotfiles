@@ -9,6 +9,8 @@
 <# PoSH for Common #>
 Import-Module posh-git
 
+$GitPromptSettings.EnablePromptStatus = $false
+
 Set-Alias grep Select-String
 function touch {New-Item "$args" -ItemType File}
 
