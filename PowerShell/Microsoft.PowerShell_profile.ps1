@@ -150,7 +150,11 @@ function source_file {
             $ReadyCacheArray
         }
         if ($args[0] -eq "copy") {
-            
+            $output_clipboard = @()
+            foreach ($str in $ReadyCacheArray) {
+                $output_clipboard += $str.Content.ToString()
+            }
+            Set-Clipboard $output_clipboard
         } elseif ($args[0] -eq "exec") {
 
         }
