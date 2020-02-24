@@ -122,9 +122,27 @@ function source_file {
     } 
 
 }
-function source_file_run {source_file "run $args"}
-function source_file_copy {source_file "copy $args"}
-function source_file_edit {source_file "edit $args"}
+function source_file_run {
+    $run_script="source_file run"
+    foreach($a in $args){
+        $run_script += " $a"
+    }
+    $run_script | Invoke-Expression
+}
+function source_file_copy {
+    $run_script="source_file copy"
+    foreach($a in $args){
+        $run_script += " $a"
+    }
+    $run_script | Invoke-Expression
+}
+function source_file_edit {
+    $run_script="source_file edit"
+    foreach($a in $args){
+        $run_script += " $a"
+    }
+    $run_script | Invoke-Expression
+}
 
 <########################
  # PoSH for Git
