@@ -134,9 +134,23 @@ function git_branch {
     git branch -vv $args
 }
 Set-Alias b git_branch
-# TODO
-funtion git_clone {
 
+function git_clone {
+    $clone_path = $args[0]
+    if ($clone_path -match "@") {
+        $clone_path = $clone_path.split("@")[1]
+        $clone_path = $clone_path.replace(":", "/")
+    } elseif ($clone_path -match "://") {
+        $clone_path = $clone_path.split("/", 3)[2]
+    } else {
+        Write-Host "Arguments error."
+        return
+    }
+    # strip suffix
+    $clone_path = $clone_path.replace(".git", "")
+
+    Write-Host Clone on $clone_path
+    git clone $args $clone_path
 }
 
 <########################
@@ -157,9 +171,23 @@ function go_path {
 }
 Set-Alias g go_path
 
-# TODO go_clone
 function go_clone {
+    $clone_path = $args[0]
+    if ($clone_path -match "@") {
+        $clone_path = $clone_path.split("@")[1]
+        $clone_path = $clone_path.replace(":", "/")
+    } elseif ($clone_path -match "://") {
+        $clone_path = $clone_path.split("/", 3)[2]
+    } else {
+        Write-Host "Arguments error."
+        return
+    }
+    # strip suffix
+    $clone_path = $clone_path.replace(".git", "")
+    $repo_name = $clone_path.split("/")[-1]
 
+    Write-Host Clone on $repo_name/src/$clone_path
+    git clone $args $repo_name/src/$clone_path
 }
 
 <########################
