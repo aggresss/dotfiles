@@ -34,7 +34,23 @@ function code {
     }
 }
 
-function s {set-location ${env:USERPROFILE}\workspace-scratch}
+function cd_scratch {
+    $s_path = "${env:USERPROFILE}\workspace-scratch"
+    if (-not $(Test-Path $s_path)) {
+        New-Item $s_path -ItemType directory -Force
+    }
+    set-location $s_path
+}
+Set-Alias s cd_scratch
+
+function cd_formal {
+    $f_path = "${env:USERPROFILE}\workspace-formal"
+    if (-not $(Test-Path $f_path)) {
+        New-Item $f_path -ItemType directory -Force
+    }
+    set-location $f_path
+}
+Set-Alias f cd_formal
 
 #TODO source_file
 function source_file {
@@ -96,6 +112,10 @@ function git_log {
     git log --oneline
 }
 
+function git_branch {
+    git branch -vv $args
+}
+Set-Alias b git_branch
 # TODO
 funtion git_clone {
 

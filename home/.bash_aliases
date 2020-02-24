@@ -526,6 +526,7 @@ function git_clone()
     clone_path=${clone_path#*://}
     # ssh
     clone_path=${clone_path#*@}
+    # match next slash
     clone_path=${clone_path/:/\/}
     # trim .git suffix
     clone_path=${clone_path%.git}
