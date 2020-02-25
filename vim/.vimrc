@@ -5,6 +5,7 @@
 " Initial configuration
 "
 set nocompatible    " required
+set backspace=indent,eol,start
 filetype off        " required
 let mapleader="\\"
 
