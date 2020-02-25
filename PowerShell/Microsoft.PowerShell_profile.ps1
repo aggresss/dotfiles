@@ -11,10 +11,6 @@
  # PoSH for Common
  ########################>
 
-Import-Module posh-git
-
-$GitPromptSettings.EnablePromptStatus = $false
-
 # short for cd ..
 function .. {Set-Location ..}
 function ... {Set-Location ../..}
@@ -216,7 +212,11 @@ Set-Alias e source_file_edit
  ########################>
 
 function git_prompt {
+    if (-not (get-module | Where-Object {$_.Name -eq "posh-git"})) {
+        Import-Module -Name posh-git -Scope Global
+    } else {
         $GitPromptSettings.EnablePromptStatus = -not $GitPromptSettings.EnablePromptStatus
+    }
 }
 Set-Alias p git_prompt
 
