@@ -178,7 +178,7 @@ function source_file {
             }
             $output_exec | Invoke-Expression
         }
-    } 
+    }
 }
 function source_file_exec {
     $run_script="source_file exec"
