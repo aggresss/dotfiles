@@ -17,7 +17,6 @@ function ... {Set-Location ../..}
 function .... {Set-Location ../../../}
 function ..... {Set-Location ../../../../}
 
-
 Set-Alias grep Select-String
 
 function u {. $profile}
