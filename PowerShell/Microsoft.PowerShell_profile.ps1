@@ -4,6 +4,7 @@
  # Before import this ps1 file, you need run these command:
  #     New-Item -Path "$profile" -ItemType "file" -Force
  #     Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Confirm
+ #     Set-Service -Name ssh-agent -StartupType automatic
  #>
 
 <########################
@@ -72,7 +73,22 @@ function cd_downloads {
 }
 Set-Alias d cd_downloads
 
-#TODO source_file
+# SSH
+function ssh_agent_add {
+    ssh-agent.exe
+    ssh-add.exe -l
+    if (-not $?) {
+        ssh-add.exe
+    }
+}
+Set-Alias a ssh_agent_add
+
+function ssh_agent_del {
+    ssh-add.exe -d
+}
+Set-Alias k ssh_agent_del
+
+# source_file
 # args[0] run/copy/edit
 # args[1] file
 # args[2..-1] lines
