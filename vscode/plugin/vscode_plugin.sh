@@ -22,7 +22,7 @@ techer.open-in-browser
 # markdown
 yzhang.markdown-all-in-one
 # git
-donjayamanne.githistory
+eamodio.gitlens
 # docker
 ms-azuretools.vscode-docker
 # editorconfig
