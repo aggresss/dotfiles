@@ -24,14 +24,7 @@ function u {. $profile}
 function touch {New-Item "$args" -ItemType File}
 
 Set-Alias vim "${Env:ProgramFiles(x86)}\Vim\vim82\vim.exe"
-function code {
-    $code_path="${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe"
-    if ($args.Count -eq 0) {
-        Start-Process -FilePath $code_path
-    } else {
-        Start-Process -FilePath $code_path -ArgumentList "$args"
-    }
-}
+Set-Alias code "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe"
 
 function cd_scratch {
     $s_path = "${env:USERPROFILE}\workspace-scratch"
