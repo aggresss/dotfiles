@@ -584,6 +584,7 @@ function git_global_set()
   git config --global core.excludesfile ${HOME}/.gitignore
   git config --global core.editor "vim"
   git config --global core.autocrlf false
+  git config --global core.quotepath false
 }
 
 
