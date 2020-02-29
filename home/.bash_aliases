@@ -881,6 +881,7 @@ case $(uname) in
         alias code='open -a Visual\ Studio\ Code'
         alias vlc='open -a VLC'
         alias skim='open -a Skim'
+        alias drawio='open -a draw.io'
         ;;
     Linux)
         release_info=$(uname -r | awk -F'-' '{print $NF}')
