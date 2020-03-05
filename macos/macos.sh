@@ -56,7 +56,8 @@ brew install \
     curl \
     wine \
     xz \
-    nodejs
+    nodejs \
+    redis
 
 brew cask install \
     virtualbox \
