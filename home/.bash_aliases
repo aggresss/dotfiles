@@ -860,10 +860,6 @@ case $(uname) in
         # ls colours
         export CLICOLOR=1
         export LSCOLORS=ExGxFxDxCxegedabagacad
-        # environment for gcc
-        alias gcc='gcc-7'
-        alias g++='g++-7'
-        alias c++='c++-7'
         # environment for java
         export JAVA_HOME="/usr/libexec/java_home"
         env_append "PATH" "$JAVA_HOME/bin"
