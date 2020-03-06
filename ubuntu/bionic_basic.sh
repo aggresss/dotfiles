@@ -30,6 +30,7 @@ sudo apt-get update && sudo apt-get install -y \
     build-essential \
     gcc-multilib \
     automake \
+    ninja-build \
     libtool \
     libtool-bin \
     cmake \
