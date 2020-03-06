@@ -75,19 +75,19 @@ alias cmc='find . -iname "*cmake*" -not -name CMakeLists.txt -exec rm -rf {} +'
 alias ccl='find . -name "*[.h|.c|.hpp|.cpp|.go|.rs|.py]" -type f | xargs cat | wc -l'
 # alias for ${LD_LIBRARY_PATH}
 alias env_ld_p='echo -e ${RED}LD_LIBRARY_PATH:\\n${GREEN}${LD_LIBRARY_PATH//:/\\n}${NORMAL}'
-alias env_ld_i='env_insert LD_LIBRARY_PATH ${PWD}'
-alias env_ld_a='env_append LD_LIBRARY_PATH ${PWD}'
-alias env_ld_d='env_prune LD_LIBRARY_PATH ${PWD}'
+alias env_ld_i='env_insert LD_LIBRARY_PATH'
+alias env_ld_a='env_append LD_LIBRARY_PATH'
+alias env_ld_d='env_prune LD_LIBRARY_PATH'
 # alias for ${PATH}
 alias env_path_p='echo -e ${RED}PATH:\\n${GREEN}${PATH//:/\\n}${NORMAL}'
-alias env_path_i='env_insert PATH ${PWD}'
-alias env_path_a='env_append PATH ${PWD}'
-alias env_path_d='env_prune PATH ${PWD}'
+alias env_path_i='env_insert PATH'
+alias env_path_a='env_append PATH'
+alias env_path_d='env_prune PATH'
 # alias for ${GOPATH}
 alias env_go_p='echo -e ${RED}GOPATH:\\n${GREEN}${GOPATH//:/\\n}${NORMAL}'
-alias env_go_i='env_insert GOPATH ${PWD}'
-alias env_go_a='env_append GOPATH ${PWD}'
-alias env_go_d='env_prune GOPATH ${PWD}'
+alias env_go_i='env_insert GOPATH'
+alias env_go_a='env_append GOPATH'
+alias env_go_d='env_prune GOPATH'
 # alias for some application special open
 alias enw='emacs -nw'
 # alias for remove fast
