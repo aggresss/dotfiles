@@ -5,6 +5,7 @@
 " Initial configuration
 "
 set nocompatible    " required
+set backspace=indent,eol,start
 filetype off        " required
 let mapleader="\\"
 
@@ -45,7 +46,7 @@ set noswapfile
 set number
 set ruler
 set nowrap
-set cursorline
+set nocursorline
 set ts=4 sts=4 sw=4 et
 set list
 set listchars=tab:>-,trail:-
@@ -97,7 +98,8 @@ highlight User7 ctermfg=yellow  ctermbg=darkblue
 :map <leader>L :set list<cr>
 :map <leader>s :set laststatus=0<cr>
 :map <leader>S :set laststatus=2<cr>
-
+:map <leader>h :set nocursorline<cr>
+:map <leader>H :set cursorline<cr>
 :map <leader>c :call Compile<cr>
 
 "

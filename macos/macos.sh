@@ -1,5 +1,6 @@
 # install command
 brew install \
+    rmtrash \
     autoconf \
     automake \
     libtool \
@@ -55,7 +56,9 @@ brew install \
     curl \
     wine \
     xz \
-    nodejs
+    nodejs \
+    ninja \
+    redis
 
 brew cask install \
     virtualbox \

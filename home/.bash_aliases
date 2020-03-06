@@ -62,6 +62,8 @@ alias ak='kill_all ssh-agent'
 alias y='git status; git stash list; echo'
 # fast echo app return
 alias o='echo $?'
+# fast echo gopath
+alias g='go_path'
 
 # find file
 alias fdf='find . -name "*" |grep -sin'
@@ -73,19 +75,19 @@ alias cmc='find . -iname "*cmake*" -not -name CMakeLists.txt -exec rm -rf {} +'
 alias ccl='find . -name "*[.h|.c|.hpp|.cpp|.go|.rs|.py]" -type f | xargs cat | wc -l'
 # alias for ${LD_LIBRARY_PATH}
 alias env_ld_p='echo -e ${RED}LD_LIBRARY_PATH:\\n${GREEN}${LD_LIBRARY_PATH//:/\\n}${NORMAL}'
-alias env_ld_i='env_insert LD_LIBRARY_PATH ${PWD}'
-alias env_ld_a='env_append LD_LIBRARY_PATH ${PWD}'
-alias env_ld_d='env_prune LD_LIBRARY_PATH ${PWD}'
+alias env_ld_i='env_insert LD_LIBRARY_PATH'
+alias env_ld_a='env_append LD_LIBRARY_PATH'
+alias env_ld_d='env_prune LD_LIBRARY_PATH'
 # alias for ${PATH}
 alias env_path_p='echo -e ${RED}PATH:\\n${GREEN}${PATH//:/\\n}${NORMAL}'
-alias env_path_i='env_insert PATH ${PWD}'
-alias env_path_a='env_append PATH ${PWD}'
-alias env_path_d='env_prune PATH ${PWD}'
+alias env_path_i='env_insert PATH'
+alias env_path_a='env_append PATH'
+alias env_path_d='env_prune PATH'
 # alias for ${GOPATH}
 alias env_go_p='echo -e ${RED}GOPATH:\\n${GREEN}${GOPATH//:/\\n}${NORMAL}'
-alias env_go_i='env_insert GOPATH ${PWD}'
-alias env_go_a='env_append GOPATH ${PWD}'
-alias env_go_d='env_prune GOPATH ${PWD}'
+alias env_go_i='env_insert GOPATH'
+alias env_go_a='env_append GOPATH'
+alias env_go_d='env_prune GOPATH'
 # alias for some application special open
 alias enw='emacs -nw'
 # alias for remove fast
@@ -524,6 +526,7 @@ function git_clone()
     clone_path=${clone_path#*://}
     # ssh
     clone_path=${clone_path#*@}
+    # match next slash
     clone_path=${clone_path/:/\/}
     # trim .git suffix
     clone_path=${clone_path%.git}
@@ -581,6 +584,7 @@ function git_global_set()
   git config --global core.excludesfile ${HOME}/.gitignore
   git config --global core.editor "vim"
   git config --global core.autocrlf false
+  git config --global core.quotepath false
 }
 
 
@@ -724,23 +728,12 @@ function git_down()
 # modify for Golang
 ##########################
 
-# environmnet for Golang
-if [ -d "$HOME/.local/go" ]; then
-    export GOROOT="$HOME/.local/go"
-    env_insert "PATH" "$GOROOT/bin"
-fi
-
-if [ -d "$HOME/go" ];then
-    env_insert "GOPATH" "$HOME/go"
-
-    if [ ! -d "$HOME/go/bin" ]; then
-        mkdir -p $HOME/go/bin
-    fi
-    env_insert "PATH" "$HOME/go/bin"
-fi
+# echo current GOPATH
+alias go_path='env_go_p'
+# mkdir for golang workspace
+alias go_workspace='mkdir -p src pkg bin'
 
 GOPATH_BAK=${GOPATH-}
-
 # reset $GOPATH
 function go_reset()
 {
@@ -759,24 +752,81 @@ function go_pwd()
     fi
 }
 
+function go_proxy()
+{
+    if [ ${GOPROXY:-NOCONFIG} = "NOCONFIG" ]; then
+        export GOPROXY=https://goproxy.cn
+        echo -e "${YELLOW}GOPROXY: ${GOPROXY}${NORMAL}"
+    else
+        unset GOPROXY
+        echo -e "${YELLOW}GOPROXY: disabled${NORMAL}"
+    fi
+}
+
+# clone repo in hierarchy directory as site/org/repo for golang workspace
+# $1 repo URI
+function go_clone()
+{
+    local clone_path=$1
+    local repo_name=""
+    # https
+    clone_path=${clone_path#*://}
+    # ssh
+    clone_path=${clone_path#*@}
+    clone_path=${clone_path/:/\/}
+    # trim .git suffix
+    clone_path=${clone_path%.git}
+    # get repo name
+    repo_name=`echo "${clone_path}" | awk -F "/" '{print $NF}'`
+    # do clone
+    clone_path="${repo_name}/src/${clone_path}"
+    git clone $@ ${clone_path} && \
+        mkdir -p ${repo_name}/bin ${repo_name}/pkg && \
+        echo -e "\n${GREEN} Clone $1 on ${PWD}/${clone_path} successfully.${NORMAL}\n"
+}
+
+# environmnet for Golang
+if [ -d "$HOME/.local/go" ]; then
+    export GOROOT="$HOME/.local/go"
+    env_insert "PATH" "$GOROOT/bin"
+fi
+
+if [ -d "$HOME/go" ];then
+    env_insert "GOPATH" "$HOME/go"
+
+    if [ ! -d "$HOME/go/bin" ]; then
+        mkdir -p $HOME/go/bin
+    fi
+    env_insert "PATH" "$HOME/go/bin"
+fi
+
 ##########################
 # modify for vscode
 ##########################
 
-# go to vscode default workspace
-function code_workspace {
-    local DEFAULT_WORKSPACE="."
+# go to vscode global workspace
+function code_global_workspace {
+    local GLOBAL_WORKSPACE="."
     case $(uname) in
         Darwin)
-            DEFAULT_WORKSPACE="${HOME}/Library/Application Support/Code/User"
+            GLOBAL_WORKSPACE="${HOME}/Library/Application Support/Code/User"
             ;;
         Linux)
-            DEFAULT_WORKSPACE="${HOME}/.config/Code/User"
+            GLOBAL_WORKSPACE="${HOME}/.config/Code/User"
             ;;
         MINGW*)
-            DEFAULT_WORKSPACE="%APPDATA%\Code\User"
+            GLOBAL_WORKSPACE="%APPDATA%\Code\User"
             ;;
     esac
+    cd ${GLOBAL_WORKSPACE}
+}
+
+# go to vscode default workspace
+function code_default_workspace {
+    local DEFAULT_WORKSPACE="${HOME}/code-workspace"
+    if [ ! -f ${DEFAULT_WORKSPACE} ]; then
+        mkdir -p ${DEFAULT_WORKSPACE}
+    fi
     cd ${DEFAULT_WORKSPACE}
 }
 
@@ -831,6 +881,7 @@ case $(uname) in
         alias code='open -a Visual\ Studio\ Code'
         alias vlc='open -a VLC'
         alias skim='open -a Skim'
+        alias drawio='open -a draw.io'
         ;;
     Linux)
         release_info=$(uname -r | awk -F'-' '{print $NF}')
@@ -878,4 +929,3 @@ esac
 
 
 # end of .bash_aliases
-

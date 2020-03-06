@@ -72,3 +72,8 @@ curl https://raw.githubusercontent.com/aggresss/dotfiles/master/update_dotfiles.
 | `~/.local/eclipse/` | *Auto Generation* | default eclipse install directory |
 | `~/eclipse-workspace/` | *Auto Generation* | default eclipse workspace directory |
 
+#### Visual Studio Code
+| Drectory | Type | Illustrate |
+|---|---|---|
+| `~/code-workspace/` | *Auto Generation* | default Visual Studio Code workspace directory |
+
