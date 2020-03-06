@@ -57,6 +57,7 @@ brew install \
     wine \
     xz \
     nodejs \
+    ninja \
     redis
 
 brew cask install \
