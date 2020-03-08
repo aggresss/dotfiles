@@ -792,7 +792,10 @@ if [ -d "$HOME/.local/go" ]; then
 fi
 
 if [ -d "$HOME/go" ];then
-    env_insert "GOPATH" "$HOME/go"
+
+    if [ ${GOPATH:-NOCONFIG} = "NOCONFIG" ]; then
+        env_insert "GOPATH" "$HOME/go"
+    fi
 
     if [ ! -d "$HOME/go/bin" ]; then
         mkdir -p $HOME/go/bin
