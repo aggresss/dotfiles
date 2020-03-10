@@ -85,7 +85,7 @@ highlight User7 ctermfg=yellow  ctermbg=darkblue
 :map <C-j> :res +2<cr>
 :map <C-k> :res -2<cr>
 
-:map <leader>r :retab<cr>
+:map <leader>r :%retab!<cr>
 :map <leader>t :set noet<cr>
 :map <leader>T :set et<cr>
 :map <leader>p :set paste<cr>
