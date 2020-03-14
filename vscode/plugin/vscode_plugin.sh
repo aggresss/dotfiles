@@ -2,28 +2,29 @@
 # code --install-extension
 # ext install
 
-# vscode framework
+# VSCode Framework
 visualstudioexptteam.vscodeintellicode
 vscode-icons-team.vscode-icons
-# c/cpp
+# C/CPP
 ms-vscode.cpptools
 ms-vscode.cpptools-themes
-# golang
+# Golang
 ms-vscode.go
-# python
+# Python
 ms-python.python
-# cmake
+# CMake
 twxs.cmake
 ms-vscode.cmake-tools
-# web debug
+# Web Debug
 msjsdiag.debugger-for-chrome
 ritwickdey.liveserver
 techer.open-in-browser
-# markdown
+# Markdown
 yzhang.markdown-all-in-one
-# git
+# Git
+donjayamanne.githistory
 eamodio.gitlens
-# docker
+# Docker
 ms-azuretools.vscode-docker
-# editorconfig
+# Editorconfig
 editorconfig.editorconfig
