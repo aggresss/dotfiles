@@ -2,7 +2,7 @@
  # File: Microsoft.PowerShell_profile.ps1
  # URL: https://raw.githubusercontent.com/aggresss/dotfiles/master/PowerShell/Microsoft.PowerShell_profile.ps1
  # Before import this ps1 file, you need run these command:
- #     New-Item -Path "$profile" -ItemType "file" -Force
+ #     New-Item -Path "$PROFILE" -ItemType "file" -Force
  #     Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Confirm
  #     Install-Module posh-git -Scope CurrentUser -Force
  #     Set-Service -Name ssh-agent -StartupType automatic
