@@ -19,6 +19,7 @@ brew install \
     gd \
     gettext \
     git \
+    git-lfs \
     gnu-sed \
     gnu-tar \
     gawk \

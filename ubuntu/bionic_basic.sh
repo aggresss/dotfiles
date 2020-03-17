@@ -22,6 +22,7 @@ sudo apt-get update && sudo apt-get install -y \
     ssh \
     mosh \
     git \
+    git-lfs \
     p7zip-full \
     unrar \
     hexedit \
