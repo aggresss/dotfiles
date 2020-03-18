@@ -14,16 +14,20 @@
 	"vsicons.dontShowNewVersionMessage": true,
 	"cmake.configureOnOpen": false,
 	"liveServer.settings.donotShowInfoMsg": true,
+
 	"go.inferGopath": false,
 	"go.gopath": "${workspaceFolder}",
 	"go.toolsGopath": "${env:GOPATH}",
 	"go.useLanguageServer": false,
 	"go.formatTool": "goimports",
+
 	"python.pythonPath": "/usr/local/bin/python3",
 	"python.formatting.provider": "yapf",
 	"python.linting.enabled": true,
 	"python.linting.pylintEnabled": false,
 	"python.linting.flake8Enabled": true,
+	"python.jediEnabled": false,
+
 	"C_Cpp.default.compilerPath": "/usr/local/bin/gcc-7",
 	"C_Cpp.default.macFrameworkPath": [],
 	"C_Cpp.default.intelliSenseMode": "gcc-x64",
