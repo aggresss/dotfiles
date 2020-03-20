@@ -881,6 +881,7 @@ case $(uname) in
         alias vlc='open -a VLC'
         alias skim='open -a Skim'
         alias drawio='open -a draw.io'
+        alias chrome='open -a Google\ Chrome'
         ;;
     Linux)
         release_info=$(uname -r | awk -F'-' '{print $NF}')
