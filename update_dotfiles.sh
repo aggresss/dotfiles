@@ -2,8 +2,15 @@
 # Update dotfiles from git@github.com:aggresss/dotfiles.git master branch
 # curl https://raw.githubusercontent.com/aggresss/dotfiles/master/update_dotfiles.sh -sSf | bash
 
-DOTFILES_URL="https://github.com/aggresss/dotfiles/raw/master"
-BASH_URL="https://github.com/aggresss/playground-bash/raw/master"
+if [ ${1:-NoDefine} = "local" ]; then
+    UPDATE_METHOD="local"
+    DOTFILES_URL="${HOME}/workspace-scratch/dotfiles"
+    BASH_URL="${HOME}/workspace-scratch/playground-bash"
+else
+    UPDATE_METHOD="remote"
+    DOTFILES_URL="https://github.com/aggresss/dotfiles/raw/master"
+    BASH_URL="https://github.com/aggresss/playground-bash/raw/master"
+fi
 
 # $1 download url
 # $2 local filepath
@@ -13,24 +20,29 @@ function update_file()
     # can replace by dirname and basename command
     local down_file=`echo "$1" | awk -F "/" '{print $NF}'`
     local down_path=`echo "$2" | awk 'BEGIN{res=""; FS="/";}{for(i=2;i<=NF-1;i++) res=(res"/"$i);} END{print res}'`
-    if [ ! -d ${down_path} ]; then
-        mkdir -vp ${down_path}
-    fi
-    rm -rvf ${tmp_path}/${down_file}
-    if [ $(command -v wget > /dev/null; echo $?) -eq 0 ]; then
-        wget -P ${tmp_path} $1
-    elif [ $(command -v curl > /dev/null; echo $?) -eq 0 ]; then
-        cd ${tmp_path}
-        curl -OL $1
-        cd -
+    echo "Update $2 ..."
+    if [ ${UPDATE_METHOD} = "remote" ]; then
+        if [ ! -d ${down_path} ]; then
+            mkdir -vp ${down_path}
+        fi
+        rm -rvf ${tmp_path}/${down_file}
+        if [ $(command -v wget > /dev/null; echo $?) -eq 0 ]; then
+            wget -P ${tmp_path} $1
+        elif [ $(command -v curl > /dev/null; echo $?) -eq 0 ]; then
+            cd ${tmp_path}
+            curl -OL $1
+            cd -
+        else
+            echo "No http request tool."
+            exit 1;
+        fi
+        cp -vf ${tmp_path}/${down_file} $2
+        rm -vf ${tmp_path}/${down_file}
+        if [ ${down_file##*.} = "sh" ]; then
+            chmod +x $2
+        fi
     else
-        echo "No http request tool."
-        exit 1;
-    fi
-    cp -vf ${tmp_path}/${down_file} $2
-    rm -vf ${tmp_path}/${down_file}
-    if [ ${down_file##*.} = "sh" ]; then
-        chmod +x $2
+        cp -vf $1 $2
     fi
 }
 
@@ -44,7 +56,7 @@ if [ ${HAS_UPDATED:-NoDefine} = "NoDefine" ]; then
     chmod +x ${file_path}/${file_name}
     echo "--- Use updated update_dotfiles.sh to update dotfiles  ---"
     export HAS_UPDATED=1
-    eval ${file_path}/${file_name}
+    eval ${file_path}/${file_name} ${UPDATE_METHOD}
     unset HAS_UPDATED
     exit 0
 fi
