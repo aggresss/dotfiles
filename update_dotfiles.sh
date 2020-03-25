@@ -56,7 +56,7 @@ update_file ${DOTFILES_URL}/vim/.vimrc ${HOME}/.vimrc
 update_file ${DOTFILES_URL}/vim/.vimrc.bundles ${HOME}/.vimrc.bundles
 # vim
 if [ ! -d ${HOME}/.vim/bundle ]; then
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim \
+    git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim \
     && vim +BundleInstall +qall
 else
     vim +BundleInstall +qall
@@ -83,8 +83,8 @@ if [[ ${SHELL} =~ .*zsh$ ]]; then
         cat << END >> ${HOME}/.zshrc
 
 # modify by aggresss
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f ${HOME}/.bash_aliases ]; then
+    . ${HOME}/.bash_aliases
 fi
 
 END
@@ -104,8 +104,8 @@ elif [[ ${SHELL} =~ .*bash$ ]]; then
         cat << END >> ${HOME}/.bashrc
 
 # modify by aggresss
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f ${HOME}/.bash_aliases ]; then
+    . ${HOME}/.bash_aliases
 fi
 
 END
