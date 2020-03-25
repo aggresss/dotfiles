@@ -2,7 +2,7 @@
 # Update dotfiles from git@github.com:aggresss/dotfiles.git master branch
 # curl https://raw.githubusercontent.com/aggresss/dotfiles/master/bin/update_dotfiles.sh -sSf | bash
 
-if [ ${1:-NoDefine} = "local" -a -d ${HOME}/workspace-scratch/dotfiles ]; then
+if [ ${1:-NoDefine} = "local" ] && [ -d ${HOME}/workspace-scratch/dotfiles ]; then
     UPDATE_METHOD="local"
     DOTFILES_URL="${HOME}/workspace-scratch/dotfiles"
 else
