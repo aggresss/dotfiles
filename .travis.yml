@@ -9,7 +9,7 @@ addons:
     update: true
 
 install:
-  - ./bin/update_dotfiles.sh local
+  - ./bin/update_dotfiles.sh
 
 script:
   - source ~/.bashrc
