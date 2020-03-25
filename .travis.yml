@@ -3,13 +3,13 @@ os: linux
 dist: xenial
 
 before_install:
-  - sudo apt-get install -y ctags cscope
+  - sudo apt-get install -y vim ctags cscope
 addons:
   apt:
     update: true
 
 install:
-  - ./update_dotfiles.sh
+  - ./bin/update_dotfiles.sh local
 
 script:
   - source ~/.bashrc
