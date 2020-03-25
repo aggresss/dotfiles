@@ -1,15 +1,13 @@
 #!/usr/bin/env bash
 # Update dotfiles from git@github.com:aggresss/dotfiles.git master branch
-# curl https://raw.githubusercontent.com/aggresss/dotfiles/master/update_dotfiles.sh -sSf | bash
+# curl https://raw.githubusercontent.com/aggresss/dotfiles/master/bin/update_dotfiles.sh -sSf | bash
 
 if [ ${1:-NoDefine} = "local" ]; then
     UPDATE_METHOD="local"
     DOTFILES_URL="${HOME}/workspace-scratch/dotfiles"
-    BASH_URL="${HOME}/workspace-scratch/playground-bash"
 else
     UPDATE_METHOD="remote"
     DOTFILES_URL="https://github.com/aggresss/dotfiles/raw/master"
-    BASH_URL="https://github.com/aggresss/playground-bash/raw/master"
 fi
 
 # $1 download url
@@ -52,7 +50,7 @@ echo "=== Update dotfiles from git@github.com:aggresss/dotfiles.git master branc
 if [ ${HAS_UPDATED:-NoDefine} = "NoDefine" ]; then
     file_path=${HOME}/bin
     file_name=update_dotfiles.sh
-    update_file ${DOTFILES_URL}/${file_name} ${file_path}/${file_name}
+    update_file ${DOTFILES_URL}/bin/${file_name} ${file_path}/${file_name}
     chmod +x ${file_path}/${file_name}
     echo "--- Use updated update_dotfiles.sh to update dotfiles  ---"
     export HAS_UPDATED=1
@@ -64,17 +62,19 @@ fi
 # Update commom dotfiles
 update_file ${DOTFILES_URL}/home/.bash_aliases ${HOME}/.bash_aliases
 update_file ${DOTFILES_URL}/home/.inputrc ${HOME}/.inputrc
-update_file ${DOTFILES_URL}/tmux/.tmux.conf ${HOME}/.tmux.conf
+update_file ${DOTFILES_URL}/bin/hello.sh ${HOME}/bin/hello.sh
+# vim
 update_file ${DOTFILES_URL}/vim/.vimrc ${HOME}/.vimrc
 update_file ${DOTFILES_URL}/vim/.vimrc.bundles ${HOME}/.vimrc.bundles
-# vim
 if [ ! -d ${HOME}/.vim/bundle ]; then
     git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim \
     && vim +BundleInstall +qall
 else
     vim +BundleInstall +qall
 fi
-
+# tmux
+update_file ${DOTFILES_URL}/tmux/.tmux.conf ${HOME}/.tmux.conf
+# pip
 update_file ${DOTFILES_URL}/pip/pip.conf ${HOME}/.pip/pip.conf
 # .bash_profile
 if [ ! -f ${HOME}/.bash_profile ]; then
@@ -147,9 +147,6 @@ fi
 
 END
 fi
-
-# Update common bash utility
-update_file ${BASH_URL}/hello.sh ${HOME}/bin/hello.sh
 
 case $(uname) in
     Linux)

@@ -7,7 +7,7 @@
 ## How To Use
 
 ```shell
-curl https://raw.githubusercontent.com/aggresss/dotfiles/master/update_dotfiles.sh -sSf | bash
+curl https://raw.githubusercontent.com/aggresss/dotfiles/master/bin/update_dotfiles.sh -sSf | bash
 ```
 
 ## $HOME Filesystem Hierarchy Standard
