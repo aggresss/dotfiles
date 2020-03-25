@@ -95,10 +95,23 @@ END
         cat << END > /tmp/hello.go
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+	"os/signal"
+	"syscall"
+)
 
 func main() {
-    fmt.Println("Hello, World!")
+	ch := make(chan os.Signal, 1)
+	signal.Notify(ch, syscall.SIGINT, syscall.SIGTERM, syscall.SIGKILL)
+
+	fmt.Println("Hello, World!")
+
+	select {
+	case s := <-ch:
+		fmt.Println(s.String())
+	}
 }
 
 END
