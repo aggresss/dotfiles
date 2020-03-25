@@ -52,6 +52,7 @@ fi
 # Update commom dotfiles
 update_file ${DOTFILES_URL}/home/.bash_aliases ${HOME}/.bash_aliases
 update_file ${DOTFILES_URL}/home/.inputrc ${HOME}/.inputrc
+update_file ${DOTFILES_URL}/tmux/.tmux.conf ${HOME}/.tmux.conf
 update_file ${DOTFILES_URL}/vim/.vimrc ${HOME}/.vimrc
 update_file ${DOTFILES_URL}/vim/.vimrc.bundles ${HOME}/.vimrc.bundles
 # vim
