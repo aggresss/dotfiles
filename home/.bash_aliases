@@ -582,11 +582,11 @@ function git_global_set()
   local base_url="https://raw.githubusercontent.com/aggresss/dotfiles/master"
   update_file ${base_url}/.gitignore ${HOME}/.gitignore
   git config --global core.excludesfile ${HOME}/.gitignore
+  git config --global url."git@github.com:".insteadOf "https://github.com/"
   git config --global core.editor "vim"
   git config --global core.autocrlf false
   git config --global core.quotepath false
 }
-
 
 GIT_NAME_TITLE=''
 GIT_NAME_CONTENT=''
