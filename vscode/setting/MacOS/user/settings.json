@@ -7,7 +7,7 @@
 	"terminal.integrated.rendererType": "dom",
 	"window.zoomLevel": 0,
 	"workbench.startupEditor": "newUntitledFile",
-	"workbench.colorTheme": "Visual Studio Light - C++",
+	"workbench.colorTheme": "Visual Studio Light",
 	"explorer.confirmDragAndDrop": false,
 	"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
 	"java.configuration.checkProjectSettingsExclusions": false,
