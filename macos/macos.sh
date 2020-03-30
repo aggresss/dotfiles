@@ -15,7 +15,6 @@ brew install \
     ffmpeg \
     fontconfig \
     freetype \
-    gcc \
     gd \
     gettext \
     git \
@@ -33,7 +32,6 @@ brew install \
     lua \
     md5sha1sum \
     minicom \
-    mosquitto \
     mosh \
     openssl \
     gpg \
@@ -42,7 +40,6 @@ brew install \
     protobuf \
     pstree \
     python \
-    qt \
     readline \
     ruby \
     socat \
@@ -66,5 +63,11 @@ brew cask install \
     typora \
     drawio \
     insomnia \
+    mqttfx \
     vlc
+
+# Manual install
+# https://www.docker.com
+# https://www.virtualbox.org
+# https://www.wireshark.org
 
