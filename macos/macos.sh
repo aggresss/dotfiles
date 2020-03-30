@@ -15,7 +15,7 @@ brew install \
     ffmpeg \
     fontconfig \
     freetype \
-    gcc@7 \
+    gcc \
     gd \
     gettext \
     git \
@@ -42,7 +42,6 @@ brew install \
     protobuf \
     pstree \
     python \
-    python@2 \
     qt \
     readline \
     ruby \
@@ -55,26 +54,17 @@ brew install \
     unzip \
     wget \
     curl \
-    wine \
     xz \
     nodejs \
     ninja \
     redis
 
 brew cask install \
-    virtualbox \
-    vagrant \
-    docker \
     xquartz \
     diffmerge \
-    emacs \
-    mactex \
-    qt-creator \
     skim \
     typora \
-    wireshark \
     insomnia \
-    sequel-pro
 
 sudo gem install \
     iStats
