@@ -64,8 +64,7 @@ brew cask install \
     diffmerge \
     skim \
     typora \
+    drawio \
     insomnia \
-
-sudo gem install \
-    iStats
+    vlc
 
