@@ -70,4 +70,5 @@ brew cask install \
 # https://www.docker.com
 # https://www.virtualbox.org
 # https://www.wireshark.org
+# https://code.visualstudio.com
 
