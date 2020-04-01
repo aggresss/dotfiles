@@ -64,11 +64,6 @@ brew cask install \
     drawio \
     insomnia \
     mqttfx \
-    vlc
-
-# Manual install
-# https://www.docker.com
-# https://www.virtualbox.org
-# https://www.wireshark.org
-# https://code.visualstudio.com
+    vlc \
+    visual-studio-code
 
