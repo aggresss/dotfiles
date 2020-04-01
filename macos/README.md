@@ -3,7 +3,8 @@
 
 name | Website
 :---:|---
-Docker | https://www.docker.com
-VirtualBox | https://www.virtualbox.org
-Wireshark | https://www.wireshark.org
+Homebrew | https://brew.sh/
+Docker | https://www.docker.com/
+VirtualBox | https://www.virtualbox.org/
+Wireshark | https://www.wireshark.org/
 
