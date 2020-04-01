@@ -49,7 +49,7 @@ alias t='git_top'
 # fast show git branch
 alias b='git branch -vv'
 # fast execute file content
-alias r='source_file exec'
+alias x='source_file exec'
 # fast copy file content
 alias c='source_file copy'
 # fast edit index note file
