@@ -98,8 +98,8 @@ function source_file {
         Write-Host "Arguments error."
     } elseif ($args.Count -eq 1) {
         if (-not $(Test-Path $note_dir)) {
-            New-Item -ItemType Directory -Force -Path $note_dir
-            New-Item ${note_dir}/note.common -ItemType File
+            New-Item -Path $note_dir -ItemType Directory
+            New-Item -Path ${note_dir}/note.common -ItemType File
         }
         $file_index = Get-ChildItem -Path $note_dir -Exclude .*
         $file_index | add_index
