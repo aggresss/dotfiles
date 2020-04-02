@@ -65,5 +65,6 @@ brew cask install \
     insomnia \
     mqttfx \
     vlc \
+    balenaEtcher \
     visual-studio-code
 
