@@ -379,10 +379,11 @@ function vs_env {
  ########################>
 function update_self_config {
     $update_base_url = "https://raw.githubusercontent.com/aggresss/dotfiles/master"
-    Invoke-WebRequest `
+    $ErrorActionPreference = "stop"; `
+        Invoke-WebRequest `
         -Uri ${update_base_url}/powershell/Microsoft.PowerShell_profile.ps1 `
-        -OutFile $PROFILE
-    Unblock-File $PROFILE
+        -OutFile $PROFILE; `
+        Write-Host "Update configuration successful" -ForegroundColor DarkGreen
 }
 
 function update_vim_config {
