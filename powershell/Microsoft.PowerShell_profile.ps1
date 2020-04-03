@@ -3,7 +3,6 @@
  # URL: https://raw.githubusercontent.com/aggresss/dotfiles/master/PowerShell/Microsoft.PowerShell_profile.ps1
  # Before import this ps1 file, you need run these command:
  #     Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Confirm
- #     Install-Module posh-git -Scope CurrentUser -Force
  #     Set-Service -Name ssh-agent -StartupType automatic
  #>
 
@@ -217,7 +216,10 @@ Set-Alias e source_file_edit
  ########################>
 
 function git_prompt {
-    if (-not (get-module | Where-Object {$_.Name -eq "posh-git"})) {
+    if(-not $(Get-InstalledModule -Name "posh-git")) {
+        Install-Module posh-git -Scope CurrentUser -Force
+    }
+    if (-not (Get-Module -Name "posh-git")) {
         Import-Module -Name posh-git -Scope Global
     } else {
         $GitPromptSettings.EnablePromptStatus = -not $GitPromptSettings.EnablePromptStatus
