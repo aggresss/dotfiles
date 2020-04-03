@@ -1,5 +1,4 @@
 # file .bash_aliases
-# start of modify
 # modify by aggresss
 # wget https://raw.githubusercontent.com/aggresss/dotfiles/master/home/.bash_aliases
 
@@ -373,7 +372,6 @@ function env_prune()
     eval export $1="$(echo ${env_var} | sed -e "s;\(^\|:\)${del_element}\(:\|\$\);\1\2;g" -e 's;^:\|:$;;g' -e 's;::;:;g')"
 }
 
-
 ##########################
 # modify for vagrant
 ##########################
@@ -392,14 +390,12 @@ function vagrant_ps()
 
 }
 
-
 ##########################
 # modify for VirtualBox
 ##########################
 
 # alias for VirtualBox
 alias vb='VBoxManage'
-
 
 ##########################
 # modify for docker
