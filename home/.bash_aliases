@@ -1,5 +1,4 @@
 # file .bash_aliases
-# modify by aggresss
 # wget https://raw.githubusercontent.com/aggresss/dotfiles/master/home/.bash_aliases
 
 ##########################
@@ -922,6 +921,5 @@ case $(uname) in
         echo "No support this ENV."
         ;;
 esac
-
 
 # end of .bash_aliases
