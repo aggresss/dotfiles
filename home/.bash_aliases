@@ -858,6 +858,7 @@ env_append "PATH" "${HOME}/bin"
 
 # specified for system type
 echo -e "${GREEN}ENV: $(uname)${NORMAL}"
+echo -e "${GREEN}$(${SHELL} --version)${NORMAL}"
 case $(uname) in
     Darwin)
         # ls colours
