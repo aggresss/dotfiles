@@ -274,6 +274,21 @@ function git_sig {
     }
 }
 
+# Get pull request to local branch
+# $1 remote name
+# $2 pull request index No.
+function git_pull {
+    if ($args.Count -lt 2 ) {
+        Write-Host "Arguments error."
+        return
+    }
+    $remote_name=$args[0]
+    $remote_pr=$args[1]
+    $ErrorActionPreference = "stop"; `
+        git fetch ${remote_name} pull/${remote_pr}/head:pull/${remote_name}/${remote_pr}; `
+        git checkout pull/${remote_name}/${remote_pr}
+}
+
 function git_log {
     git log --oneline
 }
