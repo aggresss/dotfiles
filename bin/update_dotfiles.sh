@@ -76,6 +76,11 @@ fi
 update_file ${DOTFILES_URL}/tmux/.tmux.conf ${HOME}/.tmux.conf
 # pip
 update_file ${DOTFILES_URL}/pip/pip.conf ${HOME}/.pip/pip.conf
+# powershell
+if [ -d ${HOME}/.config/powershell ]; then
+    update_file ${DOTFILES_URL}/powershell/Microsoft.PowerShell_profile.ps1 \
+        ${HOME}/.config/powershell/Microsoft.PowerShell_profile.ps1
+fi
 # .bash_profile
 if [ ! -f ${HOME}/.bash_profile ]; then
     if [ -f /etc/skel/.bash_profile ]; then
