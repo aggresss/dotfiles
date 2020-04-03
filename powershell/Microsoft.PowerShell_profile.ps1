@@ -377,7 +377,7 @@ function vs_env {
 <########################
  # Update
  ########################>
-function update_self {
+function update_self_config {
     $update_base_url = "https://raw.githubusercontent.com/aggresss/dotfiles/master"
     Invoke-WebRequest `
         -Uri ${update_base_url}/powershell/Microsoft.PowerShell_profile.ps1 `
@@ -385,14 +385,10 @@ function update_self {
     Unblock-File $PROFILE
 }
 
-function update_vim {
+function update_vim_config {
     $update_base_url = "https://raw.githubusercontent.com/aggresss/dotfiles/master"
-    Invoke-WebRequest `
-        -Uri ${update_base_url}/vim/.vimrc `
-        -OutFile ${HOME}/.vimrc
-    Invoke-WebRequest `
-        -Uri ${update_base_url}/vim/.vimrc.bundles `
-        -OutFile ${HOME}/.vimrc.bundles
+    Invoke-WebRequest -Uri ${update_base_url}/vim/.vimrc -OutFile ${HOME}/.vimrc
+    Invoke-WebRequest -Uri ${update_base_url}/vim/.vimrc.bundles -OutFile ${HOME}/.vimrc.bundles
     if (-not $(Test-Path ${HOME}/.vim/bundle)) {
         $ErrorActionPreference = "stop"; `
             git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim; `
