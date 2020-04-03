@@ -377,5 +377,5 @@ function vs_env {
 <########################
  # Echo Envronment
  ########################>
-
+Write-Host ($PSVersionTable).OS -ForegroundColor DarkGreen
 Write-Host "PowerShell Version:" ${PSVersionTable}.PSVersion.ToString() -ForegroundColor DarkGreen
