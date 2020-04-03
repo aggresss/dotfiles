@@ -22,11 +22,18 @@ Set-Alias grep Select-String
 function u {. $profile}
 function touch {New-Item "$args" -ItemType File}
 
-Set-Alias vim "${Env:ProgramFiles(x86)}\Vim\vim82\vim.exe"
-Set-Alias code "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe"
+$vim_path = "${Env:ProgramFiles(x86)}\Vim\vim82\vim.exe"
+if ($(Test-Path $vim_path)) {
+    Set-Alias vim $vim_path
+}
+
+$code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe"
+if ($(Test-Path $code_path)) {
+    Set-Alias code $code_path
+}
 
 function cd_scratch {
-    $s_path = "${env:USERPROFILE}\workspace-scratch"
+    $s_path = "${HOME}\workspace-scratch"
     if (-not $(Test-Path $s_path)) {
         New-Item $s_path -ItemType directory -Force
     }
@@ -35,7 +42,7 @@ function cd_scratch {
 Set-Alias s cd_scratch
 
 function cd_formal {
-    $f_path = "${env:USERPROFILE}\workspace-formal"
+    $f_path = "${HOME}\workspace-formal"
     if (-not $(Test-Path $f_path)) {
         New-Item $f_path -ItemType directory -Force
     }
@@ -44,7 +51,7 @@ function cd_formal {
 Set-Alias f cd_formal
 
 function cd_documents {
-    $doc_path = "${env:USERPROFILE}\Documents"
+    $doc_path = "${HOME}\Documents"
     if (-not $(Test-Path $doc_path)) {
         New-Item $doc_path -ItemType directory -Force
     }
@@ -53,7 +60,7 @@ function cd_documents {
 Set-Alias m cd_documents
 
 function cd_downloads {
-    $down_path = "${env:USERPROFILE}\Downloads"
+    $down_path = "${HOME}\Downloads"
     if (-not $(Test-Path $down_path)) {
         New-Item $down_path -ItemType directory -Force
     }
@@ -81,7 +88,7 @@ Set-Alias k ssh_agent_del
 # args[1] file
 # args[2..-1] lines
 function source_file {
-    $note_dir = "${env:USERPROFILE}\note\"
+    $note_dir = "${HOME}\note\"
     function add_index {
         Begin { $i = 1}
         Process {
@@ -329,6 +336,9 @@ function go_clone {
 
 function vs_env {
     $vs_path = "${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\Community\Common7\Tools"
+    if (-not $(Test-Path $vs_path)) {
+        return
+    }
     Push-Location $vs_path
     cmd /c "VsDevCmd.bat & set" |
         ForEach-Object {
