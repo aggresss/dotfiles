@@ -66,5 +66,6 @@ brew cask install \
     mqttfx \
     vlc \
     balenaEtcher \
+    powershell \
     visual-studio-code
 
