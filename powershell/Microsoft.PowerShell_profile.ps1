@@ -19,6 +19,13 @@ Set-Alias grep Select-String
 
 function u {. $profile}
 function touch {New-Item "$args" -ItemType File}
+function ll {
+    if ((Get-Command ls).CommandType -eq "Application") {
+        ls -al
+    } else {
+        Get-ChildItem -Attributes !System,Hidden
+    }
+}
 
 $vim_path = "${Env:ProgramFiles(x86)}\Vim\vim82\vim.exe"
 if ($(Test-Path $vim_path)) {
