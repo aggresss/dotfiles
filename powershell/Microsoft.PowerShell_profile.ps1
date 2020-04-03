@@ -3,7 +3,6 @@
  # URL: https://raw.githubusercontent.com/aggresss/dotfiles/master/PowerShell/Microsoft.PowerShell_profile.ps1
  # Before import this ps1 file, you need run these command:
  #     Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Confirm
- #     Set-Service -Name ssh-agent -StartupType automatic
  #>
 
 <########################
