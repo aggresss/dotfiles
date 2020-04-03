@@ -355,5 +355,4 @@ function vs_env {
  # Echo Envronment
  ########################>
 
-Write-Host "ENV:" (Get-WmiObject Win32_OperatingSystem).Caption -ForegroundColor DarkGreen
 Write-Host "PowerShell Version:" ${PSVersionTable}.PSVersion.ToString() -ForegroundColor DarkGreen
