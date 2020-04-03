@@ -375,6 +375,34 @@ function vs_env {
 }
 
 <########################
+ # Update
+ ########################>
+function update_self {
+    $update_base_url = "https://raw.githubusercontent.com/aggresss/dotfiles/master"
+    Invoke-WebRequest `
+        -Uri ${update_base_url}/powershell/Microsoft.PowerShell_profile.ps1 `
+        -OutFile $PROFILE
+    Unblock-File $PROFILE
+}
+
+function update_vim {
+    $update_base_url = "https://raw.githubusercontent.com/aggresss/dotfiles/master"
+    Invoke-WebRequest `
+        -Uri ${update_base_url}/vim/.vimrc `
+        -OutFile ${HOME}/.vimrc
+    Invoke-WebRequest `
+        -Uri ${update_base_url}/vim/.vimrc.bundles `
+        -OutFile ${HOME}/.vimrc.bundles
+    if (-not $(Test-Path ${HOME}/.vim/bundle)) {
+        $ErrorActionPreference = "stop"; `
+            git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim; `
+            vim +BundleInstall +qall
+    } else {
+        vim +BundleInstall +qall
+    }
+}
+
+<########################
  # Echo Envronment
  ########################>
 Write-Host ($PSVersionTable).OS -ForegroundColor DarkGreen
