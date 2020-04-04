@@ -10,81 +10,82 @@
  ########################>
 
 # short for cd ..
-function .. {Set-Location ..}
-function ... {Set-Location ../..}
-function .... {Set-Location ../../../}
-function ..... {Set-Location ../../../../}
+function .. { Set-Location .. }
+function ... { Set-Location ../.. }
+function .... { Set-Location ../../../ }
+function ..... { Set-Location ../../../../ }
 
 Set-Alias grep Select-String
 
-function u {. $profile}
-function touch {New-Item "$args" -ItemType File}
+function u { . $profile }
+function touch { New-Item "$args" -ItemType File }
 function ll {
-    if ((Get-Command ls).CommandType -eq "Application") {
-        ls -al
-    } else {
-        Get-ChildItem -Attributes !System,Hidden
-    }
+  if ((Get-Command ls).CommandType -eq "Application") {
+    ls -al
+  }
+  else {
+    Get-ChildItem -Attributes !System, Hidden
+  }
 }
 
 $vim_path = "${Env:ProgramFiles(x86)}\Vim\vim82\vim.exe"
 if ($(Test-Path $vim_path)) {
-    Set-Alias vim $vim_path
+  Set-Alias vim $vim_path
 }
 
 $code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe"
 if ($(Test-Path $code_path)) {
-    Set-Alias code $code_path
+  Set-Alias code $code_path
 }
 
 function cd_scratch {
-    $s_path = "${HOME}\workspace-scratch"
-    if (-not $(Test-Path $s_path)) {
-        New-Item $s_path -ItemType directory -Force
-    }
-    Set-Location $s_path
+  $s_path = "${HOME}\workspace-scratch"
+  if (-not $(Test-Path $s_path)) {
+    New-Item $s_path -ItemType directory -Force
+  }
+  Set-Location $s_path
 }
 Set-Alias s cd_scratch
 
 function cd_formal {
-    $f_path = "${HOME}\workspace-formal"
-    if (-not $(Test-Path $f_path)) {
-        New-Item $f_path -ItemType directory -Force
-    }
-    Set-Location $f_path
+  $f_path = "${HOME}\workspace-formal"
+  if (-not $(Test-Path $f_path)) {
+    New-Item $f_path -ItemType directory -Force
+  }
+  Set-Location $f_path
 }
 Set-Alias f cd_formal
 
 function cd_documents {
-    $doc_path = "${HOME}\Documents"
-    if (-not $(Test-Path $doc_path)) {
-        New-Item $doc_path -ItemType directory -Force
-    }
-    Set-Location $doc_path
+  $doc_path = "${HOME}\Documents"
+  if (-not $(Test-Path $doc_path)) {
+    New-Item $doc_path -ItemType directory -Force
+  }
+  Set-Location $doc_path
 }
 Set-Alias m cd_documents
 
 function cd_downloads {
-    $down_path = "${HOME}\Downloads"
-    if (-not $(Test-Path $down_path)) {
-        New-Item $down_path -ItemType directory -Force
-    }
-    Set-Location $down_path
+  $down_path = "${HOME}\Downloads"
+  if (-not $(Test-Path $down_path)) {
+    New-Item $down_path -ItemType directory -Force
+  }
+  Set-Location $down_path
 }
 Set-Alias d cd_downloads
 
 # SSH
 function ssh_agent_add {
-    ssh-agent.exe
-    ssh-add.exe -l
-    if (-not $?) {
-        ssh-add.exe
-    }
+  ssh-agent.exe
+  ssh-add.exe -l
+  if (-not $?) {
+    ssh-add.exe
+  }
 }
 Set-Alias a ssh_agent_add
 
 function ssh_agent_del {
-    ssh-add.exe -d
+  ssh-add.exe -d
 }
 Set-Alias k ssh_agent_del
 
@@ -93,127 +94,135 @@ Set-Alias k ssh_agent_del
 # args[1] file
 # args[2..-1] lines
 function source_file {
-    $note_dir = "${HOME}\note\"
-    function add_index {
-        Begin { $i = 1}
-        Process {
-            $_ | Add-Member -NotePropertyName "Index" -NotePropertyValue $i
-            $i++
-        }
-        End {}
+  $note_dir = "${HOME}\note\"
+  function add_index {
+    Begin { $i = 1 }
+    Process {
+      $_ | Add-Member -NotePropertyName "Index" -NotePropertyValue $i
+      $i++
     }
-    function number_line{
-        Get-content $args | Out-String -Stream | Select-String '.*' | Select-Object LineNumber, Line
-    }
+    End { }
+  }
+  function number_line {
+    Get-content $args | Out-String -Stream | Select-String '.*' | Select-Object LineNumber, Line
+  }
 
-    if ($args.Count -eq 0) {
-        Write-Host "Arguments error."
-    } elseif ($args.Count -eq 1) {
-        if (-not $(Test-Path $note_dir)) {
-            New-Item -Path $note_dir -ItemType Directory
-            New-Item -Path ${note_dir}/note.common -ItemType File
-        }
-        $file_index = Get-ChildItem -Path $note_dir -Exclude .*
-        $file_index | add_index
-        $file_index | Format-Table -Property Index,Name -AutoSize
-    } else {
-        $filepath = ""
-        $file_index = Get-ChildItem -Path $note_dir -Exclude .*
-        $file_index | add_index
-        if (($args[1] -match '^[0-9]+$') -and ($args[1] -gt $file_index.Count)) {
-            Write-Host "File index out of range."
-            return
-        }
-        if (($args[1] -match '^[0-9]+$') -and ($args[1] -le $file_index.Count)) {
-            $index = $args[1]
-            $filename = $file_index | Where-Object {$_.Index -eq $index}
-            $filepath = $note_dir + $filename.Name.ToString()
-        } else {
-            $filepath = $args[1]
-        }
-        if ( ($args.Count -eq 2) -or (($args.Count -ge 2) -and ($args[0] -eq "edit")) ) {
-            if ($args[0] -eq "edit") {
-                vim $filepath
-            } else {
-                number_line $filepath
-            }
-            return
-        }
-        if (-not $(Test-Path $filepath)) {
-            Write-Host "File not exist." -ForegroundColor Red
-            return
-        }
-        # Process index of spesical file
-        $ReadyCacheArray = @()
-        $file_cache = Get-Content -Path $filepath
-        for ($k = 2; $k -lt $args.Count; $k++) {
-            if ($args[$k] -eq "all") {
-                for($j = 0; $j -lt $file_cache.Count; $j++) {
-                    $data = [ordered]@{LineNumber=$j + 1;Content=$file_cache[$j].ToString()}
-                    $ReadyCacheArray += New-Object -TypeName PSCustomObject -Property $data
-                }
-            } elseif (($args[$k] -match '^[0-9]+$') -and ($args[$k] -le $file_cache.Count)) {
-                $data = [ordered]@{LineNumber=$args[$k];Content=$file_cache[$args[$k] - 1].ToString()}
-                $ReadyCacheArray += New-Object -TypeName PSCustomObject -Property $data
-            } elseif ($args[$k] -match '-') {
-                $from = $args[$k].split('-', 2)[0]
-                $to = $args[$k].split('-', 2)[1]
-                if (($from -match '^[0-9]+$') -and ($to -match '^[0-9]+$') `
-                        -and ($from -le $file_cache.Count) `
-                        -and ($to -le $file_cache.Count)) {
-                    $range = $from..$to
-                    foreach ($item in $range) {
-                        $data = [ordered]@{LineNumber=$item;Content=$file_cache[$item - 1].ToString()}
-                        $ReadyCacheArray += New-Object -TypeName PSCustomObject -Property $data
-                    }
-                }
-            }
-        }
-        # Process Action
-        if ($ReadyCacheArray.Count -eq 0) {
-            return
-        } else {
-            $ReadyCacheArray
-        }
-        if ($args[0] -eq "copy") {
-            $output_clipboard = @()
-            foreach ($str in $ReadyCacheArray) {
-                $output_clipboard += $str.Content.ToString()
-            }
-            Set-Clipboard $output_clipboard
-        } elseif ($args[0] -eq "exec") {
-            $output_exec = ""
-            foreach ($str in $ReadyCacheArray) {
-                $output_exec += $str.Content.ToString()
-                $output_exec += ";"
-            }
-            $output_exec | Invoke-Expression
-        }
+  if ($args.Count -eq 0) {
+    Write-Host "Arguments error."
+  }
+  elseif ($args.Count -eq 1) {
+    if (-not $(Test-Path $note_dir)) {
+      New-Item -Path $note_dir -ItemType Directory
+      New-Item -Path ${note_dir}/note.common -ItemType File
     }
+    $file_index = Get-ChildItem -Path $note_dir -Exclude .*
+    $file_index | add_index
+    $file_index | Format-Table -Property Index, Name -AutoSize
+  }
+  else {
+    $filepath = ""
+    $file_index = Get-ChildItem -Path $note_dir -Exclude .*
+    $file_index | add_index
+    if (($args[1] -match '^[0-9]+$') -and ($args[1] -gt $file_index.Count)) {
+      Write-Host "File index out of range."
+      return
+    }
+    if (($args[1] -match '^[0-9]+$') -and ($args[1] -le $file_index.Count)) {
+      $index = $args[1]
+      $filename = $file_index | Where-Object { $_.Index -eq $index }
+      $filepath = $note_dir + $filename.Name.ToString()
+    }
+    else {
+      $filepath = $args[1]
+    }
+    if ( ($args.Count -eq 2) -or (($args.Count -ge 2) -and ($args[0] -eq "edit")) ) {
+      if ($args[0] -eq "edit") {
+        vim $filepath
+      }
+      else {
+        number_line $filepath
+      }
+      return
+    }
+    if (-not $(Test-Path $filepath)) {
+      Write-Host "File not exist." -ForegroundColor Red
+      return
+    }
+    # Process index of spesical file
+    $ReadyCacheArray = @()
+    $file_cache = Get-Content -Path $filepath
+    for ($k = 2; $k -lt $args.Count; $k++) {
+      if ($args[$k] -eq "all") {
+        for ($j = 0; $j -lt $file_cache.Count; $j++) {
+          $data = [ordered]@{LineNumber = $j + 1; Content = $file_cache[$j].ToString() }
+          $ReadyCacheArray += New-Object -TypeName PSCustomObject -Property $data
+        }
+      }
+      elseif (($args[$k] -match '^[0-9]+$') -and ($args[$k] -le $file_cache.Count)) {
+        $data = [ordered]@{LineNumber = $args[$k]; Content = $file_cache[$args[$k] - 1].ToString() }
+        $ReadyCacheArray += New-Object -TypeName PSCustomObject -Property $data
+      }
+      elseif ($args[$k] -match '-') {
+        $from = $args[$k].split('-', 2)[0]
+        $to = $args[$k].split('-', 2)[1]
+        if (($from -match '^[0-9]+$') -and ($to -match '^[0-9]+$') `
+            -and ($from -le $file_cache.Count) `
+            -and ($to -le $file_cache.Count)) {
+          $range = $from..$to
+          foreach ($item in $range) {
+            $data = [ordered]@{LineNumber = $item; Content = $file_cache[$item - 1].ToString() }
+            $ReadyCacheArray += New-Object -TypeName PSCustomObject -Property $data
+          }
+        }
+      }
+    }
+    # Process Action
+    if ($ReadyCacheArray.Count -eq 0) {
+      return
+    }
+    else {
+      $ReadyCacheArray
+    }
+    if ($args[0] -eq "copy") {
+      $output_clipboard = @()
+      foreach ($str in $ReadyCacheArray) {
+        $output_clipboard += $str.Content.ToString()
+      }
+      Set-Clipboard $output_clipboard
+    }
+    elseif ($args[0] -eq "exec") {
+      $output_exec = ""
+      foreach ($str in $ReadyCacheArray) {
+        $output_exec += $str.Content.ToString()
+        $output_exec += ";"
+      }
+      $output_exec | Invoke-Expression
+    }
+  }
 }
 function source_file_exec {
-    $run_script="source_file exec"
-    foreach($a in $args){
-        $run_script += " $a"
-    }
-    $run_script | Invoke-Expression
+  $run_script = "source_file exec"
+  foreach ($a in $args) {
+    $run_script += " $a"
+  }
+  $run_script | Invoke-Expression
 }
 Set-Alias x source_file_exec
 function source_file_copy {
-    $run_script="source_file copy"
-    foreach($a in $args){
-        $run_script += " $a"
-    }
-    $run_script | Invoke-Expression
+  $run_script = "source_file copy"
+  foreach ($a in $args) {
+    $run_script += " $a"
+  }
+  $run_script | Invoke-Expression
 }
 Set-Alias c source_file_copy
 
 function source_file_edit {
-    $run_script="source_file edit"
-    foreach($a in $args){
-        $run_script += " $a"
-    }
-    $run_script | Invoke-Expression
+  $run_script = "source_file edit"
+  foreach ($a in $args) {
+    $run_script += " $a"
+  }
+  $run_script | Invoke-Expression
 }
 Set-Alias e source_file_edit
 
@@ -222,98 +231,105 @@ Set-Alias e source_file_edit
  ########################>
 
 function git_prompt {
-    if(-not $(Get-InstalledModule -Name "posh-git")) {
-        Install-Module posh-git -Scope CurrentUser -Force
-    }
-    if (-not (Get-Module -Name "posh-git")) {
-        Import-Module -Name posh-git -Scope Global
-    } else {
-        $GitPromptSettings.EnablePromptStatus = -not $GitPromptSettings.EnablePromptStatus
-    }
+  if (-not $(Get-InstalledModule -Name "posh-git")) {
+    Install-Module posh-git -Scope CurrentUser -Force
+  }
+  if (-not (Get-Module -Name "posh-git")) {
+    Import-Module -Name posh-git -Scope Global
+  }
+  else {
+    $GitPromptSettings.EnablePromptStatus = -not $GitPromptSettings.EnablePromptStatus
+  }
 }
 Set-Alias p git_prompt
 
 function git_status {
-    git status
-    git stash list
+  git status
+  git stash list
 }
 Set-Alias y git_status
 
 function git_top {
-    git rev-parse --show-toplevel | Set-Location
+  git rev-parse --show-toplevel | Set-Location
 }
 Set-Alias t git_top
 
 function git_haste {
-    $branch = Get-GitBranch
-    if (-not $branch) {
-        Write-Host "Not a git repository"
-        return
-    }
-    if ($args -eq "commit") {
-        git commit -m $(get-date -uformat "%Y-%m-%d %T %Z W%WD%u")
-    } elseif ($args -eq "rebase") {
-        git fetch origin
-        git rebase origin/${branch}
-    } else {
-        git commit -m $(get-date -uformat "%Y-%m-%d %T %Z W%WD%u")
-        git push origin ${branch}:${branch}
-    }
+  $branch = Get-GitBranch
+  if (-not $branch) {
+    Write-Host "Not a git repository"
+    return
+  }
+  if ($args -eq "commit") {
+    git commit -m $(get-date -uformat "%Y-%m-%d %T %Z W%WD%u")
+  }
+  elseif ($args -eq "rebase") {
+    git fetch origin
+    git rebase origin/${branch}
+  }
+  else {
+    git commit -m $(get-date -uformat "%Y-%m-%d %T %Z W%WD%u")
+    git push origin ${branch}:${branch}
+  }
 }
 
 function git_sig {
-    if ($args.Count -eq 0) {
-        Write-Host "user.name: $(git config --get user.name)"
-        Write-Host "user.email: $(git config --get user.email)"
-    } elseif ($args -match "@") {
-        $v = $args.split("@")
-        git config user.name $v[0]
-        git config user.email $args
-    } else {
-        Write-Host "Arguments error."
-    }
+  if ($args.Count -eq 0) {
+    Write-Host "user.name: $(git config --get user.name)"
+    Write-Host "user.email: $(git config --get user.email)"
+  }
+  elseif ($args -match "@") {
+    $v = $args.split("@")
+    git config user.name $v[0]
+    git config user.email $args
+  }
+  else {
+    Write-Host "Arguments error."
+  }
 }
 
 # Get pull request to local branch
 # $1 remote name
 # $2 pull request index No.
 function git_pull {
-    if ($args.Count -lt 2 ) {
-        Write-Host "Arguments error."
-        return
-    }
-    $remote_name=$args[0]
-    $remote_pr=$args[1]
-    $ErrorActionPreference = "stop"; `
-        git fetch ${remote_name} pull/${remote_pr}/head:pull/${remote_name}/${remote_pr}; `
-        git checkout pull/${remote_name}/${remote_pr}
+  if ($args.Count -lt 2 ) {
+    Write-Host "Arguments error."
+    return
+  }
+  $remote_name = $args[0]
+  $remote_pr = $args[1]
+  $ErrorActionPreference = "stop"; `
+    git fetch ${remote_name} pull/${remote_pr}/head:pull/${remote_name}/${remote_pr}; `
+    git checkout pull/${remote_name}/${remote_pr}
 }
 
 function git_log {
-    git log --oneline
+  git log --oneline
 }
 
 function git_branch {
-    git branch -vv $args
+  git branch -vv $args
 }
 Set-Alias b git_branch
 
 function git_clone {
-    $clone_path = $args[0]
-    if ($clone_path -match "@") {
-        $clone_path = $clone_path.split("@")[1]
-        $clone_path = $clone_path.replace(":", "/")
-    } elseif ($clone_path -match "://") {
-        $clone_path = $clone_path.split("/", 3)[2]
-    } else {
-        Write-Host "Arguments error."
-        return
-    }
-    # strip suffix
-    $clone_path = $clone_path.replace(".git", "")
+  $clone_path = $args[0]
+  if ($clone_path -match "@") {
+    $clone_path = $clone_path.split("@")[1]
+    $clone_path = $clone_path.replace(":", "/")
+  }
+  elseif ($clone_path -match "://") {
+    $clone_path = $clone_path.split("/", 3)[2]
+  }
+  else {
+    Write-Host "Arguments error."
+    return
+  }
+  # strip suffix
+  $clone_path = $clone_path.replace(".git", "")
 
-    Write-Host Clone on $clone_path
-    git clone $args $clone_path
+  Write-Host Clone on $clone_path
+  git clone $args $clone_path
 }
 
 <########################
@@ -322,35 +338,36 @@ function git_clone {
 
 $GOPATH_BAK = ${env:GOPATH}
 # reset $GOPATH
-function go_reset()
-{
-    ${env:GOPATH} = ${GOPATH_BAK}
-    Write-Host "Successful clear GOPATH: ${env:GOPATH}"
+function go_reset() {
+  ${env:GOPATH} = ${GOPATH_BAK}
+  Write-Host "Successful clear GOPATH: ${env:GOPATH}"
 }
-function go_pwd {$Env:GOPATH="${PWD}"}
+function go_pwd { $Env:GOPATH = "${PWD}" }
 
 function go_path {
-    Write-Host "GOPATH: ${env:GOPATH}" -ForegroundColor DarkGreen
+  Write-Host "GOPATH: ${env:GOPATH}" -ForegroundColor DarkGreen
 }
 Set-Alias g go_path
 
 function go_clone {
-    $clone_path = $args[0]
-    if ($clone_path -match "@") {
-        $clone_path = $clone_path.split("@")[1]
-        $clone_path = $clone_path.replace(":", "/")
-    } elseif ($clone_path -match "://") {
-        $clone_path = $clone_path.split("/", 3)[2]
-    } else {
-        Write-Host "Arguments error."
-        return
-    }
-    # strip suffix
-    $clone_path = $clone_path.replace(".git", "")
-    $repo_name = $clone_path.split("/")[-1]
+  $clone_path = $args[0]
+  if ($clone_path -match "@") {
+    $clone_path = $clone_path.split("@")[1]
+    $clone_path = $clone_path.replace(":", "/")
+  }
+  elseif ($clone_path -match "://") {
+    $clone_path = $clone_path.split("/", 3)[2]
+  }
+  else {
+    Write-Host "Arguments error."
+    return
+  }
+  # strip suffix
+  $clone_path = $clone_path.replace(".git", "")
+  $repo_name = $clone_path.split("/")[-1]
 
-    Write-Host Clone on $repo_name/src/$clone_path
-    git clone $args $repo_name/src/$clone_path
+  Write-Host Clone on $repo_name/src/$clone_path
+  git clone $args $repo_name/src/$clone_path
 }
 
 <########################
@@ -358,65 +375,71 @@ function go_clone {
  ########################>
 
 function vs_env {
-    $vs_path = "${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\Community\Common7\Tools"
-    if (-not $(Test-Path $vs_path)) {
-        return
+  $vs_path = "${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\Community\Common7\Tools"
+  if (-not $(Test-Path $vs_path)) {
+    return
+  }
+  Push-Location $vs_path
+  cmd /c "VsDevCmd.bat & set" |
+  ForEach-Object {
+    if ($_ -match "=") {
+      $v = $_.split("=")
+      Set-Item -Force -Path "Env:\$($v[0])" -Value "$($v[1])"
     }
-    Push-Location $vs_path
-    cmd /c "VsDevCmd.bat & set" |
-        ForEach-Object {
-            if ($_ -match "=") {
-                $v = $_.split("=")
-                Set-Item -Force -Path "Env:\$($v[0])" -Value "$($v[1])"
-        }
-    }
-    Pop-Location
-    Write-Host "`nVisual Studio Command Prompt variables set." -ForegroundColor Yellow
+  }
+  Pop-Location
+  Write-Host "`nVisual Studio Command Prompt variables set." -ForegroundColor Yellow
 }
 
 <########################
  # Update
  ########################>
 
-# $0 isLocal
-# $1 remotePath
-# $2 localPath
 function update_internal {
-    $local_base_path = "${HOME}/workspace-scratch/dotfiles"
-    $remote_base_url = "https://raw.githubusercontent.com/aggresss/dotfiles/master"
-    if (($args[0] -eq "local") -and ($(Test-Path $local_base_path))) {
-        $ErrorActionPreference = "stop"; `
-            Copy-Item ${local_base_path}/$args[1] $args[2]; `
-            Write-Host "Local update $args[2] successful." -ForegroundColor DarkGreen
-    } else {
-        $ErrorActionPreference = "stop"; `
-            Invoke-WebRequest -Uri ${remote_base_url}/$args[1] -OutFile $args[2]; `
-            Write-Host "Remote update $args[2] successful." -ForegroundColor DarkGreen
-    }
+  Param (
+    [parameter(Mandatory = $true)] [bool]$IsLocal,
+    [parameter(Mandatory = $true)] [String]$Remote,
+    [parameter(Mandatory = $true)] [String]$Local
+  )
+  $local_base_path = "${HOME}/workspace-scratch/dotfiles"
+  $remote_base_url = "https://raw.githubusercontent.com/aggresss/dotfiles/master"
+  if ($IsLocal -and ($(Test-Path $local_base_path))) {
+    $ErrorActionPreference = "stop"; `
+      Copy-Item "${local_base_path}/$Remote" "$Local"; `
+      Write-Host "Local update $Local successful." -ForegroundColor DarkGreen
+  }
+  else {
+    $ErrorActionPreference = "stop"; `
+      Invoke-WebRequest -Uri "${remote_base_url}/$Remote" -OutFile "$Local"; `
+      Write-Host "Remote update $Local successful." -ForegroundColor DarkGreen
+  }
 }
 function update_config_self {
-    if ($args[0] -eq "local") {
-        update_internal local "powershell/Microsoft.PowerShell_profile.ps1" $PROFILE
-    } else {
-        update_internal remote "powershell/Microsoft.PowerShell_profile.ps1" $PROFILE
-    }
+  if ($args[0] -eq "local") {
+    update_internal $true "powershell/Microsoft.PowerShell_profile.ps1" $PROFILE
+  }
+  else {
+    update_internal $false "powershell/Microsoft.PowerShell_profile.ps1" $PROFILE
+  }
 }
 
 function update_config_vim {
-    if ($args[0] -eq "local") {
-        update_internal local "vim/.vimrc" "${HOME}/.vimrc"
-        update_internal local "vim/.vimrc.bundles" "${HOME}/.vimrc.bundles"
-    } else {
-        update_internal remote "vim/.vimrc" "${HOME}/.vimrc"
-        update_internal remote "vim/.vimrc.bundles" "${HOME}/.vimrc.bundles"
-    }
-    if (-not $(Test-Path ${HOME}/.vim/bundle)) {
-        $ErrorActionPreference = "stop"; `
-            git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim; `
-            vim +BundleInstall +qall
-    } else {
-        vim +BundleInstall +qall
-    }
+  if ($args[0] -eq "local") {
+    update_internal $true "vim/.vimrc" "${HOME}/.vimrc"
+    update_internal $true "vim/.vimrc.bundles" "${HOME}/.vimrc.bundles"
+  }
+  else {
+    update_internal $false "vim/.vimrc" "${HOME}/.vimrc"
+    update_internal $false "vim/.vimrc.bundles" "${HOME}/.vimrc.bundles"
+  }
+  if (-not $(Test-Path ${HOME}/.vim/bundle)) {
+    $ErrorActionPreference = "stop"; `
+      git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim; `
+      vim +BundleInstall +qall
+  }
+  else {
+    vim +BundleInstall +qall
+  }
 }
 
 <########################
