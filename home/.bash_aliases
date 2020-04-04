@@ -837,9 +837,8 @@ if [ -d "$HOME/.cargo/bin" ]; then
     env_insert "PATH" "$HOME/.cargo/bin"
 fi
 
-
 ##########################
-# specified
+# ENV specified
 ##########################
 
 # specified for ${HOME}/.local/bin
@@ -852,17 +851,13 @@ env_append "PATH" "${HOME}/.local/bin"
 env_append "PATH" "${HOME}/bin"
 
 # specified for system type
-echo -e "${GREEN}ENV: $(uname)${NORMAL}"
+echo -e "${GREEN}$(uname -a)${NORMAL}"
+echo -e "${CYAN}${SHELL}${NORMAL}"
 case $(uname) in
     Darwin)
         # ls colours
         export CLICOLOR=1
         export LSCOLORS=ExGxFxDxCxegedabagacad
-        # environment for java
-        export JAVA_HOME="/usr/libexec/java_home"
-        env_append "PATH" "$JAVA_HOME/bin"
-        # wine chinese character
-        alias wine='env LANG=zh_CN.UTF8 wine'
         # use "brew install gnu-*" instead of bsd-*
         alias sed='gsed'
         alias awk='gawk'
@@ -880,17 +875,13 @@ case $(uname) in
         ;;
     Linux)
         release_info=$(uname -r | awk -F'-' '{print $NF}')
+        # Specified for Microsoft WSL
+        if [ "${release_info}" = "Microsoft" ]; then
+            export DISPLAY=localhost:0
+        fi
         # specified for docker container
         if [ -f /.dockerenv ]; then
             echo -e "${YELLOW}DOCKER_IMAGE: ${DOCKER_IMAGE}${NORMAL}"
-            if [ "${release_info}" = "linuxkit" ]; then
-                echo -e "${CYAN}HOST: ${release_info}${NORMAL}"
-            fi
-        fi
-        # Specified for Microsoft WSL
-        if [ "${release_info}" = "Microsoft" ]; then
-            echo -e "${CYAN}HOST: ${release_info}${NORMAL}"
-            export DISPLAY=localhost:0
         fi
         # Specified for Gnome environment
         if [ $(command -v gnome-terminal >/dev/null; echo $?) -eq 0 ]; then

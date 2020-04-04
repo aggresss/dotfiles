@@ -377,19 +377,39 @@ function vs_env {
 <########################
  # Update
  ########################>
-function update_self_config {
-    $update_base_url = "https://raw.githubusercontent.com/aggresss/dotfiles/master"
-    $ErrorActionPreference = "stop"; `
-        Invoke-WebRequest `
-        -Uri ${update_base_url}/powershell/Microsoft.PowerShell_profile.ps1 `
-        -OutFile $PROFILE; `
-        Write-Host "Update configuration successful" -ForegroundColor DarkGreen
+
+# $0 isLocal
+# $1 remotePath
+# $2 localPath
+function update_internal {
+    $local_base_path = "${HOME}/workspace-scratch/dotfiles"
+    $remote_base_url = "https://raw.githubusercontent.com/aggresss/dotfiles/master"
+    if (($args[0] -eq "local") -and ($(Test-Path $local_base_path))) {
+        $ErrorActionPreference = "stop"; `
+            Copy-Item ${local_base_path}/$args[1] $args[2]; `
+            Write-Host "Local update $args[2] successful." -ForegroundColor DarkGreen
+    } else {
+        $ErrorActionPreference = "stop"; `
+            Invoke-WebRequest -Uri ${remote_base_url}/$args[1] -OutFile $args[2]; `
+            Write-Host "Remote update $args[2] successful." -ForegroundColor DarkGreen
+    }
+}
+function update_config_self {
+    if ($args[0] -eq "local") {
+        update_internal local "powershell/Microsoft.PowerShell_profile.ps1" $PROFILE
+    } else {
+        update_internal remote "powershell/Microsoft.PowerShell_profile.ps1" $PROFILE
+    }
 }
 
-function update_vim_config {
-    $update_base_url = "https://raw.githubusercontent.com/aggresss/dotfiles/master"
-    Invoke-WebRequest -Uri ${update_base_url}/vim/.vimrc -OutFile ${HOME}/.vimrc
-    Invoke-WebRequest -Uri ${update_base_url}/vim/.vimrc.bundles -OutFile ${HOME}/.vimrc.bundles
+function update_config_vim {
+    if ($args[0] -eq "local") {
+        update_internal local "vim/.vimrc" "${HOME}/.vimrc"
+        update_internal local "vim/.vimrc.bundles" "${HOME}/.vimrc.bundles"
+    } else {
+        update_internal remote "vim/.vimrc" "${HOME}/.vimrc"
+        update_internal remote "vim/.vimrc.bundles" "${HOME}/.vimrc.bundles"
+    }
     if (-not $(Test-Path ${HOME}/.vim/bundle)) {
         $ErrorActionPreference = "stop"; `
             git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim; `
@@ -403,4 +423,4 @@ function update_vim_config {
  # Echo Envronment
  ########################>
 Write-Host ($PSVersionTable).OS -ForegroundColor DarkGreen
-Write-Host "PowerShell Version:" ${PSVersionTable}.PSVersion.ToString() -ForegroundColor DarkGreen
+Write-Host "PowerShell Version:" ${PSVersionTable}.PSVersion.ToString() -ForegroundColor DarkCyan
