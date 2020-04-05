@@ -3,7 +3,7 @@
 	"editor.minimap.enabled": false,
 	"editor.renderWhitespace": "all",
 	"editor.suggestSelection": "first",
-	"terminal.integrated.fontSize": 14,
+	"terminal.integrated.fontSize": 12,
 	"terminal.integrated.rendererType": "dom",
 	"window.zoomLevel": 0,
 	"workbench.startupEditor": "newUntitledFile",
