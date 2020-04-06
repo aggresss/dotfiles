@@ -134,16 +134,16 @@ Set-Alias d cd_downloads
 
 # SSH
 function ssh_agent_add {
-  ssh-agent.exe
-  ssh-add.exe -l
+  ssh-agent
+  ssh-add -l
   if (-not $?) {
-    ssh-add.exe
+    ssh-add
   }
 }
 Set-Alias a ssh_agent_add
 
 function ssh_agent_del {
-  ssh-add.exe -d
+  ssh-add -d
 }
 Set-Alias k ssh_agent_del
 
