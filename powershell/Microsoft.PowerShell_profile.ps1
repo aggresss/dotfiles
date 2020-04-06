@@ -559,6 +559,9 @@ elseif ($(uname) -eq "Darwin") {
   function skim { open -a Skim }
   function drawio { open -a draw.io }
   function chrome { open -a "Google Chrome" }
+  function note { open -a YoudaoNote }
+  function dict { open -a "网易有道词典" }
+  function mail { open -a Foxmail }
 
 }
 elseif ($(uname) -eq "Linux") {
