@@ -15,10 +15,7 @@ function ... { Set-Location ../.. }
 function .... { Set-Location ../../../ }
 function ..... { Set-Location ../../../../ }
 
-Set-Alias grep Select-String
-
 function u { . $profile }
-function touch { New-Item "$args" -ItemType File }
 function ll {
   if ((Get-Command ls).CommandType -eq "Application") {
     ls -al
@@ -26,16 +23,6 @@ function ll {
   else {
     Get-ChildItem -Attributes !System, Hidden
   }
-}
-
-$vim_path = "${Env:ProgramFiles(x86)}\Vim\vim82\vim.exe"
-if ($(Test-Path $vim_path)) {
-  Set-Alias vim $vim_path
-}
-
-$code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe"
-if ($(Test-Path $code_path)) {
-  Set-Alias code $code_path
 }
 
 function internal_env_opration {
@@ -46,7 +33,8 @@ function internal_env_opration {
   )
   if ($IsWindows -or $Env:OS) {
     $separator = ';'
-  } else {
+  }
+  else {
     $separator = ':'
   }
   $eval = '$curr_values = $env:{0}'
@@ -54,7 +42,8 @@ function internal_env_opration {
   if ((-not $curr_values) -or ($curr_values -eq "")) {
     $eval = '$Env:{0} = "$env_value"'
     ($eval -f $env_name) | Invoke-Expression
-  } else {
+  }
+  else {
     if ($curr_values -like "*$separator*") {
       $values_array = $curr_values.split("$separator")
       foreach ($value in $values_array) {
@@ -62,14 +51,16 @@ function internal_env_opration {
           return
         }
       }
-    } else {
+    }
+    else {
       if ($curr_values -eq $env_value) {
         return
       }
     }
     if ($is_insert) {
       $eval = '$Env:{0} = "$env_value$separator$Env:{0}"'
-    } else {
+    }
+    else {
       $eval = '$Env:{0} += "$separator$env_value"'
     }
     ($eval -f $env_name) | Invoke-Expression
@@ -99,28 +90,32 @@ function env_prune {
   )
   if ($IsWindows -or $Env:OS) {
     $separator = ';'
-  } else {
+  }
+  else {
     $separator = ':'
   }
   $eval = '$curr_values = $env:{0}'
   ($eval -f $env_name) | Invoke-Expression
   if ((-not $curr_values) -or ($curr_values -eq "")) {
     return
-  } else {
+  }
+  else {
     if ($curr_values -like "*$separator*") {
       $values_array = $curr_values.split("$separator")
       foreach ($value in $values_array) {
         if (-not ($value -eq $env_value)) {
           if (-not $new_value) {
             $new_value = "$value"
-          } else {
+          }
+          else {
             $new_value += "$separator$value"
           }
         }
       }
       $eval = '$Env:{0} = "$new_value"'
       ($eval -f $env_name) | Invoke-Expression
-    } else {
+    }
+    else {
       if ($curr_values -eq $env_value) {
         $eval = '$Env:{0} = ""'
         ($eval -f $env_name) | Invoke-Expression
@@ -532,6 +527,44 @@ function update_config_vim {
     vim +BundleInstall +qall
   }
 }
+
+<########################
+ # Envronment specific
+ ########################>
+if ($IsWindows -or $Env:OS) {
+  function touch { New-Item "$args" -ItemType File }
+  Set-Alias grep Select-String
+  $vim_path = "${Env:ProgramFiles(x86)}\Vim\vim82\vim.exe"
+  if ($(Test-Path $vim_path)) {
+    Set-Alias vim $vim_path
+  }
+  $code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe"
+  if ($(Test-Path $code_path)) {
+    Set-Alias code $code_path
+  }
+
+}
+elseif ($(uname) -eq "Darwin") {
+  # use "brew install gnu-*" instead of bsd-*
+  Set-Alias -Name sed -Value gsed
+  Set-Alias -Name awk -Value gawk
+  Set-Alias -Name tar -Value gtar
+  Set-Alias -Name find -Value gfind
+  # open application from command
+  function calc { open -a Calculator }
+  function typora { open -a Typora }
+  function diffmerge { open -a DiffMerge }
+  function code { open -a "Visual Studio Code" }
+  function vlc { open -a VLC }
+  function skim { open -a Skim }
+  function drawio { open -a draw.io }
+  function chrome { open -a "Google Chrome" }
+
+}
+elseif ($(uname) -eq "Linux") {
+  function hello { Write-Host "hello" }
+}
+
 
 <########################
  # Echo Envronment
