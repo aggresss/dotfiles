@@ -393,6 +393,10 @@ function git_log {
   git log --oneline
 }
 
+function git_diff {
+  git diff --name-status
+}
+
 function git_branch {
   git branch -vv $args
 }

@@ -36,7 +36,6 @@ else
     alias f='cd ${HOME}/workspace-formal'
     alias d='cd ${HOME}/Downloads'
     alias m='cd ${HOME}/Documents'
-    alias v='cd ${HOME}/Vagrant'
 fi
 # fast update bash env
 alias u='source ${HOME}/.bash_aliases'
@@ -67,8 +66,6 @@ alias g='go_path'
 alias fdf='find . -name "*" |grep -sin'
 # find file content
 alias fdc='find . -name "*" |xargs grep -sin'
-# cmake clean
-alias cmc='find . -iname "*cmake*" -not -name CMakeLists.txt -exec rm -rf {} +'
 # count code line
 alias ccl='find . -name "*[.h|.c|.hpp|.cpp|.go|.rs|.py]" -type f | xargs cat | wc -l'
 # alias for ${LD_LIBRARY_PATH}
