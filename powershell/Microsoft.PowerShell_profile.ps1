@@ -461,27 +461,6 @@ function go_clone {
 }
 
 <########################
- # PoSH for Visual Studio
- ########################>
-
-function vs_env {
-  $vs_path = "${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\Community\Common7\Tools"
-  if (-not $(Test-Path $vs_path)) {
-    return
-  }
-  Push-Location $vs_path
-  cmd /c "VsDevCmd.bat & set" |
-  ForEach-Object {
-    if ($_ -match "=") {
-      $v = $_.split("=")
-      Set-Item -Force -Path "Env:\$($v[0])" -Value "$($v[1])"
-    }
-  }
-  Pop-Location
-  Write-Host "`nVisual Studio Command Prompt variables set." -ForegroundColor Yellow
-}
-
-<########################
  # Update
  ########################>
 
@@ -537,6 +516,24 @@ function update_config_vim {
  ########################>
 if ($IsWindows -or $Env:OS) {
   function touch { New-Item "$args" -ItemType File }
+  
+  function vs_env {
+    $vs_path = "${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\Community\Common7\Tools"
+    if (-not $(Test-Path $vs_path)) {
+      return
+    }
+    Push-Location $vs_path
+    cmd /c "VsDevCmd.bat & set" |
+    ForEach-Object {
+      if ($_ -match "=") {
+        $v = $_.split("=")
+        Set-Item -Force -Path "Env:\$($v[0])" -Value "$($v[1])"
+      }
+    }
+    Pop-Location
+    Write-Host "`nVisual Studio Command Prompt variables set." -ForegroundColor Yellow
+  }
+
   Set-Alias grep Select-String
   $vim_path = "${Env:ProgramFiles(x86)}\Vim\vim82\vim.exe"
   if ($(Test-Path $vim_path)) {
