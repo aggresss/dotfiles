@@ -739,12 +739,8 @@ function go_reset()
 # set $PWD to $GOPATH
 function go_pwd()
 {
-    if [[ ${GOPATH-} =~ .*$PWD.* ]]; then
-        echo -e "${RED}currnet dir is already in GOPATH${NORMAL}"
-    else
-        export GOPATH=${PWD}
-        echo -e "${GREEN}successful set GOPATH \n${RED}GOPATH ==> ${GOPATH}${NORMAL}"
-    fi
+    export GOPATH=${PWD}
+    echo -e "${GREEN}successful set GOPATH \n${RED}GOPATH ==> ${GOPATH}${NORMAL}"
 }
 
 function go_proxy()

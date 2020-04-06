@@ -38,6 +38,64 @@ if ($(Test-Path $code_path)) {
   Set-Alias code $code_path
 }
 
+function internal_env_opration {
+  Param (
+    [parameter(Mandatory = $true)] [bool]$is_insert,
+    [parameter(Mandatory = $true)] [string]$env_name,
+    [parameter(Mandatory = $true)] [String]$env_value
+  )
+  if ($IsWindows -or $Env:OS) {
+    $separator = ";"
+  } else {
+    $separator = ":"
+  }
+  $eval = '$curr_values = $env:{0}'
+  ($eval -f $env_name) | Invoke-Expression
+  if (-not $curr_values) {
+    $eval = '$Env:{0} = "$env_value"'
+    ($eval -f $env_name) | Invoke-Expression
+  } else {
+    if ($curr_values -contains $separator) {
+      $values_array = $curr_values.split("$separator")
+      foreach ($value in $values_array) {
+        if ($value -eq $env_value) {
+          return
+        }
+      }
+    } else {
+      if ($curr_values -eq $env_value) {
+        return
+      }
+    }
+    if ($is_insert) {
+      $eval = '$Env:{0} = "$env_value$separator$Env:{0}"'
+    } else {
+      $eval = '$Env:{0} += "$separator$env_value"'
+    }
+    ($eval -f $env_name) | Invoke-Expression
+  }
+}
+
+function env_insert {
+  Param (
+    [parameter(Mandatory = $true)] [string]$env_name,
+    [parameter(Mandatory = $true)] [String]$env_value
+  )
+  internal_env_opration $true $env_name $env_value
+}
+
+function env_append {
+  Param (
+    [parameter(Mandatory = $true)] [string]$env_name,
+    [parameter(Mandatory = $true)] [String]$env_value
+  )
+  internal_env_opration $false $env_name $env_value
+}
+
+function env_prune {
+
+}
+
 function cd_scratch {
   $s_path = "${HOME}\workspace-scratch"
   if (-not $(Test-Path $s_path)) {
