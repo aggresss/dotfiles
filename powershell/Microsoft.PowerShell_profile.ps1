@@ -45,17 +45,17 @@ function internal_env_opration {
     [parameter(Mandatory = $true)] [String]$env_value
   )
   if ($IsWindows -or $Env:OS) {
-    $separator = ";"
+    $separator = ';'
   } else {
-    $separator = ":"
+    $separator = ':'
   }
   $eval = '$curr_values = $env:{0}'
   ($eval -f $env_name) | Invoke-Expression
-  if (-not $curr_values) {
+  if ((-not $curr_values) -or ($curr_values -eq "")) {
     $eval = '$Env:{0} = "$env_value"'
     ($eval -f $env_name) | Invoke-Expression
   } else {
-    if ($curr_values -contains $separator) {
+    if ($curr_values -like "*$separator*") {
       $values_array = $curr_values.split("$separator")
       foreach ($value in $values_array) {
         if ($value -eq $env_value) {
@@ -93,7 +93,40 @@ function env_append {
 }
 
 function env_prune {
-
+  Param (
+    [parameter(Mandatory = $true)] [string]$env_name,
+    [parameter(Mandatory = $true)] [String]$env_value
+  )
+  if ($IsWindows -or $Env:OS) {
+    $separator = ';'
+  } else {
+    $separator = ':'
+  }
+  $eval = '$curr_values = $env:{0}'
+  ($eval -f $env_name) | Invoke-Expression
+  if ((-not $curr_values) -or ($curr_values -eq "")) {
+    return
+  } else {
+    if ($curr_values -like "*$separator*") {
+      $values_array = $curr_values.split("$separator")
+      foreach ($value in $values_array) {
+        if (-not ($value -eq $env_value)) {
+          if (-not $new_value) {
+            $new_value = "$value"
+          } else {
+            $new_value += "$separator$value"
+          }
+        }
+      }
+      $eval = '$Env:{0} = "$new_value"'
+      ($eval -f $env_name) | Invoke-Expression
+    } else {
+      if ($curr_values -eq $env_value) {
+        $eval = '$Env:{0} = ""'
+        ($eval -f $env_name) | Invoke-Expression
+      }
+    }
+  }
 }
 
 function cd_scratch {
