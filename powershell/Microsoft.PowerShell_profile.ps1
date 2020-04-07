@@ -37,11 +37,9 @@ function internal_env_opration {
   else {
     $separator = ':'
   }
-  $eval = '$curr_values = $env:{0}'
-  ($eval -f $env_name) | Invoke-Expression
+  ('$curr_values = $env:{0}' -f $env_name) | Invoke-Expression
   if ((-not $curr_values) -or ($curr_values -eq "")) {
-    $eval = '$Env:{0} = "$env_value"'
-    ($eval -f $env_name) | Invoke-Expression
+    ('$Env:{0} = "$env_value"' -f $env_name) | Invoke-Expression
   }
   else {
     if ($curr_values -like "*$separator*") {
@@ -94,8 +92,7 @@ function env_prune {
   else {
     $separator = ':'
   }
-  $eval = '$curr_values = $env:{0}'
-  ($eval -f $env_name) | Invoke-Expression
+  ('$curr_values = $env:{0}' -f $env_name) | Invoke-Expression
   if ((-not $curr_values) -or ($curr_values -eq "")) {
     return
   }
@@ -112,13 +109,11 @@ function env_prune {
           }
         }
       }
-      $eval = '$Env:{0} = "$new_value"'
-      ($eval -f $env_name) | Invoke-Expression
+      ('$Env:{0} = "$new_value"' -f $env_name) | Invoke-Expression
     }
     else {
       if ($curr_values -eq $env_value) {
-        $eval = '$Env:{0} = ""'
-        ($eval -f $env_name) | Invoke-Expression
+        ('$Env:{0} = ""' -f $env_name) | Invoke-Expression
       }
     }
   }
