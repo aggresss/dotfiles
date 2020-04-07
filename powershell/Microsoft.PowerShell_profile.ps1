@@ -2,7 +2,7 @@
  # File: Microsoft.PowerShell_profile.ps1
  # URL: https://raw.githubusercontent.com/aggresss/dotfiles/master/PowerShell/Microsoft.PowerShell_profile.ps1
  # Before import this ps1 file, you need run these command:
- #     Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Confirm
+ #     Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
  #>
 
 <########################
