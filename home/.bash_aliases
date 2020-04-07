@@ -720,14 +720,30 @@ function git_down()
 # modify for Golang
 ##########################
 
-# echo current GOPATH
-alias go_path='env_go_p'
-# mkdir for golang workspace
-alias go_workspace='mkdir -p src pkg bin'
+# environmnet for Golang
+if [ -d "$HOME/.local/go" ]; then
+    export GOROOT="$HOME/.local/go"
+    env_insert "PATH" "$GOROOT/bin"
+fi
+
+if [ -d "$HOME/go" ];then
+    if [ ${GOPATH:-NOCONFIG} = "NOCONFIG" ]; then
+        env_insert "GOPATH" "$HOME/go"
+    fi
+    if [ ! -d "$HOME/go/bin" ]; then
+        mkdir -p $HOME/go/bin
+    fi
+    env_insert "PATH" "$HOME/go/bin"
+fi
 
 if [ ${GOPATH_BAK:-NOCONFIG} = "NOCONFIG" ]; then
     GOPATH_BAK=${GOPATH-}
 fi
+
+# echo current GOPATH
+alias go_path='env_go_p'
+# mkdir for golang workspace
+alias go_workspace='mkdir -p src pkg bin'
 
 # reset $GOPATH
 function go_reset()
@@ -775,24 +791,6 @@ function go_clone()
         mkdir -p ${repo_name}/bin ${repo_name}/pkg && \
         echo -e "\n${GREEN} Clone $1 on ${PWD}/${clone_path} successfully.${NORMAL}\n"
 }
-
-# environmnet for Golang
-if [ -d "$HOME/.local/go" ]; then
-    export GOROOT="$HOME/.local/go"
-    env_insert "PATH" "$GOROOT/bin"
-fi
-
-if [ -d "$HOME/go" ];then
-
-    if [ ${GOPATH:-NOCONFIG} = "NOCONFIG" ]; then
-        env_insert "GOPATH" "$HOME/go"
-    fi
-
-    if [ ! -d "$HOME/go/bin" ]; then
-        mkdir -p $HOME/go/bin
-    fi
-    env_insert "PATH" "$HOME/go/bin"
-fi
 
 ##########################
 # modify for vscode
