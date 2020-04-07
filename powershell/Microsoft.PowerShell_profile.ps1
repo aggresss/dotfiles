@@ -426,7 +426,10 @@ function git_clone {
  # PoSH for Golang
  ########################>
 
-$GOPATH_BAK = ${env:GOPATH}
+if (-not $GOPATH_BAK) {
+  $GOPATH_BAK = ${env:GOPATH}
+}
+
 # reset $GOPATH
 function go_reset() {
   ${env:GOPATH} = ${GOPATH_BAK}

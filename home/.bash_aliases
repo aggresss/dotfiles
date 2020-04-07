@@ -725,7 +725,10 @@ alias go_path='env_go_p'
 # mkdir for golang workspace
 alias go_workspace='mkdir -p src pkg bin'
 
-GOPATH_BAK=${GOPATH-}
+if [ ${GOPATH_BAK:-NOCONFIG} = "NOCONFIG" ]; then
+    GOPATH_BAK=${GOPATH-}
+fi
+
 # reset $GOPATH
 function go_reset()
 {
