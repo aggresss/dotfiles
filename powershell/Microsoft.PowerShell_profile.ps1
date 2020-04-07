@@ -555,17 +555,17 @@ elseif ($(uname) -eq "Darwin") {
   Set-Alias -Name tar -Value gtar
   Set-Alias -Name find -Value gfind
   # open application from command
-  function calc { open -a Calculator }
-  function typora { open -a Typora }
-  function diffmerge { open -a DiffMerge }
-  function code { open -a "Visual Studio Code" }
-  function vlc { open -a VLC }
-  function skim { open -a Skim }
-  function drawio { open -a draw.io }
-  function chrome { open -a "Google Chrome" }
-  function note { open -a YoudaoNote }
-  function dict { open -a "网易有道词典" }
-  function mail { open -a Foxmail }
+  function calc { open -a Calculator $args }
+  function typora { open -a Typora $args }
+  function diffmerge { open -a DiffMerge $args }
+  function code { open -a "Visual Studio Code" $args }
+  function vlc { open -a VLC $args }
+  function skim { open -a Skim $args }
+  function drawio { open -a draw.io $args }
+  function chrome { open -a "Google Chrome" $args }
+  function note { open -a YoudaoNote $args }
+  function dict { open -a "网易有道词典" $args }
+  function mail { open -a Foxmail $args }
 
 }
 elseif ($(uname) -eq "Linux") {
