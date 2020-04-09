@@ -120,7 +120,7 @@ function env_prune {
 }
 
 function cd_scratch {
-  $s_path = "${HOME}\workspace-scratch"
+  $s_path = "${HOME}/workspace-scratch"
   if (-not $(Test-Path $s_path)) {
     New-Item $s_path -ItemType directory -Force
   }
@@ -129,7 +129,7 @@ function cd_scratch {
 Set-Alias s cd_scratch
 
 function cd_formal {
-  $f_path = "${HOME}\workspace-formal"
+  $f_path = "${HOME}/workspace-formal"
   if (-not $(Test-Path $f_path)) {
     New-Item $f_path -ItemType directory -Force
   }
@@ -138,7 +138,7 @@ function cd_formal {
 Set-Alias f cd_formal
 
 function cd_documents {
-  $doc_path = "${HOME}\Documents"
+  $doc_path = "${HOME}/Documents"
   if (-not $(Test-Path $doc_path)) {
     New-Item $doc_path -ItemType directory -Force
   }
@@ -147,7 +147,7 @@ function cd_documents {
 Set-Alias m cd_documents
 
 function cd_downloads {
-  $down_path = "${HOME}\Downloads"
+  $down_path = "${HOME}/Downloads"
   if (-not $(Test-Path $down_path)) {
     New-Item $down_path -ItemType directory -Force
   }
@@ -175,7 +175,7 @@ Set-Alias k ssh_agent_del
 # args[1] file
 # args[2..-1] lines
 function source_file {
-  $note_dir = "${HOME}\note\"
+  $note_dir = "${HOME}/note/"
   function add_index {
     Begin { $i = 1 }
     Process {
