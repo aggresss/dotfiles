@@ -446,7 +446,7 @@ function go_reset() {
 function go_pwd { $Env:GOPATH = "${PWD}" }
 
 function go_path {
-  Write-Host "GOPATH: ${env:GOPATH}" -ForegroundColor DarkGreen
+  env_print GOPATH
 }
 Set-Alias g go_path
 
