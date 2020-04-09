@@ -68,21 +68,6 @@ alias fdf='find . -name "*" |grep -sin'
 alias fdc='find . -name "*" |xargs grep -sin'
 # count code line
 alias ccl='find . -name "*[.h|.c|.hpp|.cpp|.go|.rs|.py]" -type f | xargs cat | wc -l'
-# alias for ${LD_LIBRARY_PATH}
-alias env_ld_p='echo -e ${RED}LD_LIBRARY_PATH:\\n${GREEN}${LD_LIBRARY_PATH//:/\\n}${NORMAL}'
-alias env_ld_i='env_insert LD_LIBRARY_PATH'
-alias env_ld_a='env_append LD_LIBRARY_PATH'
-alias env_ld_d='env_prune LD_LIBRARY_PATH'
-# alias for ${PATH}
-alias env_path_p='echo -e ${RED}PATH:\\n${GREEN}${PATH//:/\\n}${NORMAL}'
-alias env_path_i='env_insert PATH'
-alias env_path_a='env_append PATH'
-alias env_path_d='env_prune PATH'
-# alias for ${GOPATH}
-alias env_go_p='echo -e ${RED}GOPATH:\\n${GREEN}${GOPATH//:/\\n}${NORMAL}'
-alias env_go_i='env_insert GOPATH'
-alias env_go_a='env_append GOPATH'
-alias env_go_d='env_prune GOPATH'
 # alias for some application special open
 alias enw='emacs -nw'
 # alias for remove fast
@@ -366,6 +351,14 @@ function env_prune()
     eval local env_var=\$\{${1}\-\}
     local del_element=${2%/}
     eval export $1="$(echo ${env_var} | sed -e "s;\(^\|:\)${del_element}\(:\|\$\);\1\2;g" -e 's;^:\|:$;;g' -e 's;::;:;g')"
+}
+
+# print element from environment variable
+# $1 enviroment variable
+function env_print()
+{
+    eval local env_var=\$\{${1}\-\}
+    echo -e ${RED}${1}:\\n${GREEN}${env_var//:/\\n}${NORMAL}
 }
 
 ##########################
@@ -741,7 +734,7 @@ if [ ${GOPATH_BAK:-NOCONFIG} = "NOCONFIG" ]; then
 fi
 
 # echo current GOPATH
-alias go_path='env_go_p'
+alias go_path='env_print GOPATH'
 # mkdir for golang workspace
 alias go_workspace='mkdir -p src pkg bin'
 
