@@ -111,6 +111,14 @@ function env_prune {
   }
 }
 
+function env_amend {
+  Param (
+    [parameter(Mandatory = $true)] [string]$env_name,
+    [parameter(Mandatory = $true)] [String]$env_value
+  )
+  ('$Env:{0} = "$env_value"' -f $env_name) | Invoke-Expression
+}
+
 function env_print {
   Param (
     [parameter(Mandatory = $true)] [string]$env_name
@@ -443,11 +451,9 @@ function go_reset() {
   ${env:GOPATH} = ${GOPATH_BAK}
   Write-Host "Successful clear GOPATH: ${env:GOPATH}"
 }
-function go_pwd { $Env:GOPATH = "${PWD}" }
+function go_pwd { env_amend GOPATH "${PWD}" }
 
-function go_path {
-  env_print GOPATH
-}
+function go_path { env_print GOPATH }
 Set-Alias g go_path
 
 function go_clone {

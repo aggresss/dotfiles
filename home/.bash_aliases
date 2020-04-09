@@ -361,6 +361,14 @@ function env_print()
     echo -e ${RED}${1}:\\n${GREEN}${env_var//:/\\n}${NORMAL}
 }
 
+# amend environment variable
+# $1 enviroment variable
+# $2 amend element
+function env_amend()
+{
+    eval export $1="$(echo $2)"
+}
+
 ##########################
 # modify for vagrant
 ##########################
