@@ -31,12 +31,8 @@ function internal_env_opration {
     [parameter(Mandatory = $true)] [string]$env_name,
     [parameter(Mandatory = $true)] [String]$env_value
   )
-  if ($IsWindows -or $Env:OS) {
-    $separator = ';'
-  }
-  else {
-    $separator = ':'
-  }
+  if ($IsWindows -or $Env:OS) { $separator = ';' } else { $separator = ':' }
+
   ('$curr_values = $env:{0}' -f $env_name) | Invoke-Expression
   if ((-not $curr_values) -or ($curr_values -eq "")) {
     ('$Env:{0} = "$env_value"' -f $env_name) | Invoke-Expression
@@ -86,12 +82,8 @@ function env_prune {
     [parameter(Mandatory = $true)] [string]$env_name,
     [parameter(Mandatory = $true)] [String]$env_value
   )
-  if ($IsWindows -or $Env:OS) {
-    $separator = ';'
-  }
-  else {
-    $separator = ':'
-  }
+  if ($IsWindows -or $Env:OS) { $separator = ';' } else { $separator = ':' }
+
   ('$curr_values = $env:{0}' -f $env_name) | Invoke-Expression
   if ((-not $curr_values) -or ($curr_values -eq "")) {
     return
@@ -115,6 +107,27 @@ function env_prune {
       if ($curr_values -eq $env_value) {
         ('$Env:{0} = ""' -f $env_name) | Invoke-Expression
       }
+    }
+  }
+}
+
+function env_print {
+  Param (
+    [parameter(Mandatory = $true)] [string]$env_name
+  )
+  if ($IsWindows -or $Env:OS) { $separator = ';' } else { $separator = ':' }
+
+  ('$curr_values = $env:{0}' -f $env_name) | Invoke-Expression
+  if (($curr_values) -and (-not $curr_values -eq "")) {
+    Write-Host "${env_name}:" -ForegroundColor DarkRed
+    if ($curr_values -like "*$separator*") {
+      $values_array = $curr_values.split("$separator")
+      foreach ($value in $values_array) {
+        Write-Host "$value" -ForegroundColor DarkGreen
+      }
+    }
+    else {
+      Write-Host "$curr_values" -ForegroundColor DarkGreen
     }
   }
 }
