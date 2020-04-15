@@ -326,7 +326,7 @@ function env_append()
 {
     eval local env_var=\$\{${1}\-\}
     local new_element=${2%/}
-    if [ -d "$new_element" ] && ! echo $env_var | grep -E -q "(^|:)$new_element($|:)" ; then
+    if ! echo $env_var | grep -E -q "(^|:)$new_element($|:)" ; then
         eval export $1="\${$1-}\${$1:+\:}${new_element}"
     fi
 }
@@ -338,7 +338,7 @@ function env_insert()
 {
     eval local env_var=\$\{${1}\-\}
     local new_element=${2%/}
-    if [ -d "$new_element" ] && ! echo $env_var | grep -E -q "(^|:)$new_element($|:)" ; then
+    if ! echo $env_var | grep -E -q "(^|:)$new_element($|:)" ; then
         eval export $1="${new_element}\${$1:+\:}\${$1-}"
     fi
 }
