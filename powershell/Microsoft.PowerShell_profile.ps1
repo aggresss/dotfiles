@@ -140,6 +140,13 @@ function env_print {
   }
 }
 
+function env_unset {
+  Param (
+    [parameter(Mandatory = $true)] [string]$env_name
+  )
+  ('Remove-Item Env:\{0}' -f $env_name) | Invoke-Expression
+}
+
 function cd_scratch {
   $s_path = "${HOME}/workspace-scratch"
   if (-not $(Test-Path $s_path)) {
@@ -192,7 +199,7 @@ function ssh_agent_del {
 Set-Alias k ssh_agent_del
 
 # source_file
-# args[0] run/copy/edit
+# args[0] exec/copy/edit
 # args[1] file
 # args[2..-1] lines
 function source_file {

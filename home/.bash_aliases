@@ -369,6 +369,13 @@ function env_amend()
     eval export $1="$(echo $2)"
 }
 
+# amend environment variable
+# $1 enviroment variable
+function env_unset()
+{
+    eval unset $1
+}
+
 ##########################
 # modify for vagrant
 ##########################
