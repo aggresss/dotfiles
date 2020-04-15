@@ -4,7 +4,8 @@
 
 # VSCode Framework
 visualstudioexptteam.vscodeintellicode
-vscode-icons-team.vscode-icons
+# Remote
+ms-vscode-remote.vscode-remote-extensionpack
 # C/CPP
 ms-vscode.cpptools
 ms-vscode.cpptools-themes
@@ -28,3 +29,4 @@ eamodio.gitlens
 ms-azuretools.vscode-docker
 # Editorconfig
 editorconfig.editorconfig
+
