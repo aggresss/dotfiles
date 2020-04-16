@@ -9,11 +9,8 @@
 	"workbench.startupEditor": "newUntitledFile",
 	"workbench.colorTheme": "Visual Studio Light",
 	"explorer.confirmDragAndDrop": false,
-	"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-	"java.configuration.checkProjectSettingsExclusions": false,
 	"vsicons.dontShowNewVersionMessage": true,
-	"cmake.configureOnOpen": false,
-	"liveServer.settings.donotShowInfoMsg": true,
+	"explorer.confirmDelete": false,
 
 	"go.inferGopath": false,
 	"go.gopath": "${workspaceFolder}",
@@ -28,9 +25,6 @@
 	"python.linting.flake8Enabled": true,
 	"python.jediEnabled": false,
 
-	"C_Cpp.default.compilerPath": "/usr/local/bin/gcc-7",
-	"C_Cpp.default.macFrameworkPath": [],
-	"C_Cpp.default.intelliSenseMode": "gcc-x64",
 	"C_Cpp.default.cStandard": "c11",
 	"C_Cpp.default.cppStandard": "c++14",
 	"C_Cpp.default.defines": [],
