@@ -326,7 +326,7 @@ function env_append()
 {
     eval local env_var=\$\{${1}\-\}
     local new_element=${2%/}
-    if ! echo $env_var | grep -E -q "(^|:)$new_element($|:)" ; then
+    if ! echo $env_var | grep -E -q "(^|:)$new_element($|:)"; then
         eval export $1="\${$1-}\${$1:+\:}${new_element}"
     fi
 }
@@ -338,7 +338,7 @@ function env_insert()
 {
     eval local env_var=\$\{${1}\-\}
     local new_element=${2%/}
-    if ! echo $env_var | grep -E -q "(^|:)$new_element($|:)" ; then
+    if ! echo $env_var | grep -E -q "(^|:)$new_element($|:)"; then
         eval export $1="${new_element}\${$1:+\:}\${$1-}"
     fi
 }
@@ -844,7 +844,7 @@ function code_default_workspace {
 
 # environmnet for Rust
 if [ -d "$HOME/.cargo/bin" ]; then
-    env_insert "PATH" "$HOME/.cargo/bin"
+    env_append "PATH" "$HOME/.cargo/bin"
 fi
 
 ##########################
@@ -857,8 +857,10 @@ if [ ! -d ${HOME}/.local/bin ]; then
 fi
 env_append "PATH" "${HOME}/.local/bin"
 
-# environment for ~/bin
-env_append "PATH" "${HOME}/bin"
+# environment for ${HOME}/bin
+if [ -d ${HOME}/bin ]; then
+    env_append "PATH" "${HOME}/bin"
+fi
 
 # specified for system type
 echo -e "${GREEN}$(uname -a)${NORMAL}"
