@@ -411,6 +411,15 @@ function docker_shell()
     docker exec -it $1 bash -c "stty cols $COLUMNS rows $LINES && bash";
 }
 
+# Show docker host infomation
+function docker_info()
+{
+    echo -e "DOCKER_HOST: ${DOCKER_HOST}"
+    echo -e "DOCKER_CERT_PATH: ${DOCKER_CERT_PATH}"
+    echo -e "DOCKER_TLS_VERIFY: ${DOCKER_TLS_VERIFY}"
+
+}
+
 # Inspect volumes and port
 function docker_inspect()
 {
