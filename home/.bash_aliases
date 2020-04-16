@@ -846,11 +846,11 @@ function code_default_workspace {
 if [ ! -d ${HOME}/.local/bin ]; then
     mkdir -p ${HOME}/.local/bin
 fi
-env_append "PATH" "${HOME}/.local/bin"
+env_insert "PATH" "${HOME}/.local/bin"
 
 # environment for ${HOME}/bin
 if [ -d ${HOME}/bin ]; then
-    env_append "PATH" "${HOME}/bin"
+    env_insert "PATH" "${HOME}/bin"
 fi
 
 # specified for system type
