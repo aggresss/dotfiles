@@ -858,6 +858,9 @@ if [ -d ${HOME}/Library/Python ]; then
     done
 fi
 
+# change directory to python3 user base
+function py_path { cd $(python3 -c 'import site; print(site.USER_BASE)') }
+
 ##########################
 # ENV specified
 ##########################
