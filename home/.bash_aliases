@@ -414,10 +414,9 @@ function docker_shell()
 # Show docker host infomation
 function docker_info()
 {
-    echo -e "DOCKER_HOST: ${DOCKER_HOST}"
-    echo -e "DOCKER_CERT_PATH: ${DOCKER_CERT_PATH}"
-    echo -e "DOCKER_TLS_VERIFY: ${DOCKER_TLS_VERIFY}"
-
+    echo -e "${RED}DOCKER_HOST: ${GREEN}${DOCKER_HOST}${NORMAL}"
+    echo -e "${RED}DOCKER_CERT_PATH: ${GREEN}${DOCKER_CERT_PATH}${NORMAL}"
+    echo -e "${RED}DOCKER_TLS_VERIFY: ${GREEN}${DOCKER_TLS_VERIFY}${NORMAL}"
 }
 
 # Inspect volumes and port
