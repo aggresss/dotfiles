@@ -839,15 +839,6 @@ function code_default_workspace {
 }
 
 ##########################
-# modify for Rust
-##########################
-
-# environmnet for Rust
-if [ -d "$HOME/.cargo/bin" ]; then
-    env_append "PATH" "$HOME/.cargo/bin"
-fi
-
-##########################
 # ENV specified
 ##########################
 
