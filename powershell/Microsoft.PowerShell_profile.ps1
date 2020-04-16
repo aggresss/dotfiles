@@ -267,10 +267,6 @@ function source_file {
           $ReadyCacheArray += New-Object -TypeName PSCustomObject -Property $data
         }
       }
-      elseif (($args[$k] -match '^[0-9]+$') -and ($args[$k] -le $file_cache.Count)) {
-        $data = [ordered]@{LineNumber = $args[$k]; Content = $file_cache[$args[$k] - 1].ToString() }
-        $ReadyCacheArray += New-Object -TypeName PSCustomObject -Property $data
-      }
       elseif ($args[$k] -match '-') {
         $from = $args[$k].split('-', 2)[0]
         $to = $args[$k].split('-', 2)[1]
@@ -283,6 +279,10 @@ function source_file {
             $ReadyCacheArray += New-Object -TypeName PSCustomObject -Property $data
           }
         }
+      }
+      elseif (($args[$k] -match '^[0-9]+$') -and ($args[$k] -le $file_cache.Count)) {
+        $data = [ordered]@{LineNumber = $args[$k]; Content = $file_cache[$args[$k] - 1].ToString() }
+        $ReadyCacheArray += New-Object -TypeName PSCustomObject -Property $data
       }
     }
     # Process Action
