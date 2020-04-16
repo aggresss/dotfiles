@@ -64,18 +64,24 @@ update_file ${DOTFILES_URL}/home/.bash_aliases ${HOME}/.bash_aliases
 update_file ${DOTFILES_URL}/home/.inputrc ${HOME}/.inputrc
 update_file ${DOTFILES_URL}/bin/hello.sh ${HOME}/bin/hello.sh
 # vim
-update_file ${DOTFILES_URL}/vim/.vimrc ${HOME}/.vimrc
-update_file ${DOTFILES_URL}/vim/.vimrc.bundles ${HOME}/.vimrc.bundles
-if [ ! -d ${HOME}/.vim/bundle ]; then
-    git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim \
-    && vim +BundleInstall +qall
-else
-    vim +BundleInstall +qall
+if [ $(command -v vim >/dev/null; echo $?) -eq 0 ]; then
+    update_file ${DOTFILES_URL}/vim/.vimrc ${HOME}/.vimrc
+    update_file ${DOTFILES_URL}/vim/.vimrc.bundles ${HOME}/.vimrc.bundles
+    if [ ! -d ${HOME}/.vim/bundle ]; then
+        git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim \
+        && vim +BundleInstall +qall
+    else
+        vim +BundleInstall +qall
+    fi
 fi
 # tmux
-update_file ${DOTFILES_URL}/tmux/.tmux.conf ${HOME}/.tmux.conf
+if [ $(command -v tmux >/dev/null; echo $?) -eq 0 ]; then
+    update_file ${DOTFILES_URL}/tmux/.tmux.conf ${HOME}/.tmux.conf
+fi
 # pip
-update_file ${DOTFILES_URL}/pip/pip.conf ${HOME}/.pip/pip.conf
+if [ -d "${HOME}/.local/bin" ] || [ -d "${HOME}/Library/Python" ]; then
+    update_file ${DOTFILES_URL}/pip/pip.conf ${HOME}/.pip/pip.conf
+fi
 # powershell
 if [ -d ${HOME}/.config/powershell ]; then
     update_file ${DOTFILES_URL}/powershell/Microsoft.PowerShell_profile.ps1 \
