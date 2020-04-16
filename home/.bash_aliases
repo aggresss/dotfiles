@@ -839,7 +839,7 @@ function code_default_workspace {
 }
 
 ##########################
-# ENV specified
+# modify for python
 ##########################
 
 # specified for ${HOME}/.local/bin
@@ -847,6 +847,20 @@ if [ ! -d ${HOME}/.local/bin ]; then
     mkdir -p ${HOME}/.local/bin
 fi
 env_insert "PATH" "${HOME}/.local/bin"
+
+# specified for ${HOME}/Library/Python
+if [ -d ${HOME}/Library/Python ]; then
+    for file in `ls ${HOME}/Library/Python`
+    do
+        if [ -d ${HOME}/Library/Python/${file}/bin ]; then
+            env_insert PATH ${HOME}/Library/Python/${file}/bin
+        fi
+    done
+fi
+
+##########################
+# ENV specified
+##########################
 
 # environment for ${HOME}/bin
 if [ -d ${HOME}/bin ]; then
