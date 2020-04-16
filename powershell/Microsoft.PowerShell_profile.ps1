@@ -270,9 +270,7 @@ function source_file {
       elseif ($args[$k] -match '-') {
         $from = $args[$k].split('-', 2)[0]
         $to = $args[$k].split('-', 2)[1]
-        if (($from -match '^[0-9]+$') -and ($to -match '^[0-9]+$') `
-            -and ($from -le $file_cache.Count) `
-            -and ($to -le $file_cache.Count)) {
+        if (($from -match '^[0-9]+$') -and ($to -match '^[0-9]+$')) {
           $range = $from..$to
           foreach ($item in $range) {
             $data = [ordered]@{LineNumber = $item; Content = $file_cache[$item - 1].ToString() }
