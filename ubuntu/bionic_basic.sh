@@ -30,6 +30,7 @@ sudo apt-get update && sudo apt-get install -y \
     expect \
     build-essential \
     gcc-multilib \
+    clang \
     automake \
     ninja-build \
     libtool \
