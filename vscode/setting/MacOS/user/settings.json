@@ -1,6 +1,9 @@
 {
 	"workbench.startupEditor": "newUntitledFile",
 	"workbench.colorTheme": "Visual Studio Light",
+	"workbench.activityBar.visible": true,
+	"workbench.sideBar.location": "right",
+	"workbench.statusBar.visible": true,
 	"window.zoomLevel": 0,
 	"editor.fontSize": 14,
 	"editor.minimap.enabled": false,
@@ -10,6 +13,7 @@
 	"terminal.integrated.rendererType": "dom",
 	"explorer.confirmDragAndDrop": false,
 	"explorer.confirmDelete": false,
+	"cmake.configureOnOpen": false,
 
 	"go.inferGopath": false,
 	"go.gopath": "${workspaceFolder}",
@@ -33,6 +37,7 @@
 	"C_Cpp.errorSquiggles": "Enabled",
 	"C_Cpp.enhancedColorization": "Enabled",
 	"C_Cpp.dimInactiveRegions": true,
-	"C_Cpp.inactiveRegionOpacity": 0.8,
-	"C_Cpp.inactiveRegionBackgroundColor": "#E0E0E0"
+	"C_Cpp.inactiveRegionOpacity": 1,
+	"C_Cpp.inactiveRegionBackgroundColor": "#A0A0A0"
+
 }
