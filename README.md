@@ -18,7 +18,6 @@ curl https://raw.githubusercontent.com/aggresss/dotfiles/master/bin/update_dotfi
 |---|---|---|
 | `~/Downloads/` | **Delete Anytime** | common downloads repository |
 | `~/Documents/` | ***Periodic Backup*** | common documents repository |
-| `~/Pictures/` | ***Periodic Backup*** | common pictures repository |
 
 ### 2. Customized
 
@@ -77,3 +76,6 @@ curl https://raw.githubusercontent.com/aggresss/dotfiles/master/bin/update_dotfi
 |---|---|---|
 | `~/code-workspace/` | *Auto Generation* | default Visual Studio Code workspace directory |
 
+## Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/aggresss/dotfiles.svg)](https://starchart.cc/aggresss/dotfiles)
