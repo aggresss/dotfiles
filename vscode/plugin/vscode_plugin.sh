@@ -29,4 +29,6 @@ eamodio.gitlens
 ms-azuretools.vscode-docker
 # Editorconfig
 editorconfig.editorconfig
+# JSON
+eriklynd.json-tools
 
