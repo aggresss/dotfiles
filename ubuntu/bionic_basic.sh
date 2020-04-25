@@ -31,6 +31,9 @@ sudo apt-get update && sudo apt-get install -y \
     build-essential \
     gcc-multilib \
     clang \
+    clang-tools \
+    clang-format \
+    clang-tidy \
     automake \
     ninja-build \
     libtool \
