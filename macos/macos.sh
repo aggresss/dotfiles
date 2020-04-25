@@ -3,6 +3,7 @@
 
 # Install command
 brew install \
+    llvm \
     rmtrash \
     autoconf \
     automake \
@@ -37,6 +38,7 @@ brew install \
     minicom \
     mosh \
     openssl \
+    mosquitto \
     gpg \
     p7zip \
     pandoc \
