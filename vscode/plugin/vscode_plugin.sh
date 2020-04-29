@@ -4,7 +4,7 @@
 
 # VSCode Framework
 visualstudioexptteam.vscodeintellicode
-# Remote
+alefragnani.bookmarks
 ms-vscode-remote.vscode-remote-extensionpack
 # C/CPP
 ms-vscode.cpptools
