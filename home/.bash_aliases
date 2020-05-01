@@ -733,7 +733,7 @@ function git_down()
 }
 
 ##########################
-# modify for Golang
+# modify for golang
 ##########################
 
 # environmnet for Golang
@@ -865,15 +865,14 @@ function py_path
 }
 
 ##########################
-# modify for JavaScript
+# modify for javascript
 ##########################
 
-if [ ! -d ${HOME}/.npm-packages ]; then
-    mkdir -p ${HOME}/.npm-packages
-fi
-
-env_insert "PATH" "${HOME}/.npm-packages"
 env_amend "NPM_PACKAGES" "${HOME}/.npm-packages"
+if [ ! -d ${NPM_PACKAGES} ]; then
+    mkdir -p ${NPM_PACKAGES}
+fi
+env_insert "PATH" "${NPM_PACKAGES}/bin"
 env_insert "NODE_PATH" "${NPM_PACKAGES}/lib/node_modules"
 
 ##########################
