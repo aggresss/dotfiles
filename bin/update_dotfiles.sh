@@ -79,8 +79,12 @@ if [ $(command -v tmux >/dev/null; echo $?) -eq 0 ]; then
     update_file ${DOTFILES_URL}/tmux/.tmux.conf ${HOME}/.tmux.conf
 fi
 # pip
-if [ -d "${HOME}/.local/bin" ] || [ -d "${HOME}/Library/Python" ]; then
+if [ $(command -v pip >/dev/null; echo $?) -eq 0 ]; then
     update_file ${DOTFILES_URL}/pip/pip.conf ${HOME}/.pip/pip.conf
+fi
+# npm
+if [ $(command -v npm >/dev/null; echo $?) -eq 0 ]; then
+    update_file ${DOTFILES_URL}/npm/.npmrc ${HOME}/.npmrc
 fi
 # powershell
 if [ -d ${HOME}/.config/powershell ]; then

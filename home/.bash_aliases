@@ -853,7 +853,7 @@ if [ -d ${HOME}/Library/Python ]; then
     for file in `ls ${HOME}/Library/Python`
     do
         if [ -d ${HOME}/Library/Python/${file}/bin ]; then
-            env_insert PATH ${HOME}/Library/Python/${file}/bin
+            env_insert "PATH" "${HOME}/Library/Python/${file}/bin"
         fi
     done
 fi
@@ -863,6 +863,18 @@ function py_path
 {
     cd $(python3 -c 'import site; print(site.USER_BASE)')
 }
+
+##########################
+# modify for JavaScript
+##########################
+
+if [ ! -d ${HOME}/.npm-packages ]; then
+    mkdir -p ${HOME}/.npm-packages
+fi
+
+env_insert "PATH" "${HOME}/.npm-packages"
+env_amend "NPM_PACKAGES" "${HOME}/.npm-packages"
+env_insert "NODE_PATH" "${NPM_PACKAGES}/lib/node_modules"
 
 ##########################
 # ENV specified
