@@ -868,7 +868,7 @@ function py_path
 # modify for javascript
 ##########################
 
-env_amend "NPM_PACKAGES" "${HOME}/.npm-packages"
+env_amend "NPM_PACKAGES" "${HOME}/.local"
 if [ ! -d ${NPM_PACKAGES} ]; then
     mkdir -p ${NPM_PACKAGES}
 fi

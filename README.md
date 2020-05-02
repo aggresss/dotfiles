@@ -69,7 +69,7 @@ curl https://raw.githubusercontent.com/aggresss/dotfiles/master/bin/update_dotfi
 
 | Drectory | Type | Illustrate |
 |---|---|---|
-| `~/.npm-packages/` | *Auto Generation* | npm global directory |
+| `~/.local/` | *Auto Generation* | npm global directory |
 
 #### Eclipse
 | Drectory | Type | Illustrate |
