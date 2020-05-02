@@ -65,6 +65,12 @@ curl https://raw.githubusercontent.com/aggresss/dotfiles/master/bin/update_dotfi
 | `~/env/` | **Delete Anytime** | python virtualenv directory |
 | `~/.local/` | *Auto Generation* | pip user directory |
 
+### npm
+
+| Drectory | Type | Illustrate |
+|---|---|---|
+| `~/.npm-packages/` | *Auto Generation* | npm global directory |
+
 #### Eclipse
 | Drectory | Type | Illustrate |
 |---|---|---|
