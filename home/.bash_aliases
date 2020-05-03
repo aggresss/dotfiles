@@ -720,14 +720,14 @@ function git_down()
         echo -e "Invalid URL: $1"
         return 1
     fi
-
+    local res_url="https://${vendor}/${user}/${repo}/raw/${branch}/${path}"
+    echo -e "Download URL: ${res_url}"
     case ${vendor} in
         gitlab.com | github.com)
-            curl -OL https://${vendor}/${user}/${repo}/raw/${branch}/${path}
+            curl -OL ${res_url}
             ;;
         *)
             echo -e "Not support URL: $1"
-            echo -e "Maybe: https://${vendor}/${user}/${repo}/raw/${branch}/${path}"
             ;;
     esac
 }
