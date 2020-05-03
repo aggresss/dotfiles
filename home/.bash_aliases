@@ -708,21 +708,21 @@ function git_haste()
 # $1 url
 function git_down()
 {
-    local url=$1
-    local vendor=$(echo "${url}" | awk -F'[/:]' '{print $4}')
-    local uri=$(echo "${url}" | cut -d/ -f4-)
-    local user=$(echo "${uri}" | cut -d/ -f1)
-    local repo=$(echo "${uri}" | cut -d/ -f2)
-    local branch=$(echo "${uri}" | cut -d/ -f4)
-    local path=$(echo "${uri}" | cut -d/ -f5-)
+    local l_url=$1
+    local l_vendor=$(echo "${l_url}" | awk -F'[/:]' '{print $4}')
+    local l_uri=$(echo "${l_url}" | cut -d/ -f4-)
+    local l_user=$(echo "${l_uri}" | cut -d/ -f1)
+    local l_repo=$(echo "${l_uri}" | cut -d/ -f2)
+    local l_branch=$(echo "${l_uri}" | cut -d/ -f4)
+    local l_path=$(echo "${l_uri}" | cut -d/ -f5-)
 
-    if [[ -z ${url} || -z ${vendor} || -z ${uri} || -z ${user} || -z ${repo} || -z ${branch} || -z ${path} ]]; then
+    if [[ -z ${l_url} || -z ${l_vendor} || -z ${l_uri} || -z ${l_user} || -z ${l_repo} || -z ${l_branch} || -z ${l_path} ]]; then
         echo -e "Invalid URL: $1"
         return 1
     fi
-    local res_url="https://${vendor}/${user}/${repo}/raw/${branch}/${path}"
+    local res_url="https://${l_vendor}/${l_user}/${l_repo}/raw/${l_branch}/${l_path}"
     echo -e "Download URL: ${res_url}"
-    case ${vendor} in
+    case ${l_vendor} in
         gitlab.com | github.com)
             curl -OL ${res_url}
             ;;
