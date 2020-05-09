@@ -1,6 +1,44 @@
 {
-    "workbench.startupEditor": "newUntitledFile",
-    "workbench.colorTheme": "Visual Studio Light",
-    "window.zoomLevel": 0,
-    "editor.renderWhitespace": "all"
+	"C_Cpp.default.cStandard": "c11",
+	"C_Cpp.default.cppStandard": "c++14",
+	"C_Cpp.default.defines": [],
+	"C_Cpp.default.includePath": [
+		"${workspaceFolder}/**"
+	],
+	"C_Cpp.errorSquiggles": "Enabled",
+	"C_Cpp.enhancedColorization": "Enabled",
+	"C_Cpp.dimInactiveRegions": true,
+	"C_Cpp.inactiveRegionOpacity": 1,
+	"C_Cpp.inactiveRegionBackgroundColor": "#A0A0A0",
+
+	"go.inferGopath": false,
+	"go.gopath": "${workspaceFolder}",
+	"go.toolsGopath": "${env:GOPATH}",
+	"go.useLanguageServer": false,
+	"go.formatTool": "goimports",
+
+	"python.pythonPath": "/usr/bin/python3",
+	"python.formatting.provider": "yapf",
+	"python.linting.enabled": true,
+	"python.linting.pylintEnabled": false,
+	"python.linting.flake8Enabled": true,
+	"python.jediEnabled": false,
+
+	"workbench.startupEditor": "newUntitledFile",
+	"workbench.colorTheme": "Visual Studio Light",
+	"workbench.activityBar.visible": true,
+	"workbench.statusBar.visible": true,
+	"workbench.sideBar.location": "left",
+	"window.zoomLevel": 0,
+	"editor.fontSize": 14,
+	"editor.minimap.enabled": false,
+	"editor.renderWhitespace": "all",
+	"editor.suggestSelection": "first",
+	"terminal.integrated.fontSize": 12,
+	"terminal.integrated.rendererType": "dom",
+	"explorer.confirmDragAndDrop": false,
+	"explorer.confirmDelete": false,
+	"cmake.configureOnOpen": false,
+	"files.trimTrailingWhitespace": true
+
 }
