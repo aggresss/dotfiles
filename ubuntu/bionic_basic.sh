@@ -108,7 +108,6 @@ sudo apt-get update && sudo apt-get install -y \
     okular \
     xvnc4viewer \
     remmina \
-    flashplugin-installer \
     scrot \
     imagemagick \
     meld \
