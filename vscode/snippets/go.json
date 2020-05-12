@@ -1,0 +1,17 @@
+{
+	"package main": {
+		"prefix": "main",
+		"body":[
+			"package main\n",
+			"import (",
+			"\t\"fmt\"",
+			"\t$1",
+			")\n",
+			"func main() {",
+			"\t$2",
+			"}",
+		],
+		"description": "short for package main"
+	}
+
+}
