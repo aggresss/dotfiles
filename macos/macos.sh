@@ -71,6 +71,8 @@ brew cask install \
     insomnia \
     mqttfx \
     vlc \
+    google-chrome \
+    firefox \
     balenaEtcher \
     powershell \
     visual-studio-code
