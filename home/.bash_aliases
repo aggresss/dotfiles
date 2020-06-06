@@ -912,10 +912,9 @@ case $(uname) in
         alias mail='open -a Foxmail'
         ;;
     Linux)
-        release_info=$(uname -r | awk -F'-' '{print $NF}')
         # Specified for Microsoft WSL
-        if [ "${release_info}" = "Microsoft" ]; then
-            export DISPLAY=localhost:0
+        if [[ $(uname -a) =~ "icrosoft" ]]; then
+            export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0.0
         fi
         # specified for docker container
         if [ -f /.dockerenv ]; then
