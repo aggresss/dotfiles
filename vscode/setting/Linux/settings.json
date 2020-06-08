@@ -24,7 +24,7 @@
 	"python.linting.flake8Enabled": true,
 	"python.jediEnabled": false,
 
-	"workbench.startupEditor": "newUntitledFile",
+	"workbench.startupEditor": "none",
 	"workbench.colorTheme": "Visual Studio Light",
 	"workbench.activityBar.visible": true,
 	"workbench.statusBar.visible": true,

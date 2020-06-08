@@ -24,13 +24,11 @@
 	"python.linting.flake8Enabled": true,
 	"python.jediEnabled": false,
 
-	"workbench.startupEditor": "newUntitledFile",
-	"workbench.colorTheme": "Visual Studio Light",
+	"workbench.startupEditor": "none",
 	"workbench.activityBar.visible": true,
 	"workbench.statusBar.visible": true,
 	"workbench.sideBar.location": "left",
 	"window.zoomLevel": 0,
-	"editor.fontSize": 14,
 	"editor.minimap.enabled": false,
 	"editor.renderWhitespace": "all",
 	"editor.suggestSelection": "first",
@@ -39,6 +37,10 @@
 	"explorer.confirmDragAndDrop": false,
 	"explorer.confirmDelete": false,
 	"cmake.configureOnOpen": false,
-	"files.trimTrailingWhitespace": true
-
+	"files.trimTrailingWhitespace": true,
+	"extensions.ignoreRecommendations": false,
+	"terminal.integrated.shell.osx": "/bin/zsh",
+	"workbench.colorTheme": "Visual Studio Light",
+	"editor.fontSize": 14,
+	"breadcrumbs.enabled": true
 }
