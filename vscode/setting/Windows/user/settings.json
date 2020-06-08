@@ -23,21 +23,24 @@
 	"python.linting.flake8Enabled": true,
 	"python.jediEnabled": false,
 
-	"workbench.startupEditor": "newUntitledFile",
-	"workbench.colorTheme": "Visual Studio Light",
+	"workbench.startupEditor": "none",
+	"workbench.colorTheme": "Visual Studio Dark",
 	"workbench.activityBar.visible": true,
 	"workbench.statusBar.visible": true,
 	"workbench.sideBar.location": "left",
 	"window.zoomLevel": 0,
-	"editor.fontSize": 14,
+	"editor.fontSize": 16,
 	"editor.minimap.enabled": false,
 	"editor.renderWhitespace": "all",
 	"editor.suggestSelection": "first",
-	"terminal.integrated.fontSize": 12,
+	"terminal.integrated.fontSize": 14,
 	"terminal.integrated.rendererType": "dom",
 	"explorer.confirmDragAndDrop": false,
 	"explorer.confirmDelete": false,
 	"cmake.configureOnOpen": false,
-	"files.trimTrailingWhitespace": true
+	"files.trimTrailingWhitespace": true,
+	"remote.SSH.remotePlatform": {
+		"rtc.router7.cn": "linux"
+	}
 
 }
