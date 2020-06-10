@@ -10,7 +10,7 @@ ms-vscode-remote.vscode-remote-extensionpack
 ms-vscode.cpptools
 ms-vscode.cpptools-themes
 # Golang
-ms-vscode.go
+golang.go
 # Python
 ms-python.python
 # CMake
