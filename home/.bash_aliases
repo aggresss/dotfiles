@@ -61,6 +61,8 @@ alias y='git status; git stash list; echo'
 alias o='echo $?'
 # fast echo gopath
 alias g='go_path'
+# fast echo package.json run
+alias j='jq .scripts package.json'
 
 # find file
 alias fdf='find . -name "*" |grep -sin'
