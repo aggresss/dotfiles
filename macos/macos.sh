@@ -64,6 +64,7 @@ brew install \
 brew cask install \
     iterm2 \
     xquartz \
+    barrier \
     diffmerge \
     skim \
     typora \
