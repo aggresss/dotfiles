@@ -597,6 +597,7 @@ function git_global_set()
   git config --global core.editor "vim"
   git config --global core.autocrlf false
   git config --global core.quotepath false
+  git config --global pull.rebase false
 }
 
 GIT_NAME_TITLE=''
