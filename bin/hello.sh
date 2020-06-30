@@ -216,7 +216,7 @@ END
     nodejs)
         cat << END > /tmp/hello.js
 #!/usr/bin/env node
-
+'use strict'
 const http = require('http');
 const port = process.env.PORT || 8080;
 
