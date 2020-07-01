@@ -242,6 +242,7 @@ END
   <head>
     <meta charset="UTF-8">
     <title>Hello, World!</title>
+    <link rel="help" href="https://github.com/aggresss/dotfiles">
     <style type="text/css">
       h1 {color:magenta}
       p {color:cyan}
