@@ -242,9 +242,14 @@ END
   <head>
     <meta charset="UTF-8">
     <title>Hello, World!</title>
+    <style type="text/css">
+      h1 {color:magenta}
+      p {color:cyan}
+    </style>
   </head>
   <body>
     <h1>Hello, World!</h1>
+    <p>Hello, World!</p>
     <script>
       console.log('Hello, World!')
     </script>
