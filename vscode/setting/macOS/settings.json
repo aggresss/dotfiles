@@ -14,7 +14,7 @@
 	"go.inferGopath": false,
 	"go.gopath": "${workspaceFolder}",
 	"go.toolsGopath": "${env:GOPATH}",
-	"go.useLanguageServer": false,
+	"go.useLanguageServer": true,
 	"go.formatTool": "goimports",
 
 	"python.pythonPath": "/usr/local/bin/python3",
@@ -22,7 +22,6 @@
 	"python.linting.enabled": true,
 	"python.linting.pylintEnabled": false,
 	"python.linting.flake8Enabled": true,
-	"python.jediEnabled": false,
 
 	"workbench.startupEditor": "none",
 	"workbench.activityBar.visible": true,
@@ -38,9 +37,9 @@
 	"explorer.confirmDelete": false,
 	"cmake.configureOnOpen": false,
 	"files.trimTrailingWhitespace": true,
-	"extensions.ignoreRecommendations": false,
+	"extensions.ignoreRecommendations": true,
 	"terminal.integrated.shell.osx": "/bin/zsh",
-	"workbench.colorTheme": "Visual Studio Light",
 	"editor.fontSize": 14,
-	"breadcrumbs.enabled": true
+	"breadcrumbs.enabled": true,
+	"workbench.colorTheme": "Visual Studio Dark"
 }
