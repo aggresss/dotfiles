@@ -14,6 +14,9 @@
 	"go.inferGopath": false,
 	"go.gopath": "${workspaceFolder}",
 	"go.toolsGopath": "${env:GOPATH}",
+	"go.lintFlags": [
+		"--fast"
+	],
 	"go.useLanguageServer": true,
 	"go.formatTool": "goimports",
 
@@ -41,5 +44,5 @@
 	"terminal.integrated.shell.osx": "/bin/zsh",
 	"editor.fontSize": 14,
 	"breadcrumbs.enabled": true,
-	"workbench.colorTheme": "Visual Studio Dark"
+	"workbench.colorTheme": "Default High Contrast"
 }
