@@ -15,7 +15,8 @@
 	"go.gopath": "${workspaceFolder}",
 	"go.toolsGopath": "${env:GOPATH}",
 	"go.lintFlags": [
-		"--fast"
+		"--disable=all",
+		"--enable=errcheck"
 	],
 	"go.useLanguageServer": true,
 	"go.formatTool": "goimports",
