@@ -260,9 +260,19 @@ END
 END
     echo "/tmp/hello.html"
     ;;
+    java)
+    cat << END > /tmp/hello.java
+public class hello{
+    public static void main(String[] args){
+         System.out.println("Hello, World!");
+    }
+}
+END
+    echo "/tmp/hello.java"
+    ;;
     *)
         echo -e "${GREEN}Support Lang:"
-        echo -e "  c\n  h\n  cpp\n  go\n  rs\n  py\n  sh\n  pl\n  cmake\n  make\n  nodejs\n  html\n${NORMAL}"
+        echo -e "  c\n  h\n  cpp\n  go\n  rs\n  py\n  sh\n  pl\n  cmake\n  make\n  nodejs\n  html\n java\n${NORMAL}"
     ;;
 esac
 
