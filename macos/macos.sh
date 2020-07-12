@@ -76,5 +76,6 @@ brew cask install \
     firefox \
     balenaEtcher \
     powershell \
+    java \
     visual-studio-code
 
