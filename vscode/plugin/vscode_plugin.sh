@@ -13,6 +13,8 @@ ms-vscode.cpptools-themes
 golang.go
 # Python
 ms-python.python
+# Java
+vscjava.vscode-java-pack
 # CMake
 twxs.cmake
 ms-vscode.cmake-tools
