@@ -59,6 +59,7 @@ brew install \
     xz \
     nodejs \
     ninja \
+    openjdk \
     redis
 
 brew cask install \
@@ -76,6 +77,5 @@ brew cask install \
     firefox \
     balenaEtcher \
     powershell \
-    java \
     visual-studio-code
 

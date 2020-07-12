@@ -10,4 +10,6 @@ ln -sf $(brew --prefix llvm)/bin/mosquitto_passwd ${HOME}/bin/mosquitto_passwd
 ln -sf $(brew --prefix llvm)/bin/mosquitto_rr ${HOME}/bin/mosquitto_rr
 ## curl
 ln -sf $(brew --prefix curl)/bin/curl ${HOME}/bin/curl
+## openjdk
+sudo ln -sfn /usr/local/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
 
