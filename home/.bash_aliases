@@ -2,7 +2,7 @@
 # wget https://raw.githubusercontent.com/aggresss/dotfiles/master/home/.bash_aliases
 
 ##########################
-# modify for utility
+# Modify for utility
 ##########################
 
 # color for echo
@@ -380,7 +380,7 @@ function env_unset()
 }
 
 ##########################
-# modify for vagrant
+# Modify for vagrant
 ##########################
 
 # Fast list vagrant status
@@ -398,14 +398,14 @@ function vagrant_ps()
 }
 
 ##########################
-# modify for VirtualBox
+# Modify for VirtualBox
 ##########################
 
 # alias for VirtualBox
 alias vb='VBoxManage'
 
 ##########################
-# modify for docker
+# Modify for docker
 ##########################
 
 # Fast docker inside
@@ -505,7 +505,7 @@ function docker_kill()
 
 
 ##########################
-# modify for git
+# Modify for git
 ##########################
 
 # fast change directry to git top level path
@@ -737,7 +737,7 @@ function git_down()
 }
 
 ##########################
-# modify for golang
+# Modify for golang
 ##########################
 
 # environmnet for Golang
@@ -813,7 +813,7 @@ function go_clone()
 }
 
 ##########################
-# modify for vscode
+# Modify for vscode
 ##########################
 
 # go to vscode global workspace
@@ -843,7 +843,7 @@ function code_default_workspace {
 }
 
 ##########################
-# modify for python
+# Modify for python
 ##########################
 
 # specified for ${HOME}/.local/bin
@@ -869,7 +869,7 @@ function py_path
 }
 
 ##########################
-# modify for javascript
+# Modify for javascript
 ##########################
 
 env_amend "NPM_PACKAGES" "${HOME}/.local"
@@ -878,6 +878,15 @@ if [ ! -d ${NPM_PACKAGES} ]; then
 fi
 env_insert "PATH" "${NPM_PACKAGES}/bin"
 env_insert "NODE_PATH" "${NPM_PACKAGES}/lib/node_modules"
+
+function npm_rc
+{
+    if [ ! -f ${PWD}/.npmrc ]; then
+        cat << END > ${PWD}/.npmrc
+package-lock=false
+END
+    fi
+}
 
 ##########################
 # ENV specified
