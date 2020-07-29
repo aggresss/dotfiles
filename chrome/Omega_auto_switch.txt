@@ -1,15 +1,10 @@
 [SwitchyOmega Conditions]
 @with result
 
-*.twitter.com +proxy
-*.twimg.com +proxy
 *.google.com +proxy
-*.python.org +proxy
-*.youtube.com +proxy
 *.golang.org +proxy
 *.*.githubusercontent.com +proxy
 *.github.com +proxy
-*.google.co.jp +proxy
 *.googleusercontent.com +proxy
 
 * +direct
