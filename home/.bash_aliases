@@ -919,7 +919,9 @@ case $(uname) in
         alias skim='open -a Skim'
         alias drawio='open -a draw.io'
         alias chrome='open -a Google\ Chrome'
-        alias note='open -a YoudaoNote'
+        alias firefox='open -a Firefox'
+        alias safari='open -a Safari'
+        alias notex='open -a YoudaoNote'
         alias dict='open -a 网易有道词典'
         alias mail='open -a Foxmail'
         ;;
