@@ -921,7 +921,8 @@ case $(uname) in
         alias chrome='open -a Google\ Chrome'
         alias firefox='open -a Firefox'
         alias safari='open -a Safari'
-        alias notex='open -a YoudaoNote'
+        alias edge='open -a Microsoft\ Edge'
+        alias note='open -a YoudaoNote'
         alias dict='open -a 网易有道词典'
         alias mail='open -a Foxmail'
         ;;

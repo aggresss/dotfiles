@@ -75,6 +75,7 @@ brew cask install \
     vlc \
     google-chrome \
     firefox \
+    microsoft-edge \
     balenaEtcher \
     powershell \
     visual-studio-code
