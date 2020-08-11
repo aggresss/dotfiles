@@ -911,7 +911,7 @@ case $(uname) in
         alias tar='gtar'
         alias find='gfind'
         # open application from command
-        alias calc='open -a Calculator'
+        alias preview='open -a Preview'
         alias typora='open -a Typora'
         alias diffmerge='open -a DiffMerge'
         alias code='open -a Visual\ Studio\ Code'
@@ -922,9 +922,6 @@ case $(uname) in
         alias firefox='open -a Firefox'
         alias safari='open -a Safari'
         alias edge='open -a Microsoft\ Edge'
-        alias note='open -a YoudaoNote'
-        alias dict='open -a 网易有道词典'
-        alias mail='open -a Foxmail'
         ;;
     Linux)
         # Specified for Microsoft WSL
