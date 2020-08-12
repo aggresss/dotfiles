@@ -63,6 +63,8 @@ alias o='echo $?'
 alias g='go_path'
 # fast echo package.json run
 alias j='jq .scripts package.json'
+# fast history query
+alias h='history | grep'
 
 # find file
 alias fdf='find . -name "*" |grep -sin'
