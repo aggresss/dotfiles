@@ -5,6 +5,9 @@ winget install cmake
 winget install vim
 winget install python
 winget install node.js
+winget install Chrome
+winget install Firefox
+winget install "Microsoft Edge"
 winget install "Visual Studio Code"
 winget install "Visual Studio Community"
 
