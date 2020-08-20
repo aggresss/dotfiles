@@ -183,6 +183,16 @@ function cd_downloads {
 }
 Set-Alias d cd_downloads
 
+function code_user {
+  if ($IsWindows -or $Env:OS) {
+    Set-Location ${Env:APPDATA}/Code/User
+  } elseif ($(uname) -eq "Darwin") {
+    Set-Location ${HOME}/Library/Application Support/Code/User
+  } elseif ($(uname) -eq "Linux") {
+    Set-Location ${HOME}/.config/Code/User
+  }
+}
+
 # SSH
 function ssh_agent_add {
   ssh-agent
@@ -538,7 +548,7 @@ function update_config_vim {
  ########################>
 if ($IsWindows -or $Env:OS) {
   function touch { New-Item "$args" -ItemType File }
-  
+
   function vs_env {
     $vs_path = "${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\Community\Common7\Tools"
     if (-not $(Test-Path $vs_path)) {
@@ -574,7 +584,7 @@ elseif ($(uname) -eq "Darwin") {
   Set-Alias -Name tar -Value gtar
   Set-Alias -Name find -Value gfind
   # open application from command
-  function calc { open -a Calculator $args }
+  function preview { open -a Preview $args }
   function typora { open -a Typora $args }
   function diffmerge { open -a DiffMerge $args }
   function code { open -a "Visual Studio Code" $args }
@@ -582,9 +592,9 @@ elseif ($(uname) -eq "Darwin") {
   function skim { open -a Skim $args }
   function drawio { open -a draw.io $args }
   function chrome { open -a "Google Chrome" $args }
-  function note { open -a YoudaoNote $args }
-  function dict { open -a "网易有道词典" $args }
-  function mail { open -a Foxmail $args }
+  function firefox { open -a Firefox $args }
+  function safari { open -a Safari $args }
+  function edge { open -a "Microsoft Edge" $args }
 
 }
 elseif ($(uname) -eq "Linux") {

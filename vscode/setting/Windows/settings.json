@@ -22,6 +22,7 @@
 	"python.linting.pylintEnabled": false,
 	"python.linting.flake8Enabled": true,
 	"python.jediEnabled": false,
+	"python.languageServer": "Microsoft",
 
 	"workbench.startupEditor": "none",
 	"workbench.colorTheme": "Visual Studio Dark",
@@ -29,10 +30,10 @@
 	"workbench.statusBar.visible": true,
 	"workbench.sideBar.location": "left",
 	"window.zoomLevel": 0,
-	"editor.fontSize": 16,
 	"editor.minimap.enabled": false,
 	"editor.renderWhitespace": "all",
 	"editor.suggestSelection": "first",
+	"editor.fontFamily": "'Cascadia Code', Consolas, 'Courier New', monospace"
 	"terminal.integrated.fontSize": 14,
 	"terminal.integrated.rendererType": "dom",
 	"explorer.confirmDragAndDrop": false,
@@ -41,6 +42,5 @@
 	"files.trimTrailingWhitespace": true,
 	"remote.SSH.remotePlatform": {
 		"rtc.router7.cn": "linux"
-	}
-
+    }
 }

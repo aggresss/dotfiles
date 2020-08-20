@@ -818,8 +818,8 @@ function go_clone()
 # Modify for vscode
 ##########################
 
-# go to vscode global workspace
-function code_global_workspace {
+# go to vscode user path
+function code_user {
     local GLOBAL_WORKSPACE="."
     case $(uname) in
         Darwin)
@@ -833,15 +833,6 @@ function code_global_workspace {
             ;;
     esac
     cd ${GLOBAL_WORKSPACE}
-}
-
-# go to vscode default workspace
-function code_default_workspace {
-    local DEFAULT_WORKSPACE="${HOME}/code-workspace"
-    if [ ! -f ${DEFAULT_WORKSPACE} ]; then
-        mkdir -p ${DEFAULT_WORKSPACE}
-    fi
-    cd ${DEFAULT_WORKSPACE}
 }
 
 ##########################
