@@ -33,7 +33,7 @@ function internal_env_opration {
   )
   if ($IsWindows -or $Env:OS) { $separator = ';' } else { $separator = ':' }
 
-  ('$curr_values = $env:{0}' -f $env_name) | Invoke-Expression
+  ('$curr_values = $Env:{0}' -f $env_name) | Invoke-Expression
   if ((-not $curr_values) -or ($curr_values -eq "")) {
     ('$Env:{0} = "$env_value"' -f $env_name) | Invoke-Expression
   }
@@ -84,7 +84,7 @@ function env_prune {
   )
   if ($IsWindows -or $Env:OS) { $separator = ';' } else { $separator = ':' }
 
-  ('$curr_values = $env:{0}' -f $env_name) | Invoke-Expression
+  ('$curr_values = $Env:{0}' -f $env_name) | Invoke-Expression
   if ((-not $curr_values) -or ($curr_values -eq "")) {
     return
   }
@@ -125,7 +125,7 @@ function env_print {
   )
   if ($IsWindows -or $Env:OS) { $separator = ';' } else { $separator = ':' }
 
-  ('$curr_values = $env:{0}' -f $env_name) | Invoke-Expression
+  ('$curr_values = $Env:{0}' -f $env_name) | Invoke-Expression
   if (($curr_values) -and (-not $curr_values -eq "")) {
     Write-Host "${env_name}:" -ForegroundColor DarkRed
     if ($curr_values -like "*$separator*") {
@@ -186,9 +186,11 @@ Set-Alias d cd_downloads
 function code_user {
   if ($IsWindows -or $Env:OS) {
     Set-Location ${Env:APPDATA}/Code/User
-  } elseif ($(uname) -eq "Darwin") {
+  }
+  elseif ($(uname) -eq "Darwin") {
     Set-Location ${HOME}/Library/Application Support/Code/User
-  } elseif ($(uname) -eq "Linux") {
+  }
+  elseif ($(uname) -eq "Linux") {
     Set-Location ${HOME}/.config/Code/User
   }
 }
@@ -549,6 +551,21 @@ function update_config_vim {
 if ($IsWindows -or $Env:OS) {
   function touch { New-Item "$args" -ItemType File }
 
+  function custom_cd {
+    if ($args.Count -eq 0) {
+      $tmp_path = ${HOME}
+    }
+    elseif ($args[0] -eq '-') {
+      $tmp_path = $OLDPWD;
+    }
+    else {
+      $tmp_path = $args[0];
+    }
+
+    Set-Variable -Name OLDPWD -Value $PWD -Scope global;
+    Set-Location $tmp_path;
+  }
+  Set-Alias cd custom_cd -Option AllScope
   function vs_env {
     $vs_path = "${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\Community\Common7\Tools"
     if (-not $(Test-Path $vs_path)) {
