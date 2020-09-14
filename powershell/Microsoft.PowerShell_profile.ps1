@@ -561,9 +561,10 @@ if ($IsWindows -or $Env:OS) {
     else {
       $tmp_path = $args[0];
     }
-
-    Set-Variable -Name OLDPWD -Value $PWD -Scope global;
-    Set-Location $tmp_path;
+    if ($tmp_path) {
+      Set-Variable -Name OLDPWD -Value $PWD -Scope global;
+      Set-Location $tmp_path;
+    }
   }
   Set-Alias cd custom_cd -Option AllScope
   function vs_env {
