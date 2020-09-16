@@ -78,5 +78,8 @@ brew cask install \
     microsoft-edge \
     balenaEtcher \
     powershell \
-    visual-studio-code
+    visual-studio-code \
+    virtualbox \
+    wireshark \
+    docker
 
