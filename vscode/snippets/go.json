@@ -9,7 +9,7 @@
 			")\n",
 			"func main() {",
 			"\t$2",
-			"}",
+			"}"
 		],
 		"description": "short for package main"
 	}
