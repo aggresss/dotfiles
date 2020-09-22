@@ -917,11 +917,13 @@ case $(uname) in
         alias edge='open -a Microsoft\ Edge'
         ;;
     Linux)
+        # Export history format
+        export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S "
         # Specified for Microsoft WSL
         if [[ $(uname -a) =~ "icrosoft" ]]; then
             export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0.0
         fi
-        # specified for docker container
+        # Specified for docker container
         if [ -f /.dockerenv ]; then
             echo -e "${YELLOW}DOCKER_IMAGE: ${DOCKER_IMAGE}${NORMAL}"
         fi
