@@ -32,6 +32,7 @@ brew install \
     hexedit \
     htop \
     bmon \
+    mtr \
     jq \
     lua \
     md5sha1sum \
