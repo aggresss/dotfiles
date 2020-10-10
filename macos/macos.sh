@@ -74,6 +74,7 @@ brew cask install \
     drawio \
     insomnia \
     mqttfx \
+    robo-3t \
     vlc \
     google-chrome \
     firefox \
