@@ -48,6 +48,7 @@ brew install \
     python \
     readline \
     ruby \
+    nmap \
     socat \
     sqlite \
     telnet \

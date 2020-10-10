@@ -57,6 +57,7 @@ sudo apt-get update && sudo apt-get install -y \
     samba \
     smbclient \
     cifs-utils \
+    nmap \
     netcat \
     socat \
     nfs-kernel-server \
