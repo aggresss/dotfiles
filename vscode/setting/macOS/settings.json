@@ -18,7 +18,7 @@
 		"--disable=all",
 		"--enable=errcheck"
 	],
-	"go.useLanguageServer": true,
+	"go.useLanguageServer": false,
 	"go.formatTool": "goimports",
 
 	"python.pythonPath": "/usr/local/bin/python3",
@@ -26,24 +26,30 @@
 	"python.linting.enabled": true,
 	"python.linting.pylintEnabled": false,
 	"python.linting.flake8Enabled": true,
+	"python.showStartPage": false,
+
+	"java.semanticHighlighting.enabled": true,
+	"java.configuration.checkProjectSettingsExclusions": false,
 
 	"workbench.startupEditor": "none",
 	"workbench.activityBar.visible": true,
 	"workbench.statusBar.visible": true,
 	"workbench.sideBar.location": "left",
+	"workbench.editor.showTabs": true,
 	"window.zoomLevel": 0,
 	"editor.minimap.enabled": false,
 	"editor.renderWhitespace": "all",
 	"editor.suggestSelection": "first",
+	"editor.fontSize": 14,
 	"terminal.integrated.fontSize": 12,
 	"terminal.integrated.rendererType": "dom",
+	"terminal.integrated.shell.osx": "/bin/zsh",
 	"explorer.confirmDragAndDrop": false,
 	"explorer.confirmDelete": false,
-	"cmake.configureOnOpen": false,
 	"files.trimTrailingWhitespace": true,
 	"extensions.ignoreRecommendations": true,
-	"terminal.integrated.shell.osx": "/bin/zsh",
-	"editor.fontSize": 14,
 	"breadcrumbs.enabled": true,
-	"workbench.colorTheme": "Default High Contrast"
+	"svg.preview.mode": "svg",
+	"diffEditor.ignoreTrimWhitespace": false,
+	"cmake.configureOnOpen": false
 }
