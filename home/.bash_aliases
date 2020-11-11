@@ -528,7 +528,7 @@ function git_status()
 {
     git status
     git stash list && echo
-    git ls-files -v | grep --color -E "^S|^h" && echo
+    git ls-files -v | grep --color -E "^S|^h|^M" && echo
 }
 
 # no-skip-worktree all
