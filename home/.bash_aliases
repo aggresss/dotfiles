@@ -56,7 +56,7 @@ alias a='ssh_agent'
 alias k='eval `ssh-agent -k`'
 alias ak='kill_all ssh-agent'
 # fast git status
-alias y='git status; git stash list; echo; git ls-files -v | grep -E "^S|^h"; echo'
+alias y='git_status'
 # fast echo app return
 alias o='echo $?'
 # fast echo gopath
@@ -516,6 +516,32 @@ alias git_top='cd `git rev-parse --show-toplevel`'
 alias git_diff='git diff --name-status'
 # git log oneline
 alias git_log='git log --oneline'
+# git skip worktree
+alias git_skip='git update-index --skip-worktree'
+alias git_noskip='git update-index --no-skip-worktree'
+# git assume unchanged
+alias git_assume='git update-index --assume-unchanged'
+alias git_noassume='git update-index --no-assume-unchanged'
+
+# Show git status
+function git_status()
+{
+    git status
+    git stash list && echo
+    git ls-files -v | grep --color -E "^S|^h" && echo
+}
+
+# no-skip-worktree all
+function git_all_noskip()
+{
+    git ls-files -v | grep "^S" | awk "{print $2}" |xargs git update-index --no-skip-worktree
+}
+
+# no-assume-unchanged all
+function git_all_noassume()
+{
+    git ls-files -v | grep "^h" | awk '{print $2}' |xargs git update-index --no-assume-unchanged
+}
 
 # Signature for github repository
 # $1 user.email
