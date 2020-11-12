@@ -365,9 +365,13 @@ Set-Alias p git_prompt
 function git_status {
   git status
   git stash list
-  git ls-files -v | grep "^S"
-  git ls-files -v | grep "^h"
-  git ls-files -v | grep "^M"
+  git ls-files -v |
+    ForEach-Object {
+      if ($_ -cmatch "^S|^h|^M") {
+        Write-Host $_ -ForegroundColor DarkRed
+      }
+    }
+    write-host ""
 }
 Set-Alias y git_status
 
@@ -593,12 +597,12 @@ if ($IsWindows -or $Env:OS) {
     }
     Push-Location $vs_path
     cmd /c "VsDevCmd.bat & set" |
-    ForEach-Object {
-      if ($_ -match "=") {
-        $v = $_.split("=")
-        Set-Item -Force -Path "Env:\$($v[0])" -Value "$($v[1])"
+      ForEach-Object {
+        if ($_ -match "=") {
+          $v = $_.split("=")
+          Set-Item -Force -Path "Env:\$($v[0])" -Value "$($v[1])"
+        }
       }
-    }
     Pop-Location
     Write-Host "`nVisual Studio Command Prompt variables set." -ForegroundColor Yellow
   }
