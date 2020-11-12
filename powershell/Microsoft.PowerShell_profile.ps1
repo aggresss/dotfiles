@@ -365,13 +365,14 @@ Set-Alias p git_prompt
 function git_status {
   git status
   git stash list
+  write-host ""
   git ls-files -v |
     ForEach-Object {
       if ($_ -cmatch "^S|^h|^M") {
         Write-Host $_ -ForegroundColor DarkRed
       }
     }
-    write-host ""
+  write-host ""
 }
 Set-Alias y git_status
 
