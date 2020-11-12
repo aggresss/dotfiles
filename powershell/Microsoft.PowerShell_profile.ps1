@@ -365,8 +365,27 @@ Set-Alias p git_prompt
 function git_status {
   git status
   git stash list
+  git ls-files -v | grep "^S"
+  git ls-files -v | grep "^h"
+  git ls-files -v | grep "^M"
 }
 Set-Alias y git_status
+
+function git_skip {
+  git update-index --skip-worktree $args[0]
+}
+
+function git_noskip {
+  git update-index --no-skip-worktree $args[0]
+}
+
+function git_assume {
+  git update-index --assume-unchanged $args[0]
+}
+
+function git_noassume {
+  git update-index --no-assume-unchanged $args[0]
+}
 
 function git_top {
   git rev-parse --show-toplevel | Set-Location
