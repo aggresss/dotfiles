@@ -383,12 +383,34 @@ function git_noskip {
   git update-index --no-skip-worktree $args[0]
 }
 
+function git_all_noskip {
+  git ls-files -v |
+  ForEach-Object {
+    if ($_ -cmatch "^S") {
+      $v = $_.split(" ")[1]
+      git update-index --no-skip-worktree $v
+      Write-Host $v -ForegroundColor DarkRed
+    }
+  }
+}
+
 function git_assume {
   git update-index --assume-unchanged $args[0]
 }
 
 function git_noassume {
   git update-index --no-assume-unchanged $args[0]
+}
+
+function git_all_noassume {
+  git ls-files -v |
+  ForEach-Object {
+    if ($_ -cmatch "^h") {
+      $v = $_.split(" ")[1]
+      git update-index --no-assume-unchanged $v
+      Write-Host $v -ForegroundColor DarkRed
+    }
+  }
 }
 
 function git_top {
