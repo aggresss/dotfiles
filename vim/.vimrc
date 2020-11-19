@@ -114,9 +114,11 @@ command TrimHnumber %s/^[0-9]\{1,}//g
 " Trim one space at the head of line
 command TrimOnespace %s/^\s//g
 " Trim spaces at the head of line
-command Trimspaces %s/^\s*//g
-" Trim html Trimspaces->TrimHnumber->TrimOnespace->TrimEOL
-command Trimhtml %s/^\s*//g | %s/^[0-9]\{1,}//g | %s/^\s//g | %s/\s\+$//g
+command TrimSpaces %s/^\s*//g
+" Trim blank lines
+command TrimBlankLines g/^\s*$/d
+" Trans SDP info \r\n
+command TransSDP %s/\\r\\n/\r/g
 
 "
 " Custom function
