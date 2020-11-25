@@ -526,7 +526,7 @@ alias git_noassume='git update-index --no-assume-unchanged'
 # Show git status
 function git_status()
 {
-    git status
+    git status && echo
     git stash list && echo
     git ls-files -v | grep --color -E "^S|^h|^M" && echo
 }
