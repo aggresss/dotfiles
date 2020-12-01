@@ -626,6 +626,7 @@ function git_global_set()
   git config --global core.autocrlf false
   git config --global core.quotepath false
   git config --global pull.rebase false
+  git config --global push.default matching
 }
 
 GIT_NAME_TITLE=''
