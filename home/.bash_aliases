@@ -615,13 +615,41 @@ function git_del()
     fi
 }
 
+# git config insteadOf
+# $1: https/ssh/unset; null to display
+# $2: domain name
+function git_insteadof()
+{
+    if [ $# -lt 2 ]; then
+        echo; git config -l | grep "insteadof=" && echo
+        return
+    fi
+
+    case $1 in
+        ssh)
+            git config --global --unset-all url."https://$2/".insteadof
+            git config --global url."git@$2:".insteadOf "https://$2/"
+            ;;
+        https)
+            git config --global --unset-all url."git@$2:".insteadof
+            git config --global url."https://$2/".insteadOf "git@$2:"
+            ;;
+        unset)
+            git config --global --unset-all url."https://$2/".insteadof
+            git config --global --unset-all url."git@$2:".insteadof
+            ;;
+        *)
+            echo; git config -l | grep "insteadof=" && echo
+            ;;
+        esac
+}
+
 # Set git global set
 function git_global_set()
 {
   local base_url="https://raw.githubusercontent.com/aggresss/dotfiles/master"
   update_file ${base_url}/.gitignore ${HOME}/.gitignore
   git config --global core.excludesfile ${HOME}/.gitignore
-  git config --global url."git@github.com:".insteadOf "https://github.com/"
   git config --global core.editor "vim"
   git config --global core.autocrlf false
   git config --global core.quotepath false
