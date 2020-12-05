@@ -620,23 +620,22 @@ function git_del()
 # $2: domain name
 function git_insteadof()
 {
-    if [ $# -lt 2 ]; then
-        echo; git config -l | grep -E "url\.|\.insteadof=" && echo
-        return
+    local url="github.com"
+    if [ $# -ge 2 ]; then
+        url=$2
     fi
-
     case $1 in
         ssh)
-            git config --global --unset-all url."https://$2/".insteadof
-            git config --global url."git@$2:".insteadOf "https://$2/"
+            git config --global --unset-all url."https://${url}/".insteadof
+            git config --global url."git@${url}:".insteadOf "https://${url}/"
             ;;
         https)
-            git config --global --unset-all url."git@$2:".insteadof
-            git config --global url."https://$2/".insteadOf "git@$2:"
+            git config --global --unset-all url."git@${url}:".insteadof
+            git config --global url."https://${url}/".insteadOf "git@${url}:"
             ;;
         unset)
-            git config --global --unset-all url."https://$2/".insteadof
-            git config --global --unset-all url."git@$2:".insteadof
+            git config --global --unset-all url."https://${url}/".insteadof
+            git config --global --unset-all url."git@${url}:".insteadof
             ;;
         *)
             echo; git config -l | grep -E "url\.|\.insteadof=" && echo
