@@ -621,7 +621,7 @@ function git_del()
 function git_insteadof()
 {
     if [ $# -lt 2 ]; then
-        echo; git config -l | grep "insteadof=" && echo
+        echo; git config -l | grep -E "url\.|\.insteadof=" && echo
         return
     fi
 
@@ -639,7 +639,7 @@ function git_insteadof()
             git config --global --unset-all url."git@$2:".insteadof
             ;;
         *)
-            echo; git config -l | grep "insteadof=" && echo
+            echo; git config -l | grep -E "url\.|\.insteadof=" && echo
             ;;
         esac
 }
