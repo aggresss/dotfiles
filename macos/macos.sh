@@ -35,7 +35,7 @@ brew install \
     mtr \
     jq \
     lua \
-    md5sha1sum \
+    coreutils \
     minicom \
     mosh \
     openssl \

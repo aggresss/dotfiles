@@ -22,6 +22,13 @@ sudo chown `id -nu 0` /usr/share/X11/xorg.conf.d/20-intel.conf
 # timezone
 sudo timedatectl set-timezone Asia/Shanghai
 
+# ssh
+if [ -f /etc/ssh/ssh_config ]; then
+    sudo cat << END >> /etc/ssh/ssh_config
+    ServerAliveInterval 60
+END
+fi
+
 # gdm3
 sudo sed -r -e 's/^(\[security\])/\1\nDisallowTCP=false/' -i /etc/gdm3/custom.conf
 
