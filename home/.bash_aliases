@@ -957,6 +957,7 @@ case $(uname) in
         alias awk='gawk'
         alias tar='gtar'
         alias find='gfind'
+        alias seq='gseq'
         # open application from command
         alias preview='open -a Preview'
         alias typora='open -a Typora'
