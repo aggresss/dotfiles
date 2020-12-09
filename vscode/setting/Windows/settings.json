@@ -33,9 +33,8 @@
 	"editor.minimap.enabled": false,
 	"editor.renderWhitespace": "all",
 	"editor.suggestSelection": "first",
-	"editor.fontFamily": "'Cascadia Code', Consolas, 'Courier New', monospace"
+	"editor.fontFamily": "'Cascadia Code', Consolas, 'Courier New', monospace",
 	"terminal.integrated.fontSize": 14,
-	"terminal.integrated.rendererType": "dom",
 	"explorer.confirmDragAndDrop": false,
 	"explorer.confirmDelete": false,
 	"cmake.configureOnOpen": false,

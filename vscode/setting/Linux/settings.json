@@ -35,7 +35,6 @@
 	"editor.renderWhitespace": "all",
 	"editor.suggestSelection": "first",
 	"terminal.integrated.fontSize": 12,
-	"terminal.integrated.rendererType": "dom",
 	"explorer.confirmDragAndDrop": false,
 	"explorer.confirmDelete": false,
 	"cmake.configureOnOpen": false,

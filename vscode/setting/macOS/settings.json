@@ -42,7 +42,6 @@
 	"editor.suggestSelection": "first",
 	"editor.fontSize": 14,
 	"terminal.integrated.fontSize": 12,
-	"terminal.integrated.rendererType": "dom",
 	"terminal.integrated.shell.osx": "/bin/zsh",
 	"explorer.confirmDragAndDrop": false,
 	"explorer.confirmDelete": false,
