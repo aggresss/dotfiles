@@ -12,7 +12,7 @@
 	"C_Cpp.inactiveRegionBackgroundColor": "#A0A0A0",
 
 	"go.inferGopath": false,
-	"go.gopath": "${workspaceFolder}",
+	"go.gopath": "${env:GOPATH}",
 	"go.toolsGopath": "${env:GOPATH}",
 	"go.lintFlags": [
 		"--disable=all",
