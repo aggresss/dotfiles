@@ -224,7 +224,7 @@ function source_file()
                 sed -n "${line_range}p" ${index_file} >> ${tmp_src_file}
                 local file_index=$(sed -n '$=' ${tmp_src_file})
             done
-            sed -i "s/\r$//g" ${tmp_src_file}
+            sed -i 's/\r$//g' ${tmp_src_file}
             # operate file
             case $1 in
                 copy)
