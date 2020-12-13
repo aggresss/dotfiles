@@ -614,11 +614,12 @@ if ($IsWindows -or $Env:OS) {
   }
   Set-Alias cd custom_cd -Option AllScope
   function vs_env {
-    $vs_path = "${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\Community\Common7\Tools"
-    if (-not $(Test-Path $vs_path)) {
+    $vs_wildcard = "${Env:ProgramFiles(x86)}\Microsoft Visual Studio\*\Community\Common7\Tools"
+    if (-not $(Test-Path $vs_wildcard)) {
       return
     }
-    Push-Location $vs_path
+    $vs_path = Get-ChildItem $vs_wildcard
+    Push-Location $vs_path[-1].FullName
     cmd /c "VsDevCmd.bat & set" |
       ForEach-Object {
         if ($_ -match "=") {
@@ -634,7 +635,7 @@ if ($IsWindows -or $Env:OS) {
   $vim_wildcard = "${Env:ProgramFiles(x86)}\Vim\*\vim.exe"
   if ($(Test-Path $vim_wildcard)) {
     $vim_path = Get-ChildItem $vim_wildcard
-    Set-Alias vim $vim_path[0].FullName
+    Set-Alias vim $vim_path[-1].FullName
   }
   $code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe"
   if ($(Test-Path $code_path)) {
