@@ -631,15 +631,15 @@ if ($IsWindows -or $Env:OS) {
   }
 
   Set-Alias grep Select-String
-  $vim_path = "${Env:ProgramFiles(x86)}\Vim\vim82\vim.exe"
-  if ($(Test-Path $vim_path)) {
-    Set-Alias vim $vim_path
+  $vim_wildcard = "${Env:ProgramFiles(x86)}\Vim\*\vim.exe"
+  if ($(Test-Path $vim_wildcard)) {
+    $vim_path = Get-ChildItem $vim_wildcard
+    Set-Alias vim $vim_path[0].FullName
   }
   $code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe"
   if ($(Test-Path $code_path)) {
     Set-Alias code $code_path
   }
-
 }
 elseif ($(uname) -eq "Darwin") {
   # use "brew install gnu-*" instead of bsd-*
