@@ -114,6 +114,30 @@ function ssh_agent()
     fi
 }
 
+# fast ssh id copy
+# $1 souce name
+# $2 target name
+function ssh_copy()
+{
+    if [ $# -ne 2 ]; then
+        for id in `ls ${HOME}/.ssh/*.pub`
+        do
+            local trim_id=${id%.pub}
+            echo -e "${YELLOW}\t${trim_id#${HOME}/.ssh/}${NORMAL}"
+        done
+        return 0
+    fi
+    local source_file="${HOME}/.ssh/id_rsa"
+    if [ "$1" != "_" ]; then
+        source_file="${source_file}_$1"
+    fi
+    local target_file="${HOME}/.ssh/id_rsa"
+    if [ "$2" != "_" ]; then
+        target_file="${target_file}_$2"
+    fi
+    cp -vf ${source_file} ${target_file} && cp -vf ${source_file}.pub ${target_file}.pub
+}
+
 # kill all
 # $1 process name to kill
 function kill_all()
