@@ -544,15 +544,19 @@ function git_all_noassume()
 }
 
 # Signature for github repository
-# $1 user.email
+# $# -eq 1 => $1 user.email
+# $# -eq 2 => $1 user.name; $2 user.email
 function git_sig()
 {
     if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
         echo "user.name: `git config --get user.name`"
         echo "user.email: `git config --get user.email`"
-    else
+    else if [ ${2:-NOCONFIG} = "NOCONFIG" ]; then
         git config user.name `echo "$1" | awk -F "@" '{print $1}'`
         git config user.email $1
+    else
+        git config user.name $1
+        git config user.email $2
     fi
 }
 
