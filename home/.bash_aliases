@@ -242,7 +242,7 @@ function source_file()
             for ((i=3; i<=$#; i++))
             do
                 eval local line_range=\$\{${i}\}
-                if [ "${line_range}" = "@" ]; then
+                if [ "${line_range}" = "_" ]; then
                     line_range="1,$"
                 fi
                 sed -n "${line_range}p" ${index_file} >> ${tmp_src_file}

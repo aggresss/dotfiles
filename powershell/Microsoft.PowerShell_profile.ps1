@@ -296,7 +296,7 @@ function source_file {
     $ReadyCacheArray = @()
     $file_cache = Get-Content -Path $filepath
     for ($k = 2; $k -lt $args.Count; $k++) {
-      if ($args[$k] -eq "all") {
+      if ($args[$k] -eq "_") {
         for ($j = 0; $j -lt $file_cache.Count; $j++) {
           $data = [ordered]@{LineNumber = $j + 1; Content = $file_cache[$j].ToString() }
           $ReadyCacheArray += New-Object -TypeName PSCustomObject -Property $data
