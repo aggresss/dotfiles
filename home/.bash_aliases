@@ -127,15 +127,15 @@ function ssh_copy()
         done
         return 0
     fi
-    local source_file="${HOME}/.ssh/id_rsa"
+    local src_file="${HOME}/.ssh/id_rsa"
     if [ "$1" != "_" ]; then
-        source_file="${source_file}_$1"
+        src_file="${src_file}_$1"
     fi
-    local target_file="${HOME}/.ssh/id_rsa"
+    local dest_file="${HOME}/.ssh/id_rsa"
     if [ "$2" != "_" ]; then
-        target_file="${target_file}_$2"
+        dest_file="${dest_file}_$2"
     fi
-    cp -vf ${source_file} ${target_file} && cp -vf ${source_file}.pub ${target_file}.pub
+    cp -vf ${src_file} ${dest_file} && cp -vf ${src_file}.pub ${dest_file}.pub
 }
 
 # kill all

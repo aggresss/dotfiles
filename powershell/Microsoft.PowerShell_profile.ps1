@@ -221,16 +221,16 @@ function ssh_copy {
     }
     return
   }
-  ${source_file}="${HOME}/.ssh/id_rsa"
+  ${src_file}="${HOME}/.ssh/id_rsa"
   if ($args[0] -ne "_") {
-    ${source_file} = ${source_file} + "_" + $args[0]
+    ${src_file} = ${src_file} + "_" + $args[0]
   }
-  ${target_file}="${HOME}/.ssh/id_rsa"
+  ${dest_file}="${HOME}/.ssh/id_rsa"
   if ($args[1] -ne "_") {
-    ${target_file} = ${target_file} + "_" + $args[1]
+    ${dest_file} = ${dest_file} + "_" + $args[1]
   }
-  Copy-Item -Path "${source_file}" -Destination "${target_file}" -Verbose
-  Copy-Item -Path "${source_file}.pub" -Destination "${target_file}.pub" -Verbose
+  Copy-Item -Path "${src_file}" -Destination "${dest_file}" -Verbose
+  Copy-Item -Path "${src_file}.pub" -Destination "${dest_file}.pub" -Verbose
 }
 
 # source_file
