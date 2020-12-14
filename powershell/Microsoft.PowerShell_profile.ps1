@@ -210,6 +210,29 @@ function ssh_agent_del {
 }
 Set-Alias k ssh_agent_del
 
+# ssh_copy
+# args[0] source file
+# args[1] target file
+function ssh_copy {
+  if ($args.Count -ne 2 ) {
+    Get-ChildItem -Path ${HOME}/.ssh/*.pub |
+    ForEach-Object {
+      Write-Host "`t" $_.Name.TrimEnd("\.pub") -ForegroundColor DarkYellow
+    }
+    return
+  }
+  ${source_file}="${HOME}/.ssh/id_rsa"
+  if ($args[0] -ne "_") {
+    ${source_file} = ${source_file} + "_" + $args[0]
+  }
+  ${target_file}="${HOME}/.ssh/id_rsa"
+  if ($args[1] -ne "_") {
+    ${target_file} = ${target_file} + "_" + $args[1]
+  }
+  Copy-Item -Path "${source_file}" -Destination "${target_file}" -Verbose
+  Copy-Item -Path "${source_file}.pub" -Destination "${target_file}.pub" -Verbose
+}
+
 # source_file
 # args[0] exec/copy/edit
 # args[1] file
@@ -443,13 +466,14 @@ function git_sig {
     Write-Host "user.name: $(git config --get user.name)"
     Write-Host "user.email: $(git config --get user.email)"
   }
-  elseif ($args -match "@") {
+  elseif (($args.Count -eq 1) -and ($args -match "@")) {
     $v = $args.split("@")
     git config user.name $v[0]
     git config user.email $args
   }
   else {
-    Write-Host "Arguments error."
+    git config user.name $args[0]
+    git config user.email $args[1]
   }
 }
 
