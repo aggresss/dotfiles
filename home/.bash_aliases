@@ -242,6 +242,7 @@ function source_file()
             for ((i=3; i<=$#; i++))
             do
                 eval local line_range=\$\{${i}\}
+                line_range=${line_range/-/,}
                 if [ "${line_range}" = "_" ]; then
                     line_range="1,$"
                 fi
