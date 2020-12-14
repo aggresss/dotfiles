@@ -525,6 +525,39 @@ function git_clone {
   git clone $args $clone_path
 }
 
+# git config insteadOf
+# $1: https/ssh/unset; null to display
+# $2: domain name
+function git_insteadof {
+  $url = "github.com"
+  if ($args.Count -ge 2) {
+    $url=$args[1]
+  }
+
+  switch ($args[0]) {
+    "ssh" {
+      git config --global --unset-all url."https://${url}/".insteadof
+      git config --global url."git@${url}:".insteadOf "https://${url}/"
+    }
+    "https" {
+      git config --global --unset-all url."git@${url}:".insteadof
+      git config --global url."https://${url}/".insteadOf "git@${url}:"
+    }
+    "unset" {
+      git config --global --unset-all url."https://${url}/".insteadof
+      git config --global --unset-all url."git@${url}:".insteadof
+    }
+    Default {
+      git config -l |
+        ForEach-Object {
+          if ($_ -match "insteadof=") {
+            Write-Host $_ -ForegroundColor DarkYellow
+          }
+        }
+    }
+  }
+}
+
 <########################
  # PoSH for Golang
  ########################>
