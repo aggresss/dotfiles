@@ -64,15 +64,6 @@ case $(uname) in
             alias mks='setxkbmap -option keypad:pointerkeys; xkbset ma 60 10 15 15 10'
             alias xck='xclock -bg cyan -update 1 &'
         fi
-        alias vmc='valgrind \
-            --tool=memcheck \
-            --leak-check=yes \
-            --track-fds=yes \
-            --trace-children=yes \
-            --show-reachable=yes \
-            --undef-value-errors=no \
-            --gen-suppressions=all \
-            --error-exitcode=255'
         ;;
     FreeBSD)
         # ls colours
@@ -1043,6 +1034,18 @@ END
 # environment for ${HOME}/bin
 if [ -d ${HOME}/bin ]; then
     env_insert "PATH" "${HOME}/bin"
+fi
+
+if [ $(command -v valgrind >/dev/null; echo $?) -eq 0 ]; then
+    alias vmc='valgrind \
+        --tool=memcheck \
+        --leak-check=yes \
+        --track-fds=yes \
+        --trace-children=yes \
+        --show-reachable=yes \
+        --undef-value-errors=no \
+        --gen-suppressions=all \
+        --error-exitcode=255'
 fi
 
 # end of .bash_aliases
