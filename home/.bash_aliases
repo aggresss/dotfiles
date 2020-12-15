@@ -215,19 +215,6 @@ function kill_all()
     fi
 }
 
-# search file on $PATH
-function find_bin()
-{
-    echo -e "${GREEN}"
-    local tmp_arg
-    for i in `seq 1 $#`
-    do
-        eval tmp_arg=\$$i
-        eval find {${PATH//:/,}} -name '${tmp_arg}'
-    done
-    echo -e "${NORMAL}"
-}
-
 # fast decompression archives
 function un_ball()
 {
@@ -350,25 +337,6 @@ function source_file()
     fi
 }
 
-# remove recursive
-function rm_rcs()
-{
-    local tmp_arg
-    for i in `seq 1 $#`
-    do
-        eval tmp_arg=\$$i
-        echo -e "${RED}CLEAR ==> ${tmp_arg}${NORMAL}"
-        find . -name "${tmp_arg}" -exec rm -rvf {} \;
-    done
-}
-
-# fast find process
-# $1 process name
-function ps_grep()
-{
-    ps aux | grep -si $1 | grep -v grep
-}
-
 # update file utility
 # $1 download url
 # $2 local filepath
@@ -470,7 +438,7 @@ function env_unset()
 }
 
 ##########################
-# Modify for vagrant
+# Modify for Vagrant
 ##########################
 
 # Fast list vagrant status
@@ -495,7 +463,7 @@ function vagrant_ps()
 alias vb='VBoxManage'
 
 ##########################
-# Modify for docker
+# Modify for Docker
 ##########################
 
 # Fast docker inside
@@ -595,7 +563,7 @@ function docker_kill()
 
 
 ##########################
-# Modify for git
+# Modify for Git
 ##########################
 
 # fast change directry to git top level path
@@ -885,7 +853,7 @@ function git_down()
 }
 
 ##########################
-# Modify for golang
+# Modify for Golang
 ##########################
 
 # environmnet for Golang
@@ -961,7 +929,7 @@ function go_clone()
 }
 
 ##########################
-# Modify for vscode
+# Modify for Vscode
 ##########################
 
 # go to vscode user path
@@ -982,7 +950,7 @@ function code_user {
 }
 
 ##########################
-# Modify for python
+# Modify for Python
 ##########################
 
 # specified for ${HOME}/.local/bin
@@ -1008,7 +976,7 @@ function py_path
 }
 
 ##########################
-# Modify for javascript
+# Modify for JavaScript
 ##########################
 
 env_amend "NPM_PACKAGES" "${HOME}/.local"
@@ -1026,6 +994,12 @@ package-lock=false
 END
     fi
 }
+
+##########################
+# Modify for Java
+##########################
+
+alias mvn_create='mvn archetype:generate'
 
 ##########################
 # Modify for Envrionment
