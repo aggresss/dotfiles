@@ -134,7 +134,7 @@ alias fdf='find . -name "*" |grep -sin'
 # find file content
 alias fdc='find . -name "*" |xargs grep -sin'
 # count code line
-alias ccl='find . -name "*[.h|.c|.hpp|.cpp|.go|.rs|.py]" -type f | xargs cat | wc -l'
+alias ccl='find . -name "*[.h|.c|.hpp|.cpp|.go|.rs|.py|.java|.ts|.js]" -type f | xargs cat | wc -l'
 # alias for some application special open
 alias enw='emacs -nw'
 # alias for remove fast
