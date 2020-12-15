@@ -853,6 +853,27 @@ function git_down()
 }
 
 ##########################
+# Modify for Vscode
+##########################
+
+# go to vscode user path
+function code_user {
+    local GLOBAL_WORKSPACE="."
+    case $(uname) in
+        Darwin)
+            GLOBAL_WORKSPACE="${HOME}/Library/Application Support/Code/User"
+            ;;
+        Linux)
+            GLOBAL_WORKSPACE="${HOME}/.config/Code/User"
+            ;;
+        MINGW*)
+            GLOBAL_WORKSPACE="%APPDATA%\Code\User"
+            ;;
+    esac
+    cd ${GLOBAL_WORKSPACE}
+}
+
+##########################
 # Modify for Golang
 ##########################
 
@@ -926,27 +947,6 @@ function go_clone()
     git clone $@ ${clone_path} && \
         mkdir -p ${repo_name}/bin ${repo_name}/pkg && \
         echo -e "\n${GREEN} Clone $1 on ${PWD}/${clone_path} successfully.${NORMAL}\n"
-}
-
-##########################
-# Modify for Vscode
-##########################
-
-# go to vscode user path
-function code_user {
-    local GLOBAL_WORKSPACE="."
-    case $(uname) in
-        Darwin)
-            GLOBAL_WORKSPACE="${HOME}/Library/Application Support/Code/User"
-            ;;
-        Linux)
-            GLOBAL_WORKSPACE="${HOME}/.config/Code/User"
-            ;;
-        MINGW*)
-            GLOBAL_WORKSPACE="%APPDATA%\Code\User"
-            ;;
-    esac
-    cd ${GLOBAL_WORKSPACE}
 }
 
 ##########################
