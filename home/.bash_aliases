@@ -1001,6 +1001,23 @@ END
 
 alias mvn_create='mvn archetype:generate'
 
+function mvn_exec()
+{
+    if [ $# -lt 1 ]; then
+        return
+    elif [ $# -eq 1 ]; then
+        mvn exec:java -Dexec.mainClass="$1"
+    else
+        local i
+        local args=""
+        for ((i=2; i<=$#; i++))
+        do
+            eval args=\$\{args\}\$\{${i}\}\"\ \"
+        done
+        mvn exec:java -Dexec.mainClass="$1" -Dexec.args="${args% }"
+    fi
+}
+
 ##########################
 # Modify for Envrionment
 ##########################
