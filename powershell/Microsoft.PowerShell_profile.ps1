@@ -601,7 +601,9 @@ function go_clone {
  # PoSH for Java
  ########################>
 
- Set-Alias mvn_create mvn archetype:generate
+function mvn_create {
+  mvn archetype:generate
+}
 
 function mvn_exec {
   if ($args.Count -lt 1) {
