@@ -1,10 +1,6 @@
 # file .bash_aliases
 # wget https://raw.githubusercontent.com/aggresss/dotfiles/master/home/.bash_aliases
 
-##########################
-# Modify for utility
-##########################
-
 # color for echo
 BLACK=$'\e[30m'
 RED=$'\e[31m'
@@ -17,6 +13,87 @@ WHITE=$'\e[37m'
 NORMAL=$'\e[0m'
 LIGHT=$'\e[1m'
 INVERT=$'\e[7m'
+
+##########################
+# ENV specified
+##########################
+
+# environment for ${HOME}/bin
+if [ -d ${HOME}/bin ]; then
+    env_insert "PATH" "${HOME}/bin"
+fi
+
+# specified for system type
+echo -e "${GREEN}$(uname -a)${NORMAL}"
+echo -e "${CYAN}${SHELL}${NORMAL}"
+case $(uname) in
+    Darwin)
+        # ls colours
+        export CLICOLOR=1
+        export LSCOLORS=ExGxFxDxCxegedabagacad
+        # use "brew install gnu-*" instead of bsd-*
+        alias sed='gsed'
+        alias awk='gawk'
+        alias tar='gtar'
+        alias find='gfind'
+        alias seq='gseq'
+        # open application from command
+        alias preview='open -a Preview'
+        alias typora='open -a Typora'
+        alias diffmerge='open -a DiffMerge'
+        alias code='open -a Visual\ Studio\ Code'
+        alias vlc='open -a VLC'
+        alias skim='open -a Skim'
+        alias drawio='open -a draw.io'
+        alias chrome='open -a Google\ Chrome'
+        alias firefox='open -a Firefox'
+        alias safari='open -a Safari'
+        alias edge='open -a Microsoft\ Edge'
+        ;;
+    Linux)
+        # Export history format
+        export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S "
+        # Specified for Microsoft WSL
+        if [[ $(uname -a) =~ "icrosoft" ]]; then
+            export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0.0
+        fi
+        # Specified for docker container
+        if [ -f /.dockerenv ]; then
+            echo -e "${YELLOW}DOCKER_IMAGE: ${DOCKER_IMAGE}${NORMAL}"
+        fi
+        # Specified for Gnome environment
+        if [ $(command -v gnome-terminal >/dev/null; echo $?) -eq 0 ]; then
+            alias cbp='chromium-browser --proxy-server=socks5://127.0.0.1:1080'
+            alias calc='gnome-calculator'
+            alias gterm='gnome-terminal'
+            alias mks='setxkbmap -option keypad:pointerkeys; xkbset ma 60 10 15 15 10'
+            alias xck='xclock -bg cyan -update 1 &'
+        fi
+        alias vmc='valgrind \
+            --tool=memcheck \
+            --leak-check=yes \
+            --track-fds=yes \
+            --trace-children=yes \
+            --show-reachable=yes \
+            --undef-value-errors=no \
+            --gen-suppressions=all \
+            --error-exitcode=255'
+        ;;
+    FreeBSD)
+        # ls colours
+        export CLICOLOR=1
+        export LSCOLORS=ExGxFxDxCxegedabagacad
+        ;;
+    MINGW*)
+        ;;
+    *)
+        echo "No support this ENV."
+        ;;
+esac
+
+##########################
+# Modify for utility
+##########################
 
 # some more ls aliases
 alias ll='ls -alF'
@@ -963,82 +1040,5 @@ package-lock=false
 END
     fi
 }
-
-##########################
-# ENV specified
-##########################
-
-# environment for ${HOME}/bin
-if [ -d ${HOME}/bin ]; then
-    env_insert "PATH" "${HOME}/bin"
-fi
-
-# specified for system type
-echo -e "${GREEN}$(uname -a)${NORMAL}"
-echo -e "${CYAN}${SHELL}${NORMAL}"
-case $(uname) in
-    Darwin)
-        # ls colours
-        export CLICOLOR=1
-        export LSCOLORS=ExGxFxDxCxegedabagacad
-        # use "brew install gnu-*" instead of bsd-*
-        alias sed='gsed'
-        alias awk='gawk'
-        alias tar='gtar'
-        alias find='gfind'
-        alias seq='gseq'
-        # open application from command
-        alias preview='open -a Preview'
-        alias typora='open -a Typora'
-        alias diffmerge='open -a DiffMerge'
-        alias code='open -a Visual\ Studio\ Code'
-        alias vlc='open -a VLC'
-        alias skim='open -a Skim'
-        alias drawio='open -a draw.io'
-        alias chrome='open -a Google\ Chrome'
-        alias firefox='open -a Firefox'
-        alias safari='open -a Safari'
-        alias edge='open -a Microsoft\ Edge'
-        ;;
-    Linux)
-        # Export history format
-        export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S "
-        # Specified for Microsoft WSL
-        if [[ $(uname -a) =~ "icrosoft" ]]; then
-            export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0.0
-        fi
-        # Specified for docker container
-        if [ -f /.dockerenv ]; then
-            echo -e "${YELLOW}DOCKER_IMAGE: ${DOCKER_IMAGE}${NORMAL}"
-        fi
-        # Specified for Gnome environment
-        if [ $(command -v gnome-terminal >/dev/null; echo $?) -eq 0 ]; then
-            alias cbp='chromium-browser --proxy-server=socks5://127.0.0.1:1080'
-            alias calc='gnome-calculator'
-            alias gterm='gnome-terminal'
-            alias mks='setxkbmap -option keypad:pointerkeys; xkbset ma 60 10 15 15 10'
-            alias xck='xclock -bg cyan -update 1 &'
-        fi
-        alias vmc='valgrind \
-            --tool=memcheck \
-            --leak-check=yes \
-            --track-fds=yes \
-            --trace-children=yes \
-            --show-reachable=yes \
-            --undef-value-errors=no \
-            --gen-suppressions=all \
-            --error-exitcode=255'
-        ;;
-    FreeBSD)
-        # ls colours
-        export CLICOLOR=1
-        export LSCOLORS=ExGxFxDxCxegedabagacad
-        ;;
-    MINGW*)
-        ;;
-    *)
-        echo "No support this ENV."
-        ;;
-esac
 
 # end of .bash_aliases
