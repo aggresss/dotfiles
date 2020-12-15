@@ -598,6 +598,27 @@ function go_clone {
 }
 
 <########################
+ # PoSH for Java
+ ########################>
+
+ Set-Alias mvn_create mvn archetype:generate
+
+function mvn_exec {
+  if ($args.Count -lt 1) {
+    return
+  }
+  elseif ($args.Count -eq 1) {
+    ${exec_name} = $args[0]
+    "mvn exec:java '-Dexec.mainClass=`"${exec_name}`"'" | Invoke-Expression
+  }
+  else {
+    ${exec_name} = $args[0]
+    ${exec_args} = $args[1..$args.count]
+    "mvn exec:java '-Dexec.mainClass=`"${exec_name}`"' '-Dexec.args=`"${exec_args}`"'" | Invoke-Expression
+  }
+}
+
+<########################
  # Update
  ########################>
 

@@ -1009,12 +1009,12 @@ function mvn_exec()
         mvn exec:java -Dexec.mainClass="$1"
     else
         local i
-        local args=""
+        local exec_args=""
         for ((i=2; i<=$#; i++))
         do
-            eval args=\$\{args\}\$\{${i}\}\"\ \"
+            eval exec_args=\$\{exec_args\}\"\ \"\$\{${i}\}
         done
-        mvn exec:java -Dexec.mainClass="$1" -Dexec.args="${args% }"
+        mvn exec:java -Dexec.mainClass="$1" -Dexec.args="${exec_args# }"
     fi
 }
 
