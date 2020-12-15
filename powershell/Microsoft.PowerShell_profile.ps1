@@ -601,7 +601,7 @@ function go_clone {
  # PoSH for Java
  ########################>
 
-function mvn_create {
+function mvn_gen {
   mvn archetype:generate
 }
 

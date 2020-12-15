@@ -999,7 +999,7 @@ END
 # Modify for Java
 ##########################
 
-alias mvn_create='mvn archetype:generate'
+alias mvn_gen='mvn archetype:generate'
 
 function mvn_exec()
 {
