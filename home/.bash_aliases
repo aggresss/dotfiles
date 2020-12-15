@@ -15,13 +15,8 @@ LIGHT=$'\e[1m'
 INVERT=$'\e[7m'
 
 ##########################
-# ENV specified
+# Operate System specified
 ##########################
-
-# environment for ${HOME}/bin
-if [ -d ${HOME}/bin ]; then
-    env_insert "PATH" "${HOME}/bin"
-fi
 
 # specified for system type
 echo -e "${GREEN}$(uname -a)${NORMAL}"
@@ -1040,5 +1035,14 @@ package-lock=false
 END
     fi
 }
+
+##########################
+# Modify for Envrionment
+##########################
+
+# environment for ${HOME}/bin
+if [ -d ${HOME}/bin ]; then
+    env_insert "PATH" "${HOME}/bin"
+fi
 
 # end of .bash_aliases

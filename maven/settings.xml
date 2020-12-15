@@ -1,0 +1,6 @@
+<mirror>
+    <id>maven-aliyun</id>
+    <name>maven aliyun</name>
+    <mirrorOf>central</mirrorOf>
+    <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+</mirror>

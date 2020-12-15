@@ -86,6 +86,10 @@ fi
 if [ $(command -v npm >/dev/null; echo $?) -eq 0 ]; then
     update_file ${DOTFILES_URL}/npm/.npmrc ${HOME}/.npmrc
 fi
+# maven
+if [ $(command -v mvn >/dev/null; echo $?) -eq 0 ]; then
+    update_file ${DOTFILES_URL}/maven/settings.xml ${HOME}/.m2/settings.xml
+fi
 # powershell
 if [ -d ${HOME}/.config/powershell ]; then
     update_file ${DOTFILES_URL}/powershell/Microsoft.PowerShell_profile.ps1 \
