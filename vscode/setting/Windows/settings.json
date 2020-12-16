@@ -14,7 +14,7 @@
 	"go.inferGopath": false,
 	"go.gopath": "${env:GOPATH}",
 	"go.toolsGopath": "${env:GOPATH}",
-	"go.useLanguageServer": false,
+	"go.useLanguageServer": true,
 	"go.formatTool": "goimports",
 
 	"python.formatting.provider": "yapf",

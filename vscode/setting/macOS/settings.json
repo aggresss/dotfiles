@@ -18,7 +18,7 @@
 		"--disable=all",
 		"--enable=errcheck"
 	],
-	"go.useLanguageServer": false,
+	"go.useLanguageServer": true,
 	"go.formatTool": "goimports",
 
 	"python.pythonPath": "/usr/local/bin/python3",
