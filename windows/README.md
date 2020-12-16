@@ -5,3 +5,6 @@ OpenJDK by Red Hat
 
 Maven
 - https://maven.apache.org/download.cgi
+
+Cascadia Code Font
+- https://github.com/microsoft/cascadia-code/releases
