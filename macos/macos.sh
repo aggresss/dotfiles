@@ -61,7 +61,7 @@ brew install \
     xz \
     nodejs \
     ninja \
-    openjdk \
+    openjdk@11 \
     redis
 
 brew cask install \

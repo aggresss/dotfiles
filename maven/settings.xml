@@ -10,6 +10,16 @@
   </mirrors>
   <profiles>
     <profile>
+      <id>8</id>
+      <activation>
+        <jdk>8</jdk>
+      </activation>
+      <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+      </properties>
+    </profile>
+    <profile>
       <id>11</id>
       <activation>
         <jdk>11</jdk>

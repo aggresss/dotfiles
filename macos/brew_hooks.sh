@@ -12,6 +12,5 @@ ln -sf $(brew --prefix llvm)/bin/mosquitto_rr ${HOME}/bin/mosquitto_rr
 ln -sf $(brew --prefix curl)/bin/curl ${HOME}/bin/curl
 ## mtr
 ln -sf $(brew --prefix mtr)/sbin/mtr ${HOME}/bin/mtr
-## openjdk
-sudo ln -sfn /usr/local/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
-
+## openjdk@11
+sudo ln -sfn /usr/local/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
