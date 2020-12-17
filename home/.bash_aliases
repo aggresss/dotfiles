@@ -588,13 +588,13 @@ function git_status()
 }
 
 # no-skip-worktree all
-function git_all_noskip()
+function git_noskip_all()
 {
     git ls-files -v | grep "^S" | awk '{print $2}' |xargs git update-index --no-skip-worktree
 }
 
 # no-assume-unchanged all
-function git_all_noassume()
+function git_noassume_all()
 {
     git ls-files -v | grep "^h" | awk '{print $2}' |xargs git update-index --no-assume-unchanged
 }

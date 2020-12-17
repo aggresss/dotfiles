@@ -407,7 +407,7 @@ function git_noskip {
   git update-index --no-skip-worktree $args[0]
 }
 
-function git_all_noskip {
+function git_noskip_all {
   git ls-files -v |
   ForEach-Object {
     if ($_ -cmatch "^S") {
@@ -426,7 +426,7 @@ function git_noassume {
   git update-index --no-assume-unchanged $args[0]
 }
 
-function git_all_noassume {
+function git_noassume_all {
   git ls-files -v |
   ForEach-Object {
     if ($_ -cmatch "^h") {
