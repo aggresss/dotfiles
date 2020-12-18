@@ -404,17 +404,18 @@ function git_skip {
 }
 
 function git_noskip {
-  git update-index --no-skip-worktree $args[0]
-}
-
-function git_noskip_all {
-  git ls-files -v |
-  ForEach-Object {
-    if ($_ -cmatch "^S") {
-      $v = $_.split(" ")[-1]
-      git update-index --no-skip-worktree $v
-      Write-Host $v -ForegroundColor DarkRed
-    }
+  if ($args.Count -eq 0) {
+    git ls-files -v |
+      ForEach-Object {
+        if ($_ -cmatch "^S") {
+          $v = $_.split(" ")[-1]
+          git update-index --no-skip-worktree $v
+          Write-Host $v -ForegroundColor DarkRed
+        }
+      }
+  }
+  else {
+    git update-index --no-skip-worktree $args[0]
   }
 }
 
@@ -423,17 +424,18 @@ function git_assume {
 }
 
 function git_noassume {
-  git update-index --no-assume-unchanged $args[0]
-}
-
-function git_noassume_all {
-  git ls-files -v |
-  ForEach-Object {
-    if ($_ -cmatch "^h") {
-      $v = $_.split(" ")[-1]
-      git update-index --no-assume-unchanged $v
-      Write-Host $v -ForegroundColor DarkRed
-    }
+  if ($args.Count -eq 0) {
+    git ls-files -v |
+      ForEach-Object {
+        if ($_ -cmatch "^h") {
+          $v = $_.split(" ")[-1]
+          git update-index --no-assume-unchanged $v
+          Write-Host $v -ForegroundColor DarkRed
+        }
+      }
+  }
+  else {
+    git update-index --no-assume-unchanged $args[0]
   }
 }
 

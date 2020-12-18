@@ -574,10 +574,8 @@ alias git_diff='git diff --name-status'
 alias git_log='git log --oneline'
 # git skip worktree
 alias git_skip='git update-index --skip-worktree'
-alias git_noskip='git update-index --no-skip-worktree'
 # git assume unchanged
 alias git_assume='git update-index --assume-unchanged'
-alias git_noassume='git update-index --no-assume-unchanged'
 
 # Show git status
 function git_status()
@@ -588,15 +586,23 @@ function git_status()
 }
 
 # no-skip-worktree all
-function git_noskip_all()
+function git_noskip()
 {
-    git ls-files -v | grep "^S" | awk '{print $2}' |xargs git update-index --no-skip-worktree
+    if [ $# -eq 0 ]; then
+        git ls-files -v | grep "^S" | awk '{print $2}' |xargs git update-index --no-skip-worktree
+    else
+        git update-index --no-skip-worktree $1
+    fi
 }
 
 # no-assume-unchanged all
-function git_noassume_all()
+function git_noassume()
 {
-    git ls-files -v | grep "^h" | awk '{print $2}' |xargs git update-index --no-assume-unchanged
+    if [ $# -eq 0 ]; then
+        git ls-files -v | grep "^h" | awk '{print $2}' |xargs git update-index --no-assume-unchanged
+    else
+        git update-index --no-assume-unchanged $1
+    fi
 }
 
 # Signature for github repository
