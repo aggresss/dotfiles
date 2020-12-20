@@ -14,6 +14,10 @@
 	"go.inferGopath": false,
 	"go.gopath": "${env:GOPATH}",
 	"go.toolsGopath": "${env:GOPATH}",
+	"go.lintFlags": [
+		"--disable=all",
+		"--enable=errcheck"
+	],
 	"go.useLanguageServer": true,
 	"go.formatTool": "goimports",
 
