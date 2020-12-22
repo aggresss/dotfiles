@@ -22,8 +22,6 @@ ms-vscode.cmake-tools
 msjsdiag.debugger-for-chrome
 ritwickdey.liveserver
 techer.open-in-browser
-# Markdown
-yzhang.markdown-all-in-one
 # Git
 donjayamanne.githistory
 eamodio.gitlens
@@ -33,4 +31,7 @@ ms-azuretools.vscode-docker
 editorconfig.editorconfig
 # JSON
 eriklynd.json-tools
-
+# Markdown
+yzhang.markdown-all-in-one
+# PlantUML
+jebbs.plantuml
