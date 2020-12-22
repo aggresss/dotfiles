@@ -604,7 +604,27 @@ function go_clone {
  ########################>
 
 function mvn_gen {
-  mvn archetype:generate
+  if ($args.Count -eq 1) {
+    $values_array = $args[0].split(":")
+    if ($values_array.count -eq 2) {
+      $goupdId = $values_array[0]
+      $artifactId = $values_array[1]
+      "mvn archetype:generate ``
+        '-DarchetypeGroupId=org.apache.maven.archetypes' ``
+        '-DarchetypeArtifactId=maven-archetype-quickstart' ``
+        '-DgroupId=$goupdId' ``
+        '-DartifactId=$artifactId' ``
+        '-Dversion=1.0-SNAPSHOT' ``
+        '-DinteractiveMode=false'" | Invoke-Expression
+    }
+    else
+    {
+      Write-Host "GroupId:ArtifactId"
+    }
+  }
+  else {
+    mvn archetype:generate
+  }
 }
 
 function mvn_exec {

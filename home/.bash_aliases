@@ -1005,7 +1005,26 @@ END
 # Modify for Java
 ##########################
 
-alias mvn_gen='mvn archetype:generate'
+function mvn_gen()
+{
+    if [ $# -eq 1 ]; then
+        local groupId=${1%%:*}
+        local artifactId=${1##*:}
+        if [[ -n ${groupId} && -n ${artifactId} ]]; then
+            mvn archetype:generate \
+                -DarchetypeGroupId=org.apache.maven.archetypes \
+                -DarchetypeArtifactId=maven-archetype-quickstart \
+                -DgroupId=${groupId} \
+                -DartifactId=${artifactId} \
+                -Dversion=1.0-SNAPSHOT \
+                -DinteractiveMode=false
+        else
+            echo -e "${RED}GroupId:ArtifactId${NORMAL}"
+        fi
+    else
+        mvn archetype:generate
+    fi
+}
 
 function mvn_exec()
 {
