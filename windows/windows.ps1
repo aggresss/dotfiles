@@ -4,6 +4,7 @@ winget install git
 winget install cmake
 winget install vim
 winget install vcxsrv
+winget install graphviz
 winget install python
 winget install node.js
 winget install Chrome
