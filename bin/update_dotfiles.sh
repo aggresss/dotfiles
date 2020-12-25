@@ -184,4 +184,3 @@ case $(uname) in
         echo "No support this ENV"
     ;;
 esac
-

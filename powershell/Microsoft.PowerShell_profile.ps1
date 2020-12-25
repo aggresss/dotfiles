@@ -665,24 +665,16 @@ function update_internal {
       Write-Host "Remote update $Local successful." -ForegroundColor DarkGreen
   }
 }
-function update_config_self {
+function update_configfiles {
+  $isLocal = false
   if ($args[0] -eq "local") {
-    update_internal $true "powershell/Microsoft.PowerShell_profile.ps1" $PROFILE
+    $isLocal = true
   }
-  else {
-    update_internal $false "powershell/Microsoft.PowerShell_profile.ps1" $PROFILE
-  }
-}
-
-function update_config_vim {
-  if ($args[0] -eq "local") {
-    update_internal $true "vim/.vimrc" "${HOME}/.vimrc"
-    update_internal $true "vim/.vimrc.bundles" "${HOME}/.vimrc.bundles"
-  }
-  else {
-    update_internal $false "vim/.vimrc" "${HOME}/.vimrc"
-    update_internal $false "vim/.vimrc.bundles" "${HOME}/.vimrc.bundles"
-  }
+  # profile
+  update_internal $isLocal "powershell/Microsoft.PowerShell_profile.ps1" $PROFILE
+  # vim
+  update_internal $isLocal "vim/.vimrc" "${HOME}/.vimrc"
+  update_internal $isLocal "vim/.vimrc.bundles" "${HOME}/.vimrc.bundles"
   if (-not $(Test-Path ${HOME}/.vim/bundle)) {
     $ErrorActionPreference = "stop"; `
       git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim; `
@@ -690,6 +682,18 @@ function update_config_vim {
   }
   else {
     vim +BundleInstall +qall
+  }
+  # pip
+  if ((Get-Command pip).CommandType -eq "Application") {
+    update_internal $true "pip/pip.conf" "${HOME}/.pip/pip.conf"
+  }
+  # npm
+  if ((Get-Command npm).CommandType -eq "Application") {
+    update_internal $true "npm/.npmrc" "${HOME}/.npmrc"
+  }
+  # maven
+  if ((Get-Command mvn).CommandType -eq "Application") {
+    update_internal $true "maven/settings.xml" "${HOME}/.m2/settings.xml"
   }
 }
 
