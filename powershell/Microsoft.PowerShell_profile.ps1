@@ -666,9 +666,9 @@ function update_internal {
   }
 }
 function update_configfiles {
-  $isLocal = false
+  $isLocal = $false
   if ($args[0] -eq "local") {
-    $isLocal = true
+    $isLocal = $true
   }
   # profile
   update_internal $isLocal "powershell/Microsoft.PowerShell_profile.ps1" $PROFILE
