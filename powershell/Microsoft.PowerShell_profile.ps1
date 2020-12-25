@@ -676,26 +676,28 @@ function update_configfiles {
   # profile
   update_internal $isLocal "powershell/Microsoft.PowerShell_profile.ps1" $PROFILE
   # vim
-  update_internal $isLocal "vim/.vimrc" "${HOME}/.vimrc"
-  update_internal $isLocal "vim/.vimrc.bundles" "${HOME}/.vimrc.bundles"
-  if (-not $(Test-Path ${HOME}/.vim/bundle)) {
-    $ErrorActionPreference = "stop"; `
-      git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim; `
+  if (Get-Command vim -errorAction SilentlyContinue) {
+    update_internal $isLocal "vim/.vimrc" "${HOME}/.vimrc"
+    update_internal $isLocal "vim/.vimrc.bundles" "${HOME}/.vimrc.bundles"
+    if (-not $(Test-Path ${HOME}/.vim/bundle)) {
+      $ErrorActionPreference = "stop"; `
+        git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim; `
+        vim +BundleInstall +qall
+    }
+    else {
       vim +BundleInstall +qall
-  }
-  else {
-    vim +BundleInstall +qall
+    }
   }
   # pip
-  if ((Get-Command pip).CommandType -eq "Application") {
+  if (Get-Command pip -errorAction SilentlyContinue) {
     update_internal $true "pip/pip.conf" "${HOME}/.pip/pip.conf"
   }
   # npm
-  if ((Get-Command npm).CommandType -eq "Application") {
+  if (Get-Command npm -errorAction SilentlyContinue) {
     update_internal $true "npm/.npmrc" "${HOME}/.npmrc"
   }
   # maven
-  if ((Get-Command mvn).CommandType -eq "Application") {
+  if (Get-Command mvn -errorAction SilentlyContinue) {
     update_internal $true "maven/settings.xml" "${HOME}/.m2/settings.xml"
   }
 }
