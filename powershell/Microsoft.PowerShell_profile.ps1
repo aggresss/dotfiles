@@ -655,6 +655,9 @@ function update_internal {
   $local_base_path = "${HOME}/workspace-scratch/dotfiles"
   $remote_base_url = "https://raw.githubusercontent.com/aggresss/dotfiles/master"
   if ($IsLocal -and ($(Test-Path $local_base_path))) {
+    if (-not $(Test-Path $(Split-Path -Path $Local))) {
+      New-Item -ItemType Directory -Path $(Split-Path -Path $Local)
+    }
     $ErrorActionPreference = "stop"; `
       Copy-Item "${local_base_path}/$Remote" "$Local"; `
       Write-Host "Local update $Local successful." -ForegroundColor DarkGreen
