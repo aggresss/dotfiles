@@ -6,7 +6,7 @@
 
 1. Open Keychain Access
 2. In menu, open **Keychain Access > Certificate Assistant > Create a certificate**
-3. Give it a name (e.g. `gdbc`)
+3. Give it a name (e.g. `gdb-cert`)
   + Identity type: Self Signed Root
   + Certificate type: Code Signing
   + Check: let me override defaults
@@ -17,7 +17,7 @@
 8. Double click certificate
 9. Expand **Trust**, set **Code signing** to `always trust`
 10. Restart taskgated in terminal: `killall taskgated`
-11. Codesign gdb using your certificate: `codesign -fs gdbc /usr/local/bin/gdb`
+11. Codesign gdb using your certificate: `codesign -fs gdb-cert /usr/local/bin/gdb`
 12. Shut down your mac and restart in recovery mode (hold down command-R until apple logo appears)
 13. Open terminal window
 14. Modify System Integrity Protection to allow debugging: `csrutil enable --without debug`
