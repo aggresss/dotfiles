@@ -17,8 +17,5 @@
 8. Double click certificate
 9. Expand **Trust**, set **Code signing** to `always trust`
 10. Restart taskgated in terminal: `killall taskgated`
-11. Codesign gdb using your certificate: `codesign -fs gdb-cert /usr/local/bin/gdb`
-12. Shut down your mac and restart in recovery mode (hold down command-R until apple logo appears)
-13. Open terminal window
-14. Modify System Integrity Protection to allow debugging: `csrutil enable --without debug`
-15. Reboot your Mac. Debugging with gdb should now work as expected.
+11. Codesign gdb using your certificate: `codesign --entitlements gdb-entitlement.xml -fs gdb-cert $(which gdb)`
+12. Reboot your Mac. Debugging with gdb should now work as expected.
