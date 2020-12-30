@@ -8,3 +8,6 @@ Maven
 
 Cascadia Code Font
 - https://github.com/microsoft/cascadia-code/releases
+
+JetBrains Mono Font
+- https://www.jetbrains.com/lp/mono/
