@@ -197,10 +197,12 @@ function code_user {
 
 # SSH
 function ssh_agent_add {
-  ssh-agent
-  ssh-add -l
+  ssh-add -l 2>&1> $null
   if (-not $?) {
     ssh-add
+  }
+  else {
+    ssh-add -l
   }
 }
 Set-Alias a ssh_agent_add
@@ -221,11 +223,11 @@ function ssh_copy {
     }
     return
   }
-  ${src_file}="${HOME}/.ssh/id_rsa"
+  ${src_file} = "${HOME}/.ssh/id_rsa"
   if ($args[0] -ne "_") {
     ${src_file} = ${src_file} + "_" + $args[0]
   }
-  ${dest_file}="${HOME}/.ssh/id_rsa"
+  ${dest_file} = "${HOME}/.ssh/id_rsa"
   if ($args[1] -ne "_") {
     ${dest_file} = ${dest_file} + "_" + $args[1]
   }
@@ -390,11 +392,11 @@ function git_status {
   git stash list
   write-host ""
   git ls-files -v |
-    ForEach-Object {
-      if ($_ -cmatch "^S|^h|^M") {
-        Write-Host $_ -ForegroundColor DarkRed
-      }
+  ForEach-Object {
+    if ($_ -cmatch "^S|^h|^M") {
+      Write-Host $_ -ForegroundColor DarkRed
     }
+  }
   write-host ""
 }
 Set-Alias y git_status
@@ -406,13 +408,13 @@ function git_skip {
 function git_noskip {
   if ($args.Count -eq 0) {
     git ls-files -v |
-      ForEach-Object {
-        if ($_ -cmatch "^S") {
-          $v = $_.split(" ")[-1]
-          git update-index --no-skip-worktree $v
-          Write-Host $v -ForegroundColor DarkRed
-        }
+    ForEach-Object {
+      if ($_ -cmatch "^S") {
+        $v = $_.split(" ")[-1]
+        git update-index --no-skip-worktree $v
+        Write-Host $v -ForegroundColor DarkRed
       }
+    }
   }
   else {
     git update-index --no-skip-worktree $args[0]
@@ -426,13 +428,13 @@ function git_assume {
 function git_noassume {
   if ($args.Count -eq 0) {
     git ls-files -v |
-      ForEach-Object {
-        if ($_ -cmatch "^h") {
-          $v = $_.split(" ")[-1]
-          git update-index --no-assume-unchanged $v
-          Write-Host $v -ForegroundColor DarkRed
-        }
+    ForEach-Object {
+      if ($_ -cmatch "^h") {
+        $v = $_.split(" ")[-1]
+        git update-index --no-assume-unchanged $v
+        Write-Host $v -ForegroundColor DarkRed
       }
+    }
   }
   else {
     git update-index --no-assume-unchanged $args[0]
@@ -533,7 +535,7 @@ function git_clone {
 function git_insteadof {
   $url = "github.com"
   if ($args.Count -ge 2) {
-    $url=$args[1]
+    $url = $args[1]
   }
 
   switch ($args[0]) {
@@ -551,11 +553,11 @@ function git_insteadof {
     }
     Default {
       git config -l |
-        ForEach-Object {
-          if ($_ -match "insteadof=") {
-            Write-Host $_ -ForegroundColor DarkYellow
-          }
+      ForEach-Object {
+        if ($_ -match "insteadof=") {
+          Write-Host $_ -ForegroundColor DarkYellow
         }
+      }
     }
   }
 }
@@ -617,8 +619,7 @@ function mvn_gen {
         '-Dversion=1.0-SNAPSHOT' ``
         '-DinteractiveMode=false'" | Invoke-Expression
     }
-    else
-    {
+    else {
       Write-Host "GroupId:ArtifactId"
     }
   }
@@ -732,12 +733,12 @@ if ($IsWindows -or $Env:OS) {
     $vs_path = Get-ChildItem $vs_wildcard
     Push-Location $vs_path[-1].FullName
     cmd /c "VsDevCmd.bat & set" |
-      ForEach-Object {
-        if ($_ -match "=") {
-          $v = $_.split("=")
-          Set-Item -Force -Path "Env:\$($v[0])" -Value "$($v[1])"
-        }
+    ForEach-Object {
+      if ($_ -match "=") {
+        $v = $_.split("=")
+        Set-Item -Force -Path "Env:\$($v[0])" -Value "$($v[1])"
       }
+    }
     Pop-Location
     Write-Host "`nVisual Studio Command Prompt variables set." -ForegroundColor Yellow
   }
