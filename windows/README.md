@@ -11,3 +11,11 @@ Cascadia Code Font
 
 JetBrains Mono Font
 - https://www.jetbrains.com/lp/mono/
+
+## Using ssh-agent with git on Windows
+
+```
+Get-Service ssh-agent | Set-Service -StartupType Automatic
+
+[Environment]::SetEnvironmentVariable("GIT_SSH", "$((Get-Command ssh).Source)", [System.EnvironmentVariableTarget]::User)
+```
