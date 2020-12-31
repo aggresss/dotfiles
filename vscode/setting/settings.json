@@ -16,28 +16,36 @@
 	"go.toolsGopath": "${env:GOPATH}",
 	"go.useLanguageServer": true,
 	"go.formatTool": "goimports",
+	"go.lintFlags": [
+		"--disable=all",
+		"--enable=errcheck"
+	],
 
-	"python.pythonPath": "/usr/bin/python3",
+
+	"java.semanticHighlighting.enabled": true,
+	"java.configuration.checkProjectSettingsExclusions": false,
+
 	"python.formatting.provider": "yapf",
 	"python.linting.enabled": true,
 	"python.linting.pylintEnabled": false,
 	"python.linting.flake8Enabled": true,
 	"python.jediEnabled": false,
+	"python.languageServer": "Microsoft",
 
 	"workbench.startupEditor": "none",
-	"workbench.colorTheme": "Visual Studio Light",
+	"workbench.colorTheme": "Visual Studio Dark",
 	"workbench.activityBar.visible": true,
 	"workbench.statusBar.visible": true,
 	"workbench.sideBar.location": "left",
 	"window.zoomLevel": 0,
-	"editor.fontSize": 14,
 	"editor.minimap.enabled": false,
 	"editor.renderWhitespace": "all",
 	"editor.suggestSelection": "first",
-	"terminal.integrated.fontSize": 12,
+	"editor.fontFamily": "'JetBrains Mono', 'Cascadia Code', Consolas, 'Courier New', monospace",
+	"terminal.integrated.fontSize": 14,
+	"terminal.integrated.shell.osx": "/bin/zsh",
 	"explorer.confirmDragAndDrop": false,
 	"explorer.confirmDelete": false,
-	"cmake.configureOnOpen": false,
-	"files.trimTrailingWhitespace": true
-
+	"files.trimTrailingWhitespace": true,
+	"cmake.configureOnOpen": false
 }
