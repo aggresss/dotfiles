@@ -42,7 +42,7 @@
 	"editor.minimap.enabled": false,
 	"editor.renderWhitespace": "all",
 	"editor.suggestSelection": "first",
-	"editor.fontFamily": "'JetBrains Mono', 'Menlo', 'DejaVu', 'Cascadia Code', Consolas, 'Courier New', monospace",
+	"editor.fontFamily": "'JetBrains Mono', Menlo, DejaVu, 'Cascadia Code', Consolas, 'Courier New', monospace",
 	"terminal.integrated.fontSize": 12,
 	"terminal.integrated.shell.osx": "/bin/zsh",
 	"explorer.confirmDragAndDrop": false,
