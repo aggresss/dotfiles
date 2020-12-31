@@ -7,11 +7,10 @@ Maven
 - https://maven.apache.org/download.cgi
 
 Cascadia Code Font
-- https://github.com/microsoft/cascadia-code/releases
+- https://github.com/microsoft/cascadia-code
 
 JetBrains Mono Font
-- https://www.jetbrains.com/lp/mono/
-
+- https://github.com/JetBrains/JetBrainsMono
 ## Using ssh-agent with git on Windows
 
 ```
