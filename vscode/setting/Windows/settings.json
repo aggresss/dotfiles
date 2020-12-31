@@ -37,13 +37,16 @@
 	"editor.minimap.enabled": false,
 	"editor.renderWhitespace": "all",
 	"editor.suggestSelection": "first",
-	"editor.fontFamily": "'Cascadia Code', Consolas, 'Courier New', monospace",
+	"editor.fontFamily": "'JetBrains Mono', 'Cascadia Code', Consolas, 'Courier New', monospace",
 	"terminal.integrated.fontSize": 14,
 	"explorer.confirmDragAndDrop": false,
 	"explorer.confirmDelete": false,
-	"cmake.configureOnOpen": false,
 	"files.trimTrailingWhitespace": true,
-	"remote.SSH.remotePlatform": {
-		"rtc.router7.cn": "linux"
-    }
+	"files.exclude": {
+		"**/.classpath": true,
+		"**/.project": true,
+		"**/.settings": true,
+		"**/.factorypath": true
+	},
+	"cmake.configureOnOpen": false
 }
