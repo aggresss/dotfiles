@@ -703,6 +703,7 @@ GIT_NAME_TITLE=''
 GIT_NAME_CONTENT=''
 GIT_NAME_LEFT=''
 GIT_NAME_RIGHT=''
+GIT_NAME_HEAD=''
 
 function git_branch_internal()
 {
@@ -710,16 +711,22 @@ function git_branch_internal()
     until [ "$dir" -ef / ]; do
         if [ -f "$dir/.git/HEAD" ]; then
             local head=$(< "$dir/.git/HEAD")
-                if [[ $head = ref:\ refs/heads/* ]]; then
-                    GIT_NAME_TITLE="branch"
-                    GIT_NAME_CONTENT="${head#*/*/}"
-                elif [[ $head != '' ]]; then
+            if [[ ${head} == ${GIT_NAME_HEAD} ]]; then
+                return
+            fi
+            GIT_NAME_HEAD=${head}
+            if [[ $head = ref:\ refs/heads/* ]]; then
+                GIT_NAME_TITLE="branch"
+                GIT_NAME_CONTENT="${head#*/*/}"
+            else
+                local describe=$( git describe --all --always --long --abbrev=7)
+                if [ ${#describe} -eq 7 ]; then
                     GIT_NAME_TITLE="commit"
-                    GIT_NAME_CONTENT=${head:0:7}
+                    GIT_NAME_CONTENT=${describe}
                 else
-                    GIT_NAME_TITLE="git"
-                    GIT_NAME_CONTENT="unknow"
+                    # TODO
                 fi
+            fi
             GIT_NAME_LEFT=":("
             GIT_NAME_RIGHT=")"
             return
@@ -730,6 +737,7 @@ function git_branch_internal()
     GIT_NAME_CONTENT=''
     GIT_NAME_LEFT=''
     GIT_NAME_RIGHT=''
+    GIT_NAME_HEAD=''
 }
 
 # Git branch perception
@@ -772,6 +780,7 @@ function git_prompt()
         fi
         PS1=${PS1_BAK-}
         unset PS1_BAK
+        GIT_NAME_HEAD=''
     fi
 }
 
