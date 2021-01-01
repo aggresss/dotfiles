@@ -154,16 +154,6 @@ alias mv='mv -i'
 # Generate GNU standard files
 alias make_gnu='touch AUTHORS COPYING ChangeLog NEWS README'
 
-# conversion number
-#$1 obase
-#$2 ibase
-#$3 number
-function conv_num()
-{
-    local num=$(echo $3 | tr '[a-z]' '[A-Z]')
-    echo "obase=$1; ibase=$2; $num" | bc
-}
-
 # fast ssh-agent
 function ssh_agent()
 {
@@ -335,19 +325,6 @@ function source_file()
             rm -rf ${tmp_src_file}
         fi
     fi
-}
-
-# update file utility
-# $1 download url
-# $2 local filepath
-function update_file()
-{
-    local tmp_path="/tmp"
-    local down_file=`echo "$1" | awk -F "/" '{print $NF}'`
-    rm -rf ${tmp_path}/${down_file}
-    wget -P ${tmp_path} $1
-    cp -f ${tmp_path}/${down_file} $2
-    rm -f ${tmp_path}/${down_file}
 }
 
 # switch proxy on-off
