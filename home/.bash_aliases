@@ -719,12 +719,13 @@ function git_branch_internal()
                 GIT_NAME_TITLE="branch"
                 GIT_NAME_CONTENT="${head#*/*/}"
             else
-                local describe=$( git describe --all --always --long --abbrev=7)
-                if [ ${#describe} -eq 7 ]; then
-                    GIT_NAME_TITLE="commit"
+                local describe=$(git describe --tags 2> /dev/null)
+                if [ -n "${describe}" ]; then
+                    GIT_NAME_TITLE="tag"
                     GIT_NAME_CONTENT=${describe}
                 else
-                    # TODO
+                    GIT_NAME_TITLE="commit"
+                    GIT_NAME_CONTENT=${head:0:7}
                 fi
             fi
             GIT_NAME_LEFT=":("
