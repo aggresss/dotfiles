@@ -714,13 +714,8 @@ function git_branch_internal()
                     GIT_NAME_TITLE="branch"
                     GIT_NAME_CONTENT="${head#*/*/}"
                 elif [[ $head != '' ]]; then
-                    local tag=`git describe --always --tags`
-                    if [[ $head = $tag* ]]; then
-                        GIT_NAME_TITLE="commit"
-                    else
-                        GIT_NAME_TITLE="tag"
-                    fi
-                    GIT_NAME_CONTENT=$tag
+                    GIT_NAME_TITLE="commit"
+                    GIT_NAME_CONTENT=${head:0:7}
                 else
                     GIT_NAME_TITLE="git"
                     GIT_NAME_CONTENT="unknow"
