@@ -775,7 +775,6 @@ function git_prompt()
         elif [[ ${SHELL} =~ .*zsh$ ]]; then
             unset precmd_functions
         fi
-
         PS1=${PS1_BAK-}
         unset PS1_BAK
     fi
