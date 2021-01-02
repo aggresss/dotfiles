@@ -415,12 +415,15 @@ function prompt_custom {
   Write-Host ${GIT_NAME_TITLE}${GIT_NAME_LEFT} -ForegroundColor Blue -NoNewline
   Write-Host ${GIT_NAME_CONTENT} -ForegroundColor Red -NoNewline
   Write-Host ${GIT_NAME_RIGHT}"`$" -ForegroundColor Blue -NoNewline
+  # Prompt function requires a return, otherwise defaults to factory prompt
+  return " "
 }
 
 function git_prompt {
   if (Get-Command prompt_bak -errorAction SilentlyContinue) {
     Copy-Item Function::Global:prompt_bak Function::Global:prompt
-    Remove-Item Function::Global:prompt_bak
+    Remove-Item Function::prompt_bak
+    $Global:GIT_NAME_HEAD = ""; "$Global:GIT_NAME_HEAD" | Out-Null
   }
   else {
     Copy-Item Function::Global:prompt Function::Global:prompt_bak
