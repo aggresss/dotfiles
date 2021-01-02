@@ -708,9 +708,9 @@ GIT_NAME_HEAD=''
 function git_branch_internal()
 {
     local dir="."
-    until [ "$dir" -ef / ]; do
-        if [ -f "$dir/.git/HEAD" ]; then
-            local head=$(< "$dir/.git/HEAD")
+    until [ "${dir}" -ef / ]; do
+        if [ -f "${dir}/.git/HEAD" ]; then
+            local head=$(< "${dir}/.git/HEAD")
             if [[ ${head} == ${GIT_NAME_HEAD} ]]; then
                 return
             fi
@@ -732,7 +732,7 @@ function git_branch_internal()
             GIT_NAME_RIGHT=")"
             return
         fi
-        dir="../$dir"
+        dir="../${dir}"
     done
     GIT_NAME_TITLE=''
     GIT_NAME_CONTENT=''
