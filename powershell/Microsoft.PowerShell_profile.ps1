@@ -381,33 +381,36 @@ $Global:GIT_NAME_RIGHT=""
 $Global:GIT_NAME_HEAD=""
 
 function git_branch_internal {
-  ${dir} = ${PWD}.Path
+  $dir = $PWD.Path
   do {
     if (Test-Path "${dir}/.git/HEAD") {
-      ${head} = Get-Content "${dir}/.git/HEAD"
-      if (${head} -eq $Global:GIT_NAME_HEAD) {
+      $head = Get-Content "${dir}/.git/HEAD"
+      if ($head -eq $Global:GIT_NAME_HEAD) {
         return
       }
-      if () {
-
+      if ($head -match "^ref\:\ refs\/heads\/*") {
+        $GIT_NAME_TITLE="branch"
+        $GIT_NAME_CONTENT="${head#*/*/}"
       }
 
-      $Global:GIT_NAME_LEFT=":("
-      $Global:GIT_NAME_RIGHT=")"
+      $GIT_NAME_LEFT=":("
+      $GIT_NAME_RIGHT=")"
       return
     }
     ${dir} = Split-Path -Parent -Path "${dir}"
   } while (${dir})
 
-  $Global:GIT_NAME_TITLE=""
-  $Global:GIT_NAME_CONTENT=""
-  $Global:GIT_NAME_LEFT=""
-  $Global:GIT_NAME_RIGHT=""
-  $Global:GIT_NAME_HEAD=""
+  $GIT_NAME_TITLE=""
+  $GIT_NAME_CONTENT=""
+  $GIT_NAME_LEFT=""
+  $GIT_NAME_RIGHT=""
+  $GIT_NAME_HEAD=""
 }
 
 function prompt_custom {
-
+  Write-Host ${GIT_NAME_TITLE}${GIT_NAME_LEFT} -ForegroundColor Yellow -NoNewline; `
+  Write-Host ${GIT_NAME_CONTENT} -ForegroundColor Red -NoNewline; `
+  Write-Host ${GIT_NAME_RIGHT}"`$" -ForegroundColor Blue -NoNewline
 }
 
 function git_prompt {
