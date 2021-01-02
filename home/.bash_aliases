@@ -715,7 +715,7 @@ function git_branch_internal()
                 return
             fi
             GIT_NAME_HEAD=${head}
-            if [[ $head = ref:\ refs/heads/* ]]; then
+            if [[ $head =~ ^ref\:\ refs\/heads\/* ]]; then
                 GIT_NAME_TITLE="branch"
                 GIT_NAME_CONTENT="${head#*/*/}"
             else
