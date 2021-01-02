@@ -374,15 +374,23 @@ Set-Alias e source_file_edit
  # PoSH for Git
  ########################>
 
+$Global:GIT_NAME_TITLE=""
+$Global:GIT_NAME_CONTENT=""
+$Global:GIT_NAME_LEFT=""
+$Global:GIT_NAME_RIGHT=""
+$Global:GIT_NAME_HEAD=""
+
+function git_branch_internal {
+
+}
+
 function git_prompt {
-  if (-not $(Get-InstalledModule -Name "posh-git")) {
-    Install-Module posh-git -Scope CurrentUser -Force
-  }
-  if (-not (Get-Module -Name "posh-git")) {
-    Import-Module -Name posh-git -Scope Global
-  }
-  else {
-    $GitPromptSettings.EnablePromptStatus = -not $GitPromptSettings.EnablePromptStatus
+  if (Get-Command Function::prompt_bak -errorAction SilentlyContinue) {
+    Copy-Item Function::prompt Function::prompt_bak
+    Copy-Item Function::git_branch_internal Function::prompt
+  } else {
+    Copy-Item Function::prompt_bak Function::prompt
+    Remove-Item Function::prompt_bak
   }
 }
 Set-Alias p git_prompt
