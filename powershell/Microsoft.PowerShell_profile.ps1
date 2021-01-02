@@ -381,13 +381,39 @@ $Global:GIT_NAME_RIGHT=""
 $Global:GIT_NAME_HEAD=""
 
 function git_branch_internal {
+  ${dir} = ${PWD}.Path
+  do {
+    if (Test-Path "${dir}/.git/HEAD") {
+      ${head} = Get-Content "${dir}/.git/HEAD"
+      if (${head} -eq $Global:GIT_NAME_HEAD) {
+        return
+      }
+      if () {
+
+      }
+
+      $Global:GIT_NAME_LEFT=":("
+      $Global:GIT_NAME_RIGHT=")"
+      return
+    }
+    ${dir} = Split-Path -Parent -Path "${dir}"
+  } while (${dir})
+
+  $Global:GIT_NAME_TITLE=""
+  $Global:GIT_NAME_CONTENT=""
+  $Global:GIT_NAME_LEFT=""
+  $Global:GIT_NAME_RIGHT=""
+  $Global:GIT_NAME_HEAD=""
+}
+
+function prompt_custom {
 
 }
 
 function git_prompt {
   if (Get-Command Function::prompt_bak -errorAction SilentlyContinue) {
     Copy-Item Function::prompt Function::prompt_bak
-    Copy-Item Function::git_branch_internal Function::prompt
+    Copy-Item Function::prompt_custom Function::prompt
   } else {
     Copy-Item Function::prompt_bak Function::prompt
     Remove-Item Function::prompt_bak
