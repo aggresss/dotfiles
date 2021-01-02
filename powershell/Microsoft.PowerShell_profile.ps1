@@ -374,11 +374,11 @@ Set-Alias e source_file_edit
  # PoSH for Git
  ########################>
 
-$Global:GIT_NAME_TITLE=""
-$Global:GIT_NAME_CONTENT=""
-$Global:GIT_NAME_LEFT=""
-$Global:GIT_NAME_RIGHT=""
-$Global:GIT_NAME_HEAD=""
+$Global:GIT_NAME_TITLE = ""
+$Global:GIT_NAME_CONTENT = ""
+$Global:GIT_NAME_LEFT = ""
+$Global:GIT_NAME_RIGHT = ""
+$Global:GIT_NAME_HEAD = ""
 
 function git_branch_internal {
   $dir = $PWD.Path
@@ -388,38 +388,43 @@ function git_branch_internal {
       if ($head -eq $Global:GIT_NAME_HEAD) {
         return
       }
+      $Global:GIT_NAME_HEAD = $head
       if ($head -match "^ref\:\ refs\/heads\/*") {
-        $GIT_NAME_TITLE="branch"
-        $GIT_NAME_CONTENT="${head#*/*/}"
+        $Global:GIT_NAME_TITLE = "branch"
+        $head -match "^ref\:\ refs\/heads\/(?<branch>.*)" | Out-Null
+        $Global:GIT_NAME_CONTENT = $Matches.branch
       }
-
-      $GIT_NAME_LEFT=":("
-      $GIT_NAME_RIGHT=")"
+      $Global:GIT_NAME_LEFT = ":("
+      $Global:GIT_NAME_RIGHT = ")"
+      "$Global:GIT_NAME_TITLE$Global:GIT_NAME_LEFT$Global:GIT_NAME_CONTENT$Global:GIT_NAME_RIGHT" | Out-Null
       return
     }
     ${dir} = Split-Path -Parent -Path "${dir}"
   } while (${dir})
 
-  $GIT_NAME_TITLE=""
-  $GIT_NAME_CONTENT=""
-  $GIT_NAME_LEFT=""
-  $GIT_NAME_RIGHT=""
-  $GIT_NAME_HEAD=""
+  $Global:GIT_NAME_TITLE = ""
+  $Global:GIT_NAME_CONTENT = ""
+  $Global:GIT_NAME_LEFT = ""
+  $Global:GIT_NAME_RIGHT = ""
+  $Global:GIT_NAME_HEAD = ""
 }
 
 function prompt_custom {
-  Write-Host ${GIT_NAME_TITLE}${GIT_NAME_LEFT} -ForegroundColor Yellow -NoNewline; `
-  Write-Host ${GIT_NAME_CONTENT} -ForegroundColor Red -NoNewline; `
+  git_branch_internal
+  Write-Host $(prompt_bak) -NoNewline
+  Write-Host ${GIT_NAME_TITLE}${GIT_NAME_LEFT} -ForegroundColor Blue -NoNewline
+  Write-Host ${GIT_NAME_CONTENT} -ForegroundColor Red -NoNewline
   Write-Host ${GIT_NAME_RIGHT}"`$" -ForegroundColor Blue -NoNewline
 }
 
 function git_prompt {
-  if (Get-Command Function::prompt_bak -errorAction SilentlyContinue) {
-    Copy-Item Function::prompt Function::prompt_bak
-    Copy-Item Function::prompt_custom Function::prompt
-  } else {
+  if (Get-Command prompt_bak -errorAction SilentlyContinue) {
     Copy-Item Function::prompt_bak Function::prompt
     Remove-Item Function::prompt_bak
+  }
+  else {
+    Copy-Item Function::prompt Function::prompt_bak
+    Copy-Item Function::prompt_custom Function::prompt
   }
 }
 Set-Alias p git_prompt
