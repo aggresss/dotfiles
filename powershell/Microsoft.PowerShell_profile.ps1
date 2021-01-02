@@ -419,12 +419,12 @@ function prompt_custom {
 
 function git_prompt {
   if (Get-Command prompt_bak -errorAction SilentlyContinue) {
-    Copy-Item Function::prompt_bak Function::prompt
-    Remove-Item Function::prompt_bak
+    Copy-Item Function::Global:prompt_bak Function::Global:prompt
+    Remove-Item Function::Global:prompt_bak
   }
   else {
-    Copy-Item Function::prompt Function::prompt_bak
-    Copy-Item Function::prompt_custom Function::prompt
+    Copy-Item Function::Global:prompt Function::Global:prompt_bak
+    Copy-Item Function::Global:prompt_custom Function::Global:prompt
   }
 }
 Set-Alias p git_prompt
