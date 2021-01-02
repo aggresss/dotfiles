@@ -445,15 +445,15 @@ Set-Alias p git_prompt
 
 function git_status {
   git status
-  git stash list
-  write-host ""
-  git ls-files -v |
+  git stash list 2> $null
+  if ($?) {write-host ""}
+  git ls-files -v  2> $null |
   ForEach-Object {
     if ($_ -cmatch "^S|^h|^M") {
       Write-Host $_ -ForegroundColor DarkRed
     }
   }
-  write-host ""
+  if ($?) {write-host ""}
 }
 Set-Alias y git_status
 

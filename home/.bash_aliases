@@ -558,8 +558,8 @@ alias git_assume='git update-index --assume-unchanged'
 function git_status()
 {
     git status && echo
-    git stash list && echo
-    git ls-files -v | grep --color -E "^S|^h|^M" && echo
+    git stash list 2> /dev/null && echo
+    git ls-files -v  2> /dev/null | grep --color -E "^S|^h|^M" && echo
 }
 
 # no-skip-worktree all
