@@ -394,6 +394,17 @@ function git_branch_internal {
         $head -match "^ref\:\ refs\/heads\/(?<branch>.*)" | Out-Null
         $Global:GIT_NAME_CONTENT = $Matches.branch
       }
+      else {
+        $describe = $(git describe --tags --abbrev=7 2> $null)
+        if ($describe) {
+          $Global:GIT_NAME_TITLE = "tag"
+          $Global:GIT_NAME_CONTENT = $describe
+        }
+        else {
+          $Global:GIT_NAME_TITLE = "commit"
+          $Global:GIT_NAME_CONTENT = $head.Substring(0,7)
+        }
+      }
       $Global:GIT_NAME_LEFT = ":("
       $Global:GIT_NAME_RIGHT = ")"
       "$Global:GIT_NAME_TITLE$Global:GIT_NAME_LEFT$Global:GIT_NAME_CONTENT$Global:GIT_NAME_RIGHT" | Out-Null
@@ -412,9 +423,9 @@ function git_branch_internal {
 function prompt_custom {
   git_branch_internal
   Write-Host $(prompt_bak) -NoNewline
-  Write-Host ${GIT_NAME_TITLE}${GIT_NAME_LEFT} -ForegroundColor Blue -NoNewline
-  Write-Host ${GIT_NAME_CONTENT} -ForegroundColor Red -NoNewline
-  Write-Host ${GIT_NAME_RIGHT}"`$" -ForegroundColor Blue -NoNewline
+  Write-Host ${GIT_NAME_TITLE}${GIT_NAME_LEFT} -ForegroundColor Cyan -NoNewline
+  Write-Host ${GIT_NAME_CONTENT} -ForegroundColor Yellow -NoNewline
+  Write-Host ${GIT_NAME_RIGHT}"`$" -ForegroundColor Cyan -NoNewline
   # Prompt function requires a return, otherwise defaults to factory prompt
   return " "
 }
