@@ -220,7 +220,14 @@ function ssh_agent_add {
 Set-Alias a ssh_agent_add
 
 function ssh_agent_del {
-  ssh-add -d
+  if ($IsWindows -or $Env:OS) {
+    ssh-add -d
+  }
+  else {
+    ssh-agent -k
+    [Environment]::SetEnvironmentVariable("SSH_AGENT_PID", $null, "Process")
+    [Environment]::SetEnvironmentVariable("SSH_AUTH_SOCK", $null, "Process")
+  }
 }
 Set-Alias k ssh_agent_del
 
