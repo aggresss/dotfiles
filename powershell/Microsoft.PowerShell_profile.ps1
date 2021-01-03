@@ -197,6 +197,18 @@ function code_user {
 
 # SSH
 function ssh_agent_add {
+  if (-not ($IsWindows -or $Env:OS)) {
+    $sshAgentPid = [Environment]::GetEnvironmentVariable("SSH_AGENT_PID", "Process")
+    if ([int]$sshAgentPid -eq 0) {
+      [string]$output = ssh-agent
+      $lines = $output.Split(";")
+      foreach ($line in $lines) {
+        if (([string]$line).Trim() -match "(.+)=(.*)") {
+          [Environment]::SetEnvironmentVariable($matches[1], $matches[2], "Process")
+        }
+      }
+    }
+  }
   ssh-add -l 2>&1> $null
   if (-not $?) {
     ssh-add
@@ -402,7 +414,7 @@ function git_branch_internal {
         }
         else {
           $Global:GIT_NAME_TITLE = "commit"
-          $Global:GIT_NAME_CONTENT = $head.Substring(0,7)
+          $Global:GIT_NAME_CONTENT = $head.Substring(0, 7)
         }
       }
       $Global:GIT_NAME_LEFT = ":("
@@ -446,14 +458,14 @@ Set-Alias p git_prompt
 function git_status {
   git status
   git stash list 2> $null
-  if ($?) {write-host ""}
+  if ($?) { write-host "" }
   git ls-files -v  2> $null |
   ForEach-Object {
     if ($_ -cmatch "^S|^h|^M") {
       Write-Host $_ -ForegroundColor DarkRed
     }
   }
-  if ($?) {write-host ""}
+  if ($?) { write-host "" }
 }
 Set-Alias y git_status
 
