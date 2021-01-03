@@ -1,16 +1,22 @@
-os: linux
+language: generic
 
-dist: xenial
+branches:
+  only:
+  - master
 
-before_install:
-  - sudo apt-get install -y vim ctags cscope
-addons:
-  apt:
-    update: true
+stages:
+  - name: linux
+  - name: osx
 
-install:
-  - ./bin/update_dotfiles.sh
+jobs:
+  include:
+    - stage: linux
+      os: linux
+      dist: xenial
+      sudo: false
+    - stage: osx
+      os: osx
 
 script:
+  - ./bin/update_dotfiles.sh
   - source ~/.bashrc
-
