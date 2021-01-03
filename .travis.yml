@@ -4,19 +4,22 @@ branches:
   only:
   - master
 
-stages:
-  - name: linux
-  - name: osx
-
 jobs:
   include:
-    - stage: linux
-      os: linux
+    - os: linux
       dist: xenial
       sudo: false
-    - stage: osx
-      os: osx
+      script:
+        - ./bin/update_dotfiles.sh
+        - source ~/.bashrc
+    - os: osx
+      script:
+        - ./bin/update_dotfiles.sh
+        - source ~/.bashrc
+    - os: windows
+      script:
+        - ./bin/update_dotfiles.sh
+        - source ~/.bashrc
 
-script:
-  - ./bin/update_dotfiles.sh
-  - source ~/.bashrc
+
+
