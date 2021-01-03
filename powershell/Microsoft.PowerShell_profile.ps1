@@ -393,12 +393,6 @@ Set-Alias e source_file_edit
  # PoSH for Git
  ########################>
 
-$Global:GIT_NAME_TITLE = ""
-$Global:GIT_NAME_CONTENT = ""
-$Global:GIT_NAME_LEFT = ""
-$Global:GIT_NAME_RIGHT = ""
-$Global:GIT_NAME_HEAD = ""
-
 function git_branch_internal {
   $dir = $PWD.Path
   do {
