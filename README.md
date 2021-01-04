@@ -2,7 +2,7 @@
 
 [![Release Version](https://img.shields.io/github/v/release/aggresss/dotfiles)](https://github.com/aggresss/dotfiles/releases)
 [![Build Status](https://www.travis-ci.org/aggresss/dotfiles.svg?branch=master)](https://www.travis-ci.org/aggresss/dotfiles)
-[![License](https://img.shields.io/github/license/aggresss/dotfiles.svg)](https://github.com/aggresss/dotfiles)
+[![License](https://img.shields.io/github/license/aggresss/dotfiles)](https://github.com/aggresss/dotfiles/blob/master/LICENSE)
 
 ## How To Use
 
