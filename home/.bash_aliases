@@ -794,7 +794,7 @@ function git_haste()
         echo -e "${RED}Not in a git repo${NORMAL}"
     elif [ ${GIT_NAME_TITLE} = "branch" ]; then
         echo -e "${CYAN}add->commit->push to origin on branch ${YELLOW}${GIT_NAME_CONTENT}${NORMAL}"
-        git commit -m "`date "+%F %T %Z W%WD%u"`"
+        git commit -m "`date "+%F %T %z W%WD%u"`"
         if [[ $1 == "commit" ]]; then
             return 0
         fi

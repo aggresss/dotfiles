@@ -521,7 +521,7 @@ function git_haste {
     return
   }
   if ($args -eq "commit") {
-    git commit -m $(get-date -uformat "%Y-%m-%d %T %Z W%WD%u")
+    git commit -m $(get-date -uformat "%Y-%m-%d %T %Z00 W%WD%u")
   }
   elseif ($args -eq "rebase") {
     git fetch origin
