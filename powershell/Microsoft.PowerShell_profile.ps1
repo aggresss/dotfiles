@@ -720,7 +720,6 @@ function npm_scripts {
   if ($(Test-Path package.json)) {
     $json = (Get-Content -Path package.json -Raw) | ConvertFrom-Json
     $json.scripts | ConvertTo-Json | Write-Host
-
   }
   else {
     Write-Host "No package.json found." -ForegroundColor Red
