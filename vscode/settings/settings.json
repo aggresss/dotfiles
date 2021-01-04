@@ -9,7 +9,7 @@
 	"C_Cpp.enhancedColorization": "Enabled",
 	"C_Cpp.dimInactiveRegions": true,
 	"C_Cpp.inactiveRegionOpacity": 1,
-	"C_Cpp.inactiveRegionBackgroundColor": "#A0A0A0",
+	"C_Cpp.inactiveRegionBackgroundColor": "#393939",
 
 	"go.inferGopath": false,
 	"go.gopath": "${env:GOPATH}",
