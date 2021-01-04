@@ -402,9 +402,8 @@ function git_branch_internal {
         return
       }
       $Global:GIT_NAME_HEAD = $head
-      if ($head -match "^ref\:\ refs\/heads\/*") {
+      if ($head -match "^ref\:\ refs\/heads\/(?<branch>.*)") {
         $Global:GIT_NAME_TITLE = "branch"
-        $head -match "^ref\:\ refs\/heads\/(?<branch>.*)" | Out-Null
         $Global:GIT_NAME_CONTENT = $Matches.branch
       }
       else {
