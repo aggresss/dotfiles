@@ -418,8 +418,8 @@ function git_branch_internal {
           $Global:GIT_NAME_CONTENT = $head.Substring(0, 7)
         }
       }
-      $Global:GIT_NAME_LEFT = ":("
-      $Global:GIT_NAME_RIGHT = ")"
+      $Global:GIT_NAME_LEFT = ":["
+      $Global:GIT_NAME_RIGHT = "]"
       "$Global:GIT_NAME_TITLE$Global:GIT_NAME_LEFT$Global:GIT_NAME_CONTENT$Global:GIT_NAME_RIGHT" | Out-Null
       return
     }
@@ -438,7 +438,7 @@ function prompt_custom {
   Write-Host $(prompt_bak) -NoNewline
   Write-Host ${GIT_NAME_TITLE}${GIT_NAME_LEFT} -ForegroundColor Cyan -NoNewline
   Write-Host ${GIT_NAME_CONTENT} -ForegroundColor Yellow -NoNewline
-  Write-Host ${GIT_NAME_RIGHT}"`$" -ForegroundColor Cyan -NoNewline
+  Write-Host ${GIT_NAME_RIGHT}">" -ForegroundColor Cyan -NoNewline
   # Prompt function requires a return, otherwise defaults to factory prompt
   return " "
 }
