@@ -8,7 +8,7 @@
 	"C_Cpp.errorSquiggles": "Enabled",
 	"C_Cpp.enhancedColorization": "Enabled",
 	"C_Cpp.dimInactiveRegions": true,
-	"C_Cpp.inactiveRegionOpacity": 1,
+	"C_Cpp.inactiveRegionOpacity": 0.8,
 	"C_Cpp.inactiveRegionBackgroundColor": "#393939",
 
 	"go.inferGopath": false,
