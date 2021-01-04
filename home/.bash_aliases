@@ -745,7 +745,7 @@ function git_branch_internal()
 function git_zsh_precmd()
 {
     git_branch_internal
-    PS1="${PS1_BAK}%{$fg_bold[blue]%}${GIT_NAME_TITLE}${GIT_NAME_LEFT}%{$fg_bold[red]%}${GIT_NAME_CONTENT}%{$fg_bold[blue]%}${GIT_NAME_RIGHT}%% %{$reset_color%}"
+    PS1="${PS1_BAK}%{$fg_bold[green]%}${GIT_NAME_TITLE}${GIT_NAME_LEFT}%{$fg_bold[magenta]%}${GIT_NAME_CONTENT}%{$fg_bold[green]%}${GIT_NAME_RIGHT}%% %{$reset_color%}"
 }
 
 # color for PS1
