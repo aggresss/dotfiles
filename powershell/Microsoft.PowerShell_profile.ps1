@@ -713,6 +713,22 @@ function mvn_exec {
 }
 
 <########################
+ # PoSH for JavaScript
+ ########################>
+
+function npm_scripts {
+  if ($(Test-Path package.json)) {
+    $json = (Get-Content -Path package.json -Raw) | ConvertFrom-Json
+    $json.scripts | ConvertTo-Json | Write-Host
+
+  }
+  else {
+    Write-Host "No package.json found." -ForegroundColor Red
+  }
+}
+Set-Alias j npm_scripts
+
+<########################
  # Update
  ########################>
 
@@ -846,7 +862,6 @@ elseif ($(uname) -eq "Darwin") {
 elseif ($(uname) -eq "Linux") {
   function hello { Write-Host "hello" }
 }
-
 
 <########################
  # Echo Envronment
