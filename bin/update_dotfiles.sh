@@ -94,6 +94,8 @@ fi
 if [ -d ${HOME}/.config/powershell ]; then
     update_file ${DOTFILES_URL}/powershell/Microsoft.PowerShell_profile.ps1 \
         ${HOME}/.config/powershell/Microsoft.PowerShell_profile.ps1
+    update_file ${DOTFILES_URL}/powershell/Microsoft.PowerShell_profile.ps1 \
+        ${HOME}/.config/powershell/Microsoft.VSCode_profile.ps1
 fi
 # .bash_profile
 if [ ! -f ${HOME}/.bash_profile ]; then
