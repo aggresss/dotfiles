@@ -728,8 +728,8 @@ function git_branch_internal()
                     GIT_NAME_CONTENT=${head:0:7}
                 fi
             fi
-            GIT_NAME_LEFT=":("
-            GIT_NAME_RIGHT=")"
+            GIT_NAME_LEFT=":["
+            GIT_NAME_RIGHT="]"
             return
         fi
         dir="../${dir}"
@@ -745,7 +745,7 @@ function git_branch_internal()
 function git_zsh_precmd()
 {
     git_branch_internal
-    PS1="${PS1_BAK}%{$fg_bold[blue]%}${GIT_NAME_TITLE}${GIT_NAME_LEFT}%{$fg_bold[red]%}${GIT_NAME_CONTENT}%{$fg_bold[blue]%}${GIT_NAME_RIGHT}$ %{$reset_color%}"
+    PS1="${PS1_BAK}%{$fg_bold[blue]%}${GIT_NAME_TITLE}${GIT_NAME_LEFT}%{$fg_bold[red]%}${GIT_NAME_CONTENT}%{$fg_bold[blue]%}${GIT_NAME_RIGHT}%% %{$reset_color%}"
 }
 
 # color for PS1
