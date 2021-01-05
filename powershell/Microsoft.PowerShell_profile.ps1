@@ -227,24 +227,21 @@ function ssh_agent_check {
 }
 
 function ssh_agent_add {
-  if (-not ($IsWindows -or $Env:OS)) {
-    $sshAgentPid = [Environment]::GetEnvironmentVariable("SSH_AGENT_PID", "Process")
-    if ([int]$sshAgentPid -eq 0) {
-      [string]$output = ssh-agent
-      $lines = $output.Split(";")
-      foreach ($line in $lines) {
-        if (([string]$line).Trim() -match "(.+)=(.*)") {
-          [Environment]::SetEnvironmentVariable($matches[1], $matches[2], "Process")
-        }
-      }
+  $ssh_add_ret = $(ssh_agent_check)
+  $sshAgentPid = [Environment]::GetEnvironmentVariable("SSH_AGENT_PID", "Process")
+  if (-not $sshAgentPid) {$sshAgentPid = "NOCONFIG"}
+  switch ($ssh_add_ret) {
+    0 {
+      Write-Host "Agent pid $sshAgentPid" -ForegroundColor Yellow
+      ssh-add -l
     }
-  }
-  ssh-add -l 2>&1> $null
-  if (-not $?) {
-    ssh-add
-  }
-  else {
-    ssh-add -l
+    1 {
+      Write-Host "Agent pid $sshAgentPid" -ForegroundColor Yellow
+      ssh-add
+    }
+    Default {
+      Write-Host "No ssh-agent found" -ForegroundColor Red
+    }
   }
 }
 Set-Alias a ssh_agent_add
