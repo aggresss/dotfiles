@@ -115,8 +115,8 @@ alias c='source_file copy'
 # fast edit index note file
 alias e='source_file edit'
 # fast ssh-agent
-alias a='ssh_agent'
-alias k='eval `ssh-agent -k`'
+alias a='ssh_agent_add'
+alias k='ssh_agent_del'
 alias ak='kill_all ssh-agent'
 # fast git status
 alias y='git_status'
@@ -155,7 +155,7 @@ alias mv='mv -i'
 alias make_gnu='touch AUTHORS COPYING ChangeLog NEWS README'
 
 # fast ssh-agent
-function ssh_agent()
+function ssh_agent_add()
 {
     if [ ${SSH_AGENT_PID:-NOCONFIG} = "NOCONFIG" ] || ! ps aux | grep ssh-agent | grep -vq grep; then
         eval `ssh-agent` && ssh-add
@@ -165,6 +165,11 @@ function ssh_agent()
         echo -e "${YELLOW}SSH_AGENT_PID: ${SSH_AGENT_PID}${NORMAL}"
         ssh-add -l
     fi
+}
+
+function ssh_agent_del()
+{
+    ssh-add -d
 }
 
 # fast ssh id copy

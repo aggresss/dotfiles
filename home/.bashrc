@@ -43,4 +43,3 @@ if [[ ${SHELL} =~ .*bash$ ]]; then
     fi
   fi
 fi
-
