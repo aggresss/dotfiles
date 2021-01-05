@@ -196,6 +196,36 @@ function code_user {
 }
 
 # SSH
+
+function ssh_agent_check {
+  ssh-add -l 2>&1> $null; $ssh_add_ret=$LastExitCode
+  if ($IsWindows -or $Env:OS) {
+    return $ssh_add_ret
+  }
+  if (($ssh_add_ret -eq 2) -and (Test-Path ${HOME}/.ssh-agent.conf)) {
+    $ssh_agent_config = Get-Content -Path ${HOME}/.ssh-agent.conf
+    $lines = $ssh_agent_config.Split(";")
+    foreach ($line in $lines) {
+      if (([string]$line).Trim() -match "(.+)=(.*)") {
+        [Environment]::SetEnvironmentVariable($matches[1], $matches[2], "Process")
+      }
+    }
+    ssh-add -l 2>&1> $null; $ssh_add_ret=$LastExitCode
+  }
+  if ($ssh_add_ret -eq 2) {
+    [string]$output = ssh-agent
+    $output | Out-File -FilePath ${HOME}/.ssh-agent.conf
+    $lines = $output.Split(";")
+    foreach ($line in $lines) {
+      if (([string]$line).Trim() -match "(.+)=(.*)") {
+        [Environment]::SetEnvironmentVariable($matches[1], $matches[2], "Process")
+      }
+    }
+    ssh-add -l 2>&1> $null; $ssh_add_ret=$LastExitCode
+  }
+  return $ssh_add_ret
+}
+
 function ssh_agent_add {
   if (-not ($IsWindows -or $Env:OS)) {
     $sshAgentPid = [Environment]::GetEnvironmentVariable("SSH_AGENT_PID", "Process")
@@ -220,14 +250,7 @@ function ssh_agent_add {
 Set-Alias a ssh_agent_add
 
 function ssh_agent_del {
-  if ($IsWindows -or $Env:OS) {
-    ssh-add -d
-  }
-  else {
-    ssh-agent -k
-    [Environment]::SetEnvironmentVariable("SSH_AGENT_PID", $null, "Process")
-    [Environment]::SetEnvironmentVariable("SSH_AUTH_SOCK", $null, "Process")
-  }
+  ssh-add -d
 }
 Set-Alias k ssh_agent_del
 
