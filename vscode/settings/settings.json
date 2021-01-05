@@ -21,7 +21,6 @@
 		"--enable=errcheck"
 	],
 
-
 	"java.semanticHighlighting.enabled": true,
 	"java.configuration.checkProjectSettingsExclusions": false,
 
