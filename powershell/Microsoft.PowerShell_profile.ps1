@@ -198,7 +198,7 @@ function code_user {
 # SSH
 
 function ssh_agent_check {
-  ssh-add -l 2>&1> $null; $ssh_add_ret=$LastExitCode
+  ssh-add -l 2>&1> $null; $ssh_add_ret = $LastExitCode
   if ($IsWindows -or $Env:OS) {
     return $ssh_add_ret
   }
@@ -210,7 +210,7 @@ function ssh_agent_check {
         [Environment]::SetEnvironmentVariable($matches[1], $matches[2], "Process")
       }
     }
-    ssh-add -l 2>&1> $null; $ssh_add_ret=$LastExitCode
+    ssh-add -l 2>&1> $null; $ssh_add_ret = $LastExitCode
   }
   if ($ssh_add_ret -eq 2) {
     [string]$output = ssh-agent
@@ -221,7 +221,7 @@ function ssh_agent_check {
         [Environment]::SetEnvironmentVariable($matches[1], $matches[2], "Process")
       }
     }
-    ssh-add -l 2>&1> $null; $ssh_add_ret=$LastExitCode
+    ssh-add -l 2>&1> $null; $ssh_add_ret = $LastExitCode
   }
   return $ssh_add_ret
 }
@@ -229,7 +229,7 @@ function ssh_agent_check {
 function ssh_agent_add {
   $ssh_add_ret = $(ssh_agent_check)
   $sshAgentPid = [Environment]::GetEnvironmentVariable("SSH_AGENT_PID", "Process")
-  if (-not $sshAgentPid) {$sshAgentPid = "NOCONFIG"}
+  if (-not $sshAgentPid) { $sshAgentPid = "NOCONFIG" }
   switch ($ssh_add_ret) {
     0 {
       Write-Host "Agent pid $sshAgentPid" -ForegroundColor Yellow
