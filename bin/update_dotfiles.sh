@@ -185,17 +185,18 @@ fi
 case $(uname) in
     Linux)
         update_file ${DOTFILES_URL}/sh/.Xresources ${HOME}/.Xresources
-    ;;
+        echo "Linux"
+        ;;
     Darwin)
         echo "Darwin"
-    ;;
+        ;;
     FreeBSD)
         echo "FreeBSD"
-    ;;
+        ;;
     MINGW*)
         echo "MINGW"
-    ;;
+        ;;
     *)
         echo "No support this ENV"
-    ;;
+        ;;
 esac
