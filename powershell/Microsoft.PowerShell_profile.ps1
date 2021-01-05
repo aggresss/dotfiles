@@ -521,7 +521,7 @@ function git_haste {
     return
   }
   elseif (${GIT_NAME_TITLE} -eq "branch") {
-    git commit -m $(Get-Date -uformat "%Y-%m-%d %T %Z00 W%WD%u")
+    git commit -m $(Get-Date -uformat "%F %T %Z00 %a")
     if ($args -eq "commit") {
       return
     }
