@@ -163,7 +163,7 @@ function ssh_agent_check()
 {
     ssh-add -l > /dev/null 2>&1; local ssh_add_ret=$?
     if [ $ssh_add_ret -eq 2 ] && [ -f ${HOME}/.ssh-agent.conf ]; then
-        source ${HOME}/.ssh-agent.conf
+        source ${HOME}/.ssh-agent.conf > /dev/null 2>&1
         ssh-add -l > /dev/null 2>&1; ssh_add_ret=$?
     fi
     if [ $ssh_add_ret -eq 2 ]; then
