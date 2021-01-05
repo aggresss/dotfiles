@@ -517,20 +517,18 @@ Set-Alias t git_top
 function git_haste {
   $branch = Get-GitBranch
   if (-not $branch) {
-    Write-Host "Not a git repository"
+    Write-Host "Not a git repository or detached HEAD state" -ForegroundColor Red
     return
   }
-  if ($args -eq "commit") {
-    git commit -m $(get-date -uformat "%Y-%m-%d %T %Z00 W%WD%u")
+  git commit -m $(Get-Date -uformat "%Y-%m-%d %T %Z00 W%WD%u")
+  if ($? -eq $False -or $args -eq "commit") {
+    return
   }
-  elseif ($args -eq "rebase") {
+  if ($args -eq "rebase") {
     git fetch origin
     git rebase origin/${branch}
   }
-  else {
-    git commit -m $(get-date -uformat "%Y-%m-%d %T %Z W%WD%u")
-    git push origin ${branch}:${branch}
-  }
+  git push origin ${branch}:${branch}
 }
 
 function git_sig {

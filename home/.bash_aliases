@@ -791,23 +791,19 @@ function git_haste()
 {
     git_branch_internal;
     if [ -z ${GIT_NAME_TITLE} ]; then
-        echo -e "${RED}Not in a git repo${NORMAL}"
+        echo -e "${RED}Not a git repository${NORMAL}"
     elif [ ${GIT_NAME_TITLE} = "branch" ]; then
-        echo -e "${CYAN}add->commit->push to origin on branch ${YELLOW}${GIT_NAME_CONTENT}${NORMAL}"
         git commit -m "`date "+%F %T %z W%WD%u"`"
         if [[ $1 == "commit" ]]; then
             return 0
         fi
-
         if [[ $1 == "rebase" ]]; then
-            echo -e "${GREEN}fetch->rebase to origin on branch ${MAGENTA}${GIT_NAME_CONTENT}${NORMAL}"
             git fetch origin
             git rebase origin/${GIT_NAME_CONTENT}
         fi
-
         git push origin ${GIT_NAME_CONTENT}:${GIT_NAME_CONTENT}
     else
-        echo -e "${MAGENTA}Not on a regular branch${NORMAL}"
+        echo -e "${RED}Detached HEAD state${NORMAL}"
     fi
 }
 
