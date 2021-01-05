@@ -155,48 +155,40 @@ alias mv='mv -i'
 alias make_gnu='touch AUTHORS COPYING ChangeLog NEWS README'
 
 # fast ssh-agent
-
 # ssh-add -l > /dev/null 2>&1
 # $?=0 means the socket is there and it has a key
 # $?=1 means the socket is there but contains no key
 # $?=2 means the socket is not there or broken
 function ssh_agent_check()
 {
-    local status=2
-    if [ -n ${SSH_AGENT_PID} ] && [ -n ${SSH_AUTH_SOCK} ]; then
-        ssh-add -l > /dev/null 2>&1; status=$?
-    elif [ -f ${HOME}/.ssh-agent.conf ]; then
+    ssh-add -l > /dev/null 2>&1; local ssh_add_ret=$?
+    if [ $ssh_add_ret -eq 2 ] && [ -f ${HOME}/.ssh-agent.conf ]; then
         source ${HOME}/.ssh-agent.conf
-        ssh-add -l > /dev/null 2>&1; status=$?
-    else
-        ssh-agent > ~/.ssh-agent.conf
-        ssh-add -l > /dev/null 2>&1; status=$?
+        ssh-add -l > /dev/null 2>&1; ssh_add_ret=$?
     fi
-    if [ $status -eq 2 ]; then
-        if [ -f ${HOME}/.ssh-agent.conf ]; then
-            source ${HOME}/.ssh-agent.conf
-            ssh-add -l > /dev/null 2>&1; status=$?
-        fi
-        if [ $status -eq 2 ]; then
-            ssh-agent > ~/.ssh-agent.conf
-            ssh-add -l > /dev/null 2>&1; status=$?
-        fi
+    if [ $ssh_add_ret -eq 2 ]; then
+        eval `ssh-agent | tee ${HOME}/.ssh-agent.conf` > /dev/null 2>&1
+        ssh-add -l > /dev/null 2>&1; ssh_add_ret=$?
     fi
-    return $status
+    return $ssh_add_ret
 }
-
-
 
 function ssh_agent_add()
 {
-    if [ ${SSH_AGENT_PID:-NOCONFIG} = "NOCONFIG" ] || ! ps aux | grep ssh-agent | grep -vq grep; then
-        eval `ssh-agent` && ssh-add
-    elif ! ssh-add -l > /dev/null 2>&1; then
-        ssh-add || eval `ssh-agent` && ssh-add
-    else
-        echo -e "${YELLOW}SSH_AGENT_PID: ${SSH_AGENT_PID}${NORMAL}"
-        ssh-add -l
-    fi
+    ssh_agent_check
+    case $? in
+        0)
+            echo "${YELLOW}Agent pid ${SSH_AGENT_PID:-NOCONFIG}${NORMAL}"
+            ssh-add -l
+            ;;
+        1)
+            echo "${YELLOW}Agent pid ${SSH_AGENT_PID:-NOCONFIG}${NORMAL}"
+            ssh-add
+            ;;
+        *)
+            echo -e "${RED}No ssh-agent found${NORMAL}"
+            ;;
+    esac
 }
 
 function ssh_agent_del()
