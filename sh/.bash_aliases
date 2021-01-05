@@ -1,5 +1,5 @@
 # file .bash_aliases
-# wget https://raw.githubusercontent.com/aggresss/dotfiles/master/home/.bash_aliases
+# wget https://raw.githubusercontent.com/aggresss/dotfiles/master/sh/.bash_aliases
 
 # color for echo
 BLACK=$'\e[30m'

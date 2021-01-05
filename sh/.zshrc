@@ -1,5 +1,5 @@
 #
-# wget https://raw.githubusercontent.com/aggresss/dotfiles/master/home/.zshrc
+# wget https://raw.githubusercontent.com/aggresss/dotfiles/master/sh/.zshrc
 #
 
 if [ -x /usr/bin/dircolors ]; then
@@ -21,4 +21,3 @@ fi
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
-

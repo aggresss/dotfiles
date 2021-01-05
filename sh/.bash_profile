@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # .bash_profile fork from Ubuntu:18.04 /etc/skel/.profile
-# wget https://raw.githubusercontent.com/aggresss/dotfiles/master/home/.bash_profile
+# wget https://raw.githubusercontent.com/aggresss/dotfiles/master/sh/.bash_profile
 #
 # ~/.profile: executed by Bourne-compatible login shells.
 

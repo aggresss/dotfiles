@@ -1,4 +1,4 @@
-# wget https://raw.githubusercontent.com/aggresss/dotfiles/master/home/.zprofile
+# wget https://raw.githubusercontent.com/aggresss/dotfiles/master/sh/.zprofile
 #
 # ~/.zprofile: executed by Bourne-compatible login shells.
 

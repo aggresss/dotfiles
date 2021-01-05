@@ -60,8 +60,8 @@ if [ ${HAS_UPDATED:-NoDefine} = "NoDefine" ]; then
 fi
 
 # Update commom dotfiles
-update_file ${DOTFILES_URL}/home/.bash_aliases ${HOME}/.bash_aliases
-update_file ${DOTFILES_URL}/home/.inputrc ${HOME}/.inputrc
+update_file ${DOTFILES_URL}/sh/.bash_aliases ${HOME}/.bash_aliases
+update_file ${DOTFILES_URL}/sh/.inputrc ${HOME}/.inputrc
 update_file ${DOTFILES_URL}/bin/hello.sh ${HOME}/bin/hello.sh
 # vim
 if [ $(command -v vim >/dev/null; echo $?) -eq 0 ]; then
@@ -97,23 +97,13 @@ if [ -d ${HOME}/.config/powershell ]; then
     update_file ${DOTFILES_URL}/powershell/Microsoft.PowerShell_profile.ps1 \
         ${HOME}/.config/powershell/Microsoft.VSCode_profile.ps1
 fi
-# .bash_profile
-if [ ! -f ${HOME}/.bash_profile ]; then
-    if [ -f /etc/skel/.bash_profile ]; then
-        cp /etc/skel/.bash_profile ${HOME}/
-    else
-        update_file ${DOTFILES_URL}/home/.bash_profile ${HOME}/.bash_profile
-    fi
-fi
 
 # shell rc
 if [[ ${SHELL} =~ .*zsh$ ]]; then
     # .zshrc
     if [ ! -f ${HOME}/.zshrc ]; then
-        update_file ${DOTFILES_URL}/home/.zshrc ${HOME}/.zshrc
-        update_file ${DOTFILES_URL}/home/.zprofile ${HOME}/.zprofile
+        update_file ${DOTFILES_URL}/sh/.zshrc ${HOME}/.zshrc
     fi
-
     if ! cat ${HOME}/.zshrc | grep -q ".bash_aliases"; then
         cat << END >> ${HOME}/.zshrc
 
@@ -124,10 +114,13 @@ fi
 
 END
     fi
-
+    # .zprofile
+    if [ ! -f ${HOME}/.zprofile ]; then
+        update_file ${DOTFILES_URL}/sh/.zprofile ${HOME}/.zprofile
+    fi
     # .zlogout
     if [ ! -f ${HOME}/.zlogout ]; then
-        update_file ${DOTFILES_URL}/home/.zlogout ${HOME}/.zlogout
+        update_file ${DOTFILES_URL}/sh/.zlogout ${HOME}/.zlogout
     fi
     if ! cat ${HOME}/.zlogout | grep -q "ssh-agent -k"; then
         cat << END >> ${HOME}/.zlogout
@@ -142,11 +135,12 @@ END
     fi
 
 elif [[ ${SHELL} =~ .*bash$ ]]; then
+    # .bashrc
     if [ ! -f ${HOME}/.bashrc ]; then
         if [ -f /etc/skel/.bashrc ]; then
             cp /etc/skel/.bashrc ${HOME}/
         else
-            update_file ${DOTFILES_URL}/home/.bashrc ${HOME}/.bashrc
+            update_file ${DOTFILES_URL}/sh/.bashrc ${HOME}/.bashrc
         fi
     fi
     if ! cat ${HOME}/.bashrc | grep -q ".bash_aliases"; then
@@ -159,12 +153,20 @@ fi
 
 END
     fi
+    # .bash_profile
+    if [ ! -f ${HOME}/.bash_profile ]; then
+        if [ -f /etc/skel/.bash_profile ]; then
+            cp /etc/skel/.bash_profile ${HOME}/
+        else
+            update_file ${DOTFILES_URL}/sh/.bash_profile ${HOME}/.bash_profile
+        fi
+    fi
     # .bash_logout
     if [ ! -f ${HOME}/.bash_logout ]; then
         if [ -f /etc/skel/.bash_logout ]; then
             cp /etc/skel/.bash_logout ${HOME}/
         else
-            update_file ${DOTFILES_URL}/home/.bash_logout ${HOME}/.bash_logout
+            update_file ${DOTFILES_URL}/sh/.bash_logout ${HOME}/.bash_logout
         fi
     fi
     if ! cat ${HOME}/.bash_logout | grep -q "ssh-agent -k"; then
@@ -182,7 +184,7 @@ fi
 
 case $(uname) in
     Linux)
-        update_file ${DOTFILES_URL}/home/.Xresources ${HOME}/.Xresources
+        update_file ${DOTFILES_URL}/sh/.Xresources ${HOME}/.Xresources
     ;;
     Darwin)
         echo "Darwin"
