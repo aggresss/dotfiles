@@ -155,6 +155,38 @@ alias mv='mv -i'
 alias make_gnu='touch AUTHORS COPYING ChangeLog NEWS README'
 
 # fast ssh-agent
+
+# ssh-add -l > /dev/null 2>&1
+# $?=0 means the socket is there and it has a key
+# $?=1 means the socket is there but contains no key
+# $?=2 means the socket is not there or broken
+function ssh_agent_check()
+{
+    local status=2
+    if [ -n ${SSH_AGENT_PID} ] && [ -n ${SSH_AUTH_SOCK} ]; then
+        ssh-add -l > /dev/null 2>&1; status=$?
+    elif [ -f ${HOME}/.ssh-agent.conf ]; then
+        source ${HOME}/.ssh-agent.conf
+        ssh-add -l > /dev/null 2>&1; status=$?
+    else
+        ssh-agent > ~/.ssh-agent.conf
+        ssh-add -l > /dev/null 2>&1; status=$?
+    fi
+    if [ $status -eq 2 ]; then
+        if [ -f ${HOME}/.ssh-agent.conf ]; then
+            source ${HOME}/.ssh-agent.conf
+            ssh-add -l > /dev/null 2>&1; status=$?
+        fi
+        if [ $status -eq 2 ]; then
+            ssh-agent > ~/.ssh-agent.conf
+            ssh-add -l > /dev/null 2>&1; status=$?
+        fi
+    fi
+    return $status
+}
+
+
+
 function ssh_agent_add()
 {
     if [ ${SSH_AGENT_PID:-NOCONFIG} = "NOCONFIG" ] || ! ps aux | grep ssh-agent | grep -vq grep; then
