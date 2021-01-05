@@ -117,8 +117,8 @@ if [[ ${SHELL} =~ .*zsh$ ]]; then
         cat << END >> ${HOME}/.zshrc
 
 # modify by aggresss
-if [ -f ${HOME}/.bash_aliases ]; then
-    . ${HOME}/.bash_aliases
+if [ -f \${HOME}/.bash_aliases ]; then
+    . \${HOME}/.bash_aliases
 fi
 
 END
@@ -138,8 +138,8 @@ elif [[ ${SHELL} =~ .*bash$ ]]; then
         cat << END >> ${HOME}/.bashrc
 
 # modify by aggresss
-if [ -f ${HOME}/.bash_aliases ]; then
-    . ${HOME}/.bash_aliases
+if [ -f \${HOME}/.bash_aliases ]; then
+    . \${HOME}/.bash_aliases
 fi
 
 END
@@ -162,8 +162,25 @@ if ! cat ${HOME}/.bash_logout | grep -q "ssh-agent -k"; then
 
 # modify by aggresss
 # ssh-agent
-if [ ${SSH_AGENT_PID:-NoDefine} != "NoDefine" ] ; then
-  eval `ssh-agent -k`
+if [ \${SSH_AGENT_PID:-NoDefine} != "NoDefine" ] ; then
+  eval \`ssh-agent -k\`
+fi
+
+END
+fi
+
+# .zlogout
+if [ ! -f ${HOME}/.zlogout ]; then
+    update_file ${DOTFILES_URL}/home/.zlogout ${HOME}/.zlogout
+fi
+
+if ! cat ${HOME}/.zlogout | grep -q "ssh-agent -k"; then
+    cat << END >> ${HOME}/.zlogout
+
+# modify by aggresss
+# ssh-agent
+if [ \${SSH_AGENT_PID:-NoDefine} != "NoDefine" ] ; then
+  eval \`ssh-agent -k\`
 fi
 
 END
