@@ -108,6 +108,7 @@ fi
 
 # shell rc
 if [[ ${SHELL} =~ .*zsh$ ]]; then
+    # .zshrc
     if [ ! -f ${HOME}/.zshrc ]; then
         update_file ${DOTFILES_URL}/home/.zshrc ${HOME}/.zshrc
         update_file ${DOTFILES_URL}/home/.zprofile ${HOME}/.zprofile
@@ -122,7 +123,22 @@ if [ -f \${HOME}/.bash_aliases ]; then
 fi
 
 END
+    fi
 
+    # .zlogout
+    if [ ! -f ${HOME}/.zlogout ]; then
+        update_file ${DOTFILES_URL}/home/.zlogout ${HOME}/.zlogout
+    fi
+    if ! cat ${HOME}/.zlogout | grep -q "ssh-agent -k"; then
+        cat << END >> ${HOME}/.zlogout
+
+# modify by aggresss
+# ssh-agent
+if [ \${SSH_AGENT_PID:-NoDefine} != "NoDefine" ] ; then
+  eval \`ssh-agent -k\`
+fi
+
+END
     fi
 
 elif [[ ${SHELL} =~ .*bash$ ]]; then
@@ -133,7 +149,6 @@ elif [[ ${SHELL} =~ .*bash$ ]]; then
             update_file ${DOTFILES_URL}/home/.bashrc ${HOME}/.bashrc
         fi
     fi
-
     if ! cat ${HOME}/.bashrc | grep -q ".bash_aliases"; then
         cat << END >> ${HOME}/.bashrc
 
@@ -143,22 +158,17 @@ if [ -f \${HOME}/.bash_aliases ]; then
 fi
 
 END
-
     fi
-
-fi
-
-# .bash_logout
-if [ ! -f ${HOME}/.bash_logout ]; then
-    if [ -f /etc/skel/.bash_logout ]; then
-        cp /etc/skel/.bash_logout ${HOME}/
-    else
-        update_file ${DOTFILES_URL}/home/.bash_logout ${HOME}/.bash_logout
+    # .bash_logout
+    if [ ! -f ${HOME}/.bash_logout ]; then
+        if [ -f /etc/skel/.bash_logout ]; then
+            cp /etc/skel/.bash_logout ${HOME}/
+        else
+            update_file ${DOTFILES_URL}/home/.bash_logout ${HOME}/.bash_logout
+        fi
     fi
-fi
-
-if ! cat ${HOME}/.bash_logout | grep -q "ssh-agent -k"; then
-    cat << END >> ${HOME}/.bash_logout
+    if ! cat ${HOME}/.bash_logout | grep -q "ssh-agent -k"; then
+        cat << END >> ${HOME}/.bash_logout
 
 # modify by aggresss
 # ssh-agent
@@ -167,23 +177,7 @@ if [ \${SSH_AGENT_PID:-NoDefine} != "NoDefine" ] ; then
 fi
 
 END
-fi
-
-# .zlogout
-if [ ! -f ${HOME}/.zlogout ]; then
-    update_file ${DOTFILES_URL}/home/.zlogout ${HOME}/.zlogout
-fi
-
-if ! cat ${HOME}/.zlogout | grep -q "ssh-agent -k"; then
-    cat << END >> ${HOME}/.zlogout
-
-# modify by aggresss
-# ssh-agent
-if [ \${SSH_AGENT_PID:-NoDefine} != "NoDefine" ] ; then
-  eval \`ssh-agent -k\`
-fi
-
-END
+    fi
 fi
 
 case $(uname) in
