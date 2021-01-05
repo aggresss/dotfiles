@@ -134,7 +134,7 @@ END
 
 # modify by aggresss
 # ssh-agent
-if [ \${SSH_AGENT_PID:-NoDefine} != "NoDefine" ] ; then
+if [ \${SSH_AGENT_PID:-NoDefine} != "NoDefine" ]; then
   eval \`ssh-agent -k\`
 fi
 
@@ -172,7 +172,7 @@ END
 
 # modify by aggresss
 # ssh-agent
-if [ \${SSH_AGENT_PID:-NoDefine} != "NoDefine" ] ; then
+if [ \${SSH_AGENT_PID:-NoDefine} != "NoDefine" ]; then
   eval \`ssh-agent -k\`
 fi
 
