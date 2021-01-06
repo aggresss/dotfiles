@@ -197,30 +197,33 @@ function code_user {
 
 # SSH
 
+function ssh_agent_env {
+  Param (
+    [parameter(Mandatory = $false)] [String]$ssh_agent_config
+  )
+  if ((-not $ssh_agent_config) -and (Test-Path ${HOME}/.ssh-agent.conf)) {
+    $ssh_agent_config = Get-Content -Path ${HOME}/.ssh-agent.conf
+  }
+  $lines = $ssh_agent_config.Split(";")
+  foreach ($line in $lines) {
+    if (([string]$line).Trim() -match "(.+)=(.*)") {
+      [Environment]::SetEnvironmentVariable($matches[1], $matches[2], "Process")
+    }
+  }
+}
+
 function ssh_agent_check {
   ssh-add -l 2>&1> $null; $ssh_add_ret = $LastExitCode
   if ($IsWindows -or $Env:OS) {
     return $ssh_add_ret
   }
   if (($ssh_add_ret -eq 2) -and (Test-Path ${HOME}/.ssh-agent.conf)) {
-    $ssh_agent_config = Get-Content -Path ${HOME}/.ssh-agent.conf
-    $lines = $ssh_agent_config.Split(";")
-    foreach ($line in $lines) {
-      if (([string]$line).Trim() -match "(.+)=(.*)") {
-        [Environment]::SetEnvironmentVariable($matches[1], $matches[2], "Process")
-      }
-    }
+    ssh_agent_env
     ssh-add -l 2>&1> $null; $ssh_add_ret = $LastExitCode
   }
   if ($ssh_add_ret -eq 2) {
-    [string]$output = ssh-agent
-    $output | Out-File -FilePath ${HOME}/.ssh-agent.conf
-    $lines = $output.Split(";")
-    foreach ($line in $lines) {
-      if (([string]$line).Trim() -match "(.+)=(.*)") {
-        [Environment]::SetEnvironmentVariable($matches[1], $matches[2], "Process")
-      }
-    }
+    ssh-agent | Out-File -FilePath ${HOME}/.ssh-agent.conf
+    ssh_agent_env
     ssh-add -l 2>&1> $null; $ssh_add_ret = $LastExitCode
   }
   return $ssh_add_ret
