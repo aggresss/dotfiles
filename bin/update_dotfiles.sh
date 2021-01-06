@@ -2,6 +2,7 @@
 # Update dotfiles from git@github.com:aggresss/dotfiles.git master branch
 # curl https://raw.githubusercontent.com/aggresss/dotfiles/master/bin/update_dotfiles.sh -sSf | bash
 
+# Remote or local
 if [ ${1:-NoDefine} = "local" ] && [ -d ${HOME}/workspace-scratch/dotfiles ]; then
     UPDATE_METHOD="local"
     DOTFILES_URL="${HOME}/workspace-scratch/dotfiles"
@@ -98,7 +99,7 @@ if [ -d ${HOME}/.config/powershell ]; then
         ${HOME}/.config/powershell/Microsoft.VSCode_profile.ps1
 fi
 
-# shell rc
+# sh
 if [[ ${SHELL} =~ .*zsh$ ]]; then
     # .zshrc
     if [ ! -f ${HOME}/.zshrc ]; then
@@ -182,6 +183,7 @@ END
     fi
 fi
 
+# Environment Specify
 case $(uname) in
     Linux)
         update_file ${DOTFILES_URL}/sh/.Xresources ${HOME}/.Xresources
