@@ -212,6 +212,10 @@ function ssh_agent_env {
   }
 }
 
+# ssh-add -l > $null 2>&1
+# $LastExitCode=0 means the socket is there and it has a key
+# $LastExitCode=1 means the socket is there but contains no key
+# $LastExitCode=2 means the socket is not there or broken
 function ssh_agent_check {
   ssh-add -l 2>&1> $null; $ssh_add_ret = $LastExitCode
   if ($IsWindows -or $Env:OS) {
