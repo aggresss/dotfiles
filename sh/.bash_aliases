@@ -822,7 +822,7 @@ function git_haste()
     if [ -z ${GIT_NAME_TITLE} ]; then
         echo -e "${RED}Not a git repository${NORMAL}"
     elif [ ${GIT_NAME_TITLE} = "branch" ]; then
-        git commit -m "`date "+%F %T %z %a"`"
+        git commit -m "`date "+%F %T %a %z"`"
         if [[ $1 == "commit" ]]; then
             return 0
         fi
