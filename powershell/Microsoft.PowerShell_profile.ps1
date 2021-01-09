@@ -868,6 +868,11 @@ if ($IsWindows -or $Env:OS) {
       "${code_path} $args" | Invoke-Expression 2>&1> $null
     }
   }
+  if (Get-Command wt) {
+    function sudo {
+      Start-Process -Verb RunAs cmd.exe '/c start wt.exe'
+    }
+  }
 }
 elseif ($(uname) -eq "Darwin") {
   # use "brew install gnu-*" instead of bsd-*

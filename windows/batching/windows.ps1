@@ -1,5 +1,6 @@
 # install list
 
+winget install powertoys
 winget install git
 winget install cmake
 winget install vim
