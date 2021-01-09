@@ -1,9 +1,0 @@
-# aclfile
-
-user admin
-# read/write topic
-topic gateway/test0
-
-user username
-# read only topic
-topic read gateway/test0
