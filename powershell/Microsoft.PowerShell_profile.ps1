@@ -862,9 +862,11 @@ if ($IsWindows -or $Env:OS) {
     $vim_path = Get-ChildItem $vim_wildcard
     Set-Alias vim $vim_path[-1].FullName
   }
-  $code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe"
+  $code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe" -replace ' ', '` '
   if ($(Test-Path $code_path)) {
-    Set-Alias code $code_path
+    function code {
+      "${code_path} $args" | Invoke-Expression 2>&1> $null
+    }
   }
 }
 elseif ($(uname) -eq "Darwin") {
