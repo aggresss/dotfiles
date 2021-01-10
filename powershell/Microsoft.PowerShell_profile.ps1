@@ -820,7 +820,9 @@ function update_configfiles {
  # Envronment specific
  ########################>
 if ($IsWindows -or $Env:OS) {
+  Set-Alias grep Select-String
   function touch { New-Item "$args" -ItemType File }
+  function sudo { Start-Process -Verb RunAs "$args" }
 
   function custom_cd {
     if ($args.Count -eq 0) {
@@ -856,21 +858,16 @@ if ($IsWindows -or $Env:OS) {
     Write-Host "`nVisual Studio Command Prompt variables set." -ForegroundColor Yellow
   }
 
-  Set-Alias grep Select-String
   $vim_wildcard = "${Env:ProgramFiles(x86)}\Vim\*\vim.exe"
   if ($(Test-Path $vim_wildcard)) {
     $vim_path = Get-ChildItem $vim_wildcard
     Set-Alias vim $vim_path[-1].FullName
   }
+
   $code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe" -replace ' ', '` '
   if ($(Test-Path $code_path)) {
     function code {
       "${code_path} $args" | Invoke-Expression 2>&1> $null
-    }
-  }
-  if (Get-Command wt) {
-    function sudo {
-      Start-Process -Verb RunAs cmd.exe '/c start wt.exe'
     }
   }
 }
