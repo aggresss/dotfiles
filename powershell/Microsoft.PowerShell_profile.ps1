@@ -700,7 +700,7 @@ function go_clone {
 }
 
 function go_proxy {
-  if (-not $GOPROXY) {
+  if (-not $Env:GOPROXY) {
     env_amend GOPROXY "https://goproxy.cn"
     Write-Host "GOPROXY: $Env:GOPROXY" -ForegroundColor Yellow
   } else {
