@@ -699,6 +699,16 @@ function go_clone {
   git clone $args $repo_name/src/$clone_path
 }
 
+function go_proxy {
+  if (-not $GOPROXY) {
+    env_amend GOPROXY "https://goproxy.cn"
+    Write-Host "GOPROXY: $GOPROXY" -ForegroundColor Yellow
+  } else {
+    env_prune GOPROXY
+    Write-Host "GOPROXY: disabled" -ForegroundColor Yellow
+  }
+}
+
 <########################
  # PoSH for Java
  ########################>
