@@ -17,3 +17,4 @@ winget install "Visual Studio Code"
 winget install "Visual Studio Community"
 winget install GPU-Z
 winget install CPU-Z
+winget install 7Zip
