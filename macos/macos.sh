@@ -3,7 +3,6 @@
 
 # Install command
 brew install \
-    llvm \
     rmtrash \
     autoconf \
     automake \
