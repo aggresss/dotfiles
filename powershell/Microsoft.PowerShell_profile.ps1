@@ -660,6 +660,22 @@ function git_insteadof {
   }
 }
 
+# Set git global set
+function git_global_set {
+  $isLocal = $false
+  if ($args[0] -eq "local") {
+    $isLocal = $true
+  }
+  update_internal $isLocal ".gitignore" ${HOME}/.gitignore
+  # git global config
+  git config --global core.excludesfile ${HOME}/.gitignore
+  git config --global core.editor "vim"
+  git config --global core.autocrlf false
+  git config --global core.quotepath false
+  git config --global pull.rebase false
+  git config --global push.default simple
+}
+
 <########################
  # PoSH for Golang
  ########################>
@@ -669,7 +685,7 @@ if (-not $GOPATH_BAK) {
 }
 
 # reset $GOPATH
-function go_reset() {
+function go_reset {
   ${env:GOPATH} = ${GOPATH_BAK}
   Write-Host "Successful clear GOPATH: ${env:GOPATH}"
 }
