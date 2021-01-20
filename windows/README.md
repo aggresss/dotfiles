@@ -12,6 +12,9 @@ Cascadia Code Font
 JetBrains Mono Font
 - https://github.com/JetBrains/JetBrainsMono
 
+Sysinternals Suite
+- https://docs.microsoft.com/en-us/sysinternals/downloads/
+
 ## Using ssh-agent with git on Windows
 
 ```
