@@ -667,6 +667,9 @@ function git_global_set {
     $isLocal = $true
   }
   update_internal $isLocal ".gitignore" ${HOME}/.gitignore
+  if ($IsWindows -or $Env:OS) {
+    [Environment]::SetEnvironmentVariable("LESSCHARSET", "utf-8", "User")
+  }
   # git global config
   git config --global core.excludesfile ${HOME}/.gitignore
   git config --global core.editor "vim"
