@@ -217,18 +217,18 @@ function ssh_agent_env {
 # $LastExitCode=1 means the socket is there but contains no key
 # $LastExitCode=2 means the socket is not there or broken
 function ssh_agent_check {
-  ssh-add -l 2>&1> $null; $ssh_add_ret = $LastExitCode
+  ssh-add -l > $null 2>&1; $ssh_add_ret = $LastExitCode
   if ($IsWindows -or $Env:OS) {
     return $ssh_add_ret
   }
   if (($ssh_add_ret -eq 2) -and (Test-Path ${HOME}/.ssh-agent.conf)) {
     ssh_agent_env
-    ssh-add -l 2>&1> $null; $ssh_add_ret = $LastExitCode
+    ssh-add -l > $null 2>&1; $ssh_add_ret = $LastExitCode
   }
   if ($ssh_add_ret -eq 2) {
     ssh-agent | Out-File -FilePath ${HOME}/.ssh-agent.conf
     ssh_agent_env
-    ssh-add -l 2>&1> $null; $ssh_add_ret = $LastExitCode
+    ssh-add -l > $null 2>&1; $ssh_add_ret = $LastExitCode
   }
   return $ssh_add_ret
 }
@@ -877,7 +877,7 @@ if ($IsWindows -or $Env:OS) {
   $code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe" -replace ' ', '` '
   if ($(Test-Path $code_path)) {
     function code {
-      "${code_path} $args" | Invoke-Expression 2>&1> $null
+      "${code_path} $args" | Invoke-Expression > $null 2>&1
     }
   }
 }
