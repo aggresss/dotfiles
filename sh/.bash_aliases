@@ -656,8 +656,34 @@ function git_pull()
     fi
     local remote_name=$1
     local remote_pr=$2
-    git fetch ${remote_name} pull/${remote_pr}/head:pull/${remote_name}/${remote_pr} && \
-    git checkout pull/${remote_name}/${remote_pr}
+    local pull_branch="pull/${remote_name}/${remote_pr}"
+    git fetch ${remote_name} pull/${remote_pr}/head:${pull_branch}_staging
+    if [ $(echo $?) -ne 0 ]; then
+        return 1
+    fi
+    local curr_branch=`git branch | grep '\*' | cut -d ' ' -f 2` || return 1
+    if [ "${curr_branch}" = "${pull_branch}" ]; then
+        git rebase ${pull_branch}_staging
+    else
+        git branch -q -D ${pull_branch} 2> /dev/null
+        git checkout -b ${pull_branch} ${pull_branch}_staging
+    fi
+    git branch -q -D ${pull_branch}_staging
+}
+
+# Checkout a branch and delete current branch
+# $1 branch for checkout
+function git_leave()
+{
+    if [ $# != 1 ]; then
+        echo -e "${LIGHT}${RED}Please input a branch to checkout.${NORMAL}"
+        return 1
+    fi
+    local curr_branch=`git branch | grep '\*' | cut -d ' ' -f 2` || return 1
+    if [ -z "${curr_branch}" ]; then
+        return 2
+    fi
+    git checkout $1 && git branch -D ${curr_branch}
 }
 
 # Delete git branch on local and remote
