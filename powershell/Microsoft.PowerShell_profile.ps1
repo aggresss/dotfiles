@@ -584,14 +584,35 @@ function git_sig {
 # $2 pull request index No.
 function git_pull {
   if ($args.Count -lt 2 ) {
-    Write-Host "Arguments error."
+    Write-Host "Please input remote name and pull request No." -ForegroundColor Red
     return
   }
   $remote_name = $args[0]
   $remote_pr = $args[1]
-  $ErrorActionPreference = "stop"; `
-    git fetch ${remote_name} pull/${remote_pr}/head:pull/${remote_name}/${remote_pr}; `
-    git checkout pull/${remote_name}/${remote_pr}
+  $pull_branch = "pull/${remote_name}/${remote_pr}"
+  $curr_branch=$(git rev-parse --abbrev-ref HEAD); if (-not $?) { return }
+  git fetch ${remote_name} pull/${remote_pr}/head:${pull_branch}_staging; if (-not $?) { return }
+  if (${pull_branch} -eq ${curr_branch}) {
+    git rebase ${pull_branch}_staging
+  }
+  else {
+    git branch -q -D ${pull_branch} 2> $null
+    git checkout -b ${pull_branch} ${pull_branch}_staging
+  }
+  git branch -q -D ${pull_branch}_staging
+}
+
+function git_leave {
+  if ($args.Count -lt 1 ) {
+    Write-Host "Please input a branch to checkout." -ForegroundColor Red
+    return
+  }
+  $curr_branch=$(git rev-parse --abbrev-ref HEAD)
+  if ((-not ${curr_branch}) -or (${curr_branch} -eq "")) {
+    return
+  }
+  git checkout $args[0]; if (-not $?) { return }
+  git branch -D ${curr_branch}
 }
 
 function git_log {

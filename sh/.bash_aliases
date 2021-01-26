@@ -657,11 +657,11 @@ function git_pull()
     local remote_name=$1
     local remote_pr=$2
     local pull_branch="pull/${remote_name}/${remote_pr}"
+    local curr_branch=`git rev-parse --abbrev-ref HEAD` || return 1
     git fetch ${remote_name} pull/${remote_pr}/head:${pull_branch}_staging
     if [ $(echo $?) -ne 0 ]; then
         return 1
     fi
-    local curr_branch=`git branch | grep '\*' | cut -d ' ' -f 2` || return 1
     if [ "${curr_branch}" = "${pull_branch}" ]; then
         git rebase ${pull_branch}_staging
     else
@@ -679,7 +679,7 @@ function git_leave()
         echo -e "${LIGHT}${RED}Please input a branch to checkout.${NORMAL}"
         return 1
     fi
-    local curr_branch=`git branch | grep '\*' | cut -d ' ' -f 2` || return 1
+    local curr_branch=`git rev-parse --abbrev-ref HEAD` || return 1
     if [ -z "${curr_branch}" ]; then
         return 2
     fi
