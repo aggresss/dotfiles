@@ -890,6 +890,7 @@ if ($IsWindows -or $Env:OS) {
     }
   }
   Set-Alias cd custom_cd -Option AllScope
+  # visual studio env
   function vs_env {
     $vs_wildcard = "${Env:ProgramFiles(x86)}\Microsoft Visual Studio\*\Community\Common7\Tools"
     if (-not $(Test-Path $vs_wildcard)) {
@@ -907,13 +908,19 @@ if ($IsWindows -or $Env:OS) {
     Pop-Location
     Write-Host "`nVisual Studio Command Prompt variables set." -ForegroundColor Yellow
   }
-
+  # vim
   $vim_wildcard = "${Env:ProgramFiles(x86)}\Vim\*\vim.exe"
   if ($(Test-Path $vim_wildcard)) {
     $vim_path = Get-ChildItem $vim_wildcard
     Set-Alias vim $vim_path[-1].FullName
   }
-
+  # lua
+  $lua_wildcard = "${Env:ProgramFiles(x86)}\lua\*\lua*.exe"
+  if ($(Test-Path $lua_wildcard)) {
+    $lua_path = Get-ChildItem $lua_wildcard
+    Set-Alias lua $lua_path[-1].FullName
+  }
+  # vscode
   $code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe" -replace ' ', '` '
   if ($(Test-Path $code_path)) {
     function code {
