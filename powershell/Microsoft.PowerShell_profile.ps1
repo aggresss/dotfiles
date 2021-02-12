@@ -915,7 +915,7 @@ if ($IsWindows -or $Env:OS) {
     Set-Alias vim $vim_path[-1].FullName
   }
   # lua
-  $lua_wildcard = "${Env:UserProfile}\lua\*\lua*.exe"
+  $lua_wildcard = "${Env:UserProfile}\lua\*\lua[0-9]*.exe"
   if ($(Test-Path $lua_wildcard)) {
     $lua_path = Get-ChildItem $lua_wildcard
     Set-Alias lua $lua_path[-1].FullName
