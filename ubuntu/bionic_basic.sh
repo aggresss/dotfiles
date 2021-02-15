@@ -7,6 +7,7 @@
 # install necessary application
 #########################
 sudo apt-get update && sudo apt-get install -y \
+    zlib1g-dev \
     apt-file \
     trash-cli \
     alsa-utils \
