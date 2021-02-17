@@ -42,6 +42,7 @@
 	"editor.minimap.enabled": false,
 	"editor.renderWhitespace": "all",
 	"editor.suggestSelection": "first",
+	"editor.semanticHighlighting.enabled": true,
 	"editor.fontFamily": "'JetBrains Mono', Menlo, DejaVu, 'Cascadia Code', Consolas, 'Courier New', monospace",
 	"terminal.integrated.fontSize": 12,
 	"terminal.integrated.rendererType": "dom",
