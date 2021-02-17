@@ -144,6 +144,7 @@ END
     sh)
         cat << END > /tmp/hello.sh
 #!/usr/bin/env bash
+
 # brief line
 set -e
 set -u
@@ -181,7 +182,7 @@ END
         cat << END > /tmp/hello.pl
 #!/usr/bin/env perl
 
-print "Hello, Wrold!\n"
+print "Hello, World!\n"
 
 END
         echo "/tmp/hello.pl"
@@ -216,6 +217,7 @@ END
     nodejs)
         cat << END > /tmp/hello.js
 #!/usr/bin/env node
+
 'use strict'
 const http = require('http');
 const port = process.env.PORT || 8080;
@@ -273,6 +275,8 @@ END
     ;;
     lua)
     cat << END > /tmp/hello.lua
+#!/usr/bin/env lua
+
 function printHello(printString)
     print(printString)
 end
