@@ -7,6 +7,7 @@ winget install vim
 winget install vcxsrv
 winget install graphviz
 winget install python
+winget install StrawberryPerl
 winget install node.js
 winget install Chrome
 winget install Firefox
