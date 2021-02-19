@@ -21,6 +21,7 @@ config.status
 
 # vscode project file
 .vscode/
+.vstags
 
 # MacOS cache file
 .DS_Store
