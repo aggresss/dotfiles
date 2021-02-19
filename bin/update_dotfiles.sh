@@ -23,7 +23,7 @@ function update_file()
     if [ ! -d ${down_path} ]; then
         mkdir -vp ${down_path}
     fi
-    if [ ${UPDATE_METHOD} = "remote" ]; then
+    if [[ $1 =~ ^http.* ]]; then
         rm -rf ${tmp_path}/${down_file}
         if [ $(command -v wget > /dev/null; echo $?) -eq 0 ]; then
             wget -P ${tmp_path} $1

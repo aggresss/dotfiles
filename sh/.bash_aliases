@@ -154,6 +154,40 @@ alias mv='mv -i'
 # Generate GNU standard files
 alias make_gnu='touch AUTHORS COPYING ChangeLog NEWS README'
 
+# $1 download url
+# $2 local filepath
+function update_file()
+{
+    local tmp_path="/tmp"
+    # can replace by dirname and basename command
+    local down_file=`echo "$1" | awk -F "/" '{print $NF}'`
+    local down_path=`echo "$2" | awk 'BEGIN{res=""; FS="/";}{for(i=2;i<=NF-1;i++) res=(res"/"$i);} END{print res}'`
+    echo "Update $2 ..."
+    if [ ! -d ${down_path} ]; then
+        mkdir -vp ${down_path}
+    fi
+    if [[ $1 =~ ^http.* ]]; then
+        rm -rf ${tmp_path}/${down_file}
+        if [ $(command -v wget > /dev/null; echo $?) -eq 0 ]; then
+            wget -P ${tmp_path} $1
+        elif [ $(command -v curl > /dev/null; echo $?) -eq 0 ]; then
+            cd ${tmp_path}
+            curl -OL $1
+            cd -
+        else
+            echo "No http request tool."
+            exit 1;
+        fi
+        cp -vf ${tmp_path}/${down_file} $2
+        rm -rf ${tmp_path}/${down_file}
+        if [ ${down_file##*.} = "sh" ]; then
+            chmod +x $2
+        fi
+    else
+        cp -vf $1 $2
+    fi
+}
+
 # fast ssh-agent
 # ssh-add -l > /dev/null 2>&1
 # $?=0 means the socket is there and it has a key
@@ -744,7 +778,7 @@ function git_insteadof()
 # Set git global set
 function git_global_set()
 {
-  local base_url="https://raw.githubusercontent.com/aggresss/dotfiles/master"
+  local base_url="https://github.com/aggresss/dotfiles/raw/master"
   update_file ${base_url}/.gitignore ${HOME}/.gitignore
   git config --global core.excludesfile ${HOME}/.gitignore
   git config --global core.editor "vim"
