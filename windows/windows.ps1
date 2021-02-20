@@ -4,6 +4,7 @@ winget install powertoys
 winget install git
 winget install cmake
 winget install vim
+winget install "GNU Emacs"
 winget install vcxsrv
 winget install graphviz
 winget install python
