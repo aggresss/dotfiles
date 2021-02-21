@@ -340,7 +340,7 @@ function source_file {
       Write-Host "File not exist." -ForegroundColor Red
       return
     }
-    # Process index of spesical file
+    # Process index of special file
     $ReadyCacheArray = @()
     $file_cache = Get-Content -Path $filepath
     for ($k = 2; $k -lt $args.Count; $k++) {
@@ -870,6 +870,7 @@ function update_configfiles {
  # Envronment specific
  ########################>
 if ($IsWindows -or $Env:OS) {
+  Remove-Item alias:curl
   Set-Alias grep Select-String
   function touch { New-Item "$args" -ItemType File }
   function sudo { Start-Process -Verb RunAs "$args" }
