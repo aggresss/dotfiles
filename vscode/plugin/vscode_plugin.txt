@@ -17,6 +17,8 @@ ms-python.python
 vscjava.vscode-java-pack
 # Lua
 sumneko.lua
+# Perl
+cfgweb.vscode-perl
 # CMake
 twxs.cmake
 ms-vscode.cmake-tools
@@ -37,4 +39,3 @@ eriklynd.json-tools
 yzhang.markdown-all-in-one
 # PlantUML
 jebbs.plantuml
-
