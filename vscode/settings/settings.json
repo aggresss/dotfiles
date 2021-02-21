@@ -31,6 +31,17 @@
 	"python.linting.flake8Enabled": true,
 	"python.languageServer": "Microsoft",
 
+	"perl.perltidyArgs": [
+		"-q",
+		"-i=4",
+		"-ce",
+		"-l=0",
+		"-bar",
+		"-naws",
+		"-blbs=2",
+		"-mbl=2"
+	],
+
 	"workbench.startupEditor": "none",
 	"workbench.colorTheme": "Default Dark+",
 	"workbench.activityBar.visible": true,
