@@ -26,6 +26,7 @@ sudo apt-get update && sudo apt-get install -y \
     git-lfs \
     p7zip-full \
     unrar \
+    libarchive-tools \
     hexedit \
     tmux \
     expect \
