@@ -1051,6 +1051,7 @@ function py_path
 # Modify for Perl
 ##########################
 
+# Using local::lib for Perl modules
 if [ -d ${HOME}/perl5 ]; then
     env_insert  "PATH" "${HOME}/perl5/bin"
     env_insert "PERL5LIB" "${HOME}/perl5/lib/perl5"
