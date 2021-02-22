@@ -1061,6 +1061,13 @@ if [ -d ${PERL_LOCAL_LIB_ROOT} ]; then
     env_amend "PERL_MM_OPT" "INSTALL_BASE=${PERL_LOCAL_LIB_ROOT}"
 fi
 
+function perl_install
+{
+    for idx in $(seq $#); do
+        eval perl -MCPAN -e \"install \$$idx\"
+    done
+}
+
 ##########################
 # Modify for JavaScript
 ##########################
