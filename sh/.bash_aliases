@@ -1052,12 +1052,13 @@ function py_path
 ##########################
 
 # Using local::lib for Perl modules
-if [ -d ${HOME}/perl5 ]; then
-    env_insert  "PATH" "${HOME}/perl5/bin"
-    env_insert "PERL5LIB" "${HOME}/perl5/lib/perl5"
-    env_insert "PERL_LOCAL_LIB_ROOT" "${HOME}/perl5"
-    env_amend "PERL_MB_OPT" "--install_base\ \\\"${HOME}/perl5\\\""
-    env_amend "PERL_MM_OPT" "INSTALL_BASE=${HOME}/perl5"
+PERL_LOCAL_LIB_ROOT="${HOME}/perl5"
+if [ -d ${PERL_LOCAL_LIB_ROOT} ]; then
+    env_insert  "PATH" "${PERL_LOCAL_LIB_ROOT}/bin"
+    env_insert "PERL5LIB" "${PERL_LOCAL_LIB_ROOT}/lib/perl5"
+    env_insert "PERL_LOCAL_LIB_ROOT" "${PERL_LOCAL_LIB_ROOT}"
+    env_amend "PERL_MB_OPT" "--install_base\ \\\"${PERL_LOCAL_LIB_ROOT}\\\""
+    env_amend "PERL_MM_OPT" "INSTALL_BASE=${PERL_LOCAL_LIB_ROOT}"
 fi
 
 ##########################
