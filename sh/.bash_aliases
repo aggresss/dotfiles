@@ -136,7 +136,7 @@ alias fdc='find . -name "*" |xargs grep -sin'
 # count code line
 alias ccl='find . -name "*[.h|.c|.hpp|.cpp|.go|.rs|.py|.java|.ts|.js]" -type f | xargs cat | wc -l'
 # alias for some application special open
-alias enw='emacs -nw'
+alias emacs='emacs -nw'
 # alias for remove fast
 alias rm_3rd='rm -rvf *.zip *.tgz *.bz2 *.gz *.dmg *.7z *.xz *.tar'
 alias rm_mda='rm -rvf *.jpg *.jpeg *.png *.bmp *.gif *.mp3 *.acc *.wav *.mp4 *.flv *.mov *.avi *.ts *.wmv *.mkv'
