@@ -145,27 +145,6 @@ END
         cat << END > /tmp/hello.sh
 #!/usr/bin/env bash
 
-# brief line
-set -e
-set -u
-# set -x
-# set -v
-# set -o pipefail
-# shopt -s nullglob
-
-# linux shell color support.
-BLACK="\\\\033[30m"
-RED="\\\\033[31m"
-GREEN="\\\\033[32m"
-YELLOW="\\\\033[33m"
-BLUE="\\\\033[34m"
-MAGENTA="\\\\033[35m"
-CYAN="\\\\033[36m"
-WHITE="\\\\033[37m"
-NORMAL="\\\\033[m"
-LIGHT="\\\\033[1m"
-INVERT="\\\\033[7m"
-
 function hello()
 {
     echo "\$(echo "Hello, World!")"
