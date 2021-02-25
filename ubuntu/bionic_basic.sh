@@ -89,6 +89,7 @@ sudo apt-get update && sudo apt-get install -y \
     gettext \
     autopoint \
     nodejs \
+    lua5.1 \
     libssl-dev \
     libproxy-dev \
     libxml2-dev \
