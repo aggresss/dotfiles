@@ -75,6 +75,10 @@ if [ $(command -v vim >/dev/null; echo $?) -eq 0 ]; then
         vim +BundleInstall +qall
     fi
 fi
+# emacs
+if [ $(command -v emacs >/dev/null; echo $?) -eq 0 ]; then
+    update_file ${DOTFILES_URL}/emacs/.emacs ${HOME}/.emacs
+fi
 # tmux
 if [ $(command -v tmux >/dev/null; echo $?) -eq 0 ]; then
     update_file ${DOTFILES_URL}/tmux/.tmux.conf ${HOME}/.tmux.conf
