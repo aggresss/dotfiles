@@ -44,7 +44,7 @@ function env_append()
 
 # trim element from environment variable
 # $1 enviroment variable
-# $2 prune element
+# $2 trim element
 function env_trim()
 {
     eval local env_var=\$\{${1}\-\}
