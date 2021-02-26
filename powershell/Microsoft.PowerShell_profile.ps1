@@ -12,10 +12,10 @@
 # ${env_level} possible values are { Prcess, User, Machine }
 function internal_env_opration {
   Param (
-    [parameter(Mandatory = $true)] [bool]$is_insert,
-    [parameter(Mandatory = $true)] [string]$env_name,
-    [parameter(Mandatory = $true)] [String]$env_value,
-    [parameter(Mandatory = $false)] [String]$env_level = "Process"
+    [Parameter(Mandatory = $true)] [bool]$is_insert,
+    [Parameter(Mandatory = $true)] [string]$env_name,
+    [Parameter(Mandatory = $true)] [String]$env_value,
+    [Parameter(Mandatory = $false)] [String]$env_level = "Process"
   )
   if ($IsWindows -or $Env:OS) { $separator = ';' } else { $separator = ':' }
 
@@ -48,27 +48,27 @@ function internal_env_opration {
 
 function env_insert {
   Param (
-    [parameter(Mandatory = $true)] [string]$env_name,
-    [parameter(Mandatory = $true)] [String]$env_value,
-    [parameter(Mandatory = $false)] [String]$env_level = "Process"
+    [Parameter(Mandatory = $true)] [string]$env_name,
+    [Parameter(Mandatory = $true)] [String]$env_value,
+    [Parameter(Mandatory = $false)] [String]$env_level = "Process"
   )
   internal_env_opration $true $env_name $env_value
 }
 
 function env_append {
   Param (
-    [parameter(Mandatory = $true)] [string]$env_name,
-    [parameter(Mandatory = $true)] [String]$env_value,
-    [parameter(Mandatory = $false)] [String]$env_level = "Process"
+    [Parameter(Mandatory = $true)] [string]$env_name,
+    [Parameter(Mandatory = $true)] [String]$env_value,
+    [Parameter(Mandatory = $false)] [String]$env_level = "Process"
   )
   internal_env_opration $false $env_name $env_value
 }
 
 function env_prune {
   Param (
-    [parameter(Mandatory = $true)] [string]$env_name,
-    [parameter(Mandatory = $true)] [String]$env_value,
-    [parameter(Mandatory = $false)] [String]$env_level = "Process"
+    [Parameter(Mandatory = $true)] [string]$env_name,
+    [Parameter(Mandatory = $true)] [String]$env_value,
+    [Parameter(Mandatory = $false)] [String]$env_level = "Process"
   )
   if ($IsWindows -or $Env:OS) { $separator = ';' } else { $separator = ':' }
 
@@ -101,25 +101,25 @@ function env_prune {
 
 function env_amend {
   Param (
-    [parameter(Mandatory = $true)] [string]$env_name,
-    [parameter(Mandatory = $true)] [String]$env_value,
-    [parameter(Mandatory = $false)] [String]$env_level = "Process"
+    [Parameter(Mandatory = $true)] [string]$env_name,
+    [Parameter(Mandatory = $true)] [String]$env_value,
+    [Parameter(Mandatory = $false)] [String]$env_level = "Process"
   )
   [Environment]::SetEnvironmentVariable($env_name, $env_value, $env_level)
 }
 
 function env_unset {
   Param (
-    [parameter(Mandatory = $true)] [string]$env_name,
-    [parameter(Mandatory = $false)] [String]$env_level = "Process"
+    [Parameter(Mandatory = $true)] [string]$env_name,
+    [Parameter(Mandatory = $false)] [String]$env_level = "Process"
   )
   [Environment]::SetEnvironmentVariable($env_name, $null, $env_level)
 }
 
 function env_print {
   Param (
-    [parameter(Mandatory = $true)] [string]$env_name,
-    [parameter(Mandatory = $false)] [String]$env_level = "Process"
+    [Parameter(Mandatory = $true)] [string]$env_name,
+    [Parameter(Mandatory = $false)] [String]$env_level = "Process"
   )
   if ($IsWindows -or $Env:OS) { $separator = ';' } else { $separator = ':' }
 
@@ -210,7 +210,7 @@ function code_user {
 
 function ssh_agent_env {
   Param (
-    [parameter(Mandatory = $false)] [String]$ssh_agent_config
+    [Parameter(Mandatory = $false)] [String]$ssh_agent_config
   )
   if ((-not $ssh_agent_config) -and (Test-Path ${HOME}/.ssh-agent.conf)) {
     $ssh_agent_config = Get-Content -Path ${HOME}/.ssh-agent.conf
@@ -824,9 +824,9 @@ Set-Alias j npm_scripts
 
 function update_internal {
   Param (
-    [parameter(Mandatory = $true)] [bool]$IsLocal,
-    [parameter(Mandatory = $true)] [String]$Remote,
-    [parameter(Mandatory = $true)] [String]$Local
+    [Parameter(Mandatory = $true)] [bool]$IsLocal,
+    [Parameter(Mandatory = $true)] [String]$Remote,
+    [Parameter(Mandatory = $true)] [String]$Local
   )
   $local_base_path = "${HOME}/workspace-scratch/dotfiles"
   $remote_base_url = "https://raw.githubusercontent.com/aggresss/dotfiles/master"
