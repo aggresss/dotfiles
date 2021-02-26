@@ -96,7 +96,7 @@ if [ $(command -v mvn >/dev/null; echo $?) -eq 0 ]; then
     update_file ${DOTFILES_URL}/maven/settings.xml ${HOME}/.m2/settings.xml
 fi
 # powershell
-if [ -d ${HOME}/.config/powershell ]; then
+if [ $(command -v pwsh >/dev/null; echo $?) -eq 0 ]; then
     update_file ${DOTFILES_URL}/powershell/Microsoft.PowerShell_profile.ps1 \
         ${HOME}/.config/powershell/Microsoft.PowerShell_profile.ps1
     update_file ${DOTFILES_URL}/powershell/Microsoft.PowerShell_profile.ps1 \
