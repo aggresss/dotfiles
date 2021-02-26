@@ -15,7 +15,7 @@ LIGHT=$'\e[1m'
 INVERT=$'\e[7m'
 
 ##########################
-# Modify for Environment
+# Bash/Zsh for Environment
 ##########################
 
 # add new element to environment variable insert mode
