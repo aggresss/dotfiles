@@ -15,6 +15,67 @@ LIGHT=$'\e[1m'
 INVERT=$'\e[7m'
 
 ##########################
+# Modify for Environment
+##########################
+
+# add new element to environment variable insert mode
+# $1 enviroment variable
+# $2 new element
+function env_insert()
+{
+    eval local env_var=\$\{${1}\-\}
+    local new_element=${2%/}
+    if ! echo $env_var | grep -E -q "(^|:)$new_element($|:)"; then
+        eval export $1="${new_element}\${$1:+\:}\${$1-}"
+    fi
+}
+
+# add new element to environment variable append mode
+# $1 enviroment variable
+# $2 new element
+function env_append()
+{
+    eval local env_var=\$\{${1}\-\}
+    local new_element=${2%/}
+    if ! echo $env_var | grep -E -q "(^|:)$new_element($|:)"; then
+        eval export $1="\${$1-}\${$1:+\:}${new_element}"
+    fi
+}
+
+# prune element from environment variable
+# $1 enviroment variable
+# $2 prune element
+function env_prune()
+{
+    eval local env_var=\$\{${1}\-\}
+    local del_element=${2%/}
+    eval export $1="$(echo ${env_var} | sed -e "s;\(^\|:\)${del_element}\(:\|\$\);\1\2;g" -e 's;^:\|:$;;g' -e 's;::;:;g')"
+}
+
+# amend environment variable
+# $1 enviroment variable
+# $2 amend element
+function env_amend()
+{
+    eval export $1="$(echo $2)"
+}
+
+# amend environment variable
+# $1 enviroment variable
+function env_unset()
+{
+    eval unset $1
+}
+
+# print element from environment variable
+# $1 enviroment variable
+function env_print()
+{
+    eval local env_var=\$\{${1}\-\}
+    echo -e ${RED}${1}:\\n${GREEN}${env_var//:/\\n}${NORMAL}
+}
+
+##########################
 # Operate System specified
 ##########################
 
@@ -419,67 +480,6 @@ function proxy_cfg()
         unset proxy http_proxy https_proxy ftp_proxy
         echo -e "${RED}porxy cloesd.${NORMAL}"
     fi
-}
-
-##########################
-# Modify for Environment
-##########################
-
-# add new element to environment variable insert mode
-# $1 enviroment variable
-# $2 new element
-function env_insert()
-{
-    eval local env_var=\$\{${1}\-\}
-    local new_element=${2%/}
-    if ! echo $env_var | grep -E -q "(^|:)$new_element($|:)"; then
-        eval export $1="${new_element}\${$1:+\:}\${$1-}"
-    fi
-}
-
-# add new element to environment variable append mode
-# $1 enviroment variable
-# $2 new element
-function env_append()
-{
-    eval local env_var=\$\{${1}\-\}
-    local new_element=${2%/}
-    if ! echo $env_var | grep -E -q "(^|:)$new_element($|:)"; then
-        eval export $1="\${$1-}\${$1:+\:}${new_element}"
-    fi
-}
-
-# prune element from environment variable
-# $1 enviroment variable
-# $2 prune element
-function env_prune()
-{
-    eval local env_var=\$\{${1}\-\}
-    local del_element=${2%/}
-    eval export $1="$(echo ${env_var} | sed -e "s;\(^\|:\)${del_element}\(:\|\$\);\1\2;g" -e 's;^:\|:$;;g' -e 's;::;:;g')"
-}
-
-# amend environment variable
-# $1 enviroment variable
-# $2 amend element
-function env_amend()
-{
-    eval export $1="$(echo $2)"
-}
-
-# amend environment variable
-# $1 enviroment variable
-function env_unset()
-{
-    eval unset $1
-}
-
-# print element from environment variable
-# $1 enviroment variable
-function env_print()
-{
-    eval local env_var=\$\{${1}\-\}
-    echo -e ${RED}${1}:\\n${GREEN}${env_var//:/\\n}${NORMAL}
 }
 
 ##########################
