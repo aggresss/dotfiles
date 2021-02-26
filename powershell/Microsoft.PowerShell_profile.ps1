@@ -839,8 +839,8 @@ function update_configfiles {
   }
   # Profile
   $PROFILE_PATH = Split-Path -Path $PROFILE
-  update_internal $isLocal "powershell/Microsoft.PowerShell_profile.ps1" ${PROFILE_PATH}/PowerShell_profile.ps1
-  update_internal $isLocal "powershell/Microsoft.PowerShell_profile.ps1" ${PROFILE_PATH}/VSCode_profile.ps1
+  update_internal $isLocal "powershell/Microsoft.PowerShell_profile.ps1" ${PROFILE_PATH}/Microsoft.PowerShell_profile.ps1
+  update_internal $isLocal "powershell/Microsoft.PowerShell_profile.ps1" ${PROFILE_PATH}/Microsoft.VSCode_profile.ps1
   # Windows Envrionment
   if ($IsWindows -or $Env:OS) {
     # Vim
