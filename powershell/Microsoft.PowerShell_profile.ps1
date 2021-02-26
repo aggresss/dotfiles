@@ -837,41 +837,41 @@ function update_configfiles {
   if ($args[0] -eq "local") {
     $isLocal = $true
   }
-  # profile
-  update_internal $isLocal "powershell/Microsoft.PowerShell_profile.ps1" $PROFILE
-  # vim
-  if (Get-Command vim -errorAction SilentlyContinue) {
-    update_internal $isLocal "vim/.vimrc" "${HOME}/.vimrc"
-    update_internal $isLocal "vim/.vimrc.bundles" "${HOME}/.vimrc.bundles"
-    if (-not $(Test-Path ${HOME}/.vim/bundle)) {
-      $ErrorActionPreference = "stop"; `
-        git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim; `
+  # Profile
+  $PROFILE_PATH = Split-Path -Path $PROFILE
+  update_internal $isLocal "powershell/Microsoft.PowerShell_profile.ps1" ${PROFILE_PATH}/PowerShell_profile.ps1
+  update_internal $isLocal "powershell/Microsoft.PowerShell_profile.ps1" ${PROFILE_PATH}/VSCode_profile.ps1
+  # Windows Envrionment
+  if ($IsWindows -or $Env:OS) {
+    # Vim
+    if (Get-Command vim -errorAction SilentlyContinue) {
+      update_internal $isLocal "vim/.vimrc" "${HOME}/.vimrc"
+      update_internal $isLocal "vim/.vimrc.bundles" "${HOME}/.vimrc.bundles"
+      if (-not $(Test-Path ${HOME}/.vim/bundle)) {
+        $ErrorActionPreference = "stop"; `
+          git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim; `
+          vim +BundleInstall +qall
+      }
+      else {
         vim +BundleInstall +qall
+      }
     }
-    else {
-      vim +BundleInstall +qall
-    }
-  }
-  # emacs
-  if (Get-Command emacs -errorAction SilentlyContinue) {
-    if ($IsWindows -or $Env:OS) {
+    # Emacs
+    if (Get-Command emacs -errorAction SilentlyContinue) {
       update_internal $isLocal "emacs/.emacs" "${Env:APPDATA}/.emacs"
-    } else {
-      update_internal $isLocal "emacs/.emacs" "${HOME}/.emacs"
     }
-
-  }
-  # pip
-  if (Get-Command pip -errorAction SilentlyContinue) {
-    update_internal $true "pip/pip.conf" "${HOME}/.pip/pip.conf"
-  }
-  # npm
-  if (Get-Command npm -errorAction SilentlyContinue) {
-    update_internal $true "npm/.npmrc" "${HOME}/.npmrc"
-  }
-  # maven
-  if (Get-Command mvn -errorAction SilentlyContinue) {
-    update_internal $true "maven/settings.xml" "${HOME}/.m2/settings.xml"
+    # pip
+    if (Get-Command pip -errorAction SilentlyContinue) {
+      update_internal $true "pip/pip.conf" "${HOME}/.pip/pip.conf"
+    }
+    # npm
+    if (Get-Command npm -errorAction SilentlyContinue) {
+      update_internal $true "npm/.npmrc" "${HOME}/.npmrc"
+    }
+    # Maven
+    if (Get-Command mvn -errorAction SilentlyContinue) {
+      update_internal $true "maven/settings.xml" "${HOME}/.m2/settings.xml"
+    }
   }
 }
 
