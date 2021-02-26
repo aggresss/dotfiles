@@ -852,6 +852,10 @@ function update_configfiles {
       vim +BundleInstall +qall
     }
   }
+  # emacs
+  if (Get-Command emacs -errorAction SilentlyContinue) {
+    update_internal $isLocal "emacs/.emacs" "${HOME}/.emacs"
+  }
   # pip
   if (Get-Command pip -errorAction SilentlyContinue) {
     update_internal $true "pip/pip.conf" "${HOME}/.pip/pip.conf"
@@ -915,6 +919,12 @@ if ($IsWindows -or $Env:OS) {
     $vim_path = Get-ChildItem $vim_wildcard
     Set-Alias vim $vim_path[-1].FullName
   }
+  # emacs
+  $emacs_wildcard = "${Env:ProgramFiles}\Emacs\*\bin\emacs.exe"
+  if ($(Test-Path $emacs_wildcard)) {
+    $emacs_path = (Get-ChildItem $emacs_wildcard)[-1].FullName -replace ' ', '` '
+    function emacs { "$emacs_path -nw $args" | Invoke-Expression }
+  }
   # lua
   $lua_wildcard = "${Env:UserProfile}\lua\*\lua[0-9]*.exe"
   if ($(Test-Path $lua_wildcard)) {
@@ -924,9 +934,7 @@ if ($IsWindows -or $Env:OS) {
   # vscode
   $code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe" -replace ' ', '` '
   if ($(Test-Path $code_path)) {
-    function code {
-      "${code_path} $args" | Invoke-Expression > $null 2>&1
-    }
+    function code { "${code_path} $args" | Invoke-Expression > $null 2>&1 }
   }
 }
 elseif ($(uname) -eq "Darwin") {
