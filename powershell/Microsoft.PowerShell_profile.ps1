@@ -5,9 +5,9 @@
  #     Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
  #>
 
-<########################
- # PoSH for Environment
- ########################>
+<####################################
+ # Environment Operate for PowerShell
+ ####################################>
 
 # ${env_level} possible values are { Prcess, User, Machine }
 function internal_env_opration {

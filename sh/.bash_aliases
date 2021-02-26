@@ -14,9 +14,9 @@ NORMAL=$'\e[0m'
 LIGHT=$'\e[1m'
 INVERT=$'\e[7m'
 
-##########################
-# Bash/Zsh for Environment
-##########################
+##################################
+# Environment Operate for Bash/Zsh
+##################################
 
 # add new element to environment variable insert mode
 # $1 enviroment variable
