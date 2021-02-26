@@ -34,9 +34,9 @@ function internal_env_opration {
   )
   if ($IsWindows -or $Env:OS) { $separator = ';' } else { $separator = ':' }
 
-  ('$curr_values = $Env:{0}' -f $env_name) | Invoke-Expression
+  $curr_values = [Environment]::GetEnvironmentVariable($env_name, $env_level)
   if ((-not $curr_values) -or ($curr_values -eq "")) {
-    ('$Env:{0} = "$env_value"' -f $env_name) | Invoke-Expression
+    [Environment]::SetEnvironmentVariable($env_name, $env_value, $env_level)
   }
   else {
     if ($curr_values -like "*$separator*") {
@@ -53,12 +53,11 @@ function internal_env_opration {
       }
     }
     if ($is_insert) {
-      $eval = '$Env:{0} = "$env_value$separator$Env:{0}"'
+      [Environment]::SetEnvironmentVariable($env_name, "$env_value$separator$curr_values", $env_level)
     }
     else {
-      $eval = '$Env:{0} += "$separator$env_value"'
+      [Environment]::SetEnvironmentVariable($env_name, "$curr_values$separator$env_value", $env_level)
     }
-    ($eval -f $env_name) | Invoke-Expression
   }
 }
 
@@ -88,7 +87,7 @@ function env_prune {
   )
   if ($IsWindows -or $Env:OS) { $separator = ';' } else { $separator = ':' }
 
-  ('$curr_values = $Env:{0}' -f $env_name) | Invoke-Expression
+  $curr_values = [Environment]::GetEnvironmentVariable($env_name, $env_level)
   if ((-not $curr_values) -or ($curr_values -eq "")) {
     return
   }
@@ -105,11 +104,11 @@ function env_prune {
           }
         }
       }
-      ('$Env:{0} = "$new_value"' -f $env_name) | Invoke-Expression
+      [Environment]::SetEnvironmentVariable($env_name, $new_value, $env_level)
     }
     else {
       if ($curr_values -eq $env_value) {
-        ('$Env:{0} = ""' -f $env_name) | Invoke-Expression
+        [Environment]::SetEnvironmentVariable($env_name, $null, $env_level)
       }
     }
   }
@@ -121,7 +120,7 @@ function env_amend {
     [parameter(Mandatory = $true)] [String]$env_value,
     [parameter(Mandatory = $false)] [String]$env_level = "Process"
   )
-  ('$Env:{0} = "$env_value"' -f $env_name) | Invoke-Expression
+  [Environment]::SetEnvironmentVariable($env_name, $env_value, $env_level)
 }
 
 function env_print {
@@ -131,7 +130,7 @@ function env_print {
   )
   if ($IsWindows -or $Env:OS) { $separator = ';' } else { $separator = ':' }
 
-  ('$curr_values = $Env:{0}' -f $env_name) | Invoke-Expression
+  $curr_values = [Environment]::GetEnvironmentVariable($env_name, $env_level)
   if (($curr_values) -and (-not $curr_values -eq "")) {
     Write-Host "${env_name}:" -ForegroundColor DarkRed
     if ($curr_values -like "*$separator*") {
