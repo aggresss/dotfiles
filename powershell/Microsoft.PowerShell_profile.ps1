@@ -108,6 +108,14 @@ function env_amend {
   [Environment]::SetEnvironmentVariable($env_name, $env_value, $env_level)
 }
 
+function env_unset {
+  Param (
+    [parameter(Mandatory = $true)] [string]$env_name,
+    [parameter(Mandatory = $false)] [String]$env_level = "Process"
+  )
+  [Environment]::SetEnvironmentVariable($env_name, $null, $env_level)
+}
+
 function env_print {
   Param (
     [parameter(Mandatory = $true)] [string]$env_name,
@@ -128,14 +136,6 @@ function env_print {
       Write-Host "$curr_values" -ForegroundColor DarkGreen
     }
   }
-}
-
-function env_unset {
-  Param (
-    [parameter(Mandatory = $true)] [string]$env_name,
-    [parameter(Mandatory = $false)] [String]$env_level = "Process"
-  )
-  [Environment]::SetEnvironmentVariable($env_name, $null, $env_level)
 }
 
 <########################
