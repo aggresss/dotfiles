@@ -854,7 +854,12 @@ function update_configfiles {
   }
   # emacs
   if (Get-Command emacs -errorAction SilentlyContinue) {
-    update_internal $isLocal "emacs/.emacs" "${HOME}/.emacs"
+    if ($IsWindows -or $Env:OS) {
+      update_internal $isLocal "emacs/.emacs" "${Env:APPDATA}/.emacs"
+    } else {
+      update_internal $isLocal "emacs/.emacs" "${HOME}/.emacs"
+    }
+
   }
   # pip
   if (Get-Command pip -errorAction SilentlyContinue) {
