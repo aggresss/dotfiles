@@ -72,7 +72,7 @@ function env_unset()
 function env_print()
 {
     eval local env_var=\$\{${1}\-\}
-    echo -e ${RED}${1}:\\n${GREEN}${env_var//:/\\n}${NORMAL}
+    echo -e ${1}:\\n${env_var//:/\\n}
 }
 
 ##########################
