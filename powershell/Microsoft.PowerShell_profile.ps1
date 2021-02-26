@@ -6,25 +6,10 @@
  #>
 
 <########################
- # PoSH for Common
+ # PoSH for Environment
  ########################>
 
-# short for cd ..
-function .. { Set-Location .. }
-function ... { Set-Location ../.. }
-function .... { Set-Location ../../../ }
-function ..... { Set-Location ../../../../ }
-
-function u { . $profile }
-function ll {
-  if ((Get-Command ls).CommandType -eq "Application") {
-    ls -al
-  }
-  else {
-    Get-ChildItem -Attributes !System, Hidden
-  }
-}
-
+# ${env_level} possible values are { Prcess, User, Machine }
 function internal_env_opration {
   Param (
     [parameter(Mandatory = $true)] [bool]$is_insert,
@@ -151,6 +136,26 @@ function env_unset {
     [parameter(Mandatory = $false)] [String]$env_level = "Process"
   )
   [Environment]::SetEnvironmentVariable($env_name, $null, $env_level)
+}
+
+<########################
+ # PoSH for Common
+ ########################>
+
+# short for cd ..
+function .. { Set-Location .. }
+function ... { Set-Location ../.. }
+function .... { Set-Location ../../../ }
+function ..... { Set-Location ../../../../ }
+
+function u { . $profile }
+function ll {
+  if ((Get-Command ls).CommandType -eq "Application") {
+    ls -al
+  }
+  else {
+    Get-ChildItem -Attributes !System, Hidden
+  }
 }
 
 function cd_scratch {
@@ -886,7 +891,7 @@ function update_configfiles {
  # Envronment specific
  ########################>
 if ($IsWindows -or $Env:OS) {
-  Remove-Item alias:curl
+  if (Test-Path Alias:\curl) { Remove-Item Alias:\curl }
   Set-Alias grep Select-String
   function touch { New-Item "$args" -ItemType File }
   function sudo { Start-Process -Verb RunAs "$args" }
@@ -947,6 +952,12 @@ if ($IsWindows -or $Env:OS) {
   $code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe" -replace ' ', '` '
   if ($(Test-Path $code_path)) {
     function code { "${code_path} $args" | Invoke-Expression > $null 2>&1 }
+  }
+  # ${HOME}/bin
+  $bin_path = "${HOME}/bin"
+  if (-not $(Test-Path $bin_path)) {
+    New-Item $bin_path -ItemType directory -Force
+    env_insert "PATH" $bin_path "User"
   }
 }
 elseif ($(uname) -eq "Darwin") {
