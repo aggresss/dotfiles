@@ -29,7 +29,8 @@ function internal_env_opration {
   Param (
     [parameter(Mandatory = $true)] [bool]$is_insert,
     [parameter(Mandatory = $true)] [string]$env_name,
-    [parameter(Mandatory = $true)] [String]$env_value
+    [parameter(Mandatory = $true)] [String]$env_value,
+    [parameter(Mandatory = $false)] [String]$env_level = "Process"
   )
   if ($IsWindows -or $Env:OS) { $separator = ';' } else { $separator = ':' }
 
@@ -64,7 +65,8 @@ function internal_env_opration {
 function env_insert {
   Param (
     [parameter(Mandatory = $true)] [string]$env_name,
-    [parameter(Mandatory = $true)] [String]$env_value
+    [parameter(Mandatory = $true)] [String]$env_value,
+    [parameter(Mandatory = $false)] [String]$env_level = "Process"
   )
   internal_env_opration $true $env_name $env_value
 }
@@ -72,7 +74,8 @@ function env_insert {
 function env_append {
   Param (
     [parameter(Mandatory = $true)] [string]$env_name,
-    [parameter(Mandatory = $true)] [String]$env_value
+    [parameter(Mandatory = $true)] [String]$env_value,
+    [parameter(Mandatory = $false)] [String]$env_level = "Process"
   )
   internal_env_opration $false $env_name $env_value
 }
@@ -80,7 +83,8 @@ function env_append {
 function env_prune {
   Param (
     [parameter(Mandatory = $true)] [string]$env_name,
-    [parameter(Mandatory = $true)] [String]$env_value
+    [parameter(Mandatory = $true)] [String]$env_value,
+    [parameter(Mandatory = $false)] [String]$env_level = "Process"
   )
   if ($IsWindows -or $Env:OS) { $separator = ';' } else { $separator = ':' }
 
@@ -114,14 +118,16 @@ function env_prune {
 function env_amend {
   Param (
     [parameter(Mandatory = $true)] [string]$env_name,
-    [parameter(Mandatory = $true)] [String]$env_value
+    [parameter(Mandatory = $true)] [String]$env_value,
+    [parameter(Mandatory = $false)] [String]$env_level = "Process"
   )
   ('$Env:{0} = "$env_value"' -f $env_name) | Invoke-Expression
 }
 
 function env_print {
   Param (
-    [parameter(Mandatory = $true)] [string]$env_name
+    [parameter(Mandatory = $true)] [string]$env_name,
+    [parameter(Mandatory = $false)] [String]$env_level = "Process"
   )
   if ($IsWindows -or $Env:OS) { $separator = ';' } else { $separator = ':' }
 
@@ -142,9 +148,10 @@ function env_print {
 
 function env_unset {
   Param (
-    [parameter(Mandatory = $true)] [string]$env_name
+    [parameter(Mandatory = $true)] [string]$env_name,
+    [parameter(Mandatory = $false)] [String]$env_level = "Process"
   )
-  ('Remove-Item Env:\{0}' -f $env_name) | Invoke-Expression
+  [Environment]::SetEnvironmentVariable($env_name, $null, $env_level)
 }
 
 function cd_scratch {
@@ -590,7 +597,7 @@ function git_pull {
   $remote_name = $args[0]
   $remote_pr = $args[1]
   $pull_branch = "pull/${remote_name}/${remote_pr}"
-  $curr_branch=$(git rev-parse --abbrev-ref HEAD); if (-not $?) { return }
+  $curr_branch = $(git rev-parse --abbrev-ref HEAD); if (-not $?) { return }
   git fetch ${remote_name} pull/${remote_pr}/head:${pull_branch}_staging; if (-not $?) { return }
   if (${pull_branch} -eq ${curr_branch}) {
     git rebase ${pull_branch}_staging
@@ -607,7 +614,7 @@ function git_leave {
     Write-Host "Please input a branch to checkout." -ForegroundColor Red
     return
   }
-  $curr_branch=$(git rev-parse --abbrev-ref HEAD)
+  $curr_branch = $(git rev-parse --abbrev-ref HEAD)
   if ((-not ${curr_branch}) -or (${curr_branch} -eq "")) {
     return
   }
@@ -743,7 +750,8 @@ function go_proxy {
   if (-not $Env:GOPROXY) {
     env_amend GOPROXY "https://goproxy.cn"
     Write-Host "GOPROXY: $Env:GOPROXY" -ForegroundColor Yellow
-  } else {
+  }
+  else {
     env_unset GOPROXY
     Write-Host "GOPROXY: disabled" -ForegroundColor Yellow
   }
