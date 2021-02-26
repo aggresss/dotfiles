@@ -42,10 +42,10 @@ function env_append()
     fi
 }
 
-# prune element from environment variable
+# trim element from environment variable
 # $1 enviroment variable
 # $2 prune element
-function env_prune()
+function env_trim()
 {
     eval local env_var=\$\{${1}\-\}
     local del_element=${2%/}

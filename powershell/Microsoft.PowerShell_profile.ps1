@@ -64,7 +64,7 @@ function env_append {
   internal_env_opration $false $env_name $env_value
 }
 
-function env_prune {
+function env_trim {
   Param (
     [Parameter(Mandatory = $true, Position = 0)] [string]$env_name,
     [Parameter(Mandatory = $true, Position = 1)] [String]$env_value,
