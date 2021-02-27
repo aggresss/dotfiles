@@ -18,7 +18,6 @@ function internal_env_opration {
     [Parameter(Mandatory = $false, Position = 3)] [String]$env_level = "Process"
   )
   if ($IsWindows -or $Env:OS) { $separator = ';' } else { $separator = ':' }
-
   $curr_values = [Environment]::GetEnvironmentVariable($env_name, $env_level)
   if ((-not $curr_values) -or ($curr_values -eq "")) {
     [Environment]::SetEnvironmentVariable($env_name, $env_value, $env_level)
@@ -71,7 +70,6 @@ function env_trim {
     [Parameter(Mandatory = $false, Position = 2)] [String]$env_level = "Process"
   )
   if ($IsWindows -or $Env:OS) { $separator = ';' } else { $separator = ':' }
-
   $curr_values = [Environment]::GetEnvironmentVariable($env_name, $env_level)
   if ((-not $curr_values) -or ($curr_values -eq "")) {
     return
@@ -116,24 +114,22 @@ function env_unset {
   [Environment]::SetEnvironmentVariable($env_name, $null, $env_level)
 }
 
-function env_print {
+function env_list {
   Param (
     [Parameter(Mandatory = $true, Position = 0)] [string]$env_name,
     [Parameter(Mandatory = $false, Position = 1)] [String]$env_level = "Process"
   )
   if ($IsWindows -or $Env:OS) { $separator = ';' } else { $separator = ':' }
-
   $curr_values = [Environment]::GetEnvironmentVariable($env_name, $env_level)
   if (($curr_values) -and (-not $curr_values -eq "")) {
-    Write-Host "${env_name}:" -ForegroundColor DarkRed
     if ($curr_values -like "*$separator*") {
       $values_array = $curr_values.split("$separator")
       foreach ($value in $values_array) {
-        Write-Host "$value" -ForegroundColor DarkGreen
+        Write-Host "$value"
       }
     }
     else {
-      Write-Host "$curr_values" -ForegroundColor DarkGreen
+      Write-Host "$curr_values"
     }
   }
 }

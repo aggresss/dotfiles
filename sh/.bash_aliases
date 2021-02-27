@@ -60,19 +60,19 @@ function env_amend()
     eval export $1="$(echo $2)"
 }
 
-# amend environment variable
+# unset environment variable
 # $1 enviroment variable
 function env_unset()
 {
     eval unset $1
 }
 
-# print element from environment variable
+# list element from environment variable
 # $1 enviroment variable
-function env_print()
+function env_list()
 {
     eval local env_var=\$\{${1}\-\}
-    echo -e ${1}:\\n${env_var//:/\\n}
+    echo -e ${env_var//:/\\n}
 }
 
 ##########################
