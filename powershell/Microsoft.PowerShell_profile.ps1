@@ -52,7 +52,7 @@ function env_insert {
     [Parameter(Mandatory = $true, Position = 1)] [String]$env_value,
     [Parameter(Mandatory = $false, Position = 2)] [String]$env_level = "Process"
   )
-  internal_env_opration $true $env_name $env_value
+  internal_env_opration $true $env_name $env_value $env_level
 }
 
 function env_append {
@@ -61,7 +61,7 @@ function env_append {
     [Parameter(Mandatory = $true, Position = 1)] [String]$env_value,
     [Parameter(Mandatory = $false, Position = 2)] [String]$env_level = "Process"
   )
-  internal_env_opration $false $env_name $env_value
+  internal_env_opration $false $env_name $env_value $env_level
 }
 
 function env_trim {
