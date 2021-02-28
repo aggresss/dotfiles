@@ -1024,7 +1024,8 @@ if [ -d ${HOME}/Library/Python ]
 then
     for file in `ls ${HOME}/Library/Python`
     do
-        if [ -d ${HOME}/Library/Python/${file}/bin ]; then
+        if [ -d ${HOME}/Library/Python/${file}/bin ]
+        then
             env_insert "PATH" "${HOME}/Library/Python/${file}/bin"
         fi
     done
