@@ -368,10 +368,10 @@ alias ccl='find . -name "*[.h|.c|.hpp|.cpp|.go|.rs|.py|.java|.ts|.js]" -type f |
 alias emacs='emacs -nw'
 alias emacsx='emacs'
 # alias for remove fast
-alias rm_3rd='rm -rvf *.zip *.tgz *.bz2 *.gz *.dmg *.7z *.xz *.tar'
-alias rm_mda='rm -rvf *.jpg *.jpeg *.png *.bmp *.gif *.mp3 *.acc *.wav *.mp4 *.flv *.mov *.avi *.ts *.wmv *.mkv'
-alias rm_doc='rm -rvf *.doc *.docx *.xls *.xlsx *.ppt *.pptx *.numbers *.pages *.key'
-alias rm_ds='rm_rcs .DS_Store'
+alias rm_archive='rm -rvf *.zip *.tgz *.bz2 *.gz *.dmg *.7z *.xz *.tar'
+alias rm_media='rm -rvf *.jpg *.jpeg *.png *.bmp *.gif *.mp3 *.acc *.wav *.mp4 *.flv *.mov *.avi *.ts *.wmv *.mkv'
+alias rm_doc='rm -rvf *.doc *.docx *.xls *.xlsx *.ppt *.pptx *.numbers *.pages *.key *.pdf'
+alias rm_ds='find . -name .DS_Store -exec rm -vf {} \;'
 # short for cd ..
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -432,54 +432,6 @@ function update_file()
         fi
     else
         cp -vf $1 $2
-    fi
-}
-
-# kill all
-# $1 process name to kill
-function kill_all()
-{
-    local process_id=$(ps ax | grep -e "[/\ ]$1\$" -e "[/\ ]$1[\ ]" | grep -v grep | awk '{print $1}' | sort -u)
-    if [ "x$process_id" != "x" ]; then
-        for id in $process_id
-        do
-            kill -9 $id
-        done
-        echo -e "PID KILLED:\n${RED}${process_id}${NORMAL}"
-    fi
-}
-
-# fast decompression archives
-function un_ball()
-{
-    if [ $# -ne 1 ]; then
-        echo -e "${RED}Arguments no support.${NORMAL}"
-        return 1;
-    fi
-    if [[ $1 =~ .*\.zip$ ]]; then
-        # *.zip
-        unzip $1 -d ${1%.zip}
-    elif [[ $1 =~ .*\.rar$ ]]; then
-        # *.rar
-        mkdir -p ${1%.rar}
-        unrar x $1 ${1%.rar}
-    elif [[ $1 =~ .*\.7z$ ]]; then
-        # *.7z
-        7z x $1
-    elif [[ $1 =~ .*\.tar.xz$ ]]; then
-        # *.tar.xz
-        tar Jvxf $1
-    elif [[ $1 =~ .*\.tar.gz$ || $1 =~ .*\.tgz$ ]]; then
-        # *.tar.gz or *.tgz
-        tar zvxf $1
-    elif [[ $1 =~ .*\.tar.bz2$ ]]; then
-        # *.tar.bz2
-        tar jvxf $1
-    elif [[ $1 =~ .*\.tar$ ]]; then
-        # *.tar
-        tar vxf $1
-    else
-        echo -e "${RED}Archive tpye no support.${NORMAL}"
     fi
 }
 
