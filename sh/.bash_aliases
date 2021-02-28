@@ -263,13 +263,15 @@ alias c='source_file copy'
 alias x='source_file exec'
 alias e='source_file edit'
 
-##########################
-# Operate System specified
-##########################
+#####################
+# Common for Bash/Zsh
+#####################
 
-# specified for system type
+# Echo Env Information
 echo -e "${GREEN}$(uname -a)${NORMAL}"
 echo -e "${CYAN}${SHELL}${NORMAL}"
+
+# Envronment specific
 case $(uname) in
     Darwin)
         # ls colours
@@ -326,10 +328,6 @@ case $(uname) in
         ;;
 esac
 
-##########################
-# Modify for utility
-##########################
-
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
@@ -380,6 +378,23 @@ alias rm='rm -i'
 alias mv='mv -i'
 # Generate GNU standard files
 alias make_gnu='touch AUTHORS COPYING ChangeLog NEWS README'
+
+# environment for ${HOME}/bin
+if [ -d ${HOME}/bin ]; then
+    env_insert "PATH" "${HOME}/bin"
+fi
+
+if [ $(command -v valgrind >/dev/null; echo $?) -eq 0 ]; then
+    alias vmc='valgrind \
+        --tool=memcheck \
+        --leak-check=yes \
+        --track-fds=yes \
+        --trace-children=yes \
+        --show-reachable=yes \
+        --undef-value-errors=no \
+        --gen-suppressions=all \
+        --error-exitcode=255'
+fi
 
 # $1 download url
 # $2 local filepath
@@ -493,9 +508,9 @@ function proxy_cfg()
     fi
 }
 
-##########################
-# Modify for SSH
-##########################
+##################
+# SSH for Bash/Zsh
+##################
 
 # fast ssh-agent
 alias a='ssh_agent_add'
@@ -568,9 +583,9 @@ function ssh_copy()
     cp -vf ${src_file} ${dest_file} && cp -vf ${src_file}.pub ${dest_file}.pub
 }
 
-##########################
-# Modify for Git
-##########################
+##################
+# Git for Bash/Zsh
+##################
 
 # fast git status
 alias y='git_status'
@@ -810,33 +825,30 @@ function git_down()
     esac
 }
 
-##########################
-# Modify for Vagrant
-##########################
+#####################
+# Vscode for Bash/Zsh
+#####################
 
-# Fast list vagrant status
-function vagrant_ps()
-{
-    command vagrant >/dev/null 2>&1
-    if [ $? -ne 0 ]; then
-        echo -e ${YELLOW}; echo -e "vagrant box list:"
-        vagrant box list
-        echo -e ${GREEN}; echo -e "vagrant global-status:"
-        vagrant global-status
-        echo -e ${NORMAL}
-    fi
+# go to vscode user path
+function code_user {
+    local GLOBAL_WORKSPACE="."
+    case $(uname) in
+        Darwin)
+            GLOBAL_WORKSPACE="${HOME}/Library/Application Support/Code/User"
+            ;;
+        Linux)
+            GLOBAL_WORKSPACE="${HOME}/.config/Code/User"
+            ;;
+        MINGW*)
+            GLOBAL_WORKSPACE="%APPDATA%\Code\User"
+            ;;
+    esac
+    cd ${GLOBAL_WORKSPACE}
 }
 
-##########################
-# Modify for VirtualBox
-##########################
-
-# alias for VirtualBox
-alias vb='VBoxManage'
-
-##########################
-# Modify for Docker
-##########################
+#####################
+# Docker for Bash/Zsh
+#####################
 
 # Fast docker inside
 function docker_shell()
@@ -933,30 +945,9 @@ function docker_kill()
     fi
 }
 
-##########################
-# Modify for Vscode
-##########################
-
-# go to vscode user path
-function code_user {
-    local GLOBAL_WORKSPACE="."
-    case $(uname) in
-        Darwin)
-            GLOBAL_WORKSPACE="${HOME}/Library/Application Support/Code/User"
-            ;;
-        Linux)
-            GLOBAL_WORKSPACE="${HOME}/.config/Code/User"
-            ;;
-        MINGW*)
-            GLOBAL_WORKSPACE="%APPDATA%\Code\User"
-            ;;
-    esac
-    cd ${GLOBAL_WORKSPACE}
-}
-
-##########################
-# Modify for Golang
-##########################
+#####################
+# Golang for Bash/Zsh
+#####################
 
 # fast echo gopath
 alias g='go_path'
@@ -1032,9 +1023,9 @@ function go_clone()
         echo -e "\n${GREEN} Clone $1 on ${PWD}/${clone_path} successfully.${NORMAL}\n"
 }
 
-##########################
-# Modify for Python
-##########################
+#####################
+# Python for Bash/Zsh
+#####################
 
 # specified for ${HOME}/.local/bin
 if [ ! -d ${HOME}/.local/bin ]; then
@@ -1058,9 +1049,9 @@ function py_path
     cd $(python3 -c 'import site; print(site.USER_BASE)')
 }
 
-##########################
-# Modify for Perl
-##########################
+###################
+# Perl for Bash/Zsh
+###################
 
 # Using local::lib for Perl modules
 PERL_LOCAL_LIB_ROOT="${HOME}/perl5"
@@ -1079,9 +1070,9 @@ function perl_install
     done
 }
 
-##########################
-# Modify for JavaScript
-##########################
+#########################
+# JavaScript for Bash/Zsh
+#########################
 
 # fast echo package.json run
 alias j='jq .scripts package.json'
@@ -1102,9 +1093,9 @@ END
     fi
 }
 
-##########################
-# Modify for Java
-##########################
+###################
+# Java for Bash/Zsh
+###################
 
 function mvn_gen()
 {
@@ -1143,26 +1134,5 @@ function mvn_exec()
         mvn exec:java -Dexec.mainClass="$1" -Dexec.args="${exec_args# }"
     fi
 }
-
-##########################
-# Modify for Envrionment
-##########################
-
-# environment for ${HOME}/bin
-if [ -d ${HOME}/bin ]; then
-    env_insert "PATH" "${HOME}/bin"
-fi
-
-if [ $(command -v valgrind >/dev/null; echo $?) -eq 0 ]; then
-    alias vmc='valgrind \
-        --tool=memcheck \
-        --leak-check=yes \
-        --track-fds=yes \
-        --trace-children=yes \
-        --show-reachable=yes \
-        --undef-value-errors=no \
-        --gen-suppressions=all \
-        --error-exitcode=255'
-fi
 
 # end of .bash_aliases

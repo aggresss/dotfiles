@@ -343,9 +343,108 @@ Set-Alias c source_file_copy
 Set-Alias x source_file_exec
 Set-Alias e source_file_edit
 
-<########################
- # PoSH for Common
- ########################>
+<#######################
+ # Common for PowerShell
+ #######################>
+
+# Echo Env Information
+Write-Host ($PSVersionTable).OS -ForegroundColor DarkGreen
+Write-Host "PowerShell Version:" ${PSVersionTable}.PSVersion.ToString() -ForegroundColor DarkCyan
+
+# Envronment specific
+if ($IsWindows -or $Env:OS) {
+  if (Test-Path Alias:\curl) { Remove-Item Alias:\curl }
+  Set-Alias grep Select-String
+  function touch { New-Item "$args" -ItemType File }
+  function sudo { Start-Process -Verb RunAs "$args" }
+
+  function custom_cd {
+    if ($args.Count -eq 0) {
+      $tmp_path = ${HOME}
+    }
+    elseif ($args[0] -eq '-') {
+      $tmp_path = $OLDPWD;
+    }
+    else {
+      $tmp_path = $args[0];
+    }
+    if ($tmp_path) {
+      Set-Variable -Name OLDPWD -Value $PWD -Scope global;
+      Set-Location $tmp_path;
+    }
+  }
+  Set-Alias cd custom_cd -Option AllScope
+  # visual studio env
+  function vs_env {
+    $vs_wildcard = "${Env:ProgramFiles(x86)}\Microsoft Visual Studio\*\Community\Common7\Tools"
+    if (-not $(Test-Path $vs_wildcard)) {
+      return
+    }
+    $vs_path = Get-ChildItem $vs_wildcard
+    Push-Location $vs_path[-1].FullName
+    cmd /c "VsDevCmd.bat & set" |
+    ForEach-Object {
+      if ($_ -match "=") {
+        $v = $_.split("=")
+        Set-Item -Force -Path "Env:\$($v[0])" -Value "$($v[1])"
+      }
+    }
+    Pop-Location
+    Write-Host "`nVisual Studio Command Prompt variables set." -ForegroundColor Yellow
+  }
+  # vim
+  $vim_wildcard = "${Env:ProgramFiles(x86)}\Vim\*\vim.exe"
+  if ($(Test-Path $vim_wildcard)) {
+    $vim_path = Get-ChildItem $vim_wildcard
+    Set-Alias vim $vim_path[-1].FullName
+  }
+  # emacs
+  $emacs_wildcard = "${Env:ProgramFiles}\Emacs\*\bin\emacs.exe"
+  if ($(Test-Path $emacs_wildcard)) {
+    $emacs_path = (Get-ChildItem $emacs_wildcard)[-1].FullName -replace ' ', '` '
+    function emacs { "$emacs_path -nw $args" | Invoke-Expression }
+  }
+  # lua
+  $lua_wildcard = "${Env:UserProfile}\lua\*\lua[0-9]*.exe"
+  if ($(Test-Path $lua_wildcard)) {
+    $lua_path = Get-ChildItem $lua_wildcard
+    Set-Alias lua $lua_path[-1].FullName
+  }
+  # vscode
+  $code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe" -replace ' ', '` '
+  if ($(Test-Path $code_path)) {
+    function code { "${code_path} $args" | Invoke-Expression > $null 2>&1 }
+  }
+  # ${HOME}/bin
+  $bin_path = "${HOME}/bin"
+  if (-not $(Test-Path $bin_path)) {
+    New-Item $bin_path -ItemType directory -Force
+    env_insert "PATH" $bin_path "User"
+  }
+}
+elseif ($(uname) -eq "Darwin") {
+  # use "brew install gnu-*" instead of bsd-*
+  Set-Alias -Name sed -Value gsed
+  Set-Alias -Name awk -Value gawk
+  Set-Alias -Name tar -Value gtar
+  Set-Alias -Name find -Value gfind
+  # open application from command
+  function preview { open -a Preview $args }
+  function typora { open -a Typora $args }
+  function diffmerge { open -a DiffMerge $args }
+  function code { open -a "Visual Studio Code" $args }
+  function vlc { open -a VLC $args }
+  function skim { open -a Skim $args }
+  function drawio { open -a draw.io $args }
+  function chrome { open -a "Google Chrome" $args }
+  function firefox { open -a Firefox $args }
+  function safari { open -a Safari $args }
+  function edge { open -a "Microsoft Edge" $args }
+
+}
+elseif ($(uname) -eq "Linux") {
+  function hello { Write-Host "hello" }
+}
 
 # short for cd ..
 function .. { Set-Location .. }
@@ -399,21 +498,75 @@ function cd_downloads {
 }
 Set-Alias d cd_downloads
 
-function code_user {
+# Update
+function update_internal {
+  Param (
+    [Parameter(Mandatory = $true, Position = 0)] [bool]$IsLocal,
+    [Parameter(Mandatory = $true, Position = 1)] [String]$Remote,
+    [Parameter(Mandatory = $true, Position = 2)] [String]$Local
+  )
+  $local_base_path = "${HOME}/workspace-scratch/dotfiles"
+  $remote_base_url = "https://raw.githubusercontent.com/aggresss/dotfiles/master"
+  if ($IsLocal -and ($(Test-Path $local_base_path))) {
+    if (-not $(Test-Path $(Split-Path -Path $Local))) {
+      New-Item -ItemType Directory -Path $(Split-Path -Path $Local)
+    }
+    $ErrorActionPreference = "stop"; `
+      Copy-Item "${local_base_path}/$Remote" "$Local"; `
+      Write-Host "Local update $Local successful." -ForegroundColor DarkGreen
+  }
+  else {
+    $ErrorActionPreference = "stop"; `
+      Invoke-WebRequest -Uri "${remote_base_url}/$Remote" -OutFile "$Local"; `
+      Write-Host "Remote update $Local successful." -ForegroundColor DarkGreen
+  }
+}
+function update_configfiles {
+  $isLocal = $false
+  if ($args[0] -eq "local") {
+    $isLocal = $true
+  }
+  # Profile
+  $PROFILE_PATH = Split-Path -Path $PROFILE
+  update_internal $isLocal "powershell/Microsoft.PowerShell_profile.ps1" ${PROFILE_PATH}/Microsoft.PowerShell_profile.ps1
+  update_internal $isLocal "powershell/Microsoft.PowerShell_profile.ps1" ${PROFILE_PATH}/Microsoft.VSCode_profile.ps1
+  # Windows Envrionment
   if ($IsWindows -or $Env:OS) {
-    Set-Location ${Env:APPDATA}/Code/User
-  }
-  elseif ($(uname) -eq "Darwin") {
-    Set-Location ${HOME}/Library/Application Support/Code/User
-  }
-  elseif ($(uname) -eq "Linux") {
-    Set-Location ${HOME}/.config/Code/User
+    # Vim
+    if (Get-Command vim -errorAction SilentlyContinue) {
+      update_internal $isLocal "vim/.vimrc" "${HOME}/.vimrc"
+      update_internal $isLocal "vim/.vimrc.bundles" "${HOME}/.vimrc.bundles"
+      if (-not $(Test-Path ${HOME}/.vim/bundle)) {
+        $ErrorActionPreference = "stop"; `
+          git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim; `
+          vim +BundleInstall +qall
+      }
+      else {
+        vim +BundleInstall +qall
+      }
+    }
+    # Emacs
+    if (Get-Command emacs -errorAction SilentlyContinue) {
+      update_internal $isLocal "emacs/.emacs" "${Env:APPDATA}/.emacs"
+    }
+    # pip
+    if (Get-Command pip -errorAction SilentlyContinue) {
+      update_internal $true "pip/pip.conf" "${HOME}/.pip/pip.conf"
+    }
+    # npm
+    if (Get-Command npm -errorAction SilentlyContinue) {
+      update_internal $true "npm/.npmrc" "${HOME}/.npmrc"
+    }
+    # Maven
+    if (Get-Command mvn -errorAction SilentlyContinue) {
+      update_internal $true "maven/settings.xml" "${HOME}/.m2/settings.xml"
+    }
   }
 }
 
-<########################
- # PoSH for SSH
- ########################>
+<####################
+ # SSH for PowerShell
+ ####################>
 
 function ssh_agent_env {
   Param (
@@ -499,9 +652,9 @@ function ssh_copy {
   Copy-Item -Path "${src_file}.pub" -Destination "${dest_file}.pub" -Verbose
 }
 
-<########################
- # PoSH for Git
- ########################>
+<####################
+ # Git for PowerShell
+ ####################>
 
 function git_status {
   git status
@@ -721,9 +874,24 @@ function git_global_set {
   git config --global push.default simple
 }
 
-<########################
- # PoSH for Golang
- ########################>
+<#######################
+ # VSCode for PowerShell
+ #######################>
+function code_user {
+  if ($IsWindows -or $Env:OS) {
+    Set-Location ${Env:APPDATA}/Code/User
+  }
+  elseif ($(uname) -eq "Darwin") {
+    Set-Location ${HOME}/Library/Application Support/Code/User
+  }
+  elseif ($(uname) -eq "Linux") {
+    Set-Location ${HOME}/.config/Code/User
+  }
+}
+
+<#######################
+ # Golang for PowerShell
+ #######################>
 
 if (-not $GOPATH_BAK) {
   $GOPATH_BAK = ${env:GOPATH}
@@ -771,9 +939,9 @@ function go_proxy {
   }
 }
 
-<########################
- # PoSH for Java
- ########################>
+<#####################
+ # Java for PowerShell
+ #####################>
 
 function mvn_gen {
   if ($args.Count -eq 1) {
@@ -813,9 +981,9 @@ function mvn_exec {
   }
 }
 
-<########################
- # PoSH for JavaScript
- ########################>
+<##########################
+ # JavaScript for PowerShell
+ ##########################>
 
 function npm_scripts {
   if ($(Test-Path package.json)) {
@@ -828,174 +996,4 @@ function npm_scripts {
 }
 Set-Alias j npm_scripts
 
-<########################
- # Update
- ########################>
-
-function update_internal {
-  Param (
-    [Parameter(Mandatory = $true, Position = 0)] [bool]$IsLocal,
-    [Parameter(Mandatory = $true, Position = 1)] [String]$Remote,
-    [Parameter(Mandatory = $true, Position = 2)] [String]$Local
-  )
-  $local_base_path = "${HOME}/workspace-scratch/dotfiles"
-  $remote_base_url = "https://raw.githubusercontent.com/aggresss/dotfiles/master"
-  if ($IsLocal -and ($(Test-Path $local_base_path))) {
-    if (-not $(Test-Path $(Split-Path -Path $Local))) {
-      New-Item -ItemType Directory -Path $(Split-Path -Path $Local)
-    }
-    $ErrorActionPreference = "stop"; `
-      Copy-Item "${local_base_path}/$Remote" "$Local"; `
-      Write-Host "Local update $Local successful." -ForegroundColor DarkGreen
-  }
-  else {
-    $ErrorActionPreference = "stop"; `
-      Invoke-WebRequest -Uri "${remote_base_url}/$Remote" -OutFile "$Local"; `
-      Write-Host "Remote update $Local successful." -ForegroundColor DarkGreen
-  }
-}
-function update_configfiles {
-  $isLocal = $false
-  if ($args[0] -eq "local") {
-    $isLocal = $true
-  }
-  # Profile
-  $PROFILE_PATH = Split-Path -Path $PROFILE
-  update_internal $isLocal "powershell/Microsoft.PowerShell_profile.ps1" ${PROFILE_PATH}/Microsoft.PowerShell_profile.ps1
-  update_internal $isLocal "powershell/Microsoft.PowerShell_profile.ps1" ${PROFILE_PATH}/Microsoft.VSCode_profile.ps1
-  # Windows Envrionment
-  if ($IsWindows -or $Env:OS) {
-    # Vim
-    if (Get-Command vim -errorAction SilentlyContinue) {
-      update_internal $isLocal "vim/.vimrc" "${HOME}/.vimrc"
-      update_internal $isLocal "vim/.vimrc.bundles" "${HOME}/.vimrc.bundles"
-      if (-not $(Test-Path ${HOME}/.vim/bundle)) {
-        $ErrorActionPreference = "stop"; `
-          git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim; `
-          vim +BundleInstall +qall
-      }
-      else {
-        vim +BundleInstall +qall
-      }
-    }
-    # Emacs
-    if (Get-Command emacs -errorAction SilentlyContinue) {
-      update_internal $isLocal "emacs/.emacs" "${Env:APPDATA}/.emacs"
-    }
-    # pip
-    if (Get-Command pip -errorAction SilentlyContinue) {
-      update_internal $true "pip/pip.conf" "${HOME}/.pip/pip.conf"
-    }
-    # npm
-    if (Get-Command npm -errorAction SilentlyContinue) {
-      update_internal $true "npm/.npmrc" "${HOME}/.npmrc"
-    }
-    # Maven
-    if (Get-Command mvn -errorAction SilentlyContinue) {
-      update_internal $true "maven/settings.xml" "${HOME}/.m2/settings.xml"
-    }
-  }
-}
-
-<########################
- # Envronment specific
- ########################>
-if ($IsWindows -or $Env:OS) {
-  if (Test-Path Alias:\curl) { Remove-Item Alias:\curl }
-  Set-Alias grep Select-String
-  function touch { New-Item "$args" -ItemType File }
-  function sudo { Start-Process -Verb RunAs "$args" }
-
-  function custom_cd {
-    if ($args.Count -eq 0) {
-      $tmp_path = ${HOME}
-    }
-    elseif ($args[0] -eq '-') {
-      $tmp_path = $OLDPWD;
-    }
-    else {
-      $tmp_path = $args[0];
-    }
-    if ($tmp_path) {
-      Set-Variable -Name OLDPWD -Value $PWD -Scope global;
-      Set-Location $tmp_path;
-    }
-  }
-  Set-Alias cd custom_cd -Option AllScope
-  # visual studio env
-  function vs_env {
-    $vs_wildcard = "${Env:ProgramFiles(x86)}\Microsoft Visual Studio\*\Community\Common7\Tools"
-    if (-not $(Test-Path $vs_wildcard)) {
-      return
-    }
-    $vs_path = Get-ChildItem $vs_wildcard
-    Push-Location $vs_path[-1].FullName
-    cmd /c "VsDevCmd.bat & set" |
-    ForEach-Object {
-      if ($_ -match "=") {
-        $v = $_.split("=")
-        Set-Item -Force -Path "Env:\$($v[0])" -Value "$($v[1])"
-      }
-    }
-    Pop-Location
-    Write-Host "`nVisual Studio Command Prompt variables set." -ForegroundColor Yellow
-  }
-  # vim
-  $vim_wildcard = "${Env:ProgramFiles(x86)}\Vim\*\vim.exe"
-  if ($(Test-Path $vim_wildcard)) {
-    $vim_path = Get-ChildItem $vim_wildcard
-    Set-Alias vim $vim_path[-1].FullName
-  }
-  # emacs
-  $emacs_wildcard = "${Env:ProgramFiles}\Emacs\*\bin\emacs.exe"
-  if ($(Test-Path $emacs_wildcard)) {
-    $emacs_path = (Get-ChildItem $emacs_wildcard)[-1].FullName -replace ' ', '` '
-    function emacs { "$emacs_path -nw $args" | Invoke-Expression }
-  }
-  # lua
-  $lua_wildcard = "${Env:UserProfile}\lua\*\lua[0-9]*.exe"
-  if ($(Test-Path $lua_wildcard)) {
-    $lua_path = Get-ChildItem $lua_wildcard
-    Set-Alias lua $lua_path[-1].FullName
-  }
-  # vscode
-  $code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe" -replace ' ', '` '
-  if ($(Test-Path $code_path)) {
-    function code { "${code_path} $args" | Invoke-Expression > $null 2>&1 }
-  }
-  # ${HOME}/bin
-  $bin_path = "${HOME}/bin"
-  if (-not $(Test-Path $bin_path)) {
-    New-Item $bin_path -ItemType directory -Force
-    env_insert "PATH" $bin_path "User"
-  }
-}
-elseif ($(uname) -eq "Darwin") {
-  # use "brew install gnu-*" instead of bsd-*
-  Set-Alias -Name sed -Value gsed
-  Set-Alias -Name awk -Value gawk
-  Set-Alias -Name tar -Value gtar
-  Set-Alias -Name find -Value gfind
-  # open application from command
-  function preview { open -a Preview $args }
-  function typora { open -a Typora $args }
-  function diffmerge { open -a DiffMerge $args }
-  function code { open -a "Visual Studio Code" $args }
-  function vlc { open -a VLC $args }
-  function skim { open -a Skim $args }
-  function drawio { open -a draw.io $args }
-  function chrome { open -a "Google Chrome" $args }
-  function firefox { open -a Firefox $args }
-  function safari { open -a Safari $args }
-  function edge { open -a "Microsoft Edge" $args }
-
-}
-elseif ($(uname) -eq "Linux") {
-  function hello { Write-Host "hello" }
-}
-
-<########################
- # Echo Envronment
- ########################>
-Write-Host ($PSVersionTable).OS -ForegroundColor DarkGreen
-Write-Host "PowerShell Version:" ${PSVersionTable}.PSVersion.ToString() -ForegroundColor DarkCyan
+# End of Microsoft.PowerShell_profile.ps1
