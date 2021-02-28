@@ -49,7 +49,7 @@ function env_trim()
 {
     eval local env_var=\$\{${1}\-\}
     local del_element=${2%/}
-    eval export $1="$(echo ${env_var} | sed -e "s;\(^\|:\)${del_element}\(:\|\$\);\1\2;g" -e 's;^:\|:$;;g' -e 's;::;:;g')"
+    eval export $1="$(echo ${env_var} | sed -E -e "s;(^|:)${del_element}(:|\$);\1\2;g" -e "s;^:|:\$;;g" -e "s;::;:;g")"
 }
 
 # amend environment variable
