@@ -320,6 +320,17 @@ case $(uname) in
             alias mks='setxkbmap -option keypad:pointerkeys; xkbset ma 60 10 15 15 10'
             alias xck='xclock -bg cyan -update 1 &'
         fi
+        if [ $(command -v valgrind >/dev/null; echo $?) -eq 0 ]; then
+            alias vmc='valgrind \
+                --tool=memcheck \
+                --leak-check=yes \
+                --track-fds=yes \
+                --trace-children=yes \
+                --show-reachable=yes \
+                --undef-value-errors=no \
+                --gen-suppressions=all \
+                --error-exitcode=255'
+        fi
         ;;
     FreeBSD)
         # ls colours
@@ -333,25 +344,15 @@ case $(uname) in
         ;;
 esac
 
+# environment for ${HOME}/bin
+if [ -d ${HOME}/bin ]; then
+    env_insert "PATH" "${HOME}/bin"
+fi
+
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-
-# alias for fast command
-if [ -f /.dockerenv ]; then
-    alias s='cd /mnt/workspace-scratch'
-    alias f='cd /mnt/workspace-formal'
-    alias d='cd /mnt/Downloads'
-    alias m='cd /mnt/Documents'
-else
-    mkdir -p ${HOME}/workspace-scratch
-    mkdir -p ${HOME}/workspace-formal
-    alias s='cd ${HOME}/workspace-scratch'
-    alias f='cd ${HOME}/workspace-formal'
-    alias d='cd ${HOME}/Downloads'
-    alias m='cd ${HOME}/Documents'
-fi
 # fast update bash env
 alias u='source ${HOME}/.bash_aliases'
 # fast echo app return
@@ -364,7 +365,7 @@ alias fdf='find . -name "*" |grep -sin'
 alias fdc='find . -name "*" |xargs grep -sin'
 # count code line
 alias ccl='find . -name "*[.h|.c|.hpp|.cpp|.go|.rs|.py|.java|.ts|.js]" -type f | xargs cat | wc -l'
-# alias for some application special open
+# alias for emacs
 alias emacs='emacs -nw'
 alias emacsx='emacs'
 # alias for remove fast
@@ -383,22 +384,19 @@ alias rm='rm -i'
 alias mv='mv -i'
 # Generate GNU standard files
 alias make_gnu='touch AUTHORS COPYING ChangeLog NEWS README'
-
-# environment for ${HOME}/bin
-if [ -d ${HOME}/bin ]; then
-    env_insert "PATH" "${HOME}/bin"
-fi
-
-if [ $(command -v valgrind >/dev/null; echo $?) -eq 0 ]; then
-    alias vmc='valgrind \
-        --tool=memcheck \
-        --leak-check=yes \
-        --track-fds=yes \
-        --trace-children=yes \
-        --show-reachable=yes \
-        --undef-value-errors=no \
-        --gen-suppressions=all \
-        --error-exitcode=255'
+# alias for fast command
+if [ -f /.dockerenv ]; then
+    alias s='cd /mnt/workspace-scratch'
+    alias f='cd /mnt/workspace-formal'
+    alias d='cd /mnt/Downloads'
+    alias m='cd /mnt/Documents'
+else
+    mkdir -p ${HOME}/workspace-scratch
+    mkdir -p ${HOME}/workspace-formal
+    alias s='cd ${HOME}/workspace-scratch'
+    alias f='cd ${HOME}/workspace-formal'
+    alias d='cd ${HOME}/Downloads'
+    alias m='cd ${HOME}/Documents'
 fi
 
 # $1 download url
