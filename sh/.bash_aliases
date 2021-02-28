@@ -75,6 +75,96 @@ function env_list()
     echo -e ${env_var//:/\\n}
 }
 
+#########################
+# Git Prompt for Bash/Zsh
+#########################
+
+GIT_NAME_TITLE=''
+GIT_NAME_CONTENT=''
+GIT_NAME_LEFT=''
+GIT_NAME_RIGHT=''
+GIT_NAME_HEAD=''
+
+function git_branch_internal()
+{
+    local dir="."
+    until [ "${dir}" -ef / ]; do
+        if [ -f "${dir}/.git/HEAD" ]; then
+            local head=$(< "${dir}/.git/HEAD")
+            if [[ ${head} == ${GIT_NAME_HEAD} ]]; then
+                return
+            fi
+            GIT_NAME_HEAD=${head}
+            if [[ $head =~ ^ref\:\ refs\/heads\/* ]]; then
+                GIT_NAME_TITLE="branch"
+                GIT_NAME_CONTENT="${head#*/*/}"
+            else
+                local describe=$(git describe --tags --abbrev=7 2> /dev/null)
+                if [ -n "${describe}" ]; then
+                    GIT_NAME_TITLE="tag"
+                    GIT_NAME_CONTENT=${describe}
+                else
+                    GIT_NAME_TITLE="commit"
+                    GIT_NAME_CONTENT=${head:0:7}
+                fi
+            fi
+            GIT_NAME_LEFT=":["
+            GIT_NAME_RIGHT="]"
+            return
+        fi
+        dir="../${dir}"
+    done
+    GIT_NAME_TITLE=''
+    GIT_NAME_CONTENT=''
+    GIT_NAME_LEFT=''
+    GIT_NAME_RIGHT=''
+    GIT_NAME_HEAD=''
+}
+
+# Git branch perception
+function git_zsh_precmd()
+{
+    git_branch_internal
+    PS1="${PS1_BAK}%{$fg_bold[blue]%}${GIT_NAME_TITLE}${GIT_NAME_LEFT}%{$fg_bold[red]%}${GIT_NAME_CONTENT}%{$fg_bold[blue]%}${GIT_NAME_RIGHT}%% %{$reset_color%}"
+}
+
+# color for PS1
+black=$'\[\e[1;30m\]'
+red=$'\[\e[1;31m\]'
+green=$'\[\e[1;32m\]'
+yellow=$'\[\e[1;33m\]'
+blue=$'\[\e[1;34m\]'
+magenta=$'\[\e[1;35m\]'
+cyan=$'\[\e[1;36m\]'
+white=$'\[\e[1;37m\]'
+normal=$'\[\e[m\]'
+
+# Git prompt for branch infomation
+function git_prompt()
+{
+    if [ "${PS1_BAK-NODEFINE}" = "NODEFINE" ] ; then
+        PS1_BAK=${PS1-}
+        if [[ ${SHELL} =~ .*bash$ ]]; then
+            PROMPT_COMMAND_BAK=${PROMPT_COMMAND-}
+            PROMPT_COMMAND="git_branch_internal;${PROMPT_COMMAND-}"
+            PS1="$PS1$blue\$GIT_NAME_TITLE\$GIT_NAME_LEFT$red\$GIT_NAME_CONTENT$blue\$GIT_NAME_RIGHT\$ $normal"
+        elif [[ ${SHELL} =~ .*zsh$ ]]; then
+            autoload -U colors && colors
+            precmd_functions=(git_zsh_precmd)
+        fi
+    else
+        if [[ ${SHELL} =~ .*bash$ ]]; then
+            PROMPT_COMMAND=${PROMPT_COMMAND_BAK-}
+            unset PROMPT_COMMAND_BAK
+        elif [[ ${SHELL} =~ .*zsh$ ]]; then
+            unset precmd_functions
+        fi
+        PS1=${PS1_BAK-}
+        unset PS1_BAK
+        GIT_NAME_HEAD=''
+    fi
+}
+
 ##########################
 # Operate System specified
 ##########################
@@ -791,92 +881,6 @@ function git_global_set()
   git config --global core.quotepath false
   git config --global pull.rebase false
   git config --global push.default simple
-}
-
-GIT_NAME_TITLE=''
-GIT_NAME_CONTENT=''
-GIT_NAME_LEFT=''
-GIT_NAME_RIGHT=''
-GIT_NAME_HEAD=''
-
-function git_branch_internal()
-{
-    local dir="."
-    until [ "${dir}" -ef / ]; do
-        if [ -f "${dir}/.git/HEAD" ]; then
-            local head=$(< "${dir}/.git/HEAD")
-            if [[ ${head} == ${GIT_NAME_HEAD} ]]; then
-                return
-            fi
-            GIT_NAME_HEAD=${head}
-            if [[ $head =~ ^ref\:\ refs\/heads\/* ]]; then
-                GIT_NAME_TITLE="branch"
-                GIT_NAME_CONTENT="${head#*/*/}"
-            else
-                local describe=$(git describe --tags --abbrev=7 2> /dev/null)
-                if [ -n "${describe}" ]; then
-                    GIT_NAME_TITLE="tag"
-                    GIT_NAME_CONTENT=${describe}
-                else
-                    GIT_NAME_TITLE="commit"
-                    GIT_NAME_CONTENT=${head:0:7}
-                fi
-            fi
-            GIT_NAME_LEFT=":["
-            GIT_NAME_RIGHT="]"
-            return
-        fi
-        dir="../${dir}"
-    done
-    GIT_NAME_TITLE=''
-    GIT_NAME_CONTENT=''
-    GIT_NAME_LEFT=''
-    GIT_NAME_RIGHT=''
-    GIT_NAME_HEAD=''
-}
-
-# Git branch perception
-function git_zsh_precmd()
-{
-    git_branch_internal
-    PS1="${PS1_BAK}%{$fg_bold[blue]%}${GIT_NAME_TITLE}${GIT_NAME_LEFT}%{$fg_bold[red]%}${GIT_NAME_CONTENT}%{$fg_bold[blue]%}${GIT_NAME_RIGHT}%% %{$reset_color%}"
-}
-
-# color for PS1
-black=$'\[\e[1;30m\]'
-red=$'\[\e[1;31m\]'
-green=$'\[\e[1;32m\]'
-yellow=$'\[\e[1;33m\]'
-blue=$'\[\e[1;34m\]'
-magenta=$'\[\e[1;35m\]'
-cyan=$'\[\e[1;36m\]'
-white=$'\[\e[1;37m\]'
-normal=$'\[\e[m\]'
-
-# Git prompt for branch infomation
-function git_prompt()
-{
-    if [ "${PS1_BAK-NODEFINE}" = "NODEFINE" ] ; then
-        PS1_BAK=${PS1-}
-        if [[ ${SHELL} =~ .*bash$ ]]; then
-            PROMPT_COMMAND_BAK=${PROMPT_COMMAND-}
-            PROMPT_COMMAND="git_branch_internal;${PROMPT_COMMAND-}"
-            PS1="$PS1$blue\$GIT_NAME_TITLE\$GIT_NAME_LEFT$red\$GIT_NAME_CONTENT$blue\$GIT_NAME_RIGHT\$ $normal"
-        elif [[ ${SHELL} =~ .*zsh$ ]]; then
-            autoload -U colors && colors
-            precmd_functions=(git_zsh_precmd)
-        fi
-    else
-        if [[ ${SHELL} =~ .*bash$ ]]; then
-            PROMPT_COMMAND=${PROMPT_COMMAND_BAK-}
-            unset PROMPT_COMMAND_BAK
-        elif [[ ${SHELL} =~ .*zsh$ ]]; then
-            unset precmd_functions
-        fi
-        PS1=${PS1_BAK-}
-        unset PS1_BAK
-        GIT_NAME_HEAD=''
-    fi
 }
 
 # Git fast add->commit->fetch->rebase->push ! Deprecated

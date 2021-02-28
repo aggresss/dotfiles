@@ -134,6 +134,71 @@ function env_list {
   }
 }
 
+<###########################
+ # Git Prompt for PowerShell
+ ###########################>
+
+function git_branch_internal {
+  $dir = $PWD.Path
+  do {
+    if (Test-Path "${dir}/.git/HEAD") {
+      $head = Get-Content "${dir}/.git/HEAD"
+      if ($head -eq $Global:GIT_NAME_HEAD) {
+        return
+      }
+      $Global:GIT_NAME_HEAD = $head
+      if ($head -match "^ref\:\ refs\/heads\/(?<branch>.*)") {
+        $Global:GIT_NAME_TITLE = "branch"
+        $Global:GIT_NAME_CONTENT = $Matches.branch
+      }
+      else {
+        $describe = $(git describe --tags --abbrev=7 2> $null)
+        if ($describe) {
+          $Global:GIT_NAME_TITLE = "tag"
+          $Global:GIT_NAME_CONTENT = $describe
+        }
+        else {
+          $Global:GIT_NAME_TITLE = "commit"
+          $Global:GIT_NAME_CONTENT = $head.Substring(0, 7)
+        }
+      }
+      $Global:GIT_NAME_LEFT = ":["
+      $Global:GIT_NAME_RIGHT = "]"
+      "$Global:GIT_NAME_TITLE$Global:GIT_NAME_LEFT$Global:GIT_NAME_CONTENT$Global:GIT_NAME_RIGHT" | Out-Null
+      return
+    }
+    ${dir} = Split-Path -Parent -Path "${dir}"
+  } while (${dir})
+
+  $Global:GIT_NAME_TITLE = ""
+  $Global:GIT_NAME_CONTENT = ""
+  $Global:GIT_NAME_LEFT = ""
+  $Global:GIT_NAME_RIGHT = ""
+  $Global:GIT_NAME_HEAD = ""
+}
+
+function prompt_custom {
+  git_branch_internal
+  Write-Host $(prompt_bak) -NoNewline
+  Write-Host ${GIT_NAME_TITLE}${GIT_NAME_LEFT} -ForegroundColor Cyan -NoNewline
+  Write-Host ${GIT_NAME_CONTENT} -ForegroundColor Yellow -NoNewline
+  Write-Host ${GIT_NAME_RIGHT}">" -ForegroundColor Cyan -NoNewline
+  # Prompt function requires a return, otherwise defaults to factory prompt
+  return " "
+}
+
+function git_prompt {
+  if (Get-Command prompt_bak -errorAction SilentlyContinue) {
+    Copy-Item Function::Global:prompt_bak Function::Global:prompt
+    Remove-Item Function::prompt_bak
+    $Global:GIT_NAME_HEAD = ""; "$Global:GIT_NAME_HEAD" | Out-Null
+  }
+  else {
+    Copy-Item Function::Global:prompt Function::Global:prompt_bak
+    Copy-Item Function::Global:prompt_custom Function::Global:prompt
+  }
+}
+
 <########################
  # PoSH for Common
  ########################>
@@ -427,66 +492,6 @@ Set-Alias e source_file_edit
  # PoSH for Git
  ########################>
 
-function git_branch_internal {
-  $dir = $PWD.Path
-  do {
-    if (Test-Path "${dir}/.git/HEAD") {
-      $head = Get-Content "${dir}/.git/HEAD"
-      if ($head -eq $Global:GIT_NAME_HEAD) {
-        return
-      }
-      $Global:GIT_NAME_HEAD = $head
-      if ($head -match "^ref\:\ refs\/heads\/(?<branch>.*)") {
-        $Global:GIT_NAME_TITLE = "branch"
-        $Global:GIT_NAME_CONTENT = $Matches.branch
-      }
-      else {
-        $describe = $(git describe --tags --abbrev=7 2> $null)
-        if ($describe) {
-          $Global:GIT_NAME_TITLE = "tag"
-          $Global:GIT_NAME_CONTENT = $describe
-        }
-        else {
-          $Global:GIT_NAME_TITLE = "commit"
-          $Global:GIT_NAME_CONTENT = $head.Substring(0, 7)
-        }
-      }
-      $Global:GIT_NAME_LEFT = ":["
-      $Global:GIT_NAME_RIGHT = "]"
-      "$Global:GIT_NAME_TITLE$Global:GIT_NAME_LEFT$Global:GIT_NAME_CONTENT$Global:GIT_NAME_RIGHT" | Out-Null
-      return
-    }
-    ${dir} = Split-Path -Parent -Path "${dir}"
-  } while (${dir})
-
-  $Global:GIT_NAME_TITLE = ""
-  $Global:GIT_NAME_CONTENT = ""
-  $Global:GIT_NAME_LEFT = ""
-  $Global:GIT_NAME_RIGHT = ""
-  $Global:GIT_NAME_HEAD = ""
-}
-
-function prompt_custom {
-  git_branch_internal
-  Write-Host $(prompt_bak) -NoNewline
-  Write-Host ${GIT_NAME_TITLE}${GIT_NAME_LEFT} -ForegroundColor Cyan -NoNewline
-  Write-Host ${GIT_NAME_CONTENT} -ForegroundColor Yellow -NoNewline
-  Write-Host ${GIT_NAME_RIGHT}">" -ForegroundColor Cyan -NoNewline
-  # Prompt function requires a return, otherwise defaults to factory prompt
-  return " "
-}
-
-function git_prompt {
-  if (Get-Command prompt_bak -errorAction SilentlyContinue) {
-    Copy-Item Function::Global:prompt_bak Function::Global:prompt
-    Remove-Item Function::prompt_bak
-    $Global:GIT_NAME_HEAD = ""; "$Global:GIT_NAME_HEAD" | Out-Null
-  }
-  else {
-    Copy-Item Function::Global:prompt Function::Global:prompt_bak
-    Copy-Item Function::Global:prompt_custom Function::Global:prompt
-  }
-}
 Set-Alias p git_prompt
 
 function git_status {
