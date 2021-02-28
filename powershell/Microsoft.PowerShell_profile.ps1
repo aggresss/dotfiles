@@ -199,6 +199,8 @@ function git_prompt {
   }
 }
 
+Set-Alias p git_prompt
+
 <############################
  # Source File for PowerShell
  ############################>
@@ -500,8 +502,6 @@ function ssh_copy {
 <########################
  # PoSH for Git
  ########################>
-
-Set-Alias p git_prompt
 
 function git_status {
   git status

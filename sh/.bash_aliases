@@ -165,6 +165,8 @@ function git_prompt()
     fi
 }
 
+alias p='git_prompt'
+
 ##########################
 # Source File for Bash/Zsh
 ##########################
@@ -349,27 +351,10 @@ else
 fi
 # fast update bash env
 alias u='source ${HOME}/.bash_aliases'
-# git_prompt fast
-alias p='git_prompt'
-# fast switch to git top level
-alias t='git_top'
-# fast show git branch
-alias b='git branch -vv'
-# fast ssh-agent
-alias a='ssh_agent_add'
-alias k='ssh_agent_del'
-alias ak='kill_all ssh-agent'
-# fast git status
-alias y='git_status'
 # fast echo app return
 alias o='echo $?'
-# fast echo gopath
-alias g='go_path'
-# fast echo package.json run
-alias j='jq .scripts package.json'
 # fast history query
 alias h='history | grep'
-
 # find file
 alias fdf='find . -name "*" |grep -sin'
 # find file content
@@ -513,6 +498,11 @@ function proxy_cfg()
 ##########################
 
 # fast ssh-agent
+alias a='ssh_agent_add'
+alias k='ssh_agent_del'
+alias ak='kill_all ssh-agent'
+
+# fast ssh-agent
 # ssh-add -l > /dev/null 2>&1
 # $?=0 means the socket is there and it has a key
 # $?=1 means the socket is there but contains no key
@@ -579,133 +569,15 @@ function ssh_copy()
 }
 
 ##########################
-# Modify for Vagrant
-##########################
-
-# Fast list vagrant status
-function vagrant_ps()
-{
-    command vagrant >/dev/null 2>&1
-    if [ $? -ne 0 ]; then
-        echo -e ${YELLOW}; echo -e "vagrant box list:"
-        vagrant box list
-        echo -e ${GREEN}; echo -e "vagrant global-status:"
-        vagrant global-status
-        echo -e ${NORMAL}
-    fi
-}
-
-##########################
-# Modify for VirtualBox
-##########################
-
-# alias for VirtualBox
-alias vb='VBoxManage'
-
-##########################
-# Modify for Docker
-##########################
-
-# Fast docker inside
-function docker_shell()
-{
-    docker exec -it $1 bash -c "stty cols $COLUMNS rows $LINES && bash";
-}
-
-# Show docker host infomation
-function docker_info()
-{
-    echo -e "${RED}DOCKER_HOST: ${GREEN}${DOCKER_HOST}${NORMAL}"
-    echo -e "${RED}DOCKER_CERT_PATH: ${GREEN}${DOCKER_CERT_PATH}${NORMAL}"
-    echo -e "${RED}DOCKER_TLS_VERIFY: ${GREEN}${DOCKER_TLS_VERIFY}${NORMAL}"
-}
-
-# Inspect volumes and port
-function docker_inspect()
-{
-    echo -e "${GREEN}Volumes:"
-    docker inspect --format='{{range .Mounts }}{{println .}}{{end}}' $1
-    echo -e "${YELLOW}Ports:"
-    docker inspect --format='{{range $p, $conf := .NetworkSettings.Ports}}{{$p}} -> {{$conf}}{{println}}{{end}}' $1
-    echo -e "${CYAN}Environment:"
-    docker inspect --format='{{range .Config.Env}}{{println .}}{{end}}' $1
-    echo -e "${MAGENTA}Command:"
-    docker inspect  --format='{{.Config.Cmd}}' $1
-    echo -e "${NORMAL}"
-}
-
-# Run and mount private file
-function docker_private()
-{
-    if ! docker volume ls | grep -q root; then
-        docker volume create root
-    elif ! docker volume ls | grep -q home ; then
-        docker volume create home
-    fi
-    case $(uname) in
-        Linux)
-            local docker_host=$(docker network inspect --format='{{range .IPAM.Config}}{{.Gateway}}{{end}}' bridge)
-            xhost +local:docker > /dev/null
-            docker run --rm -it \
-                --add-host=host.docker.internal:${docker_host} \
-                -v /tmp/.X11-unix/:/tmp/.X11-unix \
-                -v root:/root \
-                -v home:/home \
-                -v ${HOME}/Downloads:/mnt/Downloads \
-                -v ${HOME}/Documents:/mnt/Documents \
-                -v ${HOME}/workspace-scratch:/mnt/workspace-scratch \
-                -v ${HOME}/workspace-formal:/mnt/workspace-formal \
-                -e DISPLAY \
-                $*
-            ;;
-        Darwin)
-            xhost +localhost > /dev/null
-            docker run --rm -it \
-                -v root:/root \
-                -v home:/home \
-                -v ${HOME}/Downloads:/mnt/Downloads \
-                -v ${HOME}/Documents:/mnt/Documents \
-                -v ${HOME}/workspace-scratch:/mnt/workspace-scratch \
-                -v ${HOME}/workspace-formal:/mnt/workspace-formal \
-                -e DISPLAY=host.docker.internal:0 \
-                $*
-            ;;
-        *)
-            echo "No support OS."
-            ;;
-    esac
-}
-
-# Run private with super privilage
-function docker_sudo()
-{
-    docker_private \
-        --privileged=true \
-        $*
-}
-
-# Run private with user
-function docker_user()
-{
-    docker_private \
-        --privileged=true \
-        --user docker \
-        $*
-}
-
-# killall containers
-function docker_kill()
-{
-    if [ -n "`docker ps -a -q`" ]; then
-        docker rm -f `docker ps -a -q`
-    fi
-}
-
-
-##########################
 # Modify for Git
 ##########################
 
+# fast git status
+alias y='git_status'
+# fast switch to git top level
+alias t='git_top'
+# fast show git branch
+alias b='git branch -vv'
 # fast change directry to git top level path
 alias git_top='cd `git rev-parse --show-toplevel`'
 # fast git diff file status
@@ -939,6 +811,129 @@ function git_down()
 }
 
 ##########################
+# Modify for Vagrant
+##########################
+
+# Fast list vagrant status
+function vagrant_ps()
+{
+    command vagrant >/dev/null 2>&1
+    if [ $? -ne 0 ]; then
+        echo -e ${YELLOW}; echo -e "vagrant box list:"
+        vagrant box list
+        echo -e ${GREEN}; echo -e "vagrant global-status:"
+        vagrant global-status
+        echo -e ${NORMAL}
+    fi
+}
+
+##########################
+# Modify for VirtualBox
+##########################
+
+# alias for VirtualBox
+alias vb='VBoxManage'
+
+##########################
+# Modify for Docker
+##########################
+
+# Fast docker inside
+function docker_shell()
+{
+    docker exec -it $1 bash -c "stty cols $COLUMNS rows $LINES && bash";
+}
+
+# Show docker host infomation
+function docker_info()
+{
+    echo -e "${RED}DOCKER_HOST: ${GREEN}${DOCKER_HOST}${NORMAL}"
+    echo -e "${RED}DOCKER_CERT_PATH: ${GREEN}${DOCKER_CERT_PATH}${NORMAL}"
+    echo -e "${RED}DOCKER_TLS_VERIFY: ${GREEN}${DOCKER_TLS_VERIFY}${NORMAL}"
+}
+
+# Inspect volumes and port
+function docker_inspect()
+{
+    echo -e "${GREEN}Volumes:"
+    docker inspect --format='{{range .Mounts }}{{println .}}{{end}}' $1
+    echo -e "${YELLOW}Ports:"
+    docker inspect --format='{{range $p, $conf := .NetworkSettings.Ports}}{{$p}} -> {{$conf}}{{println}}{{end}}' $1
+    echo -e "${CYAN}Environment:"
+    docker inspect --format='{{range .Config.Env}}{{println .}}{{end}}' $1
+    echo -e "${MAGENTA}Command:"
+    docker inspect  --format='{{.Config.Cmd}}' $1
+    echo -e "${NORMAL}"
+}
+
+# Run and mount private file
+function docker_private()
+{
+    if ! docker volume ls | grep -q root; then
+        docker volume create root
+    elif ! docker volume ls | grep -q home ; then
+        docker volume create home
+    fi
+    case $(uname) in
+        Linux)
+            local docker_host=$(docker network inspect --format='{{range .IPAM.Config}}{{.Gateway}}{{end}}' bridge)
+            xhost +local:docker > /dev/null
+            docker run --rm -it \
+                --add-host=host.docker.internal:${docker_host} \
+                -v /tmp/.X11-unix/:/tmp/.X11-unix \
+                -v root:/root \
+                -v home:/home \
+                -v ${HOME}/Downloads:/mnt/Downloads \
+                -v ${HOME}/Documents:/mnt/Documents \
+                -v ${HOME}/workspace-scratch:/mnt/workspace-scratch \
+                -v ${HOME}/workspace-formal:/mnt/workspace-formal \
+                -e DISPLAY \
+                $*
+            ;;
+        Darwin)
+            xhost +localhost > /dev/null
+            docker run --rm -it \
+                -v root:/root \
+                -v home:/home \
+                -v ${HOME}/Downloads:/mnt/Downloads \
+                -v ${HOME}/Documents:/mnt/Documents \
+                -v ${HOME}/workspace-scratch:/mnt/workspace-scratch \
+                -v ${HOME}/workspace-formal:/mnt/workspace-formal \
+                -e DISPLAY=host.docker.internal:0 \
+                $*
+            ;;
+        *)
+            echo "No support OS."
+            ;;
+    esac
+}
+
+# Run private with super privilage
+function docker_sudo()
+{
+    docker_private \
+        --privileged=true \
+        $*
+}
+
+# Run private with user
+function docker_user()
+{
+    docker_private \
+        --privileged=true \
+        --user docker \
+        $*
+}
+
+# killall containers
+function docker_kill()
+{
+    if [ -n "`docker ps -a -q`" ]; then
+        docker rm -f `docker ps -a -q`
+    fi
+}
+
+##########################
 # Modify for Vscode
 ##########################
 
@@ -963,6 +958,13 @@ function code_user {
 # Modify for Golang
 ##########################
 
+# fast echo gopath
+alias g='go_path'
+# echo current GOPATH
+alias go_path='env_print GOPATH'
+# mkdir for golang workspace
+alias go_workspace='mkdir -p src pkg bin'
+
 # environmnet for Golang
 if [ -d "$HOME/.local/go" ]; then
     export GOROOT="$HOME/.local/go"
@@ -982,11 +984,6 @@ fi
 if [ ${GOPATH_BAK:-NOCONFIG} = "NOCONFIG" ]; then
     GOPATH_BAK=${GOPATH-}
 fi
-
-# echo current GOPATH
-alias go_path='env_print GOPATH'
-# mkdir for golang workspace
-alias go_workspace='mkdir -p src pkg bin'
 
 # reset $GOPATH
 function go_reset()
@@ -1085,6 +1082,9 @@ function perl_install
 ##########################
 # Modify for JavaScript
 ##########################
+
+# fast echo package.json run
+alias j='jq .scripts package.json'
 
 env_amend "NPM_PACKAGES" "${HOME}/.local"
 if [ ! -d ${NPM_PACKAGES} ]; then
