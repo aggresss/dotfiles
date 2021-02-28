@@ -21,11 +21,11 @@ INVERT=$'\e[7m'
 # add new element to environment variable insert mode
 # $1 enviroment variable
 # $2 new element
-function env_insert()
-{
+function env_insert () {
     eval local env_var=\$\{${1}\-\}
     local new_element=${2%/}
-    if ! echo $env_var | grep -E -q "(^|:)$new_element($|:)"; then
+    if ! echo $env_var | grep -E -q "(^|:)$new_element($|:)"
+    then
         eval export $1="${new_element}\${$1:+\:}\${$1-}"
     fi
 }
@@ -33,11 +33,11 @@ function env_insert()
 # add new element to environment variable append mode
 # $1 enviroment variable
 # $2 new element
-function env_append()
-{
+function env_append () {
     eval local env_var=\$\{${1}\-\}
     local new_element=${2%/}
-    if ! echo $env_var | grep -E -q "(^|:)$new_element($|:)"; then
+    if ! echo $env_var | grep -E -q "(^|:)$new_element($|:)"
+    then
         eval export $1="\${$1-}\${$1:+\:}${new_element}"
     fi
 }
@@ -45,8 +45,7 @@ function env_append()
 # trim element from environment variable
 # $1 enviroment variable
 # $2 trim element
-function env_trim()
-{
+function env_trim () {
     eval local env_var=\$\{${1}\-\}
     local del_element=${2%/}
     eval export $1="$(echo ${env_var} | sed -E -e "s;(^|:)${del_element}(:|\$);\1\2;g" -e "s;^:|:\$;;g" -e "s;::;:;g")"
@@ -55,22 +54,19 @@ function env_trim()
 # amend environment variable
 # $1 enviroment variable
 # $2 amend element
-function env_amend()
-{
+function env_amend () {
     eval export $1="$(echo $2)"
 }
 
 # unset environment variable
 # $1 enviroment variable
-function env_unset()
-{
+function env_unset () {
     eval unset $1
 }
 
 # list element from environment variable
 # $1 enviroment variable
-function env_list()
-{
+function env_list () {
     eval local env_var=\$\{${1}\-\}
     echo -e ${env_var//:/\\n}
 }
@@ -85,22 +81,26 @@ GIT_NAME_LEFT=''
 GIT_NAME_RIGHT=''
 GIT_NAME_HEAD=''
 
-function git_branch_internal()
-{
+function git_branch_internal () {
     local dir="."
-    until [ "${dir}" -ef / ]; do
-        if [ -f "${dir}/.git/HEAD" ]; then
+    until [ "${dir}" -ef / ]
+    do
+        if [ -f "${dir}/.git/HEAD" ]
+        then
             local head=$(< "${dir}/.git/HEAD")
-            if [[ ${head} == ${GIT_NAME_HEAD} ]]; then
+            if [[ ${head} == ${GIT_NAME_HEAD} ]]
+            then
                 return
             fi
             GIT_NAME_HEAD=${head}
-            if [[ $head =~ ^ref\:\ refs\/heads\/* ]]; then
+            if [[ $head =~ ^ref\:\ refs\/heads\/* ]]
+            then
                 GIT_NAME_TITLE="branch"
                 GIT_NAME_CONTENT="${head#*/*/}"
             else
                 local describe=$(git describe --tags --abbrev=7 2> /dev/null)
-                if [ -n "${describe}" ]; then
+                if [ -n "${describe}" ]
+                then
                     GIT_NAME_TITLE="tag"
                     GIT_NAME_CONTENT=${describe}
                 else
@@ -122,8 +122,7 @@ function git_branch_internal()
 }
 
 # Git branch perception
-function git_zsh_precmd()
-{
+function git_zsh_precmd () {
     git_branch_internal
     PS1="${PS1_BAK}%{$fg_bold[blue]%}${GIT_NAME_TITLE}${GIT_NAME_LEFT}%{$fg_bold[red]%}${GIT_NAME_CONTENT}%{$fg_bold[blue]%}${GIT_NAME_RIGHT}%% %{$reset_color%}"
 }
@@ -140,23 +139,27 @@ white=$'\[\e[1;37m\]'
 normal=$'\[\e[m\]'
 
 # Git prompt for branch infomation
-function git_prompt()
-{
-    if [ "${PS1_BAK-NODEFINE}" = "NODEFINE" ] ; then
+function git_prompt () {
+    if [ "${PS1_BAK-NODEFINE}" = "NODEFINE" ]
+    then
         PS1_BAK=${PS1-}
-        if [[ ${SHELL} =~ .*bash$ ]]; then
+        if [[ ${SHELL} =~ .*bash$ ]]
+        then
             PROMPT_COMMAND_BAK=${PROMPT_COMMAND-}
             PROMPT_COMMAND="git_branch_internal;${PROMPT_COMMAND-}"
             PS1="$PS1$blue\$GIT_NAME_TITLE\$GIT_NAME_LEFT$red\$GIT_NAME_CONTENT$blue\$GIT_NAME_RIGHT\$ $normal"
-        elif [[ ${SHELL} =~ .*zsh$ ]]; then
+        elif [[ ${SHELL} =~ .*zsh$ ]]
+        then
             autoload -U colors && colors
             precmd_functions=(git_zsh_precmd)
         fi
     else
-        if [[ ${SHELL} =~ .*bash$ ]]; then
+        if [[ ${SHELL} =~ .*bash$ ]]
+        then
             PROMPT_COMMAND=${PROMPT_COMMAND_BAK-}
             unset PROMPT_COMMAND_BAK
-        elif [[ ${SHELL} =~ .*zsh$ ]]; then
+        elif [[ ${SHELL} =~ .*zsh$ ]]
+        then
             unset precmd_functions
         fi
         PS1=${PS1_BAK-}
@@ -175,11 +178,12 @@ alias p='git_prompt'
 # $1: copy source
 # $2: filename or ~/note/* index
 # $3-: lines to execute
-function source_file()
-{
+function source_file () {
     local index_range=$(ls -1p ${HOME}/note/* 2>/dev/null | sed -n '$=')
-    if [ $# -le 1 ]; then
-        if [ ! -d ${HOME}/note ];then
+    if [ $# -le 1 ]
+    then
+        if [ ! -d ${HOME}/note ]
+        then
             mkdir -p ${HOME}/note
             touch ${HOME}/note/note.common
         fi
@@ -188,22 +192,26 @@ function source_file()
         echo -e ${NORMAL}
     else
         # arguments >= 2
-        if [ ! -f $2 -a $2 -ge 1 -a $2 -le ${index_range} ] 2>/dev/null; then
+        if [ ! -f $2 -a $2 -ge 1 -a $2 -le ${index_range} ] 2>/dev/null
+        then
             local index_file=$(ls -1p ${HOME}/note/* | sed -n "${2}p")
         else
             local index_file=${2}
         fi
-        if [ ! -f ${index_file} ]; then
+        if [ ! -f ${index_file} ]
+        then
             echo -e "${RED}\nFile not exist.\n${NORMAL}"
             return 1
         fi
         # edit command
-        if [ "$1" = "edit" ]; then
+        if [ "$1" = "edit" ]
+        then
             vim ${index_file}
             return 0
         fi
         # arguments = 2
-        if [ $# -eq 2 ]; then
+        if [ $# -eq 2 ]
+        then
             echo -e ${GREEN}
             cat -n ${index_file}
             echo -e ${NORMAL}
@@ -215,14 +223,16 @@ function source_file()
             do
                 eval local line_range=\$\{${i}\}
                 line_range=${line_range/-/,}
-                if [ "${line_range}" = "_" ]; then
+                if [ "${line_range}" = "_" ]
+                then
                     line_range="1,$"
                 fi
                 sed -n "${line_range}p" ${index_file} >> ${tmp_src_file}
                 local file_index=$(sed -n '$=' ${tmp_src_file})
             done
             # trim end of line
-            if [[ $(sed --version 2>&1 | head -n1) =~ "GNU" ]]; then
+            if [[ $(sed --version 2>&1 | head -n1) =~ "GNU" ]]
+            then
                 sed -i 's/\r$//g' ${tmp_src_file}
             else
                 sed -i '' 's/\r$//g' ${tmp_src_file}
@@ -233,14 +243,16 @@ function source_file()
                     echo -e ${CYAN}; cat -n ${tmp_src_file}; echo -e ${NORMAL}
                     case $(uname) in
                         Linux)
-                            if [ ${file_index} -eq 1 ]; then
+                            if [ ${file_index} -eq 1 ]
+                            then
                                  cat ${tmp_src_file} | tr -d \\n | xclip -selection clipboard
                             else
                                  cat ${tmp_src_file} | xclip -selection clipboard
                             fi
                             ;;
                         Darwin)
-                            if [ ${file_index} -eq 1 ]; then
+                            if [ ${file_index} -eq 1 ]
+                            then
                                  cat ${tmp_src_file} | tr -d \\n | pbcopy
                             else
                                  cat ${tmp_src_file} | pbcopy
@@ -259,7 +271,7 @@ function source_file()
                     echo -e "${RED}No support this command.${NORMAL}"
                     ;;
             esac
-            rm -rf ${tmp_src_file}
+            rm -f ${tmp_src_file}
         fi
     fi
 }
@@ -305,22 +317,26 @@ case $(uname) in
         # Export history format
         export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S "
         # Specified for Microsoft WSL
-        if [[ $(uname -a) =~ "icrosoft" ]]; then
+        if [[ $(uname -a) =~ "icrosoft" ]]
+        then
             export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0.0
         fi
         # Specified for docker container
-        if [ -f /.dockerenv ]; then
+        if [ -f /.dockerenv ]
+        then
             echo -e "${YELLOW}DOCKER_IMAGE: ${DOCKER_IMAGE}${NORMAL}"
         fi
         # Specified for Gnome environment
-        if [ $(command -v gnome-terminal >/dev/null; echo $?) -eq 0 ]; then
+        if [ $(command -v gnome-terminal >/dev/null; echo $?) -eq 0 ]
+        then
             alias cbp='chromium-browser --proxy-server=socks5://127.0.0.1:1080'
             alias calc='gnome-calculator'
             alias gterm='gnome-terminal'
             alias mks='setxkbmap -option keypad:pointerkeys; xkbset ma 60 10 15 15 10'
             alias xck='xclock -bg cyan -update 1 &'
         fi
-        if [ $(command -v valgrind >/dev/null; echo $?) -eq 0 ]; then
+        if [ $(command -v valgrind >/dev/null; echo $?) -eq 0 ]
+        then
             alias vmc='valgrind \
                 --tool=memcheck \
                 --leak-check=yes \
@@ -345,7 +361,8 @@ case $(uname) in
 esac
 
 # environment for ${HOME}/bin
-if [ -d ${HOME}/bin ]; then
+if [ -d ${HOME}/bin ]
+then
     env_insert "PATH" "${HOME}/bin"
 fi
 
@@ -385,7 +402,8 @@ alias mv='mv -i'
 # Generate GNU standard files
 alias make_gnu='touch AUTHORS COPYING ChangeLog NEWS README'
 # alias for fast command
-if [ -f /.dockerenv ]; then
+if [ -f /.dockerenv ]
+then
     alias s='cd /mnt/workspace-scratch'
     alias f='cd /mnt/workspace-formal'
     alias d='cd /mnt/Downloads'
@@ -401,21 +419,24 @@ fi
 
 # $1 download url
 # $2 local filepath
-function update_file()
-{
+function update_file () {
     local tmp_path="/tmp"
     # can replace by dirname and basename command
     local down_file=`echo "$1" | awk -F "/" '{print $NF}'`
     local down_path=`echo "$2" | awk 'BEGIN{res=""; FS="/";}{for(i=2;i<=NF-1;i++) res=(res"/"$i);} END{print res}'`
     echo "Update $2 ..."
-    if [ ! -d ${down_path} ]; then
+    if [ ! -d ${down_path} ]
+    then
         mkdir -vp ${down_path}
     fi
-    if [[ $1 =~ ^http.* ]]; then
+    if [[ $1 =~ ^http.* ]]
+    then
         rm -rf ${tmp_path}/${down_file}
-        if [ $(command -v wget > /dev/null; echo $?) -eq 0 ]; then
+        if [ $(command -v wget > /dev/null; echo $?) -eq 0 ]
+        then
             wget -P ${tmp_path} $1
-        elif [ $(command -v curl > /dev/null; echo $?) -eq 0 ]; then
+        elif [ $(command -v curl > /dev/null; echo $?) -eq 0 ]
+        then
             cd ${tmp_path}
             curl -OL $1
             cd -
@@ -425,7 +446,8 @@ function update_file()
         fi
         cp -vf ${tmp_path}/${down_file} $2
         rm -rf ${tmp_path}/${down_file}
-        if [ ${down_file##*.} = "sh" ]; then
+        if [ ${down_file##*.} = "sh" ]
+        then
             chmod +x $2
         fi
     else
@@ -435,10 +457,11 @@ function update_file()
 
 # switch proxy on-off
 # $1: port 1-65536; null to display; else to close
-function proxy_cfg()
-{
-    if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
-        if [ -n "${proxy-}" ]; then
+function proxy_cfg () {
+    if [ ${1:-NOCONFIG} = "NOCONFIG" ]
+    then
+        if [ -n "${proxy-}" ]
+        then
             echo -e "${YELLOW}${proxy}${NORMAL}"
         else
             echo -e "${YELLOW}proxy disabled.${NORMAL}"
@@ -446,8 +469,10 @@ function proxy_cfg()
         return 0
     fi
     local port=$(echo $1 | sed 's/[^0-9]//g')
-    if [ ${port:=0} -gt 0  -a ${port} -lt 65536 ]; then
-        if [ -f /.dockerenv ]; then
+    if [ ${port:=0} -gt 0  -a ${port} -lt 65536 ]
+    then
+        if [ -f /.dockerenv ]
+        then
             local proxy_url="http://host.docker.internal:${port}"
         else
             local proxy_url="http://localhost:${port}"
@@ -477,22 +502,22 @@ alias ak='kill_all ssh-agent'
 # $?=0 means the socket is there and it has a key
 # $?=1 means the socket is there but contains no key
 # $?=2 means the socket is not there or broken
-function ssh_agent_check()
-{
+function ssh_agent_check () {
     ssh-add -l > /dev/null 2>&1; local ssh_add_ret=$?
-    if [ $ssh_add_ret -eq 2 ] && [ -f ${HOME}/.ssh-agent.conf ]; then
+    if [ $ssh_add_ret -eq 2 ] && [ -f ${HOME}/.ssh-agent.conf ]
+    then
         source ${HOME}/.ssh-agent.conf > /dev/null 2>&1
         ssh-add -l > /dev/null 2>&1; ssh_add_ret=$?
     fi
-    if [ $ssh_add_ret -eq 2 ]; then
+    if [ $ssh_add_ret -eq 2 ]
+    then
         eval `ssh-agent | tee ${HOME}/.ssh-agent.conf` > /dev/null 2>&1
         ssh-add -l > /dev/null 2>&1; ssh_add_ret=$?
     fi
     return $ssh_add_ret
 }
 
-function ssh_agent_add()
-{
+function ssh_agent_add () {
     ssh_agent_check
     case $? in
         0)
@@ -509,17 +534,16 @@ function ssh_agent_add()
     esac
 }
 
-function ssh_agent_del()
-{
+function ssh_agent_del () {
     ssh-add -d
 }
 
 # fast ssh id copy
 # $1 souce name
 # $2 target name
-function ssh_copy()
-{
-    if [ $# -ne 2 ]; then
+function ssh_copy () {
+    if [ $# -ne 2 ]
+    then
         for id in `ls ${HOME}/.ssh/*.pub`
         do
             local trim_id=${id%.pub}
@@ -528,11 +552,13 @@ function ssh_copy()
         return 0
     fi
     local src_file="${HOME}/.ssh/id_rsa"
-    if [ "$1" != "_" ]; then
+    if [ "$1" != "_" ]
+    then
         src_file="${src_file}_$1"
     fi
     local dest_file="${HOME}/.ssh/id_rsa"
-    if [ "$2" != "_" ]; then
+    if [ "$2" != "_" ]
+    then
         dest_file="${dest_file}_$2"
     fi
     cp -vf ${src_file} ${dest_file} && cp -vf ${src_file}.pub ${dest_file}.pub
@@ -560,17 +586,16 @@ alias git_skip='git update-index --skip-worktree'
 alias git_assume='git update-index --assume-unchanged'
 
 # Show git status
-function git_status()
-{
+function git_status () {
     git status && echo
     git stash list 2> /dev/null && echo
     git ls-files -v  2> /dev/null | grep --color -E "^S|^h|^M" && echo
 }
 
 # no-skip-worktree all
-function git_noskip()
-{
-    if [ $# -eq 0 ]; then
+function git_noskip () {
+    if [ $# -eq 0 ]
+    then
         git ls-files -v | grep "^S" | awk '{print $2}' |xargs git update-index --no-skip-worktree
     else
         git update-index --no-skip-worktree $1
@@ -578,9 +603,9 @@ function git_noskip()
 }
 
 # no-assume-unchanged all
-function git_noassume()
-{
-    if [ $# -eq 0 ]; then
+function git_noassume () {
+    if [ $# -eq 0 ]
+    then
         git ls-files -v | grep "^h" | awk '{print $2}' |xargs git update-index --no-assume-unchanged
     else
         git update-index --no-assume-unchanged $1
@@ -590,12 +615,13 @@ function git_noassume()
 # Signature for github repository
 # $# -eq 1 => $1 user.email
 # $# -eq 2 => $1 user.name; $2 user.email
-function git_sig()
-{
-    if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
+function git_sig () {
+    if [ ${1:-NOCONFIG} = "NOCONFIG" ]
+    then
         echo "user.name: `git config --get user.name`"
         echo "user.email: `git config --get user.email`"
-    elif [ ${2:-NOCONFIG} = "NOCONFIG" ]; then
+    elif [ ${2:-NOCONFIG} = "NOCONFIG" ]
+    then
         git config user.name `echo "$1" | awk -F "@" '{print $1}'`
         git config user.email $1
     else
@@ -606,8 +632,7 @@ function git_sig()
 
 # clone repo in hierarchy directory as site/org/repo
 # $1 repo URI
-function git_clone()
-{
+function git_clone () {
     local clone_path=$1
     # https
     clone_path=${clone_path#*://}
@@ -624,9 +649,9 @@ function git_clone()
 # Get pull request to local branch
 # $1 remote name
 # $2 pull request index No.
-function git_pull()
-{
-    if [ $# != 2 ]; then
+function git_pull () {
+    if [ $# != 2 ]
+    then
         echo -e "${LIGHT}${RED}Please input remote name and pull request No.${NORMAL}"
         return 1
     fi
@@ -635,10 +660,12 @@ function git_pull()
     local pull_branch="pull/${remote_name}/${remote_pr}"
     local curr_branch=`git rev-parse --abbrev-ref HEAD` || return 1
     git fetch ${remote_name} pull/${remote_pr}/head:${pull_branch}_staging
-    if [ $(echo $?) -ne 0 ]; then
+    if [ $(echo $?) -ne 0 ]
+    then
         return 1
     fi
-    if [ "${curr_branch}" = "${pull_branch}" ]; then
+    if [ "${curr_branch}" = "${pull_branch}" ]
+    then
         git rebase ${pull_branch}_staging
     else
         git branch -q -D ${pull_branch} 2> /dev/null
@@ -649,14 +676,15 @@ function git_pull()
 
 # Checkout a branch and delete current branch
 # $1 branch for checkout
-function git_leave()
-{
-    if [ $# != 1 ]; then
+function git_leave () {
+    if [ $# != 1 ]
+    then
         echo -e "${LIGHT}${RED}Please input a branch to checkout.${NORMAL}"
         return 1
     fi
     local curr_branch=`git rev-parse --abbrev-ref HEAD` || return 1
-    if [ -z "${curr_branch}" ]; then
+    if [ -z "${curr_branch}" ]
+    then
         return 2
     fi
     git checkout $1 && git branch -D ${curr_branch}
@@ -664,27 +692,29 @@ function git_leave()
 
 # Delete git branch on local and remote
 # $1 git branch
-function git_del()
-{
+function git_del () {
     local cur_branch
     local del_remote=0
     for i in `seq 1 $#`
     do
         eval cur_branch=\$$i
-        if git branch | grep -q ${cur_branch}; then
+        if git branch | grep -q ${cur_branch}
+        then
             git branch -D ${cur_branch}
         else
             echo -e "${RED}No branch ${cur_branch} on local.${NORMAL}"
             continue
         fi
-        if git branch -r | grep -q origin/${cur_branch}; then
+        if git branch -r | grep -q origin/${cur_branch}
+        then
             git push origin :${cur_branch}
             del_remote=1
         else
             echo -e "${RED}No branch ${cur_branch} on remote origin.${NORMAL}"
         fi
     done
-    if [ ${del_remote} -eq 1 ]; then
+    if [ ${del_remote} -eq 1 ]
+    then
         git remote update origin
     fi
 }
@@ -692,10 +722,10 @@ function git_del()
 # git config insteadOf
 # $1: https/ssh/unset; null to display
 # $2: domain name
-function git_insteadof()
-{
+function git_insteadof () {
     local url="github.com"
-    if [ $# -ge 2 ]; then
+    if [ $# -ge 2 ]
+    then
         url=$2
     fi
     case $1 in
@@ -718,8 +748,7 @@ function git_insteadof()
 }
 
 # Set git global set
-function git_global_set()
-{
+function git_global_set () {
   local base_url="https://github.com/aggresss/dotfiles/raw/master"
   update_file ${base_url}/.gitignore ${HOME}/.gitignore
   git config --global core.excludesfile ${HOME}/.gitignore
@@ -732,17 +761,20 @@ function git_global_set()
 
 # Git fast add->commit->fetch->rebase->push ! Deprecated
 # $1 operation: rebase
-function git_haste()
-{
+function git_haste () {
     git_branch_internal;
-    if [ -z ${GIT_NAME_TITLE} ]; then
+    if [ -z ${GIT_NAME_TITLE} ]
+    then
         echo -e "${RED}Not a git repository${NORMAL}"
-    elif [ ${GIT_NAME_TITLE} = "branch" ]; then
+    elif [ ${GIT_NAME_TITLE} = "branch" ]
+    then
         git commit -m "`date +"%Y-%m-%d %T %Z W%UD%w"`"
-        if [[ $1 == "commit" ]]; then
+        if [[ $1 == "commit" ]]
+        then
             return 0
         fi
-        if [[ $1 == "rebase" ]]; then
+        if [[ $1 == "rebase" ]]
+        then
             git fetch origin
             git rebase origin/${GIT_NAME_CONTENT}
         fi
@@ -754,8 +786,7 @@ function git_haste()
 
 # Git fast download file from url
 # $1 url
-function git_down()
-{
+function git_down () {
     local l_url=$1
     local l_vendor=$(echo "${l_url}" | awk -F'[/:]' '{print $4}')
     local l_uri=$(echo "${l_url}" | cut -d/ -f4-)
@@ -764,7 +795,8 @@ function git_down()
     local l_branch=$(echo "${l_uri}" | cut -d/ -f4)
     local l_path=$(echo "${l_uri}" | cut -d/ -f5-)
 
-    if [[ -z ${l_url} || -z ${l_vendor} || -z ${l_uri} || -z ${l_user} || -z ${l_repo} || -z ${l_branch} || -z ${l_path} ]]; then
+    if [[ -z ${l_url} || -z ${l_vendor} || -z ${l_uri} || -z ${l_user} || -z ${l_repo} || -z ${l_branch} || -z ${l_path} ]]
+    then
         echo -e "Invalid URL: $1"
         return 1
     fi
@@ -785,7 +817,7 @@ function git_down()
 #####################
 
 # go to vscode user path
-function code_user {
+function code_user () {
     local GLOBAL_WORKSPACE="."
     case $(uname) in
         Darwin)
@@ -806,22 +838,19 @@ function code_user {
 #####################
 
 # Fast docker inside
-function docker_shell()
-{
+function docker_shell () {
     docker exec -it $1 bash -c "stty cols $COLUMNS rows $LINES && bash";
 }
 
 # Show docker host infomation
-function docker_info()
-{
+function docker_info () {
     echo -e "${RED}DOCKER_HOST: ${GREEN}${DOCKER_HOST}${NORMAL}"
     echo -e "${RED}DOCKER_CERT_PATH: ${GREEN}${DOCKER_CERT_PATH}${NORMAL}"
     echo -e "${RED}DOCKER_TLS_VERIFY: ${GREEN}${DOCKER_TLS_VERIFY}${NORMAL}"
 }
 
 # Inspect volumes and port
-function docker_inspect()
-{
+function docker_inspect () {
     echo -e "${GREEN}Volumes:"
     docker inspect --format='{{range .Mounts }}{{println .}}{{end}}' $1
     echo -e "${YELLOW}Ports:"
@@ -834,11 +863,12 @@ function docker_inspect()
 }
 
 # Run and mount private file
-function docker_private()
-{
-    if ! docker volume ls | grep -q root; then
+function docker_private () {
+    if ! docker volume ls | grep -q root
+    then
         docker volume create root
-    elif ! docker volume ls | grep -q home ; then
+    elif ! docker volume ls | grep -q home
+    then
         docker volume create home
     fi
     case $(uname) in
@@ -876,16 +906,14 @@ function docker_private()
 }
 
 # Run private with super privilage
-function docker_sudo()
-{
+function docker_sudo () {
     docker_private \
         --privileged=true \
         $*
 }
 
 # Run private with user
-function docker_user()
-{
+function docker_user () {
     docker_private \
         --privileged=true \
         --user docker \
@@ -893,9 +921,9 @@ function docker_user()
 }
 
 # killall containers
-function docker_kill()
-{
-    if [ -n "`docker ps -a -q`" ]; then
+function docker_kill () {
+    if [ -n "`docker ps -a -q`" ]
+    then
         docker rm -f `docker ps -a -q`
     fi
 }
@@ -912,42 +940,45 @@ alias go_path='env_print GOPATH'
 alias go_workspace='mkdir -p src pkg bin'
 
 # environmnet for Golang
-if [ -d "$HOME/.local/go" ]; then
+if [ -d "$HOME/.local/go" ]
+then
     export GOROOT="$HOME/.local/go"
     env_insert "PATH" "$GOROOT/bin"
 fi
 
-if [ -d "$HOME/go" ];then
-    if [ ${GOPATH:-NOCONFIG} = "NOCONFIG" ]; then
+if [ -d "$HOME/go" ]
+then
+    if [ ${GOPATH:-NOCONFIG} = "NOCONFIG" ]
+    then
         env_insert "GOPATH" "$HOME/go"
     fi
-    if [ ! -d "$HOME/go/bin" ]; then
+    if [ ! -d "$HOME/go/bin" ]
+    then
         mkdir -p $HOME/go/bin
     fi
     env_insert "PATH" "$HOME/go/bin"
 fi
 
-if [ ${GOPATH_BAK:-NOCONFIG} = "NOCONFIG" ]; then
+if [ ${GOPATH_BAK:-NOCONFIG} = "NOCONFIG" ]
+then
     GOPATH_BAK=${GOPATH-}
 fi
 
 # reset $GOPATH
-function go_reset()
-{
+function go_reset () {
     export GOPATH=${GOPATH_BAK-}
     echo -e "${GREEN}successful clear GOPATH \n${RED}GOPATH ==> ${GOPATH}${NORMAL}"
 }
 
 # set $PWD to $GOPATH
-function go_pwd()
-{
+function go_pwd () {
     export GOPATH=${PWD}
     echo -e "${GREEN}successful set GOPATH \n${RED}GOPATH ==> ${GOPATH}${NORMAL}"
 }
 
-function go_proxy()
-{
-    if [ ${GOPROXY:-NOCONFIG} = "NOCONFIG" ]; then
+function go_proxy () {
+    if [ ${GOPROXY:-NOCONFIG} = "NOCONFIG" ]
+    then
         export GOPROXY=https://goproxy.cn
         echo -e "${YELLOW}GOPROXY: ${GOPROXY}${NORMAL}"
     else
@@ -958,8 +989,7 @@ function go_proxy()
 
 # clone repo in hierarchy directory as site/org/repo for golang workspace
 # $1 repo URI
-function go_clone()
-{
+function go_clone () {
     local clone_path=$1
     local repo_name=""
     # https
@@ -983,13 +1013,15 @@ function go_clone()
 #####################
 
 # specified for ${HOME}/.local/bin
-if [ ! -d ${HOME}/.local/bin ]; then
+if [ ! -d ${HOME}/.local/bin ]
+then
     mkdir -p ${HOME}/.local/bin
 fi
 env_insert "PATH" "${HOME}/.local/bin"
 
 # specified for ${HOME}/Library/Python
-if [ -d ${HOME}/Library/Python ]; then
+if [ -d ${HOME}/Library/Python ]
+then
     for file in `ls ${HOME}/Library/Python`
     do
         if [ -d ${HOME}/Library/Python/${file}/bin ]; then
@@ -999,8 +1031,7 @@ if [ -d ${HOME}/Library/Python ]; then
 fi
 
 # change directory to python3 user base
-function py_path
-{
+function py_path () {
     cd $(python3 -c 'import site; print(site.USER_BASE)')
 }
 
@@ -1010,7 +1041,8 @@ function py_path
 
 # Using local::lib for Perl modules
 PERL_LOCAL_LIB_ROOT="${HOME}/perl5"
-if [ -d ${PERL_LOCAL_LIB_ROOT} ]; then
+if [ -d ${PERL_LOCAL_LIB_ROOT} ]
+then
     env_insert  "PATH" "${PERL_LOCAL_LIB_ROOT}/bin"
     env_insert "PERL5LIB" "${PERL_LOCAL_LIB_ROOT}/lib/perl5"
     env_insert "PERL_LOCAL_LIB_ROOT" "${PERL_LOCAL_LIB_ROOT}"
@@ -1018,9 +1050,9 @@ if [ -d ${PERL_LOCAL_LIB_ROOT} ]; then
     env_amend "PERL_MM_OPT" "INSTALL_BASE=${PERL_LOCAL_LIB_ROOT}"
 fi
 
-function perl_install
-{
-    for idx in $(seq $#); do
+function perl_install () {
+    for idx in $(seq $#)
+    do
         eval perl -MCPAN -e \"install \$$idx\"
     done
 }
@@ -1033,15 +1065,16 @@ function perl_install
 alias j='jq .scripts package.json'
 
 env_amend "NPM_PACKAGES" "${HOME}/.local"
-if [ ! -d ${NPM_PACKAGES} ]; then
+if [ ! -d ${NPM_PACKAGES} ]
+then
     mkdir -p ${NPM_PACKAGES}
 fi
 env_insert "PATH" "${NPM_PACKAGES}/bin"
 env_insert "NODE_PATH" "${NPM_PACKAGES}/lib/node_modules"
 
-function npm_rc
-{
-    if [ ! -f ${PWD}/.npmrc ]; then
+function npm_rc () {
+    if [ ! -f ${PWD}/.npmrc ]
+    then
         cat << END > ${PWD}/.npmrc
 package-lock=false
 END
@@ -1052,12 +1085,13 @@ END
 # Java for Bash/Zsh
 ###################
 
-function mvn_gen()
-{
-    if [ $# -eq 1 ]; then
+function mvn_gen () {
+    if [ $# -eq 1 ]
+    then
         local groupId=${1%%:*}
         local artifactId=${1##*:}
-        if [[ -n ${groupId} && -n ${artifactId} ]]; then
+        if [[ -n ${groupId} && -n ${artifactId} ]]
+        then
             mvn archetype:generate \
                 -DarchetypeGroupId=org.apache.maven.archetypes \
                 -DarchetypeArtifactId=maven-archetype-quickstart \
@@ -1073,11 +1107,12 @@ function mvn_gen()
     fi
 }
 
-function mvn_exec()
-{
-    if [ $# -lt 1 ]; then
+function mvn_exec () {
+    if [ $# -lt 1 ]
+    then
         return
-    elif [ $# -eq 1 ]; then
+    elif [ $# -eq 1 ]
+    then
         mvn exec:java -Dexec.mainClass="$1"
     else
         local i
