@@ -166,6 +166,102 @@ function git_prompt()
 }
 
 ##########################
+# Source File for Bash/Zsh
+##########################
+
+# fast source file content
+# $1: copy source
+# $2: filename or ~/note/* index
+# $3-: lines to execute
+function source_file()
+{
+    local index_range=$(ls -1p ${HOME}/note/* 2>/dev/null | sed -n '$=')
+    if [ $# -le 1 ]; then
+        if [ ! -d ${HOME}/note ];then
+            mkdir -p ${HOME}/note
+            touch ${HOME}/note/note.common
+        fi
+        echo -e ${YELLOW}
+        ls -1p ${HOME}/note/* 2>/dev/null | cat -n
+        echo -e ${NORMAL}
+    else
+        # arguments >= 2
+        if [ ! -f $2 -a $2 -ge 1 -a $2 -le ${index_range} ] 2>/dev/null; then
+            local index_file=$(ls -1p ${HOME}/note/* | sed -n "${2}p")
+        else
+            local index_file=${2}
+        fi
+        if [ ! -f ${index_file} ]; then
+            echo -e "${RED}\nFile not exist.\n${NORMAL}"
+            return 1
+        fi
+        # edit command
+        if [ "$1" = "edit" ]; then
+            vim ${index_file}
+            return 0
+        fi
+        # arguments = 2
+        if [ $# -eq 2 ]; then
+            echo -e ${GREEN}
+            cat -n ${index_file}
+            echo -e ${NORMAL}
+        else
+            # arguments > 2
+            local tmp_src_file=$(mktemp)
+            local i
+            for ((i=3; i<=$#; i++))
+            do
+                eval local line_range=\$\{${i}\}
+                line_range=${line_range/-/,}
+                if [ "${line_range}" = "_" ]; then
+                    line_range="1,$"
+                fi
+                sed -n "${line_range}p" ${index_file} >> ${tmp_src_file}
+                local file_index=$(sed -n '$=' ${tmp_src_file})
+            done
+            sed -i 's/\r$//g' ${tmp_src_file}
+            # operate file
+            case $1 in
+                copy)
+                    echo -e ${CYAN}; cat -n ${tmp_src_file}; echo -e ${NORMAL}
+                    case $(uname) in
+                        Linux)
+                            if [ ${file_index} -eq 1 ]; then
+                                 cat ${tmp_src_file} | tr -d \\n | xclip -selection clipboard
+                            else
+                                 cat ${tmp_src_file} | xclip -selection clipboard
+                            fi
+                            ;;
+                        Darwin)
+                            if [ ${file_index} -eq 1 ]; then
+                                 cat ${tmp_src_file} | tr -d \\n | pbcopy
+                            else
+                                 cat ${tmp_src_file} | pbcopy
+                            fi
+                            ;;
+                        *)
+                            echo -e "${RED}No support this OS.${NORMAL}"
+                            ;;
+                    esac
+                    ;;
+                exec)
+                    echo -e ${MAGENTA}; cat -n ${tmp_src_file}; echo -e ${NORMAL}
+                    source ${tmp_src_file}
+                    ;;
+                *)
+                    echo -e "${RED}No support this command.${NORMAL}"
+                    ;;
+            esac
+            rm -rf ${tmp_src_file}
+        fi
+    fi
+}
+
+alias c='source_file copy'
+alias x='source_file exec'
+alias e='source_file edit'
+
+##########################
 # Operate System specified
 ##########################
 
@@ -259,12 +355,6 @@ alias p='git_prompt'
 alias t='git_top'
 # fast show git branch
 alias b='git branch -vv'
-# fast execute file content
-alias x='source_file exec'
-# fast copy file content
-alias c='source_file copy'
-# fast edit index note file
-alias e='source_file edit'
 # fast ssh-agent
 alias a='ssh_agent_add'
 alias k='ssh_agent_del'
@@ -340,6 +430,88 @@ function update_file()
     fi
 }
 
+# kill all
+# $1 process name to kill
+function kill_all()
+{
+    local process_id=$(ps ax | grep -e "[/\ ]$1\$" -e "[/\ ]$1[\ ]" | grep -v grep | awk '{print $1}' | sort -u)
+    if [ "x$process_id" != "x" ]; then
+        for id in $process_id
+        do
+            kill -9 $id
+        done
+        echo -e "PID KILLED:\n${RED}${process_id}${NORMAL}"
+    fi
+}
+
+# fast decompression archives
+function un_ball()
+{
+    if [ $# -ne 1 ]; then
+        echo -e "${RED}Arguments no support.${NORMAL}"
+        return 1;
+    fi
+    if [[ $1 =~ .*\.zip$ ]]; then
+        # *.zip
+        unzip $1 -d ${1%.zip}
+    elif [[ $1 =~ .*\.rar$ ]]; then
+        # *.rar
+        mkdir -p ${1%.rar}
+        unrar x $1 ${1%.rar}
+    elif [[ $1 =~ .*\.7z$ ]]; then
+        # *.7z
+        7z x $1
+    elif [[ $1 =~ .*\.tar.xz$ ]]; then
+        # *.tar.xz
+        tar Jvxf $1
+    elif [[ $1 =~ .*\.tar.gz$ || $1 =~ .*\.tgz$ ]]; then
+        # *.tar.gz or *.tgz
+        tar zvxf $1
+    elif [[ $1 =~ .*\.tar.bz2$ ]]; then
+        # *.tar.bz2
+        tar jvxf $1
+    elif [[ $1 =~ .*\.tar$ ]]; then
+        # *.tar
+        tar vxf $1
+    else
+        echo -e "${RED}Archive tpye no support.${NORMAL}"
+    fi
+}
+
+# switch proxy on-off
+# $1: port 1-65536; null to display; else to close
+function proxy_cfg()
+{
+    if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
+        if [ -n "${proxy-}" ]; then
+            echo -e "${YELLOW}${proxy}${NORMAL}"
+        else
+            echo -e "${YELLOW}proxy disabled.${NORMAL}"
+        fi
+        return 0
+    fi
+    local port=$(echo $1 | sed 's/[^0-9]//g')
+    if [ ${port:=0} -gt 0  -a ${port} -lt 65536 ]; then
+        if [ -f /.dockerenv ]; then
+            local proxy_url="http://host.docker.internal:${port}"
+        else
+            local proxy_url="http://localhost:${port}"
+        fi
+        export proxy=${proxy_url}
+        export http_proxy=${proxy_url}
+        export https_proxy=${proxy_url}
+        export ftp_proxy=${proxy_url}
+        echo -e "${GREEN}${proxy}${NORMAL}"
+    else
+        unset proxy http_proxy https_proxy ftp_proxy
+        echo -e "${RED}porxy cloesd.${NORMAL}"
+    fi
+}
+
+##########################
+# Modify for SSH
+##########################
+
 # fast ssh-agent
 # ssh-add -l > /dev/null 2>&1
 # $?=0 means the socket is there and it has a key
@@ -406,172 +578,6 @@ function ssh_copy()
     cp -vf ${src_file} ${dest_file} && cp -vf ${src_file}.pub ${dest_file}.pub
 }
 
-# kill all
-# $1 process name to kill
-function kill_all()
-{
-    local process_id=$(ps ax | grep -e "[/\ ]$1\$" -e "[/\ ]$1[\ ]" | grep -v grep | awk '{print $1}' | sort -u)
-    if [ "x$process_id" != "x" ]; then
-        for id in $process_id
-        do
-            kill -9 $id
-        done
-        echo -e "PID KILLED:\n${RED}${process_id}${NORMAL}"
-    fi
-}
-
-# fast decompression archives
-function un_ball()
-{
-    if [ $# -ne 1 ]; then
-        echo -e "${RED}Arguments no support.${NORMAL}"
-        return 1;
-    fi
-    if [[ $1 =~ .*\.zip$ ]]; then
-        # *.zip
-        unzip $1 -d ${1%.zip}
-    elif [[ $1 =~ .*\.rar$ ]]; then
-        # *.rar
-        mkdir -p ${1%.rar}
-        unrar x $1 ${1%.rar}
-    elif [[ $1 =~ .*\.7z$ ]]; then
-        # *.7z
-        7z x $1
-    elif [[ $1 =~ .*\.tar.xz$ ]]; then
-        # *.tar.xz
-        tar Jvxf $1
-    elif [[ $1 =~ .*\.tar.gz$ || $1 =~ .*\.tgz$ ]]; then
-        # *.tar.gz or *.tgz
-        tar zvxf $1
-    elif [[ $1 =~ .*\.tar.bz2$ ]]; then
-        # *.tar.bz2
-        tar jvxf $1
-    elif [[ $1 =~ .*\.tar$ ]]; then
-        # *.tar
-        tar vxf $1
-    else
-        echo -e "${RED}Archive tpye no support.${NORMAL}"
-    fi
-}
-
-# fast source file content
-# $1: copy source
-# $2: filename or ~/note/* index
-# $3-: lines to execute
-function source_file()
-{
-    local index_range=$(ls -1p ${HOME}/note/* 2>/dev/null | sed -n '$=')
-    if [ $# -le 1 ]; then
-        if [ ! -d ${HOME}/note ];then
-            mkdir -p ${HOME}/note
-            touch ${HOME}/note/note.common
-        fi
-        echo -e ${YELLOW}
-        ls -1p ${HOME}/note/* 2>/dev/null | cat -n
-        echo -e ${NORMAL}
-    else
-        # arguments >= 2
-        if [ ! -f $2 -a $2 -ge 1 -a $2 -le ${index_range} ] 2>/dev/null; then
-            local index_file=$(ls -1p ${HOME}/note/* | sed -n "${2}p")
-        else
-            local index_file=${2}
-        fi
-        if [ ! -f ${index_file} ]; then
-            echo -e "${RED}\nFile not exist.\n${NORMAL}"
-            return 1
-        fi
-        # edit command
-        if [ "$1" = "edit" ]; then
-            vim ${index_file}
-            return 0
-        fi
-        # arguments = 2
-        if [ $# -eq 2 ]; then
-            echo -e ${GREEN}
-            cat -n ${index_file}
-            echo -e ${NORMAL}
-        else
-            # arguments > 2
-            local tmp_src_file=$(mktemp)
-            local i
-            for ((i=3; i<=$#; i++))
-            do
-                eval local line_range=\$\{${i}\}
-                line_range=${line_range/-/,}
-                if [ "${line_range}" = "_" ]; then
-                    line_range="1,$"
-                fi
-                sed -n "${line_range}p" ${index_file} >> ${tmp_src_file}
-                local file_index=$(sed -n '$=' ${tmp_src_file})
-            done
-            sed -i 's/\r$//g' ${tmp_src_file}
-            # operate file
-            case $1 in
-                copy)
-                    echo -e ${CYAN}; cat -n ${tmp_src_file}; echo -e ${NORMAL}
-                    case $(uname) in
-                        Linux)
-                            if [ ${file_index} -eq 1 ]; then
-                                 cat ${tmp_src_file} | tr -d \\n | xclip -selection clipboard
-                            else
-                                 cat ${tmp_src_file} | xclip -selection clipboard
-                            fi
-                            ;;
-                        Darwin)
-                            if [ ${file_index} -eq 1 ]; then
-                                 cat ${tmp_src_file} | tr -d \\n | pbcopy
-                            else
-                                 cat ${tmp_src_file} | pbcopy
-                            fi
-                            ;;
-                        *)
-                            echo -e "${RED}No support this OS.${NORMAL}"
-                            ;;
-                    esac
-                    ;;
-                exec)
-                    echo -e ${MAGENTA}; cat -n ${tmp_src_file}; echo -e ${NORMAL}
-                    source ${tmp_src_file}
-                    ;;
-                *)
-                    echo -e "${RED}No support this command.${NORMAL}"
-                    ;;
-            esac
-            rm -rf ${tmp_src_file}
-        fi
-    fi
-}
-
-# switch proxy on-off
-# $1: port 1-65536; null to display; else to close
-function proxy_cfg()
-{
-    if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
-        if [ -n "${proxy-}" ]; then
-            echo -e "${YELLOW}${proxy}${NORMAL}"
-        else
-            echo -e "${YELLOW}proxy disabled.${NORMAL}"
-        fi
-        return 0
-    fi
-    local port=$(echo $1 | sed 's/[^0-9]//g')
-    if [ ${port:=0} -gt 0  -a ${port} -lt 65536 ]; then
-        if [ -f /.dockerenv ]; then
-            local proxy_url="http://host.docker.internal:${port}"
-        else
-            local proxy_url="http://localhost:${port}"
-        fi
-        export proxy=${proxy_url}
-        export http_proxy=${proxy_url}
-        export https_proxy=${proxy_url}
-        export ftp_proxy=${proxy_url}
-        echo -e "${GREEN}${proxy}${NORMAL}"
-    else
-        unset proxy http_proxy https_proxy ftp_proxy
-        echo -e "${RED}porxy cloesd.${NORMAL}"
-    fi
-}
-
 ##########################
 # Modify for Vagrant
 ##########################
@@ -587,7 +593,6 @@ function vagrant_ps()
         vagrant global-status
         echo -e ${NORMAL}
     fi
-
 }
 
 ##########################

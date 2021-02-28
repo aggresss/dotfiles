@@ -199,159 +199,9 @@ function git_prompt {
   }
 }
 
-<########################
- # PoSH for Common
- ########################>
-
-# short for cd ..
-function .. { Set-Location .. }
-function ... { Set-Location ../.. }
-function .... { Set-Location ../../../ }
-function ..... { Set-Location ../../../../ }
-
-function u { . $profile }
-function ll {
-  if ((Get-Command ls).CommandType -eq "Application") {
-    ls -al
-  }
-  else {
-    Get-ChildItem -Attributes !System, Hidden
-  }
-}
-
-function cd_scratch {
-  $s_path = "${HOME}/workspace-scratch"
-  if (-not $(Test-Path $s_path)) {
-    New-Item $s_path -ItemType directory -Force
-  }
-  Set-Location $s_path
-}
-Set-Alias s cd_scratch
-
-function cd_formal {
-  $f_path = "${HOME}/workspace-formal"
-  if (-not $(Test-Path $f_path)) {
-    New-Item $f_path -ItemType directory -Force
-  }
-  Set-Location $f_path
-}
-Set-Alias f cd_formal
-
-function cd_documents {
-  $doc_path = "${HOME}/Documents"
-  if (-not $(Test-Path $doc_path)) {
-    New-Item $doc_path -ItemType directory -Force
-  }
-  Set-Location $doc_path
-}
-Set-Alias m cd_documents
-
-function cd_downloads {
-  $down_path = "${HOME}/Downloads"
-  if (-not $(Test-Path $down_path)) {
-    New-Item $down_path -ItemType directory -Force
-  }
-  Set-Location $down_path
-}
-Set-Alias d cd_downloads
-
-function code_user {
-  if ($IsWindows -or $Env:OS) {
-    Set-Location ${Env:APPDATA}/Code/User
-  }
-  elseif ($(uname) -eq "Darwin") {
-    Set-Location ${HOME}/Library/Application Support/Code/User
-  }
-  elseif ($(uname) -eq "Linux") {
-    Set-Location ${HOME}/.config/Code/User
-  }
-}
-
-# SSH
-
-function ssh_agent_env {
-  Param (
-    [Parameter(Mandatory = $false)] [String]$ssh_agent_config
-  )
-  if ((-not $ssh_agent_config) -and (Test-Path ${HOME}/.ssh-agent.conf)) {
-    $ssh_agent_config = Get-Content -Path ${HOME}/.ssh-agent.conf
-  }
-  $lines = $ssh_agent_config.Split(";")
-  foreach ($line in $lines) {
-    if (([string]$line).Trim() -match "(.+)=(.*)") {
-      [Environment]::SetEnvironmentVariable($matches[1], $matches[2], "Process")
-    }
-  }
-}
-
-# ssh-add -l > $null 2>&1
-# $LastExitCode=0 means the socket is there and it has a key
-# $LastExitCode=1 means the socket is there but contains no key
-# $LastExitCode=2 means the socket is not there or broken
-function ssh_agent_check {
-  ssh-add -l > $null 2>&1; $ssh_add_ret = $LastExitCode
-  if ($IsWindows -or $Env:OS) {
-    return $ssh_add_ret
-  }
-  if (($ssh_add_ret -eq 2) -and (Test-Path ${HOME}/.ssh-agent.conf)) {
-    ssh_agent_env
-    ssh-add -l > $null 2>&1; $ssh_add_ret = $LastExitCode
-  }
-  if ($ssh_add_ret -eq 2) {
-    ssh-agent | Out-File -FilePath ${HOME}/.ssh-agent.conf
-    ssh_agent_env
-    ssh-add -l > $null 2>&1; $ssh_add_ret = $LastExitCode
-  }
-  return $ssh_add_ret
-}
-
-function ssh_agent_add {
-  $ssh_add_ret = $(ssh_agent_check)
-  $sshAgentPid = [Environment]::GetEnvironmentVariable("SSH_AGENT_PID", "Process")
-  if (-not $sshAgentPid) { $sshAgentPid = "NOCONFIG" }
-  switch ($ssh_add_ret) {
-    0 {
-      Write-Host "Agent pid $sshAgentPid" -ForegroundColor Yellow
-      ssh-add -l
-    }
-    1 {
-      Write-Host "Agent pid $sshAgentPid" -ForegroundColor Yellow
-      ssh-add
-    }
-    Default {
-      Write-Host "No ssh-agent found" -ForegroundColor Red
-    }
-  }
-}
-Set-Alias a ssh_agent_add
-
-function ssh_agent_del {
-  ssh-add -d
-}
-Set-Alias k ssh_agent_del
-
-# ssh_copy
-# args[0] source file
-# args[1] target file
-function ssh_copy {
-  if ($args.Count -ne 2 ) {
-    Get-ChildItem -Path ${HOME}/.ssh/*.pub |
-    ForEach-Object {
-      Write-Host "`t" $_.Name.TrimEnd("\.pub") -ForegroundColor DarkYellow
-    }
-    return
-  }
-  ${src_file} = "${HOME}/.ssh/id_rsa"
-  if ($args[0] -ne "_") {
-    ${src_file} = ${src_file} + "_" + $args[0]
-  }
-  ${dest_file} = "${HOME}/.ssh/id_rsa"
-  if ($args[1] -ne "_") {
-    ${dest_file} = ${dest_file} + "_" + $args[1]
-  }
-  Copy-Item -Path "${src_file}" -Destination "${dest_file}" -Verbose
-  Copy-Item -Path "${src_file}.pub" -Destination "${dest_file}.pub" -Verbose
-}
+<############################
+ # Source File for PowerShell
+ ############################>
 
 # source_file
 # args[0] exec/copy/edit
@@ -462,6 +312,7 @@ function source_file {
     }
   }
 }
+
 function source_file_exec {
   $run_script = "source_file exec"
   foreach ($a in $args) {
@@ -469,7 +320,7 @@ function source_file_exec {
   }
   $run_script | Invoke-Expression
 }
-Set-Alias x source_file_exec
+
 function source_file_copy {
   $run_script = "source_file copy"
   foreach ($a in $args) {
@@ -477,7 +328,6 @@ function source_file_copy {
   }
   $run_script | Invoke-Expression
 }
-Set-Alias c source_file_copy
 
 function source_file_edit {
   $run_script = "source_file edit"
@@ -486,7 +336,166 @@ function source_file_edit {
   }
   $run_script | Invoke-Expression
 }
+
+Set-Alias c source_file_copy
+Set-Alias x source_file_exec
 Set-Alias e source_file_edit
+
+<########################
+ # PoSH for Common
+ ########################>
+
+# short for cd ..
+function .. { Set-Location .. }
+function ... { Set-Location ../.. }
+function .... { Set-Location ../../../ }
+function ..... { Set-Location ../../../../ }
+
+function u { . $profile }
+function ll {
+  if ((Get-Command ls).CommandType -eq "Application") {
+    ls -al
+  }
+  else {
+    Get-ChildItem -Attributes !System, Hidden
+  }
+}
+
+function cd_scratch {
+  $s_path = "${HOME}/workspace-scratch"
+  if (-not $(Test-Path $s_path)) {
+    New-Item $s_path -ItemType directory -Force
+  }
+  Set-Location $s_path
+}
+Set-Alias s cd_scratch
+
+function cd_formal {
+  $f_path = "${HOME}/workspace-formal"
+  if (-not $(Test-Path $f_path)) {
+    New-Item $f_path -ItemType directory -Force
+  }
+  Set-Location $f_path
+}
+Set-Alias f cd_formal
+
+function cd_documents {
+  $doc_path = "${HOME}/Documents"
+  if (-not $(Test-Path $doc_path)) {
+    New-Item $doc_path -ItemType directory -Force
+  }
+  Set-Location $doc_path
+}
+Set-Alias m cd_documents
+
+function cd_downloads {
+  $down_path = "${HOME}/Downloads"
+  if (-not $(Test-Path $down_path)) {
+    New-Item $down_path -ItemType directory -Force
+  }
+  Set-Location $down_path
+}
+Set-Alias d cd_downloads
+
+function code_user {
+  if ($IsWindows -or $Env:OS) {
+    Set-Location ${Env:APPDATA}/Code/User
+  }
+  elseif ($(uname) -eq "Darwin") {
+    Set-Location ${HOME}/Library/Application Support/Code/User
+  }
+  elseif ($(uname) -eq "Linux") {
+    Set-Location ${HOME}/.config/Code/User
+  }
+}
+
+<########################
+ # PoSH for SSH
+ ########################>
+
+function ssh_agent_env {
+  Param (
+    [Parameter(Mandatory = $false)] [String]$ssh_agent_config
+  )
+  if ((-not $ssh_agent_config) -and (Test-Path ${HOME}/.ssh-agent.conf)) {
+    $ssh_agent_config = Get-Content -Path ${HOME}/.ssh-agent.conf
+  }
+  $lines = $ssh_agent_config.Split(";")
+  foreach ($line in $lines) {
+    if (([string]$line).Trim() -match "(.+)=(.*)") {
+      [Environment]::SetEnvironmentVariable($matches[1], $matches[2], "Process")
+    }
+  }
+}
+
+# ssh-add -l > $null 2>&1
+# $LastExitCode=0 means the socket is there and it has a key
+# $LastExitCode=1 means the socket is there but contains no key
+# $LastExitCode=2 means the socket is not there or broken
+function ssh_agent_check {
+  ssh-add -l > $null 2>&1; $ssh_add_ret = $LastExitCode
+  if ($IsWindows -or $Env:OS) {
+    return $ssh_add_ret
+  }
+  if (($ssh_add_ret -eq 2) -and (Test-Path ${HOME}/.ssh-agent.conf)) {
+    ssh_agent_env
+    ssh-add -l > $null 2>&1; $ssh_add_ret = $LastExitCode
+  }
+  if ($ssh_add_ret -eq 2) {
+    ssh-agent | Out-File -FilePath ${HOME}/.ssh-agent.conf
+    ssh_agent_env
+    ssh-add -l > $null 2>&1; $ssh_add_ret = $LastExitCode
+  }
+  return $ssh_add_ret
+}
+
+function ssh_agent_add {
+  $ssh_add_ret = $(ssh_agent_check)
+  $sshAgentPid = [Environment]::GetEnvironmentVariable("SSH_AGENT_PID", "Process")
+  if (-not $sshAgentPid) { $sshAgentPid = "NOCONFIG" }
+  switch ($ssh_add_ret) {
+    0 {
+      Write-Host "Agent pid $sshAgentPid" -ForegroundColor Yellow
+      ssh-add -l
+    }
+    1 {
+      Write-Host "Agent pid $sshAgentPid" -ForegroundColor Yellow
+      ssh-add
+    }
+    Default {
+      Write-Host "No ssh-agent found" -ForegroundColor Red
+    }
+  }
+}
+Set-Alias a ssh_agent_add
+
+function ssh_agent_del {
+  ssh-add -d
+}
+Set-Alias k ssh_agent_del
+
+# ssh_copy
+# args[0] source file
+# args[1] target file
+function ssh_copy {
+  if ($args.Count -ne 2 ) {
+    Get-ChildItem -Path ${HOME}/.ssh/*.pub |
+    ForEach-Object {
+      Write-Host "`t" $_.Name.TrimEnd("\.pub") -ForegroundColor DarkYellow
+    }
+    return
+  }
+  ${src_file} = "${HOME}/.ssh/id_rsa"
+  if ($args[0] -ne "_") {
+    ${src_file} = ${src_file} + "_" + $args[0]
+  }
+  ${dest_file} = "${HOME}/.ssh/id_rsa"
+  if ($args[1] -ne "_") {
+    ${dest_file} = ${dest_file} + "_" + $args[1]
+  }
+  Copy-Item -Path "${src_file}" -Destination "${dest_file}" -Verbose
+  Copy-Item -Path "${src_file}.pub" -Destination "${dest_file}.pub" -Verbose
+}
 
 <########################
  # PoSH for Git
