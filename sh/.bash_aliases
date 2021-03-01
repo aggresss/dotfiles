@@ -1115,5 +1115,3 @@ function mvn_exec () {
         mvn exec:java -Dexec.mainClass="$1" -Dexec.args="${exec_args# }"
     fi
 }
-
-# end of .bash_aliases
