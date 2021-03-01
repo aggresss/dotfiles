@@ -294,12 +294,6 @@ case $(uname) in
         # ls colours
         export CLICOLOR=1
         export LSCOLORS=ExGxFxDxCxegedabagacad
-        # use "brew install gnu-*" instead of bsd-*
-        alias sed='gsed'
-        alias awk='gawk'
-        alias tar='gtar'
-        alias find='gfind'
-        alias seq='gseq'
         # open application from command
         alias preview='open -a Preview'
         alias typora='open -a Typora'
