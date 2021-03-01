@@ -6,10 +6,23 @@
 
 ## How To Use
 
+### Bash/Zsh
+
 ```shell
 curl https://raw.githubusercontent.com/aggresss/dotfiles/master/bin/update_dotfiles.sh -sSf | bash
 ```
 
+### PowerShell
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+New-Item -Path "$PROFILE" -ItemType "file" -Force
+Invoke-WebRequest `
+    -Uri https://raw.githubusercontent.com/aggresss/dotfiles/master/powershell/Microsoft.PowerShell_profile.ps1 `
+    -OutFile $PROFILE
+Unblock-File $PROFILE
+
+```
 ## $HOME Filesystem Hierarchy Standard
 
 ### 1. Common
