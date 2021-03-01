@@ -423,11 +423,6 @@ if ($IsWindows -or $Env:OS) {
   }
 }
 elseif ($(uname) -eq "Darwin") {
-  # use "brew install gnu-*" instead of bsd-*
-  Set-Alias -Name sed -Value gsed
-  Set-Alias -Name awk -Value gawk
-  Set-Alias -Name tar -Value gtar
-  Set-Alias -Name find -Value gfind
   # open application from command
   function preview { open -a Preview $args }
   function typora { open -a Typora $args }
