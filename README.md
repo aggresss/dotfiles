@@ -38,11 +38,8 @@ Unblock-File $PROFILE
 | Drectory | Type | Illustrate |
 |---|---|---|
 | `~/bin/` | *Auto Generation* | user executable files |
-| `~/bak/` | ***Periodic Backup*** | backup cache |
-| `~/tmp/` | **Delete Anytime** | temporary cache |
 | `~/workspace-scratch/` | *Auto Generation* | code workbench |
 | `~/workspace-formal/` | *Auto Generation* | code reference |
-| `~/toolchain/` | *Auto Generation* | toolchain repository |
 | `~/note/` | ***Periodic Backup*** | notebook sort by classify |
 
 ### 3. Software
@@ -79,22 +76,16 @@ Unblock-File $PROFILE
 | `~/env/` | **Delete Anytime** | python virtualenv directory |
 | `~/.local/` | *Auto Generation* | pip user directory |
 
-### npm
+#### npm
 
 | Drectory | Type | Illustrate |
 |---|---|---|
 | `~/.local/` | *Auto Generation* | npm global directory |
 
-#### Eclipse
+#### Perl
 | Drectory | Type | Illustrate |
 |---|---|---|
-| `~/.local/eclipse/` | *Auto Generation* | default eclipse install directory |
-| `~/eclipse-workspace/` | *Auto Generation* | default eclipse workspace directory |
-
-#### Visual Studio Code
-| Drectory | Type | Illustrate |
-|---|---|---|
-| `~/code-workspace/` | *Auto Generation* | default Visual Studio Code workspace directory |
+| `~/perl5/` | *Auto Generation* | default local::lib directory |
 
 ## Stargazers over time
 
