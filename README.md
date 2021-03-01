@@ -6,13 +6,13 @@
 
 ## How To Use
 
-### Bash/Zsh
+- **Bash/Zsh**
 
 ```shell
 curl https://raw.githubusercontent.com/aggresss/dotfiles/master/bin/update_dotfiles.sh -sSf | bash
 ```
 
-### PowerShell
+- **PowerShell**
 
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
