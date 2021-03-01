@@ -38,9 +38,9 @@ Unblock-File $PROFILE
 | Drectory | Type | Illustrate |
 |---|---|---|
 | `~/bin/` | *Auto Generation* | user executable files |
+| `~/note/` | ***Periodic Backup*** | notebook sort by classify |
 | `~/workspace-scratch/` | *Auto Generation* | code workbench |
 | `~/workspace-formal/` | *Auto Generation* | code reference |
-| `~/note/` | ***Periodic Backup*** | notebook sort by classify |
 
 ### 3. Software
 
@@ -86,7 +86,3 @@ Unblock-File $PROFILE
 | Drectory | Type | Illustrate |
 |---|---|---|
 | `~/perl5/` | *Auto Generation* | default local::lib directory |
-
-## Stargazers over time
-
-[![Stargazers over time](https://starchart.cc/aggresss/dotfiles.svg)](https://starchart.cc/aggresss/dotfiles)
