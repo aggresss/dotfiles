@@ -453,6 +453,7 @@ function .... { Set-Location ../../../ }
 function ..... { Set-Location ../../../../ }
 
 function u { . $profile }
+function o { Write-Output $? }
 function ll {
   if ((Get-Command ls).CommandType -eq "Application") {
     ls -al
