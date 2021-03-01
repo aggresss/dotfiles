@@ -6,11 +6,13 @@
 
 # when leaving the console clear the screen to increase privacy
 
-if [ "$SHLVL" = 1 ]; then
+if [ "$SHLVL" = 1 ]
+then
     [ -x /usr/bin/clear_console ] && /usr/bin/clear_console -q
 fi
 
 # ssh-agent
-if [ ${SSH_AGENT_PID:-NoDefine} != "NoDefine" ] ; then
+if [ ${SSH_AGENT_PID:-NoDefine} != "NoDefine" ]
+then
   eval `ssh-agent -k`
 fi
