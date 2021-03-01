@@ -5,6 +5,7 @@
 # ~/.zlogout: executed by zsh(1) when login shell exits.
 
 # ssh-agent
-if [ ${SSH_AGENT_PID:-NoDefine} != "NoDefine" ] ; then
+if [ ${SSH_AGENT_PID:-NoDefine} != "NoDefine" ]
+then
   eval `ssh-agent -k`
 fi
