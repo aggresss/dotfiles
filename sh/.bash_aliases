@@ -402,21 +402,11 @@ alias mv='mv -i'
 # Generate GNU standard files
 alias make_gnu='touch AUTHORS COPYING ChangeLog NEWS README'
 # alias for fast command
-if [ -f /.dockerenv ]
-then
-    alias s='cd /mnt/workspace-scratch'
-    alias f='cd /mnt/workspace-formal'
-    alias d='cd /mnt/Downloads'
-    alias m='cd /mnt/Documents'
-else
-    mkdir -p ${HOME}/workspace-scratch
-    mkdir -p ${HOME}/workspace-formal
-    alias s='cd ${HOME}/workspace-scratch'
-    alias f='cd ${HOME}/workspace-formal'
-    alias d='cd ${HOME}/Downloads'
-    alias m='cd ${HOME}/Documents'
-fi
-
+function mkdir_cd { mkdir -p $1 && cd $1 }
+alias s='mkdir_cd ${HOME}/workspace-scratch'
+alias f='mkdir_cd ${HOME}/workspace-formal'
+alias d='mkdir_cd ${HOME}/Downloads'
+alias m='mkdir_cd ${HOME}/Documents'
 # $1 download url
 # $2 local filepath
 function update_file () {
