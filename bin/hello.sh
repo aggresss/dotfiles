@@ -145,8 +145,7 @@ END
         cat << END > /tmp/hello.sh
 #!/usr/bin/env bash
 
-function hello()
-{
+function hello () {
     echo "\$(echo "Hello, World!")"
 }
 
