@@ -404,12 +404,6 @@ if ($IsWindows -or $Env:OS) {
     $emacs_path = (Get-ChildItem $emacs_wildcard)[-1].FullName -replace ' ', '` '
     function emacs { "$emacs_path -nw $args" | Invoke-Expression }
   }
-  # lua
-  $lua_wildcard = "${Env:UserProfile}\lua\*\lua[0-9]*.exe"
-  if ($(Test-Path $lua_wildcard)) {
-    $lua_path = Get-ChildItem $lua_wildcard
-    Set-Alias lua $lua_path[-1].FullName
-  }
   # vscode
   $code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe" -replace ' ', '` '
   if ($(Test-Path $code_path)) {
@@ -786,11 +780,11 @@ function git_leave {
 }
 
 function git_log {
-  git log --oneline
+  git log --oneline $args
 }
 
 function git_diff {
-  git diff --name-status
+  git diff --name-status $args
 }
 
 function git_branch {
