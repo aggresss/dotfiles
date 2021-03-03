@@ -90,6 +90,7 @@ sudo apt-get update && sudo apt-get install -y \
     autopoint \
     nodejs \
     lua5.1 \
+    ruby \
     libssl-dev \
     libproxy-dev \
     libxml2-dev \
