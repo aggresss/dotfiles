@@ -461,8 +461,8 @@ function mkdir_cd {
   }
   Set-Location $folder_name
 }
-function s { mkdir_cd "${HOME}/workspace-formal" }
-function f { mkdir_cd "${HOME}/workspace-scratch" }
+function s { mkdir_cd "${HOME}/workspace-scratch" }
+function f { mkdir_cd "${HOME}/workspace-formal" }
 function d { mkdir_cd "${HOME}/Downloads" }
 function m { mkdir_cd "${HOME}/Documents" }
 
