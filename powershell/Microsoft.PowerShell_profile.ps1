@@ -303,7 +303,7 @@ function source_file {
         $output_clipboard += $str.Content.ToString()
       }
       if ((Get-Command xclip).CommandType -eq "Application") {
-        cat ${tmp_src_file} | xclip -selection clipboard
+        $output_clipboard | xclip -selection clipboard
       } else {
         Set-Clipboard $output_clipboard
       }
