@@ -263,10 +263,21 @@ printHello("Hello, World!")
 
 END
     echo "/tmp/hello.lua"
+    chmod +x /tmp/hello.lua
+    ;;
+    rb)
+    cat << END > /tmp/hello.rb
+#!/usr/bin/env ruby
+
+puts "Hello, World!"
+
+END
+    echo "/tmp/hello.rb"
+    chmod +x /tmp/hello.rb
     ;;
     *)
         echo -e "${GREEN}Support Lang:"
-        echo -e "  c\n  h\n  cpp\n  go\n  rs\n  py\n  sh\n  pl\n  cmake\n  make\n  nodejs\n  html\n  java\n  lua\n${NORMAL}"
+        echo -e "  c\n  h\n  cpp\n  go\n  rs\n  py\n  sh\n  pl\n  cmake\n  make\n  nodejs\n  html\n  java\n  lua\n  rb\n${NORMAL}"
     ;;
 esac
 
