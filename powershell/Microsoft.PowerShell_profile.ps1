@@ -445,7 +445,7 @@ function u { . $profile }
 function o { Write-Output $? }
 function ll {
   if ((Get-Command ls).CommandType -eq "Application") {
-    ls -al
+    "ls -al" | Invoke-Expression
   }
   else {
     Get-ChildItem -Attributes !System, Hidden
