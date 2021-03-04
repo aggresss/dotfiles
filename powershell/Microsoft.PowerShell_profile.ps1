@@ -541,7 +541,7 @@ function update_configfiles {
     }
     # pip
     if (Get-Command pip -errorAction SilentlyContinue) {
-      update_internal $true "pip/pip.conf" "${HOME}/.pip/pip.conf"
+      update_internal $true "pip/pip.conf" "${HOME}/pip/pip.ini"
     }
     # npm
     if (Get-Command npm -errorAction SilentlyContinue) {
