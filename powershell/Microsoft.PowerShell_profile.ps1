@@ -303,7 +303,6 @@ function source_file {
         $output_clipboard += $str.Content.ToString()
       }
       Set-Clipboard $output_clipboard
-      }
     }
     elseif ($args[0] -eq "exec") {
       $output_exec = ""
