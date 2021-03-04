@@ -302,7 +302,11 @@ function source_file {
       foreach ($str in $ReadyCacheArray) {
         $output_clipboard += $str.Content.ToString()
       }
-      Set-Clipboard $output_clipboard
+      if ((Get-Command xclip).CommandType -eq "Application") {
+        cat ${tmp_src_file} | xclip -selection clipboard
+      } else {
+        Set-Clipboard $output_clipboard
+      }
     }
     elseif ($args[0] -eq "exec") {
       $output_exec = ""
