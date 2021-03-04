@@ -452,41 +452,19 @@ function ll {
   }
 }
 
-function cd_scratch {
-  $s_path = "${HOME}/workspace-scratch"
-  if (-not $(Test-Path $s_path)) {
-    New-Item $s_path -ItemType directory -Force
+function mkdir_cd {
+  Param (
+    [Parameter(Mandatory = $true, Position = 0)] [string]$folder_name
+  )
+  if (-not $(Test-Path $folder_name)) {
+    New-Item $folder_name -ItemType directory -Force
   }
-  Set-Location $s_path
+  Set-Location $folder_name
 }
-Set-Alias s cd_scratch
-
-function cd_formal {
-  $f_path = "${HOME}/workspace-formal"
-  if (-not $(Test-Path $f_path)) {
-    New-Item $f_path -ItemType directory -Force
-  }
-  Set-Location $f_path
-}
-Set-Alias f cd_formal
-
-function cd_documents {
-  $doc_path = "${HOME}/Documents"
-  if (-not $(Test-Path $doc_path)) {
-    New-Item $doc_path -ItemType directory -Force
-  }
-  Set-Location $doc_path
-}
-Set-Alias m cd_documents
-
-function cd_downloads {
-  $down_path = "${HOME}/Downloads"
-  if (-not $(Test-Path $down_path)) {
-    New-Item $down_path -ItemType directory -Force
-  }
-  Set-Location $down_path
-}
-Set-Alias d cd_downloads
+function s { mkdir_cd "${HOME}/workspace-formal" }
+function f { mkdir_cd "${HOME}/workspace-scratch" }
+function d { mkdir_cd "${HOME}/Downloads" }
+function m { mkdir_cd "${HOME}/Documents" }
 
 # Update
 function update_internal {
