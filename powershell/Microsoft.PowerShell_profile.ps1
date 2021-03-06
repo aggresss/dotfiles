@@ -441,7 +441,7 @@ function ... { Set-Location ../.. }
 function .... { Set-Location ../../../ }
 function ..... { Set-Location ../../../../ }
 
-function u { . $profile }
+function u { . $PROFILE }
 function o { Write-Output $? }
 function ll {
   if ((Get-Command ls).CommandType -eq "Application") {
