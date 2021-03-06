@@ -616,7 +616,8 @@ function git_sig () {
     fi
 }
 
-# clone repo in hierarchy directory as site/org/repo
+# clone repo in hierarchy directory as org/repo
+# suit for https://site/org/repo.git or git@site:org/repo.git
 # $1 repo URI
 function git_clone () {
     local clone_path=$1
@@ -624,12 +625,14 @@ function git_clone () {
     clone_path=${clone_path#*://}
     # ssh
     clone_path=${clone_path#*@}
-    # match next slash
+    # match colon to slash
     clone_path=${clone_path/:/\/}
     # trim .git suffix
     clone_path=${clone_path%.git}
-    git clone $@ ${clone_path} && \
-    echo -e "\n${GREEN} Clone $1 on ${PWD}/${clone_path} successfully.${NORMAL}\n"
+    # trim site
+    clone_path=${clone_path#*/}
+    # excute
+    git clone $@ ${clone_path}
 }
 
 # Get pull request to local branch

@@ -787,10 +787,10 @@ function git_clone {
     Write-Host "Arguments error."
     return
   }
-  # strip suffix
+  # trim suffix
   $clone_path = $clone_path.replace(".git", "")
-
-  Write-Host Clone on $clone_path
+  # trim site
+  $clone_path = $clone_path.split("/", 2)[1]
   git clone $args $clone_path
 }
 
