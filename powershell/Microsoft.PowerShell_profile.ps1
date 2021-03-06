@@ -395,26 +395,30 @@ if ($IsWindows -or $Env:OS) {
   # vim
   $vim_wildcard = "${Env:ProgramFiles(x86)}\Vim\*\vim.exe"
   if ($(Test-Path $vim_wildcard)) {
-    $vim_path = Get-ChildItem $vim_wildcard
-    Set-Alias vim $vim_path[-1].FullName
+    Set-Alias vim (Get-ChildItem $vim_wildcard)[-1].FullName
   }
+  Remove-Variable -Name vim_wildcard
   # emacs
   $emacs_wildcard = "${Env:ProgramFiles}\Emacs\*\bin\emacs.exe"
   if ($(Test-Path $emacs_wildcard)) {
     $emacs_path = (Get-ChildItem $emacs_wildcard)[-1].FullName -replace ' ', '` '
     function emacs { "$emacs_path -nw $args" | Invoke-Expression }
   }
+  Remove-Variable -Name emacs_wildcard
+  Remove-Variable -Name emacs_path
   # vscode
   $code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe" -replace ' ', '` '
   if ($(Test-Path $code_path)) {
     function code { "${code_path} $args" | Invoke-Expression > $null 2>&1 }
   }
+  Remove-Variable -Name code_path
   # ${HOME}/bin
   $bin_path = "${HOME}/bin"
   if (-not $(Test-Path $bin_path)) {
     New-Item $bin_path -ItemType directory -Force
     env_insert "PATH" $bin_path "User"
   }
+  Remove-Variable -Name bin_path
 }
 elseif ($(uname) -eq "Darwin") {
   # open application from command
