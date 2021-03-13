@@ -179,22 +179,23 @@ alias p='git_prompt'
 # $2: filename or ~/note/* index
 # $3-: lines to execute
 function source_file () {
-    local index_range=$(ls -1p ${HOME}/note/* 2>/dev/null | sed -n '$=')
+    local note_dir="${HOME}/note"
+    local index_range=$(ls -1p ${note_dir}/* 2>/dev/null | sed -n '$=')
     if [ $# -le 1 ]
     then
-        if [ ! -d ${HOME}/note ]
+        if [ ! -d ${note_dir} ]
         then
-            mkdir -p ${HOME}/note
-            touch ${HOME}/note/note.common
+            mkdir -p ${note_dir}
+            touch ${note_dir}/note.common
         fi
         echo -e ${YELLOW}
-        ls -1p ${HOME}/note/* 2>/dev/null | cat -n
+        ls -1p ${note_dir}/* 2>/dev/null | cat -n
         echo -e ${NORMAL}
     else
         # arguments >= 2
         if [ ! -f $2 -a $2 -ge 1 -a $2 -le ${index_range} ] 2>/dev/null
         then
-            local index_file=$(ls -1p ${HOME}/note/* | sed -n "${2}p")
+            local index_file=$(ls -1p ${note_dir}/* | sed -n "${2}p")
         else
             local index_file=${2}
         fi
