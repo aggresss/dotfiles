@@ -1116,4 +1116,14 @@ function mvn_exec () {
     fi
 }
 
+###################
+# Rust for Bash/Zsh
+###################
+
+# environmnet for Rust
+if [ -d "$HOME/.cargo/bin" ]
+then
+    env_insert "PATH" "$HOME/.cargo/bin"
+fi
+
 # End of .bash_aliases
