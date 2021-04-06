@@ -295,7 +295,7 @@ function source_file {
       return
     }
     else {
-      $ReadyCacheArray
+      Write-Output $ReadyCacheArray
     }
     if ($args[0] -eq "copy") {
       $output_clipboard = @()
