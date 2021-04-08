@@ -802,6 +802,10 @@ function git_down () {
     esac
 }
 
+function git_latest () {
+    git describe --tags $(git rev-list --tags --max-count=1)
+}
+
 #####################
 # Vscode for Bash/Zsh
 #####################

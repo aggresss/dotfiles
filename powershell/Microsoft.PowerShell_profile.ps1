@@ -846,6 +846,10 @@ function git_global_set {
   git config --global push.default simple
 }
 
+function git_latest {
+  git describe --tags $(git rev-list --tags --max-count=1)
+}
+
 <#######################
  # VSCode for PowerShell
  #######################>
