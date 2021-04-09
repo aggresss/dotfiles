@@ -47,6 +47,7 @@ sudo apt-get update && sudo apt-get install -y \
     ccache \
     python-dev \
     python3-dev \
+    python-pip \
     virtualenv \
     pkg-config \
     flex \
