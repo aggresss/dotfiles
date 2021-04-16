@@ -301,6 +301,7 @@ case $(uname) in
         alias diffmerge='open -a DiffMerge'
         alias code='open -a Visual\ Studio\ Code'
         alias vlc='open -a VLC'
+        alias skim='open -a Skim'
         alias wps='open -a wpsoffice'
         alias drawio='open -a draw.io'
         alias chrome='open -a Google\ Chrome'
