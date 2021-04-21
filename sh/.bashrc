@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # fork from ubuntu:18.04 -> /etc/skel/.bashrc
-# wget https://raw.githubusercontent.com/aggresss/dotfiles/master/sh/.bashrc
+# wget https://raw.githubusercontent.com/aggresss/dotfiles/main/sh/.bashrc
 #
 
 if [ -x /usr/bin/dircolors ]

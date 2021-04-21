@@ -2,7 +2,7 @@ language: generic
 
 branches:
   only:
-  - master
+  - main
 
 jobs:
   include:

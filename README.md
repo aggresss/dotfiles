@@ -1,15 +1,15 @@
 # dotfiles
 
 [![Release Version](https://img.shields.io/github/v/release/aggresss/dotfiles)](https://github.com/aggresss/dotfiles/releases)
-[![License](https://img.shields.io/github/license/aggresss/dotfiles)](https://github.com/aggresss/dotfiles/blob/master/LICENSE)
-[![Build Status](https://www.travis-ci.org/aggresss/dotfiles.svg?branch=master)](https://www.travis-ci.org/aggresss/dotfiles)
+[![License](https://img.shields.io/github/license/aggresss/dotfiles)](https://github.com/aggresss/dotfiles/blob/main/LICENSE)
+[![Build Status](https://www.travis-ci.org/aggresss/dotfiles.svg?branch=main)](https://www.travis-ci.org/aggresss/dotfiles)
 
 ## How To Use
 
 - **Bash/Zsh**
 
 ```shell
-curl https://raw.githubusercontent.com/aggresss/dotfiles/master/bin/update_dotfiles.sh -sSf | bash
+curl https://raw.githubusercontent.com/aggresss/dotfiles/main/bin/update_dotfiles.sh -sSf | bash
 ```
 
 - **PowerShell**
@@ -18,7 +18,7 @@ curl https://raw.githubusercontent.com/aggresss/dotfiles/master/bin/update_dotfi
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 New-Item -Path "$PROFILE" -ItemType "file" -Force
 Invoke-WebRequest `
-    -Uri https://raw.githubusercontent.com/aggresss/dotfiles/master/powershell/Microsoft.PowerShell_profile.ps1 `
+    -Uri https://raw.githubusercontent.com/aggresss/dotfiles/main/powershell/Microsoft.PowerShell_profile.ps1 `
     -OutFile $PROFILE
 Unblock-File $PROFILE
 

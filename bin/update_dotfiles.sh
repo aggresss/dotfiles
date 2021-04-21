@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Update dotfiles from git@github.com:aggresss/dotfiles.git master branch
-# curl https://raw.githubusercontent.com/aggresss/dotfiles/master/bin/update_dotfiles.sh -sSf | bash
+# Update dotfiles from git@github.com:aggresss/dotfiles.git main branch
+# curl https://raw.githubusercontent.com/aggresss/dotfiles/main/bin/update_dotfiles.sh -sSf | bash
 
 # Remote or local
 if [ ${1:-NoDefine} = "local" ] && [ -d ${HOME}/workspace-scratch/dotfiles ]
@@ -9,7 +9,7 @@ then
     DOTFILES_URL="${HOME}/workspace-scratch/dotfiles"
 else
     UPDATE_METHOD="remote"
-    DOTFILES_URL="https://github.com/aggresss/dotfiles/raw/master"
+    DOTFILES_URL="https://github.com/aggresss/dotfiles/raw/main"
 fi
 
 # $1 download url
@@ -50,7 +50,7 @@ function update_file () {
     fi
 }
 
-echo "=== Update dotfiles from git@github.com:aggresss/dotfiles.git master branch  ==="
+echo "=== Update dotfiles from git@github.com:aggresss/dotfiles.git main branch  ==="
 
 # Update self
 if [ ${HAS_UPDATED:-NoDefine} = "NoDefine" ]

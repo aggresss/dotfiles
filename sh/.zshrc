@@ -1,5 +1,5 @@
 #
-# wget https://raw.githubusercontent.com/aggresss/dotfiles/master/sh/.zshrc
+# wget https://raw.githubusercontent.com/aggresss/dotfiles/main/sh/.zshrc
 #
 
 if [ -x /usr/bin/dircolors ]

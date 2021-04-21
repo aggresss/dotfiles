@@ -1,5 +1,5 @@
 # file .bash_aliases
-# wget https://raw.githubusercontent.com/aggresss/dotfiles/master/sh/.bash_aliases
+# wget https://raw.githubusercontent.com/aggresss/dotfiles/main/sh/.bash_aliases
 
 # color for echo
 BLACK=$'\e[30m'
@@ -740,7 +740,7 @@ function git_insteadof () {
 
 # Set git global set
 function git_global_set () {
-  local base_url="https://github.com/aggresss/dotfiles/raw/master"
+  local base_url="https://github.com/aggresss/dotfiles/raw/main"
   update_file ${base_url}/.gitignore ${HOME}/.gitignore
   git config --global core.excludesfile ${HOME}/.gitignore
   git config --global core.editor "vim"

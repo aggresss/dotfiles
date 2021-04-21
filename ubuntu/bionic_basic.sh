@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ubuntu bionic configuration file
 # Normal installation and Install third-party software.
-# wget https://raw.githubusercontent.com/aggresss/dotfiles/master/ubuntu/bionic.sh
+# wget https://raw.githubusercontent.com/aggresss/dotfiles/main/ubuntu/bionic.sh
 
 #########################
 # install necessary application

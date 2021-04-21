@@ -1,5 +1,5 @@
 ! ~/.Xresources config file
-! https://raw.githubusercontent.com/aggresss/dotfiles/master/sh/.Xresources
+! https://raw.githubusercontent.com/aggresss/dotfiles/main/sh/.Xresources
 
 ! xterm configuration file made by aggresss
 ! usage: xrdb ~/.Xresources

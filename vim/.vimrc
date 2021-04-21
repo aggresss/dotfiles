@@ -1,5 +1,5 @@
 " Vim config file composed by aggresss
-" https://raw.githubusercontent.com/aggresss/dotfiles/master/vim/.vimrc
+" https://raw.githubusercontent.com/aggresss/dotfiles/main/vim/.vimrc
 " reference: http://vimdoc.sourceforge.net/htmldoc/options.htm
 "
 " Initial configuration

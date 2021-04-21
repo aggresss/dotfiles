@@ -1,6 +1,6 @@
 <#
  # File: Microsoft.PowerShell_profile.ps1
- # URL: https://raw.githubusercontent.com/aggresss/dotfiles/master/PowerShell/Microsoft.PowerShell_profile.ps1
+ # URL: https://raw.githubusercontent.com/aggresss/dotfiles/main/PowerShell/Microsoft.PowerShell_profile.ps1
  # Before import this ps1 file, you need run these command:
  #     Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
  #>
@@ -478,7 +478,7 @@ function update_internal {
     [Parameter(Mandatory = $true, Position = 2)] [String]$Local
   )
   $local_base_path = "${HOME}/workspace-scratch/dotfiles"
-  $remote_base_url = "https://raw.githubusercontent.com/aggresss/dotfiles/master"
+  $remote_base_url = "https://raw.githubusercontent.com/aggresss/dotfiles/main"
   if ($IsLocal -and ($(Test-Path $local_base_path))) {
     if (-not $(Test-Path $(Split-Path -Path $Local))) {
       New-Item -ItemType Directory -Path $(Split-Path -Path $Local)
