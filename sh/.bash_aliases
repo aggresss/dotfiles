@@ -748,6 +748,7 @@ function git_global_set () {
   git config --global core.quotepath false
   git config --global pull.rebase false
   git config --global push.default simple
+  git config --global init.defaultBranch main
 }
 
 # Git fast add->commit->fetch->rebase->push ! Deprecated
