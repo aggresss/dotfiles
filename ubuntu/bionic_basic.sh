@@ -14,6 +14,7 @@ sudo apt-get update && sudo apt-get install -y \
     mc \
     tree \
     curl \
+    httpie \
     jq \
     zsh \
     emacs \

@@ -57,6 +57,7 @@ brew install \
     unzip \
     wget \
     curl \
+    httpie \
     xz \
     nodejs \
     ninja \
