@@ -54,6 +54,7 @@ sudo systemctl daemon-reload
 # Change Behavior of Power Button
 sudo sed -r -e 's/#HandlePowerKey=poweroff/HandlePowerKey=ignore/' -i /etc/systemd/logind.conf
 sudo systemctl daemon-reload
+sudo systemctl restart systemd-logind
 
 # disable apport
 sudo sed -r -e 's/enabled=1/enabled=0/' -i /etc/default/apport
