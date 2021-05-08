@@ -872,10 +872,10 @@ function code_user {
 
 # Run and mount private file
 function docker_private {
-  if ($(docker volume ls | Select-String root)) {
+  if (!$(docker volume ls | Select-String root)) {
     docker volume create root
   }
-  if ($(docker volume ls | Select-String home)) {
+  if (!$(docker volume ls | Select-String home)) {
     docker volume create home
   }
 
@@ -926,7 +926,7 @@ function docker_sudo {
 function docker_user {
   docker_private `
     --privileged=true `
-    --user docker `
+    --user=docker `
     $args
 }
 
