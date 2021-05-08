@@ -82,7 +82,7 @@ proxyAddress = "0.0.0.0"
 socksParentProxy = "127.0.0.1:1080"
 socksProxyType = socks5
 proxyPort = 8123
-allowedClients = 127.0.0.1, 172.17.0.0/16
+allowedClients = 127.0.0.1
 chunkHighMark = 50331648
 objectHighMark = 16384
 
@@ -93,21 +93,4 @@ sudo chown `id -nu 0` /etc/polipo/config
 # modify shadowsock mode from server to client
 sudo sed -r -e 's@DAEMON=/usr/bin/ssserver@DAEMON=/usr/bin/sslocal@' -i /etc/init.d/shadowsocks
 
-# python pip
-curl https://bootstrap.pypa.io/get-pip.py -sSf | sudo python
-curl https://bootstrap.pypa.io/get-pip.py -sSf | sudo python3
-
-mkdir -p ${HOME}/.pip
-cat << END > ${HOME}/.pip/pip.conf
-[global]
-index-url = https://mirrors.aliyun.com/pypi/simple/
-[install]
-trusted-host = mirrors.aliyun.com
-
-END
-
-# Rust
-curl https://sh.rustup.rs -sSf | sh
-
 # EOF
-
