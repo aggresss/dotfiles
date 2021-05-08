@@ -876,6 +876,7 @@ function docker_private () {
                 -v /tmp/.X11-unix/:/tmp/.X11-unix \
                 -v root:/root \
                 -v home:/home \
+                -v ${HOME}/note:/mnt/note \
                 -v ${HOME}/Downloads:/mnt/Downloads \
                 -v ${HOME}/Documents:/mnt/Documents \
                 -v ${HOME}/workspace-scratch:/mnt/workspace-scratch \
@@ -888,6 +889,7 @@ function docker_private () {
             docker run --rm -it \
                 -v root:/root \
                 -v home:/home \
+                -v ${HOME}/note:/mnt/note \
                 -v ${HOME}/Downloads:/mnt/Downloads \
                 -v ${HOME}/Documents:/mnt/Documents \
                 -v ${HOME}/workspace-scratch:/mnt/workspace-scratch \
