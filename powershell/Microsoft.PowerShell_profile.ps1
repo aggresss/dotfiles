@@ -866,6 +866,77 @@ function code_user {
   }
 }
 
+<######################
+# Docker for PowerShell
+#######################>
+
+# Run and mount private file
+function docker_private {
+  if ($(docker volume ls | Select-String root)) {
+    docker volume create root
+  }
+  if ($(docker volume ls | Select-String home)) {
+    docker volume create home
+  }
+
+  if ($IsWindows -or $Env:OS) {
+    docker run --rm -it `
+      -v root:/root `
+      -v home:/home `
+      -e DISPLAY=host.docker.internal:0 `
+      $args
+  }
+  elseif ($(uname) -eq "Darwin") {
+    xhost +localhost > /dev/null
+    docker run --rm -it `
+      -v root:/root `
+      -v home:/home `
+      -v ${HOME}/Downloads:/mnt/Downloads `
+      -v ${HOME}/Documents:/mnt/Documents `
+      -v ${HOME}/workspace-scratch:/mnt/workspace-scratch `
+      -v ${HOME}/workspace-formal:/mnt/workspace-formal `
+      -e DISPLAY=host.docker.internal:0 `
+      $args
+  }
+  elseif ($(uname) -eq "Linux") {
+    $docker_host = $(docker network inspect --format='{{range .IPAM.Config}}{{.Gateway}}{{end}}' bridge)
+    xhost +local:docker > /dev/null
+    docker run --rm -it `
+      --add-host=host.docker.internal:${docker_host} `
+      -v /tmp/.X11-unix/:/tmp/.X11-unix `
+      -v root:/root `
+      -v home:/home `
+      -v ${HOME}/Downloads:/mnt/Downloads `
+      -v ${HOME}/Documents:/mnt/Documents `
+      -v ${HOME}/workspace-scratch:/mnt/workspace-scratch `
+      -v ${HOME}/workspace-formal:/mnt/workspace-formal `
+      -e DISPLAY `
+      $args
+  }
+}
+
+# Run private with super privilage
+function docker_sudo {
+  docker_private `
+    --privileged=true `
+    $args
+}
+
+# Run private with user
+function docker_user {
+  docker_private `
+    --privileged=true `
+    --user docker `
+    $args
+}
+
+# killall containers
+function docker_kill {
+  if ($(docker ps -a -q)) {
+    docker rm -f $(docker ps -a -q)
+  }
+}
+
 <#######################
  # Golang for PowerShell
  #######################>
