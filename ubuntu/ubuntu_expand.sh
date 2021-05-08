@@ -2,6 +2,10 @@
 # configuration
 #########################
 
+# hostname
+sudo sed -r -e 's/preserve_hostname: false/preserve_hostname: true/' -i /etc/cloud/cloud.cfg
+# sudo hostnamectl set-hostname xxx
+
 # backlight
 sudo touch /usr/share/X11/xorg.conf.d/20-intel.conf
 sudo chown ${USER} /usr/share/X11/xorg.conf.d/20-intel.conf
