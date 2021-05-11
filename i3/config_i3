@@ -38,10 +38,10 @@ floating_modifier $mod
 # exec --no-startup-id xrandr --output HDMI-1 --primary --output VGA-1 --left-of HDMI-1 --rotate left
 
 # Set background
-exec --no-startup-id feh --bg-scale ~/Pictures/Wallpaper/default.jpg
+#exec --no-startup-id feh --bg-scale ~/.config/i3/winter_fog.jpg
+exec --no-startup-id xsetroot -solid "#3F3F3F"
 
 # Autostart
-exec --no-startup-id gnome-session
 exec --no-startup-id nm-applet
 exec --no-startup-id xset dpms 1800 0 0
 
@@ -168,7 +168,7 @@ bindsym $mod+r mode "resize"
 
 # Modify for app launch
 bindsym $mod+F1  exec "nautilus"
-bindsym $mod+F2  exec "gnome-screensaver-command -l"
+bindsym $mod+F2  exec "i3lock -c 3F3F3F"
 bindsym $mod+F3  exec "okular"
 bindsym $mod+F4  exec "gpicview"
 bindsym $mod+F5  exec "eclipse"

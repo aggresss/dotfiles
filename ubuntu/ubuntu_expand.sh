@@ -9,7 +9,7 @@ sudo sed -r -e 's/preserve_hostname: false/preserve_hostname: true/' -i /etc/clo
 # backlight
 sudo touch /usr/share/X11/xorg.conf.d/20-intel.conf
 sudo chown ${USER} /usr/share/X11/xorg.conf.d/20-intel.conf
-sudo cat << END > /usr/share/X11/xorg.conf.d/20-intel.conf
+sudo bash -c 'cat << END > /usr/share/X11/xorg.conf.d/20-intel.conf
 Section "Device"
     Identifier  "card0"
     Driver      "intel"
@@ -20,7 +20,7 @@ Section "Device"
     BusID       "PCI:0:2:0"
 EndSection
 
-END
+END'
 sudo chown `id -nu 0` /usr/share/X11/xorg.conf.d/20-intel.conf
 
 # timezone
@@ -28,9 +28,9 @@ sudo timedatectl set-timezone Asia/Shanghai
 
 # ssh
 if [ -f /etc/ssh/ssh_config ]; then
-    sudo cat << END >> /etc/ssh/ssh_config
+    sudo bash -c 'cat << END >> /etc/ssh/ssh_config
     ServerAliveInterval 60
-END
+END'
 fi
 
 # gdm3
@@ -41,9 +41,9 @@ sudo fcitx-autostart
 
 # nfs-kernel-server
 if [ -f /etc/default/nfs-kernel-server ]; then
-    sudo cat << END >> /etc/default/nfs-kernel-server
+    sudo bash -c 'cat << END >> /etc/default/nfs-kernel-server
 RPCNFSDOPTS="--nfs-version 2,3,4"
-END
+END'
 fi
 
 # fix: A stop job is runing ...
@@ -76,7 +76,7 @@ fi
 # polipo
 # see /usr/share/doc/polipo/examples/config.sample
 sudo chown ${USER} /etc/polipo/config
-cat << END >> /etc/polipo/config
+sudo bash -c 'cat << END >> /etc/polipo/config
 
 proxyAddress = "0.0.0.0"
 socksParentProxy = "127.0.0.1:1080"
@@ -86,11 +86,36 @@ allowedClients = 127.0.0.1
 chunkHighMark = 50331648
 objectHighMark = 16384
 
-END
+END'
 sudo chown `id -nu 0` /etc/polipo/config
 
 # shadowsocks
 # modify shadowsock mode from server to client
 sudo sed -r -e 's@DAEMON=/usr/bin/ssserver@DAEMON=/usr/bin/sslocal@' -i /etc/init.d/shadowsocks
+
+
+# i3lock
+# Reference: https://github.com/ruudud/i3wm-scripts
+
+sudo bash -c 'cat << END > /etc/systemd/system/i3lock@.service
+[Unit]
+Description=i3lock on sleep/suspend/hibernate
+Before=sleep.target
+
+[Service]
+User=%I
+Type=forking
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/i3lock -c 3F3F3F
+
+[Install]
+WantedBy=sleep.target
+WantedBy=suspend.target
+WantedBy=hibernate.target
+
+END'
+
+sudo systemctl enable i3lock@$USER
+
 
 # EOF

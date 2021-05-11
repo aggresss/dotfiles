@@ -130,6 +130,7 @@ sudo apt-get update && sudo apt-get install -y \
     awesome \
     i3 \
     i3status \
+    i3lock \
     xmonad \
     xmobar \
     dwm \
