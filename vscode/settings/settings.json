@@ -13,8 +13,6 @@
 	"editor.semanticHighlighting.enabled": true,
 	"editor.fontFamily": "'JetBrains Mono', Menlo, DejaVu, 'Cascadia Code', Consolas, 'Courier New', monospace",
 	"terminal.integrated.fontSize": 12,
-	"terminal.integrated.rendererType": "dom",
-	"terminal.integrated.shell.osx": "/bin/zsh",
 	"explorer.confirmDragAndDrop": false,
 	"explorer.confirmDelete": false,
 	"files.trimTrailingWhitespace": true,
