@@ -933,7 +933,7 @@ function docker_kill () {
 # fast echo gopath
 alias g='go_path'
 # echo current GOPATH
-alias go_path='env_print GOPATH'
+alias go_path='env_list GOPATH'
 # mkdir for golang workspace
 alias go_workspace='mkdir -p src pkg bin'
 

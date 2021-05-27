@@ -959,7 +959,7 @@ function go_reset {
 }
 function go_pwd { env_amend GOPATH "${PWD}" }
 
-function go_path { env_print GOPATH }
+function go_path { env_list GOPATH }
 Set-Alias g go_path
 
 function go_clone {
