@@ -962,8 +962,10 @@ fi
 
 # print go env
 function go_env () {
-    echo -e "${GREEN}GOPATH:${NORMAL}\n" `env_list GOPATH`
-    echo -e "${GREEN}GODEBUG:${NORMAL}\n" `env_list GODEBUG`
+    echo -e "${GREEN}GOPATH:${NORMAL}"
+    env_list GOPATH
+    echo -e "${GREEN}GODEBUG:${NORMAL}"
+    env_list GODEBUG
 }
 
 # reset $GOPATH
