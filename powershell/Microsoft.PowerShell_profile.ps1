@@ -959,8 +959,13 @@ function go_reset {
 }
 function go_pwd { env_amend GOPATH "${PWD}" }
 
-function go_path { env_list GOPATH }
-Set-Alias g go_path
+function go_env {
+  Write-Host "GOPATH" -ForegroundColor Green
+  env_list GOPATH
+  Write-Host "GODEBUG" -ForegroundColor Green
+  env_list GODEBUG
+}
+Set-Alias g go_env
 
 function go_clone {
   $clone_path = $args[0]

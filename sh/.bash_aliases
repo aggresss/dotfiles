@@ -930,10 +930,8 @@ function docker_kill () {
 # Golang for Bash/Zsh
 #####################
 
-# fast echo gopath
-alias g='go_path'
-# echo current GOPATH
-alias go_path='env_list GOPATH'
+# fast echo go env
+alias g='go_env'
 # mkdir for golang workspace
 alias go_workspace='mkdir -p src pkg bin'
 
@@ -961,6 +959,12 @@ if [ ${GOPATH_BAK:-NOCONFIG} = "NOCONFIG" ]
 then
     GOPATH_BAK=${GOPATH-}
 fi
+
+# print go env
+function go_env () {
+    echo -e "${GREEN}GOPATH:${NORMAL}\n" `env_list GOPATH`
+    echo -e "${GREEN}GODEBUG:${NORMAL}\n" `env_list GODEBUG`
+}
 
 # reset $GOPATH
 function go_reset () {
