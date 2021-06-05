@@ -1,23 +1,5 @@
 # global gitignore file
-
-# cmake project file
-CMakeCache.txt
-CMakeFiles/
-
-# autotools project file
-configure.scan
-autoscan.log
-config.log
-autom4te.cache/
-stamp-h1
-.deps/
-config.status
-
-# eclipse project file
-.project
-.cproject
-.settings/
-.autotools
+*.out
 
 # vscode project file
 .vscode/

@@ -79,7 +79,19 @@ END
     cpp)
         cat << END > /tmp/hello.cpp
 #include <iostream>
-int main()
+
+class Foo {
+   public:
+
+   protected:
+   private:
+};
+
+struct Bar {
+
+};
+
+int main(int argc, const char * argv[])
 {
     std::cout << "Hello, World!" << std::endl;
     return 0;
