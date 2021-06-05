@@ -1,5 +1,5 @@
 {
-	"package main": {
+	"snippets main": {
 		"prefix": "main",
 		"body":[
 			"package main\n",
@@ -11,7 +11,7 @@
 			"\t$2",
 			"}"
 		],
-		"description": "short for package main"
+		"description": "snippets main"
 	}
 
 }

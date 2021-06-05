@@ -1,13 +1,27 @@
 {
-	"function main": {
+	"snippets main": {
 		"prefix": "main",
 		"body": [
-			"int main(int argc, char* argv[])",
+			"#include<iostream>",
+			"",
+			"class Foo {",
+			"  public:",
+			"    ",
+			"  protected:",
+			"  private:",
+			"};",
+			"",
+			"struct Bar {",
+			"};",
+			"",
+			"int main(int argc, char const* argv[])",
 			"{",
 			"    $2",
+			"    std::cout << \"\" << std::endl;",
 			"    return 0;",
-			"}"
+			"}",
+			""
 		],
-		"description": "function main"
+		"description": "snippets main"
 	}
 }
