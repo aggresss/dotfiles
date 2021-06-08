@@ -64,7 +64,7 @@ brew install \
     openjdk \
     redis
 
-brew cask install \
+brew install --cask\
     iterm2 \
     xquartz \
     barrier \
@@ -84,4 +84,5 @@ brew cask install \
     visual-studio-code \
     virtualbox \
     wireshark \
-    docker
+    docker \
+    mkvtoolnix
