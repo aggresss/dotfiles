@@ -967,27 +967,6 @@ function go_env {
 }
 Set-Alias g go_env
 
-function go_clone {
-  $clone_path = $args[0]
-  if ($clone_path -match "@") {
-    $clone_path = $clone_path.split("@")[1]
-    $clone_path = $clone_path.replace(":", "/")
-  }
-  elseif ($clone_path -match "://") {
-    $clone_path = $clone_path.split("/", 3)[2]
-  }
-  else {
-    Write-Host "Arguments error."
-    return
-  }
-  # strip suffix
-  $clone_path = $clone_path.replace(".git", "")
-  $repo_name = $clone_path.split("/")[-1]
-
-  Write-Host Clone on $repo_name/src/$clone_path
-  git clone $args $repo_name/src/$clone_path
-}
-
 function go_proxy {
   if (-not $Env:GOPROXY) {
     env_amend GOPROXY "https://goproxy.cn"

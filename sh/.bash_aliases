@@ -991,27 +991,6 @@ function go_proxy () {
     fi
 }
 
-# clone repo in hierarchy directory as site/org/repo for golang workspace
-# $1 repo URI
-function go_clone () {
-    local clone_path=$1
-    local repo_name=""
-    # https
-    clone_path=${clone_path#*://}
-    # ssh
-    clone_path=${clone_path#*@}
-    clone_path=${clone_path/:/\/}
-    # trim .git suffix
-    clone_path=${clone_path%.git}
-    # get repo name
-    repo_name=`echo "${clone_path}" | awk -F "/" '{print $NF}'`
-    # do clone
-    clone_path="${repo_name}/src/${clone_path}"
-    git clone $@ ${clone_path} && \
-        mkdir -p ${repo_name}/bin ${repo_name}/pkg && \
-        echo -e "\n${GREEN} Clone $1 on ${PWD}/${clone_path} successfully.${NORMAL}\n"
-}
-
 #####################
 # Python for Bash/Zsh
 #####################
