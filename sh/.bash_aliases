@@ -383,7 +383,8 @@ alias emacs='emacs -nw'
 alias emacsx='emacs'
 # alias for remove fast
 alias rm_archive='rm -rvf *.zip *.tgz *.bz2 *.gz *.dmg *.7z *.xz *.tar'
-alias rm_media='rm -rvf *.jpg *.jpeg *.png *.bmp *.gif *.mp3 *.acc *.wav *.mp4 *.flv *.mov *.avi *.ts *.wmv *.mkv'
+alias rm_picture='rm -rvf *.jpg *.jpeg *.png *.bmp *.gif *.webp'
+alias rm_media='rm -rvf *.mp3 *.acc *.wav *.wma *.mp4 *.webm *.mkv *.ogg *.flv *.mov *.avi *.wmv *.ts *.ivf *.h264'
 alias rm_doc='rm -rvf *.doc *.docx *.xls *.xlsx *.ppt *.pptx *.numbers *.pages *.key *.pdf'
 alias rm_ds='find . -name .DS_Store -exec rm -vf {} \;'
 # short for cd ..
