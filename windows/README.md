@@ -15,6 +15,14 @@ JetBrains Mono Font
 Sysinternals Suite
 - https://docs.microsoft.com/en-us/sysinternals/downloads/
 
+FFmpeg
+- https://www.gyan.dev/ffmpeg/builds/
+
+MKVToolnix
+- https://www.fosshub.com/MKVToolNix.html
+
+---
+
 ## Using ssh-agent with git on Windows
 
 ```
