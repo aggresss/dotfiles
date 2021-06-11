@@ -1,4 +1,5 @@
 {
+	"security.workspace.trust.enabled": false,
 	"workbench.startupEditor": "none",
 	"workbench.colorTheme": "Default Dark+",
 	"workbench.activityBar.visible": true,
