@@ -15,7 +15,7 @@
 			"ch := make(chan os.Signal, 1)",
 			"signal.Notify(ch, os.Interrupt, syscall.SIGTERM)",
 			"select {",
-			"case <-ch:",
+			"\tcase <-ch:",
 			"}\n"
 		],
 		"description": "snippets signal"
@@ -29,7 +29,7 @@
 			"\t\tcase <-time.After(time.Second):",
 			"\t\t}",
 			"\t}",
-			"}()"
+			"}()\n"
 		],
 		"description": "snippets go select"
 	}
