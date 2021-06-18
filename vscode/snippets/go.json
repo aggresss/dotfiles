@@ -19,5 +19,18 @@
 			"}\n"
 		],
 		"description": "snippets signal"
+	},
+	"snippets go select": {
+		"prefix": "go select",
+		"body":[
+			"go func() {",
+			"\tfor {",
+			"\t\tselect {",
+			"\t\tcase <-time.After(time.Second):",
+			"\t\t}",
+			"\t}",
+			"}()"
+		],
+		"description": "snippets go select"
 	}
 }
