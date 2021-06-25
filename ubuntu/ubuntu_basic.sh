@@ -80,6 +80,7 @@ sudo apt-get update && sudo apt-get install -y \
     lcov \
     systemtap \
     valgrind \
+    protobuf-compiler \
     oprofile \
     lttng-tools \
     linux-tools-generic \
