@@ -32,5 +32,18 @@
 			"}()\n"
 		],
 		"description": "snippets go select"
+	},
+	"snippets alphabet": {
+		"prefix": "alphabet",
+		"body":[
+			"var (",
+			"\talphabet = []string{",
+			"\t\t\"alpha\", \"bata\", \"gamma\", \"delta\", \"epsilon\", \"zeta\", \"eta\", \"theta\",",
+			"\t\t\"iota\", \"kappa\", \"lambda\", \"mu\", \"nu\", \"xi\", \"omicron\", \"pi\",",
+			"\t\t\"rho\", \"sigma\", \"tau\", \"upsilon\", \"phi\", \"chi\", \"psi\", \"omega\",",
+			"\t}",
+			")"
+		],
+		"description": "snippets alphabet"
 	}
 }
