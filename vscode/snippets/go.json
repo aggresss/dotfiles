@@ -7,7 +7,7 @@
 			"\t$2",
 			"}\n"
 		],
-		"description": "snippets main"
+		"description": ""
 	},
 	"snippets signal": {
 		"prefix": "signal",
@@ -18,7 +18,7 @@
 			"\tcase <-ch:",
 			"}\n"
 		],
-		"description": "snippets signal"
+		"description": ""
 	},
 	"snippets go select": {
 		"prefix": "go select",
@@ -31,7 +31,7 @@
 			"\t}",
 			"}()\n"
 		],
-		"description": "snippets go select"
+		"description": ""
 	},
 	"snippets alphabet": {
 		"prefix": "alphabet",
@@ -44,6 +44,6 @@
 			"\t}",
 			")"
 		],
-		"description": "snippets alphabet"
+		"description": ""
 	}
 }
