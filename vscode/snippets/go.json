@@ -9,8 +9,8 @@
 		],
 		"description": ""
 	},
-	"snippets signal": {
-		"prefix": "signal",
+	"snippets sigterm": {
+		"prefix": "sigterm",
 		"body":[
 			"ch := make(chan os.Signal, 1)",
 			"signal.Notify(ch, os.Interrupt, syscall.SIGTERM)",
@@ -42,7 +42,7 @@
 			"\t\t\"iota\", \"kappa\", \"lambda\", \"mu\", \"nu\", \"xi\", \"omicron\", \"pi\",",
 			"\t\t\"rho\", \"sigma\", \"tau\", \"upsilon\", \"phi\", \"chi\", \"psi\", \"omega\",",
 			"\t}",
-			")"
+			")\n"
 		],
 		"description": ""
 	}
