@@ -45,5 +45,13 @@
 			")\n"
 		],
 		"description": ""
+	},
+	"snippets http server": {
+		"prefix": "http server",
+		"body":[
+			"// _ \"net/http/pprof\"",
+			"fmt.Println((&http.Server{Addr: \":6070\"}).ListenAndServe().Error())\n"
+		],
+		"description": ""
 	}
 }
