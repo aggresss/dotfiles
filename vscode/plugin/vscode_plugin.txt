@@ -36,6 +36,6 @@ editorconfig.editorconfig
 # JSON
 eriklynd.json-tools
 # Markdown
-yzhang.markdown-all-in-one
+DavidAnson.vscode-markdownlint
 # PlantUML
 jebbs.plantuml
