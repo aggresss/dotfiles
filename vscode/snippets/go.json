@@ -53,5 +53,29 @@
 			"fmt.Println((&http.Server{Addr: \":6070\"}).ListenAndServe().Error())\n"
 		],
 		"description": ""
+	},
+	"snippets test case": {
+		"prefix": "test case",
+		"body":[
+			"// \"github.com/stretchr/testify/assert\"",
+			"func TestEqual(t *testing.T) {",
+			"\ttestCases := map[string]struct {",
+			"\t\tinput    int",
+			"\t\texpected int",
+			"\t}{",
+			"\t\t\"blank\": {",
+			"\t\t\tinput:    0,",
+			"\t\t\texpected: 0,",
+			"\t\t},",
+			"\t}",
+			"\tfor n, c := range testCases {",
+			"\t\tt.Run(n, func(t *testing.T) {",
+			"\t\t\tassert.Equal(t, c.expected, c.input)",
+			"\t\t})",
+			"\t}",
+			"}\n"
+		],
+		"description": ""
 	}
+
 }
