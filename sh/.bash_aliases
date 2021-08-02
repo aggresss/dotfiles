@@ -847,6 +847,16 @@ function docker_info () {
     echo -e "${RED}DOCKER_TLS_VERIFY: ${GREEN}${DOCKER_TLS_VERIFY}${NORMAL}"
 }
 
+function docker_unset () {
+    unset DOCKER_HOST
+    unset DOCKER_CERT_PATH
+    unset DOCKER_TLS_VERIFY
+}
+
+function docker_minikube () {
+    eval $(minikube -p minikube docker-env)
+}
+
 # Inspect volumes and port
 function docker_inspect () {
     echo -e "${GREEN}Volumes:"
@@ -927,6 +937,13 @@ function docker_kill () {
         docker rm -f `docker ps -a -q`
     fi
 }
+
+#########################
+# Kubernetes for Bash/Zsh
+#########################
+
+
+
 
 #####################
 # Golang for Bash/Zsh
