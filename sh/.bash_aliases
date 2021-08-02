@@ -851,10 +851,11 @@ function docker_unset () {
     unset DOCKER_HOST
     unset DOCKER_CERT_PATH
     unset DOCKER_TLS_VERIFY
+    unset MINIKUBE_ACTIVE_DOCKERD
 }
 
 function docker_minikube () {
-    eval $(minikube -p minikube docker-env)
+    eval $(minikube docker-env)
 }
 
 # Inspect volumes and port
@@ -937,13 +938,6 @@ function docker_kill () {
         docker rm -f `docker ps -a -q`
     fi
 }
-
-#########################
-# Kubernetes for Bash/Zsh
-#########################
-
-
-
 
 #####################
 # Golang for Bash/Zsh
