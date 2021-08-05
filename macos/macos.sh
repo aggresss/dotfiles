@@ -83,6 +83,7 @@ brew install --cask\
     powershell \
     visual-studio-code \
     virtualbox \
+    virtualbox-extension-pack \
     wireshark \
     docker \
     mkvtoolnix
