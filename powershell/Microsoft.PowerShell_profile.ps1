@@ -357,7 +357,6 @@ if ($IsWindows -or $Env:OS) {
   Set-Alias grep Select-String
   function touch { New-Item "$args" -ItemType File }
   function sudo { Start-Process -Verb RunAs "$args" }
-
   function etc_hosts { vim ${Env:SystemRoot}\System32\drivers\etc\hosts }
 
   function custom_cd {
