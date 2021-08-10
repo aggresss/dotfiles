@@ -358,6 +358,8 @@ if ($IsWindows -or $Env:OS) {
   function touch { New-Item "$args" -ItemType File }
   function sudo { Start-Process -Verb RunAs "$args" }
 
+  function etc_hosts { vim ${Env:SystemRoot}\System32\drivers\etc\hosts }
+
   function custom_cd {
     if ($args.Count -eq 0) {
       $tmp_path = ${HOME}
