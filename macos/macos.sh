@@ -86,4 +86,5 @@ brew install --cask\
     virtualbox-extension-pack \
     wireshark \
     docker \
+    vagrant \
     mkvtoolnix
