@@ -553,6 +553,13 @@ function ssh_copy () {
     cp -vf ${src_file} ${dest_file} && cp -vf ${src_file}.pub ${dest_file}.pub
 }
 
+# fast ssh forward a port
+# $1 host
+# $2 port
+function ssh_forward_port () {
+    ssh -Nn -L ${2}:localhost:${2} ${1}
+}
+
 ##################
 # Git for Bash/Zsh
 ##################
