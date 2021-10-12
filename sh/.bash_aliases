@@ -308,7 +308,6 @@ case $(uname) in
         alias firefox='open -a Firefox'
         alias safari='open -a Safari'
         alias edge='open -a Microsoft\ Edge'
-        alias chrome-canary='open -a Google\ Chrome\ Canary'
         ;;
     Linux)
         # Export history format
