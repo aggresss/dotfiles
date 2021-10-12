@@ -304,10 +304,10 @@ case $(uname) in
         alias skim='open -a Skim'
         alias wps='open -a wpsoffice'
         alias drawio='open -a draw.io'
-        alias chrome='open -a Google\ Chrome'
         alias firefox='open -a Firefox'
         alias safari='open -a Safari'
         alias edge='open -a Microsoft\ Edge'
+        alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
         ;;
     Linux)
         # Export history format
