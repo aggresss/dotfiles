@@ -33,6 +33,20 @@
 		],
 		"description": ""
 	},
+	"snippets wait group": {
+		"prefix": "wait group",
+		"body":[
+			"wg := &sync.WaitGroup{}",
+			"for range []int{} {",
+			"\twg.Add(1)",
+			"\tgo func(wg *sync.WaitGroup) {",
+			"\t\twg.Done()",
+			"\t}(wg)",
+			"}",
+			"wg.Wait()\n"
+		],
+		"description": ""
+	},
 	"snippets greek alphabet": {
 		"prefix": "greek alphabet",
 		"body":[
