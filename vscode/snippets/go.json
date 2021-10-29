@@ -40,7 +40,7 @@
 			"for range []int{} {",
 			"\twg.Add(1)",
 			"\tgo func(wg *sync.WaitGroup) {",
-			"\t\twg.Done()",
+			"\t\tdefer wg.Done()",
 			"\t}(wg)",
 			"}",
 			"wg.Wait()\n"
