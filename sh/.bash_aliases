@@ -817,6 +817,12 @@ function git_latest () {
     git describe --tags $(git rev-list --tags --max-count=1)
 }
 
+# git set-upstream-to
+# $1 upstream
+function git_set_upstream () {
+    git branch --set-upstream-to=$1
+}
+
 #####################
 # Vscode for Bash/Zsh
 #####################
