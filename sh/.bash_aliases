@@ -308,8 +308,8 @@ case $(uname) in
         alias edge='open -a Microsoft\ Edge'
         alias chrome='open -a Google\ Chrome'
         alias firefox='open -a Firefox'
-        alias chrome_terminal="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
-        alias firefox_terminal='/Applications/Firefox.app/Contents/MacOS/firefox'
+        alias chrome_command="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+        alias firefox_command='/Applications/Firefox.app/Contents/MacOS/firefox'
         ;;
     Linux)
         # Export history format
