@@ -743,6 +743,7 @@ function git_insteadof () {
             git config --global --unset-all url."git@${url}:".insteadof
             ;;
         *)
+            echo -e "usage: git_insteadof <ssh|https|unset> <url>\n"
             echo; git config -l | grep -E "url\.|\.insteadof=" && echo
             ;;
         esac
