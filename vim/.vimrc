@@ -118,7 +118,7 @@ command TrimSpaces %s/^\s*//g
 " Trim blank lines
 command TrimBlankLines g/^\s*$/d
 " Trans SDP info \r\n
-command TransSDP %s/\\r\\n/\r/g
+command TransSDP %s/\(\\r\)\?\\n/\r/g
 
 "
 " Custom function
