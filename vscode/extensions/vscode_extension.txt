@@ -19,6 +19,8 @@ vscjava.vscode-java-pack
 sumneko.lua
 # Perl
 cfgweb.vscode-perl
+# Shell
+foxundermoon.shell-format
 # CMake
 twxs.cmake
 ms-vscode.cmake-tools
