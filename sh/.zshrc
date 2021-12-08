@@ -2,8 +2,7 @@
 # wget https://raw.githubusercontent.com/aggresss/dotfiles/main/sh/.zshrc
 #
 
-if [ -x /usr/bin/dircolors ]
-then
+if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
@@ -19,7 +18,6 @@ fi
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/.bash_aliases ]
-then
+if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
