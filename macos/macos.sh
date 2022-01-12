@@ -3,7 +3,6 @@
 
 # Install command
 brew install \
-    rmtrash \
     autoconf \
     automake \
     libtool \
@@ -50,7 +49,6 @@ brew install \
     telnet \
     tmux \
     tree \
-    unrar \
     unzip \
     wget \
     curl \
@@ -69,7 +67,6 @@ brew install --cask\
     skim \
     typora \
     drawio \
-    robo-3t \
     vlc \
     google-chrome \
     firefox \
