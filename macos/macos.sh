@@ -21,7 +21,6 @@ brew install \
     gd \
     gettext \
     git \
-    git-lfs \
     gnu-sed \
     gnu-tar \
     gawk \
@@ -41,8 +40,6 @@ brew install \
     mosquitto \
     gpg \
     p7zip \
-    pandoc \
-    protobuf \
     pstree \
     python \
     readline \
@@ -72,8 +69,6 @@ brew install --cask\
     skim \
     typora \
     drawio \
-    insomnia \
-    mqttfx \
     robo-3t \
     vlc \
     google-chrome \
