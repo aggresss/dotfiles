@@ -3,10 +3,10 @@
 # curl https://raw.githubusercontent.com/aggresss/dotfiles/main/bin/update_dotfiles.sh -sSf | bash
 
 # Remote or local
-if [ ${1:-NoDefine} = "local" ] && [ -d ${HOME}/workspace-scratch/dotfiles ]
+if [ ${1:-NoDefine} = "local" ] && [ -d ${HOME}/dotfiles ]
 then
     UPDATE_METHOD="local"
-    DOTFILES_URL="${HOME}/workspace-scratch/dotfiles"
+    DOTFILES_URL="${HOME}/dotfiles"
 else
     UPDATE_METHOD="remote"
     DOTFILES_URL="https://github.com/aggresss/dotfiles/raw/main"
