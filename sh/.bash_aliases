@@ -291,6 +291,8 @@ Darwin)
     alias firefox='open -a Firefox'
     alias chrome_command="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
     alias firefox_command='/Applications/Firefox.app/Contents/MacOS/firefox'
+    # variable
+    export ICD="${HOME}/Library/Mobile Documents/com~apple~CloudDocs"
     ;;
 Linux)
     # Export history format
