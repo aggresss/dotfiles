@@ -38,7 +38,8 @@ Unblock-File $PROFILE
 | Drectory | Type | Illustrate |
 |---|---|---|
 | `~/bin/` | *Auto Generation* | user executable files |
-| `~/note/` | ***Periodic Backup*** | notebook sort by classify |
+| `~/notes/` | ***Periodic Backup*** | notes sort by classify |
+| `~/dotfiless/` | ***Periodic Backup*** | dotfiles sort by classify |
 | `~/workspace-scratch/` | *Auto Generation* | code workbench |
 | `~/workspace-formal/` | *Auto Generation* | code reference |
 
