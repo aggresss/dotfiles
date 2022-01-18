@@ -478,7 +478,7 @@ function update_internal {
     [Parameter(Mandatory = $true, Position = 1)] [String]$Remote,
     [Parameter(Mandatory = $true, Position = 2)] [String]$Local
   )
-  $local_base_path = "${HOME}/workspace-scratch/dotfiles"
+  $local_base_path = "${HOME}/dotfiles"
   $remote_base_url = "https://raw.githubusercontent.com/aggresss/dotfiles/main"
   if ($IsLocal -and ($(Test-Path $local_base_path))) {
     if (-not $(Test-Path $(Split-Path -Path $Local))) {
