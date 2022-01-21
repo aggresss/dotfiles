@@ -17,5 +17,5 @@ if [ ! -d "${GLOBAL_WORKSPACE}/snippets/" ]
 then
     mkdir -p "${GLOBAL_WORKSPACE}/snippets"
 fi
-cp ${PWD}/go.json "${GLOBAL_WORKSPACE}/snippets/"
+cp -v ${PWD}/*.json "${GLOBAL_WORKSPACE}/snippets/"
 set +v

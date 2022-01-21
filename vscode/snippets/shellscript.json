@@ -1,15 +1,15 @@
 {
-	"SH Header": {
+	"Sh Header": {
 		"prefix": "sh",
 		"body": [
-			"#!/usr/bin/env sh"
+			"#!/usr/bin/env sh\n"
 		],
 		"description": ""
 	},
     "Bash Header": {
 		"prefix": "bash",
 		"body": [
-			"#!/usr/bin/env bash"
+			"#!/usr/bin/env bash\n"
 		],
 		"description": ""
 	}
