@@ -12,5 +12,41 @@
 			"#!/usr/bin/env bash\n"
 		],
 		"description": ""
+	},
+	"Check Arguments": {
+		"prefix": "arg",
+		"body": [
+			"if [ \\${1:-NOCONFIG} = \"NOCONFIG\" ]; then\n",
+			"fi"
+		],
+		"description": ""
+	},
+	"If Syntax": {
+		"prefix": "if",
+		"body": [
+			"if [  ]; then\n",
+			"fi"
+		],
+		"description": ""
+	},
+	"For Syntax": {
+		"prefix": "for",
+		"body": [
+			"for arg in \\${args}; do\n",
+			"done"
+
+		],
+		"description": ""
+	},
+	"Case Syntax": {
+		"prefix": "case",
+		"body": [
+			"case \\${arg} in",
+    		"\t*)",
+			"\t\t;;",
+			"esac"
+
+		],
+		"description": ""
 	}
 }
