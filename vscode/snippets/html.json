@@ -1,0 +1,42 @@
+{
+	"Atomic HTML": {
+		"prefix": "atomic",
+		"body": [
+			"<!DOCTYPE html>",
+            "<html>\n",
+            "<head>",
+            "\t<meta charset=\"UTF-8\">",
+            "\t<title>$0</title>",
+            "\t<style type=\"text/css\">",
+            "\t</style>",
+            "</head>\n",
+            "<body>",
+            "\t<script>",
+            "\t</script>\n",
+            "</body>\n",
+            "</html>"
+		],
+		"description": ""
+	},
+    "WebRTC HTML": {
+		"prefix": "webrtc",
+		"body": [
+			"<!DOCTYPE html>",
+            "<html>\n",
+            "<head>",
+            "\t<meta charset=\"UTF-8\">",
+            "\t<title>$0</title>",
+            "\t<style type=\"text/css\">",
+            "\t</style>",
+            "</head>\n",
+            "<body>",
+            "\t<video id=\"video\" width=\"320\" height=\"240\" playsinline autoplay muted></video>",
+            "\t<script>",
+            "\t\tconst video = document.getElementById(\"video\");",
+            "\t</script>\n",
+            "</body>\n",
+            "</html>"
+		],
+		"description": ""
+	}
+}

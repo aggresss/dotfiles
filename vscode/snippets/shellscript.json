@@ -16,7 +16,7 @@
 	"Check Arguments": {
 		"prefix": "arg",
 		"body": [
-			"if [ \\${1:-NOCONFIG} = \"NOCONFIG\" ]; then\n",
+			"if [ \\${1:-NOCONFIG} = \"NOCONFIG\" ]; then\n$0",
 			"fi"
 		],
 		"description": ""
@@ -24,7 +24,7 @@
 	"If Syntax": {
 		"prefix": "if",
 		"body": [
-			"if [  ]; then\n",
+			"if [ $0 ]; then\n",
 			"fi"
 		],
 		"description": ""
@@ -32,20 +32,18 @@
 	"For Syntax": {
 		"prefix": "for",
 		"body": [
-			"for arg in \\${args}; do\n",
+			"for arg in \\${args$0}; do\n",
 			"done"
-
 		],
 		"description": ""
 	},
 	"Case Syntax": {
 		"prefix": "case",
 		"body": [
-			"case \\${arg} in",
+			"case \\${arg$0} in",
     		"\t*)",
 			"\t\t;;",
 			"esac"
-
 		],
 		"description": ""
 	}
