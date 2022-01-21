@@ -1,3 +1,9 @@
 {
-
+    "Async": {
+		"prefix": "async",
+		"body": [
+			"(async () => {\n\t$0\n})();"
+		],
+		"description": ""
+	}
 }
