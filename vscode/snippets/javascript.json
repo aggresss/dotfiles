@@ -5,5 +5,12 @@
 			"(async () => {\n\t$0\n})();"
 		],
 		"description": ""
+	},
+	"Event": {
+		"prefix": "event",
+		"body": [
+			"async e => {$0}"
+		],
+		"description": ""
 	}
 }
