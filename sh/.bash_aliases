@@ -618,7 +618,7 @@ function git_clone() {
     # trim site
     clone_path=${clone_path#*/}
     # excute
-    git clone $@ ${clone_path}
+    git clone --origin upstream $@ ${clone_path}
 }
 
 # Get pull request to local branch

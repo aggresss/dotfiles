@@ -792,7 +792,7 @@ function git_clone {
   $clone_path = $clone_path.replace(".git", "")
   # trim site
   $clone_path = $clone_path.split("/", 2)[1]
-  git clone $args $clone_path
+  git clone --origin upstream $args $clone_path
 }
 
 # git config insteadOf
