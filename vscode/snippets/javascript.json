@@ -1,8 +1,15 @@
 {
-    "Async": {
-		"prefix": "async",
+	"IIFE": {
+		"prefix": "iife",
 		"body": [
-			"(async () => {\n\t$0\n})();"
+			"(() => {\n\t$0\n})()"
+		],
+		"description": ""
+	},
+    "IIFE Async": {
+		"prefix": "iife async",
+		"body": [
+			"(async () => {\n\t$0\n})()"
 		],
 		"description": ""
 	},
