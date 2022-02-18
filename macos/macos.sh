@@ -43,6 +43,7 @@ brew install \
     python \
     readline \
     ruby \
+    rbenv \
     nmap \
     socat \
     sqlite \
