@@ -7,4 +7,5 @@ npm install -g \
     yarn \
     typescript \
     serve \
+    live-server \
     create-react-app
