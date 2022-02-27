@@ -60,6 +60,26 @@
         ],
         "description": ""
     },
+    "Atomic Babel": {
+        "prefix": "atomic babel",
+        "body": [
+            "<!DOCTYPE html>",
+            "<html>\n",
+            "<head>",
+            "\t<meta charset=\"UTF-8\">",
+            "\t<title>$0</title>",
+            "\t<script src=\"https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js\"></script>",
+            "\t<style type=\"text/css\">",
+            "\t</style>",
+            "</head>\n",
+            "<body>",
+            "\t<script type=\"text/babel\">",
+            "\t</script>",
+            "</body>\n",
+            "</html>"
+        ],
+        "description": ""
+    },
     "Atomic React": {
         "prefix": "atomic react",
         "body": [
