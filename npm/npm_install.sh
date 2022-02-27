@@ -8,6 +8,7 @@ npm install -g \
     gulp-cli \
     grunt-cli \
     typescript \
+    ts-node \
     serve \
     live-server \
     create-react-app
