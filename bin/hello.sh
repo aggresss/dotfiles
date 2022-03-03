@@ -14,11 +14,15 @@ NORMAL="\\033[m"
 LIGHT="\\033[1m"
 INVERT="\\033[7m"
 
+TMP_PATH="${HOME}/tmp"
+if [ ! -d ${TMP_PATH} ]; then
+    TMP_PATH="/tmp"
+fi
 
 HELLO_TYPE=$1
 case ${HELLO_TYPE} in
-    c)
-        cat << END > /tmp/hello.c
+c)
+    cat <<END >${TMP_PATH}/hello.c
 #include <stdio.h>
 #include <signal.h>
 
@@ -42,14 +46,14 @@ int main(int argc, const char * argv[])
 }
 
 END
-        echo "/tmp/hello.c"
-        #gcc -v /tmp/hello.c 2> /tmp/hello.c.txt
-        #gcc -v /tmp/hello.c
-        #rm -rf /tmp/hello.c* a.out
+    echo "${TMP_PATH}/hello.c"
+    #gcc -v ${TMP_PATH}/hello.c 2> ${TMP_PATH}/hello.c.txt
+    #gcc -v ${TMP_PATH}/hello.c
+    #rm -rf ${TMP_PATH}/hello.c* a.out
     ;;
-    h)
+h)
 
-        cat << END > /tmp/hello.h
+    cat <<END >${TMP_PATH}/hello.h
 /* License */
 
 #ifndef HELLO_H
@@ -74,10 +78,10 @@ extern "C" {
 #endif /* HELLO_H */
 
 END
-        echo "/tmp/hello.h"
+    echo "${TMP_PATH}/hello.h"
     ;;
-    cpp)
-        cat << END > /tmp/hello.cpp
+cpp)
+    cat <<END >${TMP_PATH}/hello.cpp
 #include <iostream>
 
 class Foo {
@@ -98,13 +102,13 @@ int main(int argc, const char * argv[])
 }
 
 END
-        echo "/tmp/hello.cpp"
-        #g++ -v /tmp/hello.cpp 2> /tmp/hello.cpp.txt
-        #g++ -v /tmp/hello.cpp
-        #rm -rf /tmp/hello.cpp* a.out
+    echo "${TMP_PATH}/hello.cpp"
+    #g++ -v ${TMP_PATH}/hello.cpp 2> ${TMP_PATH}/hello.cpp.txt
+    #g++ -v ${TMP_PATH}/hello.cpp
+    #rm -rf ${TMP_PATH}/hello.cpp* a.out
     ;;
-    go)
-        cat << END > /tmp/hello.go
+go)
+    cat <<END >${TMP_PATH}/hello.go
 package main
 
 import (
@@ -127,34 +131,34 @@ func main() {
 }
 
 END
-        echo "/tmp/hello.go"
-        #go build -o a.out /tmp/hello.go
-        #rm -rf /tmp/hello.go a.out
+    echo "${TMP_PATH}/hello.go"
+    #go build -o a.out ${TMP_PATH}/hello.go
+    #rm -rf ${TMP_PATH}/hello.go a.out
     ;;
-    rs)
-        cat << END > /tmp/hello.rs
+rs)
+    cat <<END >${TMP_PATH}/hello.rs
 fn main() {
     println!("Hello, world!");
 }
 
 END
-        echo "/tmp/hello.rs"
-        #rustc /tmp/hello.rs
-        #rm -rf /tmp/hello.rs /tmp/hello
+    echo "${TMP_PATH}/hello.rs"
+    #rustc ${TMP_PATH}/hello.rs
+    #rm -rf ${TMP_PATH}/hello.rs ${TMP_PATH}/hello
 
     ;;
-    py)
-        cat << END > /tmp/hello.py
+py)
+    cat <<END >${TMP_PATH}/hello.py
 # -*- coding: UTF-8 -*-
 print('Hello, World!')
 
 END
-        echo "/tmp/hello.py"
-        #python /tmp/hello.py
-        #rm -rf /tmp/hello.py
+    echo "${TMP_PATH}/hello.py"
+    #python ${TMP_PATH}/hello.py
+    #rm -rf ${TMP_PATH}/hello.py
     ;;
-    sh)
-        cat << END > /tmp/hello.sh
+sh)
+    cat <<END >${TMP_PATH}/hello.sh
 #!/usr/bin/env bash
 
 function hello () {
@@ -163,26 +167,26 @@ function hello () {
 
 hello \$@
 END
-        echo "/tmp/hello.sh"
-        chmod +x /tmp/hello.sh
-        #bash /tmp/hello.sh
-        #rm -rf /tmp/hello.sh
+    echo "${TMP_PATH}/hello.sh"
+    chmod +x ${TMP_PATH}/hello.sh
+    #bash ${TMP_PATH}/hello.sh
+    #rm -rf ${TMP_PATH}/hello.sh
     ;;
-    pl)
-        cat << END > /tmp/hello.pl
+pl)
+    cat <<END >${TMP_PATH}/hello.pl
 #!/usr/bin/env perl
 
 print "Hello, World!\n"
 
 END
-        echo "/tmp/hello.pl"
-        chmod +x /tmp/hello.pl
-        #perl /tmp/hello.pl
-        #rm -rf /tmp/hello.pl
+    echo "${TMP_PATH}/hello.pl"
+    chmod +x ${TMP_PATH}/hello.pl
+    #perl ${TMP_PATH}/hello.pl
+    #rm -rf ${TMP_PATH}/hello.pl
 
     ;;
-    cmake)
-        cat << END > /tmp/CMakeLists.txt
+cmake)
+    cat <<END >${TMP_PATH}/CMakeLists.txt
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 project(HELLO C)
 set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -191,10 +195,10 @@ add_executable(main main.c)
 install(TARGETS main RUNTIME DESTINATION bin)
 
 END
-        echo "/tmp/CMakeLists.txt"
+    echo "${TMP_PATH}/CMakeLists.txt"
     ;;
-    make)
-        cat << END > /tmp/Makefile
+make)
+    cat <<END >${TMP_PATH}/Makefile
 ifeq (\$(OUTPUT), )
     OUTPUT:=Hello, World!
 endif
@@ -204,8 +208,8 @@ all:
 
 END
     ;;
-    nodejs)
-        cat << END > /tmp/hello.js
+nodejs)
+    cat <<END >${TMP_PATH}/hello.js
 #!/usr/bin/env node
 
 'use strict'
@@ -224,11 +228,11 @@ const port = process.env.PORT || 8080;
 })();
 
 END
-    echo "/tmp/hello.js"
-    chmod +x /tmp/hello.js
+    echo "${TMP_PATH}/hello.js"
+    chmod +x ${TMP_PATH}/hello.js
     ;;
-    html)
-        cat << END > /tmp/hello.html
+html)
+    cat <<END >${TMP_PATH}/hello.html
 <!DOCTYPE html>
 <html>
   <head>
@@ -250,10 +254,10 @@ END
 </html>
 
 END
-    echo "/tmp/hello.html"
+    echo "${TMP_PATH}/hello.html"
     ;;
-    java)
-    cat << END > /tmp/hello.java
+java)
+    cat <<END >${TMP_PATH}/hello.java
 public class hello{
     public static void main(String[] args){
          System.out.println("Hello, World!");
@@ -261,10 +265,10 @@ public class hello{
 }
 
 END
-    echo "/tmp/hello.java"
+    echo "${TMP_PATH}/hello.java"
     ;;
-    lua)
-    cat << END > /tmp/hello.lua
+lua)
+    cat <<END >${TMP_PATH}/hello.lua
 #!/usr/bin/env lua
 
 function printHello(printString)
@@ -274,22 +278,21 @@ end
 printHello("Hello, World!")
 
 END
-    echo "/tmp/hello.lua"
-    chmod +x /tmp/hello.lua
+    echo "${TMP_PATH}/hello.lua"
+    chmod +x ${TMP_PATH}/hello.lua
     ;;
-    rb)
-    cat << END > /tmp/hello.rb
+rb)
+    cat <<END >${TMP_PATH}/hello.rb
 #!/usr/bin/env ruby
 
 puts "Hello, World!"
 
 END
-    echo "/tmp/hello.rb"
-    chmod +x /tmp/hello.rb
+    echo "${TMP_PATH}/hello.rb"
+    chmod +x ${TMP_PATH}/hello.rb
     ;;
-    *)
-        echo -e "${GREEN}Support Lang:"
-        echo -e "  c\n  h\n  cpp\n  go\n  rs\n  py\n  sh\n  pl\n  cmake\n  make\n  nodejs\n  html\n  java\n  lua\n  rb\n${NORMAL}"
+*)
+    echo -e "${GREEN}Support Lang:"
+    echo -e "  c\n  h\n  cpp\n  go\n  rs\n  py\n  sh\n  pl\n  cmake\n  make\n  nodejs\n  html\n  java\n  lua\n  rb\n${NORMAL}"
     ;;
 esac
-
