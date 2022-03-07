@@ -353,7 +353,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 # fast update bash env
-alias u='source ${HOME}/.bash_aliases'
+alias u='source ${HOME}/.bash_aliases; hash -r'
 # fast echo app return
 alias o='echo $?'
 # fast history query
