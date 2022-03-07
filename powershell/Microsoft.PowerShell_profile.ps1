@@ -844,6 +844,7 @@ function git_global_set {
   git config --global core.autocrlf false
   git config --global core.quotepath false
   git config --global core.ignorecase false
+  git config --global user.useConfigOnly true
   git config --global pull.rebase false
   git config --global push.default simple
   git config --global init.defaultBranch main
