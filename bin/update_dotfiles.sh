@@ -102,6 +102,12 @@ fi
 if [ $(command -v npm >/dev/null; echo $?) -eq 0 ]
 then
     update_file ${DOTFILES_URL}/npm/.npmrc ${HOME}/.npmrc
+    if ! cat ${HOME}/.npmrc | grep -q "prefix="
+    then
+        cat << END >> ${HOME}/.npmrc
+prefix=\${HOME}/.local
+END
+    fi
 fi
 # maven
 if [ $(command -v mvn >/dev/null; echo $?) -eq 0 ]
