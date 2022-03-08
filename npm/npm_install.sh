@@ -4,6 +4,7 @@ npm config set registry https://registry.npmmirror.com
 
 npm install -g \
     npm \
+    npm-check \
     yarn \
     gulp-cli \
     grunt-cli \
