@@ -379,7 +379,11 @@ if ($IsWindows -or $Env:OS) {
   function vs_env {
     $vs_wildcard = "${Env:ProgramFiles}\Microsoft Visual Studio\*\Community\Common7\Tools"
     if (-not $(Test-Path $vs_wildcard)) {
-      return
+      $vs_wildcard = "${Env:ProgramFiles(x86)}\Microsoft Visual Studio\*\Community\Common7\Tools"
+      if (-not $(Test-Path $vs_wildcard)) {
+        Write-Host "`nVisual Studio has not been installed" -ForegroundColor Red
+        return
+      }
     }
     $vs_path = Get-ChildItem $vs_wildcard
     Push-Location $vs_path[-1].FullName
