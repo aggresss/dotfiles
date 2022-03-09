@@ -377,7 +377,7 @@ if ($IsWindows -or $Env:OS) {
   Set-Alias cd custom_cd -Option AllScope
   # visual studio env
   function vs_env {
-    $vs_wildcard = "${Env:ProgramFiles(x86)}\Microsoft Visual Studio\*\Community\Common7\Tools"
+    $vs_wildcard = "${Env:ProgramFiles}\Microsoft Visual Studio\*\Community\Common7\Tools"
     if (-not $(Test-Path $vs_wildcard)) {
       return
     }
