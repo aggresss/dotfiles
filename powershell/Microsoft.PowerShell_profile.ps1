@@ -412,8 +412,9 @@ if ($IsWindows -or $Env:OS) {
   }
   Remove-Variable -Name emacs_wildcard
   # vscode
-  $code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe" -replace ' ', '` '
+  $code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe"
   if ($(Test-Path $code_path)) {
+    $code_path = "$code_path" -replace ' ', '` '
     function code { "${code_path} $args" | Invoke-Expression > $null 2>&1 }
   }
   Remove-Variable -Name code_path
