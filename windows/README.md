@@ -1,5 +1,8 @@
 ## Software for windows
 
+Create bootable USB drives the easy way
+- http://rufus.ie/
+
 OpenJDK by Red Hat
 - https://developers.redhat.com/products/openjdk/download
 
