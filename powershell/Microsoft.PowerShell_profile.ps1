@@ -398,26 +398,23 @@ if ($IsWindows -or $Env:OS) {
     Write-Host "`nVisual Studio Command Prompt variables set." -ForegroundColor Yellow
   }
   # vim
-  $vim_wildcard = "${Env:ProgramFiles(x86)}\Vim\*\vim.exe"
-  if ($(Test-Path $vim_wildcard)) {
-    Set-Alias vim (Get-ChildItem $vim_wildcard)[-1].FullName
+  if ($(Test-Path "${Env:ProgramFiles(x86)}\Vim\*\vim.exe")) {
+    Set-Alias vim (Get-ChildItem "${Env:ProgramFiles(x86)}\Vim\*\vim.exe")[-1].FullName
   }
-  Remove-Variable -Name vim_wildcard
   # emacs
-  $emacs_wildcard = "${Env:ProgramFiles}\Emacs\*\bin\emacs.exe"
-  if ($(Test-Path $emacs_wildcard)) {
-    $emacs_path = (Get-ChildItem $emacs_wildcard)[-1].FullName -replace ' ', '` '
-    function emacs { "$emacs_path -nw $args" | Invoke-Expression }
-    Remove-Variable -Name emacs_path
+  if ($(Test-Path "${Env:ProgramFiles}\Emacs\*\bin\emacs.exe")) {
+    function emacs {
+       $emacs_path = (Get-ChildItem "${Env:ProgramFiles}\Emacs\*\bin\emacs.exe")[-1].FullName -replace ' ', '` '
+      "$emacs_path -nw $args" | Invoke-Expression
+    }
   }
-  Remove-Variable -Name emacs_wildcard
   # vscode
-  $code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe"
-  if ($(Test-Path $code_path)) {
-    $code_path = "$code_path" -replace ' ', '` '
-    function code { "${code_path} $args" | Invoke-Expression > $null 2>&1 }
+  if ($(Test-Path "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe")) {
+    function code {
+      $code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe" -replace ' ', '` '
+      "${code_path} $args" | Invoke-Expression > $null 2>&1
+    }
   }
-  Remove-Variable -Name code_path
   # ${HOME}/bin
   $bin_path = "${HOME}/bin"
   if (-not $(Test-Path $bin_path)) {
