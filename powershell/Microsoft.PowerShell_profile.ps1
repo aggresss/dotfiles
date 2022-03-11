@@ -408,9 +408,9 @@ if ($IsWindows -or $Env:OS) {
   if ($(Test-Path $emacs_wildcard)) {
     $emacs_path = (Get-ChildItem $emacs_wildcard)[-1].FullName -replace ' ', '` '
     function emacs { "$emacs_path -nw $args" | Invoke-Expression }
+    Remove-Variable -Name emacs_path
   }
   Remove-Variable -Name emacs_wildcard
-  Remove-Variable -Name emacs_path
   # vscode
   $code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe" -replace ' ', '` '
   if ($(Test-Path $code_path)) {
