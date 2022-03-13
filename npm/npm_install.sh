@@ -2,14 +2,13 @@
 
 npm config set registry https://registry.npmmirror.com
 
-npm install -g \
-    npm \
-    npm-check \
-    yarn \
-    gulp-cli \
-    grunt-cli \
-    typescript \
-    ts-node \
-    serve \
-    live-server \
-    create-react-app
+npm install -g npm
+npm install -g npm-check
+npm install -g yarn
+npm install -g gulp-cli
+npm install -g grunt-cli
+npm install -g typescript
+npm install -g ts-node
+npm install -g serve
+npm install -g live-server
+npm install -g create-react-app
