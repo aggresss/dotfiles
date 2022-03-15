@@ -717,6 +717,9 @@ function git_insteadof() {
 # Set git global set
 function git_global_set() {
     local base_url="https://github.com/aggresss/dotfiles/raw/main"
+    if [ ${1:-NoDefine} = "local" ] && [ -d ${HOME}/dotfiles ]; then
+        base_url="${HOME}/dotfiles"
+    fi
     update_file ${base_url}/.gitignore ${HOME}/.gitignore
     git config --global core.excludesfile ${HOME}/.gitignore
     git config --global core.editor "vim"

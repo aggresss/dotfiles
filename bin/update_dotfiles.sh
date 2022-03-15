@@ -3,8 +3,7 @@
 # curl https://raw.githubusercontent.com/aggresss/dotfiles/main/bin/update_dotfiles.sh -sSf | bash
 
 # Remote or local
-if [ ${1:-NoDefine} = "local" ] && [ -d ${HOME}/dotfiles ]
-then
+if [ ${1:-NoDefine} = "local" ] && [ -d ${HOME}/dotfiles ]; then
     UPDATE_METHOD="local"
     DOTFILES_URL="${HOME}/dotfiles"
 else
@@ -14,35 +13,36 @@ fi
 
 # $1 download url
 # $2 local filepath
-function update_file () {
+function update_file() {
     local tmp_path="/tmp"
     # can replace by dirname and basename command
-    local down_file=`echo "$1" | awk -F "/" '{print $NF}'`
-    local down_path=`echo "$2" | awk 'BEGIN{res=""; FS="/";}{for(i=2;i<=NF-1;i++) res=(res"/"$i);} END{print res}'`
+    local down_file=$(echo "$1" | awk -F "/" '{print $NF}')
+    local down_path=$(echo "$2" | awk 'BEGIN{res=""; FS="/";}{for(i=2;i<=NF-1;i++) res=(res"/"$i);} END{print res}')
     echo "Update $2 ..."
-    if [ ! -d ${down_path} ]
-    then
+    if [ ! -d ${down_path} ]; then
         mkdir -vp ${down_path}
     fi
-    if [[ $1 =~ ^http.* ]]
-    then
+    if [[ $1 =~ ^http.* ]]; then
         rm -rf ${tmp_path}/${down_file}
-        if [ $(command -v wget > /dev/null; echo $?) -eq 0 ]
-        then
+        if [ $(
+            command -v wget >/dev/null
+            echo $?
+        ) -eq 0 ]; then
             wget -P ${tmp_path} $1
-        elif [ $(command -v curl > /dev/null; echo $?) -eq 0 ]
-        then
+        elif [ $(
+            command -v curl >/dev/null
+            echo $?
+        ) -eq 0 ]; then
             cd ${tmp_path}
             curl -OL $1
             cd -
         else
             echo "No http request tool."
-            exit 1;
+            exit 1
         fi
         cp -vf ${tmp_path}/${down_file} $2
         rm -rf ${tmp_path}/${down_file}
-        if [ ${down_file##*.} = "sh" ]
-        then
+        if [ ${down_file##*.} = "sh" ]; then
             chmod +x $2
         fi
     else
@@ -53,8 +53,7 @@ function update_file () {
 echo "=== Update dotfiles from git@github.com:aggresss/dotfiles.git main branch  ==="
 
 # Update self
-if [ ${HAS_UPDATED:-NoDefine} = "NoDefine" ]
-then
+if [ ${HAS_UPDATED:-NoDefine} = "NoDefine" ]; then
     file_path=${HOME}/bin
     file_name=update_dotfiles.sh
     update_file ${DOTFILES_URL}/bin/${file_name} ${file_path}/${file_name}
@@ -71,52 +70,64 @@ update_file ${DOTFILES_URL}/sh/.bash_aliases ${HOME}/.bash_aliases
 update_file ${DOTFILES_URL}/sh/.inputrc ${HOME}/.inputrc
 update_file ${DOTFILES_URL}/bin/hello.sh ${HOME}/bin/hello.sh
 # vim
-if [ $(command -v vim >/dev/null; echo $?) -eq 0 ]
-then
+if [ $(
+    command -v vim >/dev/null
+    echo $?
+) -eq 0 ]; then
     update_file ${DOTFILES_URL}/vim/.vimrc ${HOME}/.vimrc
     update_file ${DOTFILES_URL}/vim/.vimrc.bundles ${HOME}/.vimrc.bundles
-    if [ ! -d ${HOME}/.vim/bundle ]
-    then
-        git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim \
-        && vim +BundleInstall +qall
+    if [ ! -d ${HOME}/.vim/bundle ]; then
+        git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim &&
+            vim +BundleInstall +qall
     else
         vim +BundleInstall +qall
     fi
 fi
 # emacs
-if [ $(command -v emacs >/dev/null; echo $?) -eq 0 ]
-then
+if [ $(
+    command -v emacs >/dev/null
+    echo $?
+) -eq 0 ]; then
     update_file ${DOTFILES_URL}/emacs/.emacs ${HOME}/.emacs
 fi
 # tmux
-if [ $(command -v tmux >/dev/null; echo $?) -eq 0 ]
-then
+if [ $(
+    command -v tmux >/dev/null
+    echo $?
+) -eq 0 ]; then
     update_file ${DOTFILES_URL}/tmux/.tmux.conf ${HOME}/.tmux.conf
 fi
 # pip
-if [ $(command -v pip >/dev/null; echo $?) -eq 0 ]
-then
+if [ $(
+    command -v pip >/dev/null
+    echo $?
+) -eq 0 ]; then
     update_file ${DOTFILES_URL}/pip/pip.conf ${HOME}/.pip/pip.conf
 fi
 # npm
-if [ $(command -v npm >/dev/null; echo $?) -eq 0 ]
-then
+if [ $(
+    command -v npm >/dev/null
+    echo $?
+) -eq 0 ]; then
     update_file ${DOTFILES_URL}/npm/.npmrc ${HOME}/.npmrc
-    if ! cat ${HOME}/.npmrc | grep -q "prefix="
-    then
-        cat << END >> ${HOME}/.npmrc
+    if ! cat ${HOME}/.npmrc | grep -q "prefix="; then
+        cat <<END >>${HOME}/.npmrc
 prefix=\${HOME}/.local
 END
     fi
 fi
 # maven
-if [ $(command -v mvn >/dev/null; echo $?) -eq 0 ]
-then
+if [ $(
+    command -v mvn >/dev/null
+    echo $?
+) -eq 0 ]; then
     update_file ${DOTFILES_URL}/maven/settings.xml ${HOME}/.m2/settings.xml
 fi
 # powershell
-if [ $(command -v pwsh >/dev/null; echo $?) -eq 0 ]
-then
+if [ $(
+    command -v pwsh >/dev/null
+    echo $?
+) -eq 0 ]; then
     update_file ${DOTFILES_URL}/powershell/Microsoft.PowerShell_profile.ps1 \
         ${HOME}/.config/powershell/Microsoft.PowerShell_profile.ps1
     update_file ${DOTFILES_URL}/powershell/Microsoft.PowerShell_profile.ps1 \
@@ -124,16 +135,13 @@ then
 fi
 
 # sh
-if [[ ${SHELL} =~ .*zsh$ ]]
-then
+if [[ ${SHELL} =~ .*zsh$ ]]; then
     # .zshrc
-    if [ ! -f ${HOME}/.zshrc ]
-    then
+    if [ ! -f ${HOME}/.zshrc ]; then
         update_file ${DOTFILES_URL}/sh/.zshrc ${HOME}/.zshrc
     fi
-    if ! cat ${HOME}/.zshrc | grep -q ".bash_aliases"
-    then
-        cat << END >> ${HOME}/.zshrc
+    if ! cat ${HOME}/.zshrc | grep -q ".bash_aliases"; then
+        cat <<END >>${HOME}/.zshrc
 
 # modify by aggresss
 if [ -f \${HOME}/.bash_aliases ]
@@ -144,18 +152,15 @@ fi
 END
     fi
     # .zprofile
-    if [ ! -f ${HOME}/.zprofile ]
-    then
+    if [ ! -f ${HOME}/.zprofile ]; then
         update_file ${DOTFILES_URL}/sh/.zprofile ${HOME}/.zprofile
     fi
     # .zlogout
-    if [ ! -f ${HOME}/.zlogout ]
-    then
+    if [ ! -f ${HOME}/.zlogout ]; then
         update_file ${DOTFILES_URL}/sh/.zlogout ${HOME}/.zlogout
     fi
-    if ! cat ${HOME}/.zlogout | grep -q "ssh-agent -k"
-    then
-        cat << END >> ${HOME}/.zlogout
+    if ! cat ${HOME}/.zlogout | grep -q "ssh-agent -k"; then
+        cat <<END >>${HOME}/.zlogout
 
 # modify by aggresss
 # ssh-agent
@@ -167,21 +172,17 @@ fi
 END
     fi
 
-elif [[ ${SHELL} =~ .*bash$ ]]
-then
+elif [[ ${SHELL} =~ .*bash$ ]]; then
     # .bashrc
-    if [ ! -f ${HOME}/.bashrc ]
-    then
-        if [ -f /etc/skel/.bashrc ]
-        then
+    if [ ! -f ${HOME}/.bashrc ]; then
+        if [ -f /etc/skel/.bashrc ]; then
             cp /etc/skel/.bashrc ${HOME}/
         else
             update_file ${DOTFILES_URL}/sh/.bashrc ${HOME}/.bashrc
         fi
     fi
-    if ! cat ${HOME}/.bashrc | grep -q ".bash_aliases"
-    then
-        cat << END >> ${HOME}/.bashrc
+    if ! cat ${HOME}/.bashrc | grep -q ".bash_aliases"; then
+        cat <<END >>${HOME}/.bashrc
 
 # modify by aggresss
 if [ -f \${HOME}/.bash_aliases ]
@@ -192,28 +193,23 @@ fi
 END
     fi
     # .bash_profile
-    if [ ! -f ${HOME}/.bash_profile ]
-    then
-        if [ -f /etc/skel/.bash_profile ]
-        then
+    if [ ! -f ${HOME}/.bash_profile ]; then
+        if [ -f /etc/skel/.bash_profile ]; then
             cp /etc/skel/.bash_profile ${HOME}/
         else
             update_file ${DOTFILES_URL}/sh/.bash_profile ${HOME}/.bash_profile
         fi
     fi
     # .bash_logout
-    if [ ! -f ${HOME}/.bash_logout ]
-    then
-        if [ -f /etc/skel/.bash_logout ]
-        then
+    if [ ! -f ${HOME}/.bash_logout ]; then
+        if [ -f /etc/skel/.bash_logout ]; then
             cp /etc/skel/.bash_logout ${HOME}/
         else
             update_file ${DOTFILES_URL}/sh/.bash_logout ${HOME}/.bash_logout
         fi
     fi
-    if ! cat ${HOME}/.bash_logout | grep -q "ssh-agent -k"
-    then
-        cat << END >> ${HOME}/.bash_logout
+    if ! cat ${HOME}/.bash_logout | grep -q "ssh-agent -k"; then
+        cat <<END >>${HOME}/.bash_logout
 
 # modify by aggresss
 # ssh-agent
@@ -228,20 +224,20 @@ fi
 
 # Environment Specify
 case $(uname) in
-    Linux)
-        update_file ${DOTFILES_URL}/sh/.Xresources ${HOME}/.Xresources
-        echo "Linux"
-        ;;
-    Darwin)
-        echo "Darwin"
-        ;;
-    FreeBSD)
-        echo "FreeBSD"
-        ;;
-    MINGW*)
-        echo "MINGW"
-        ;;
-    *)
-        echo "No support this ENV"
-        ;;
+Linux)
+    update_file ${DOTFILES_URL}/sh/.Xresources ${HOME}/.Xresources
+    echo "Linux"
+    ;;
+Darwin)
+    echo "Darwin"
+    ;;
+FreeBSD)
+    echo "FreeBSD"
+    ;;
+MINGW*)
+    echo "MINGW"
+    ;;
+*)
+    echo "No support this ENV"
+    ;;
 esac
