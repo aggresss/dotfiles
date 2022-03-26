@@ -415,8 +415,8 @@ if ($IsWindows -or $Env:OS) {
       "${code_path} $args" | Invoke-Expression > $null 2>&1
     }
   }
-  # ${HOME}/bin
-  $bin_path = "${HOME}/bin"
+  # ${HOME}\bin
+  $bin_path = Join-Path -Path ${HOME} -ChildPath 'bin1'
   if (-not $(Test-Path $bin_path)) {
     New-Item $bin_path -ItemType directory -Force
     env_insert "PATH" $bin_path "User"
