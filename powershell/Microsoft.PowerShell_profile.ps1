@@ -411,8 +411,13 @@ if ($IsWindows -or $Env:OS) {
   # vscode
   if ($(Test-Path "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe")) {
     function code {
-      $code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe" -replace ' ', '` '
-      "${code_path} $args" | Invoke-Expression
+      $processOptions = @{
+        FilePath = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe"
+        ArgumentList = "$args"
+        WindowStyle = "Maximized"
+        UseNewEnvironment = $true
+      }
+      Start-Process @processOptions
     }
   }
   # ${HOME}\bin
