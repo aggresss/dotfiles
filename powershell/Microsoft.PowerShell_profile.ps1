@@ -414,7 +414,6 @@ if ($IsWindows -or $Env:OS) {
       $processOptions = @{
         FilePath = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe"
         ArgumentList = "$args"
-        WindowStyle = "Maximized"
         UseNewEnvironment = $true
       }
       Start-Process @processOptions
