@@ -416,7 +416,7 @@ if ($IsWindows -or $Env:OS) {
     }
   }
   # ${HOME}\bin
-  $bin_path = Join-Path -Path ${HOME} -ChildPath 'bin1'
+  $bin_path = Join-Path -Path ${HOME} -ChildPath 'bin'
   if (-not $(Test-Path $bin_path)) {
     New-Item $bin_path -ItemType directory -Force
     env_insert "PATH" $bin_path "User"
