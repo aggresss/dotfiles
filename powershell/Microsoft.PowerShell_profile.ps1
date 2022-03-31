@@ -412,7 +412,7 @@ if ($IsWindows -or $Env:OS) {
   if ($(Test-Path "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe")) {
     function code {
       $code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe" -replace ' ', '` '
-      "${code_path} $args" | Invoke-Expression > $null 2>&1
+      "${code_path} $args" | Invoke-Expression
     }
   }
   # ${HOME}\bin
