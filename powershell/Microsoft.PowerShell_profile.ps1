@@ -461,15 +461,19 @@ function ll {
 
 function mkdir_cd {
   Param (
-    [Parameter(Mandatory = $true, Position = 0)] [string]$folder_name
+    [Parameter(Mandatory = $true, Position = 0)] [string]$folder_name,
+    [Parameter(Mandatory = $false, Position = 1)] [bool]$caseSensitive = $false
   )
   if (-not $(Test-Path $folder_name)) {
     New-Item $folder_name -ItemType directory -Force
+    if (($IsWindows -or $Env:OS) -and $caseSensitive) {
+      "fsutil file setCaseSensitiveInfo $folder_name enable" | Invoke-Expression
+    }
   }
   Set-Location $folder_name
 }
-function s { mkdir_cd "${HOME}/workspace-scratch" }
-function f { mkdir_cd "${HOME}/workspace-formal" }
+function s { mkdir_cd "${HOME}/workspace-scratch" $true}
+function f { mkdir_cd "${HOME}/workspace-formal" $true}
 function d { mkdir_cd "${HOME}/Downloads" }
 function m { mkdir_cd "${HOME}/Documents" }
 
