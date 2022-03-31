@@ -409,14 +409,10 @@ if ($IsWindows -or $Env:OS) {
     }
   }
   # vscode
-  if ($(Test-Path "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe")) {
+  if ($(Test-Path "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\bin\code.cmd")) {
     function code {
-      $processOptions = @{
-        FilePath = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\Code.exe"
-        ArgumentList = "$args"
-        UseNewEnvironment = $true
-      }
-      Start-Process @processOptions
+        $code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\bin\code.cmd" -replace ' ', '` '
+      "${code_path} $args" | Invoke-Expression
     }
   }
   # ${HOME}\bin
