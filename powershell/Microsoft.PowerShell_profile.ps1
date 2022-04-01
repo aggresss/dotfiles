@@ -356,7 +356,14 @@ if ($IsWindows -or $Env:OS) {
   if (Test-Path Alias:\curl) { Remove-Item Alias:\curl }
   Set-Alias grep Select-String
   function touch { New-Item "$args" -ItemType File }
-  function sudo { Start-Process -Verb RunAs "$args" }
+  function sudo {
+    $processOptions = @{
+      FilePath = "$args"
+      WindowStyle = "Maximized"
+      Verb = "RunAs"
+    }
+    Start-Process @processOptions
+  }
   function etc_hosts { vim ${Env:SystemRoot}\System32\drivers\etc\hosts }
 
   function custom_cd {
