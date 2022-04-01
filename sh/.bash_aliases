@@ -298,7 +298,7 @@ Linux)
     # Export history format
     export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S "
     # Specified for Microsoft WSL
-    if [[ $(uname -a) =~ "icrosoft" ]]; then
+    if [ -n "$WSL_DISTRO_NAME" ]; then
         export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0.0
     fi
     # Specified for docker container
