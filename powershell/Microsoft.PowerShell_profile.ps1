@@ -365,7 +365,24 @@ if ($IsWindows -or $Env:OS) {
     Start-Process @processOptions
   }
   function etc_hosts { vim ${Env:SystemRoot}\System32\drivers\etc\hosts }
-
+  function case_sensitive {
+    switch ($args.Count) {
+      1 {
+        fsutil file queryCaseSensitiveInfo $args; break
+      }
+      2 {
+        if ($args[1]) {
+          fsutil file setCaseSensitiveInfo $args[0] enable
+        } else {
+          fsutil file setCaseSensitiveInfo $args[0] disable
+        }
+        break
+      }
+      Default {
+        fsutil file queryCaseSensitiveInfo $PWD
+      }
+    }
+  }
   function custom_cd {
     if ($args.Count -eq 0) {
       $tmp_path = ${HOME}
@@ -598,10 +615,12 @@ function ssh_agent_add {
     0 {
       Write-Host "Agent pid $sshAgentPid" -ForegroundColor Yellow
       ssh-add -l
+      break
     }
     1 {
       Write-Host "Agent pid $sshAgentPid" -ForegroundColor Yellow
       ssh-add
+      break
     }
     Default {
       Write-Host "No ssh-agent found" -ForegroundColor Red
@@ -821,14 +840,17 @@ function git_insteadof {
     "ssh" {
       git config --global --unset-all url."https://${url}/".insteadof
       git config --global url."git@${url}:".insteadOf "https://${url}/"
+      break
     }
     "https" {
       git config --global --unset-all url."git@${url}:".insteadof
       git config --global url."https://${url}/".insteadOf "git@${url}:"
+      break
     }
     "unset" {
       git config --global --unset-all url."https://${url}/".insteadof
       git config --global --unset-all url."git@${url}:".insteadof
+      break
     }
     Default {
       git config -l |
