@@ -33,3 +33,25 @@ Get-Service ssh-agent | Set-Service -StartupType Automatic
 
 [Environment]::SetEnvironmentVariable("GIT_SSH", "$((Get-Command ssh).Source)", [System.EnvironmentVariableTarget]::User)
 ```
+
+## Windows optional feature
+
+```
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
+
+## Windows capability
+
+```
+dism /Online /Get-Capabilities | findstr OpenSSH
+dism /Online /Add-Capability /CapabilityName:OpenSSH.Client~~~~0.0.1.0
+dism /Online /Add-Capability /CapabilityName:OpenSSH.Server~~~~0.0.1.0
+```
+
+## Windows service management
+
+```
+Start-Service ssh-agent
+Set-Service -Name ssh-agent -StartupType 'Automatic'
+```
