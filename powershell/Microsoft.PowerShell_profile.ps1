@@ -433,10 +433,9 @@ if ($IsWindows -or $Env:OS) {
     }
   }
   # vscode
-  if ($(Test-Path "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\bin\code.cmd")) {
-    function code {
-        $code_path = "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\bin\code.cmd" -replace ' ', '` '
-      "${code_path} $args" | Invoke-Expression
+  if ($(Test-Path "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\bin")) {
+    if (-not $(Get-Command code -errorAction SilentlyContinue)) {
+      env_insert "PATH" "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\bin" "User"
     }
   }
   # ${HOME}\bin
