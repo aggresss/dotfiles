@@ -819,6 +819,9 @@ function git_branch {
 }
 Set-Alias b git_branch
 
+# clone repo in hierarchy directory as org/repo
+# suit for https://site/org/repo.git or git@site:org/repo.git
+# $1: repo URI
 function git_clone {
   $clone_path = $args[0]
   if ($clone_path -match "@") {
@@ -834,8 +837,11 @@ function git_clone {
   }
   # trim suffix
   $clone_path = $clone_path.replace(".git", "")
-  # trim site
-  $clone_path = $clone_path.split("/", 2)[1]
+  # trim site if exist org
+  if ($clone_path.split("/").Length -eq 3) {
+    $clone_path = $clone_path.split("/", 2)[1]
+  }
+  # execute
   git clone --origin upstream $args $clone_path
 }
 
