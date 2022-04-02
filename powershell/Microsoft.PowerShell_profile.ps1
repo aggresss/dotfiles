@@ -399,6 +399,9 @@ if ($IsWindows -or $Env:OS) {
     }
   }
   Set-Alias cd custom_cd -Option AllScope
+  function ln ($target, $link) {
+    New-Item -Path $link -ItemType SymbolicLink -Value $target
+  }
   # visual studio env
   function vs_env {
     $vs_wildcard = "${Env:ProgramFiles}\Microsoft Visual Studio\*\Community\Common7\Tools"
@@ -495,8 +498,9 @@ function mkdir_cd {
   }
   Set-Location $folder_name
 }
-function s { mkdir_cd "${HOME}/workspace-scratch" $true}
-function f { mkdir_cd "${HOME}/workspace-formal" $true}
+function s { mkdir_cd "${HOME}/workspace-scratch" $true }
+function f { mkdir_cd "${HOME}/workspace-formal" $true }
+function z { Set-Location "${HOME}/workspace-zoo" }
 function d { mkdir_cd "${HOME}/Downloads" }
 function m { mkdir_cd "${HOME}/Documents" }
 

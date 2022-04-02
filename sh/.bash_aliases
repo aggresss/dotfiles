@@ -390,6 +390,7 @@ function mkdir_cd() {
 }
 alias s='mkdir_cd ${HOME}/workspace-scratch'
 alias f='mkdir_cd ${HOME}/workspace-formal'
+alias z='cd ${HOME}/workspace-zoo'
 alias d='mkdir_cd ${HOME}/Downloads'
 alias m='mkdir_cd ${HOME}/Documents'
 # $1 download url
