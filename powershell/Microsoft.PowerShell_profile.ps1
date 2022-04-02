@@ -836,7 +836,8 @@ function git_clone {
     return
   }
   # trim suffix
-  $clone_path = $clone_path.replace(".git", "")
+  $clone_path = $clone_path.TrimEnd("/")
+  $clone_path = $clone_path.TrimEnd(".git")
   # trim site if exist org
   if ($clone_path.split("/").Length -eq 3) {
     $clone_path = $clone_path.split("/", 2)[1]
