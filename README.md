@@ -42,6 +42,7 @@ Unblock-File $PROFILE
 | `~/dotfiless/` | ***Periodic Backup*** | dotfiles sort by classify |
 | `~/workspace-scratch/` | *Auto Generation* | code workbench |
 | `~/workspace-formal/` | *Auto Generation* | code reference |
+| `~/workspace-zoo/` | *Auto Generation* | code forge (symbolic link) |
 
 ### 3. Software
 

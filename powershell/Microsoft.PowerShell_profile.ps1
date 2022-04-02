@@ -402,6 +402,15 @@ if ($IsWindows -or $Env:OS) {
   function ln ($target, $link) {
     New-Item -Path $link -ItemType SymbolicLink -Value $target
   }
+  function which ($target) {
+    $obj = $(Get-Command $target)
+    if ($obj) {
+      Write-Output $obj
+      switch ($obj.CommandType) {
+        "Function" { Write-Output  "`n" $obj.definition }
+      }
+    }
+  }
   # visual studio env
   function vs_env {
     $vs_wildcard = "${Env:ProgramFiles}\Microsoft Visual Studio\*\Community\Common7\Tools"
