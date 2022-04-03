@@ -10,7 +10,7 @@
 - [Sysinternals Suite](https://docs.microsoft.com/en-us/sysinternals/downloads/)
 - [FFmpeg](https://www.gyan.dev/ffmpeg/builds/)
 - [MKVToolnix](https://www.fosshub.com/MKVToolNix.html)
-
+- [VcXsrv](https://sourceforge.net/projects/vcxsrv/)
 ```
 winget install Microsoft.PowerToys
 winget install Git.Git
