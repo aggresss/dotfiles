@@ -14,6 +14,7 @@ brew install \
     ctags \
     doxygen \
     emacs \
+    gstreamer \
     ffmpeg \
     fontconfig \
     freetype \
