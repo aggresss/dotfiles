@@ -17,6 +17,7 @@ winget install Git.Git
 winget install Kitware.CMake
 winget install vim.vim
 winget install GNU.Emacs
+winget install GnuWin32.make
 winget install marha.VcXsrv
 winget install Graphviz.Graphviz
 winget install Python.Python
@@ -62,6 +63,12 @@ if ($(Test-Path $lua_path)) {
 $maven_path = "${Env:USERPROFILE}\maven\*\bin"
 if ($(Test-Path $maven_path)) {
   env_append PATH (Resolve-Path $maven_path)[-1] User
+}
+
+## GnuWin32
+$gnuwin32_path = "${Env:ProgramFiles(x86)}\GnuWin32\bin"
+if ($(Test-Path $gnuwin32_path)) {
+  env_append PATH (Resolve-Path $gnuwin32_path)[-1] User
 }
 ```
 
