@@ -839,7 +839,7 @@ function git_clone {
   $clone_path = $clone_path.TrimEnd("/")
   $clone_path = $clone_path.TrimEnd(".git")
   # trim site if exist org
-  if ($clone_path.split("/").Length -eq 3) {
+  if ($clone_path.split("/").Length -ge 3) {
     $clone_path = $clone_path.split("/", 2)[1]
   }
   # execute

@@ -618,7 +618,7 @@ function git_clone() {
     clone_path=${clone_path%/}
     clone_path=${clone_path%.git}
     # trim site if org exist
-    if [ $(echo ${clone_path} | awk -F "/" '{print NF}') -eq 3 ]; then
+    if [ $(echo ${clone_path} | awk -F "/" '{print NF}') -ge 3 ]; then
         clone_path=${clone_path#*/}
     fi
     # execute
