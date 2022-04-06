@@ -11,6 +11,8 @@
 - [FFmpeg](https://www.gyan.dev/ffmpeg/builds/)
 - [MKVToolnix](https://www.fosshub.com/MKVToolNix.html)
 - [VcXsrv](https://sourceforge.net/projects/vcxsrv/)
+- [PulseAudio](https://www.freedesktop.org/wiki/Software/PulseAudio/Ports/Windows/Support/)
+
 ```
 winget install Microsoft.PowerToys
 winget install Git.Git

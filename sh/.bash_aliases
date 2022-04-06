@@ -300,6 +300,7 @@ Linux)
     # Specified for Microsoft WSL
     if [ -n "$WSL_DISTRO_NAME" ]; then
         export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0.0
+        export PULSE_SERVER=tcp:$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}');
     fi
     # Specified for docker container
     if [ -f /.dockerenv ]; then
