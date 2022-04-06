@@ -1,0 +1,11 @@
+{
+	"Batch Header": {
+		"prefix": "cmd",
+		"body": [
+			"@echo off",
+			"setlocal\n$0",
+			"endlocal"
+		],
+		"description": ""
+	}
+}
