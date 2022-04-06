@@ -14,7 +14,7 @@ brew install \
     ctags \
     doxygen \
     emacs \
-    gstreamer \
+    gstreamer gst-plugins-base gst-plugins-good gst-plugins-ugly gst-plugins-bad \
     ffmpeg \
     fontconfig \
     freetype \
