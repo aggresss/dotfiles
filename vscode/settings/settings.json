@@ -1,11 +1,12 @@
 {
 	"security.workspace.trust.enabled": false,
+	"remote.autoForwardPorts": false,
+	"workbench.iconTheme": "vscode-icons",
 	"workbench.startupEditor": "none",
 	"workbench.colorTheme": "Default Dark+",
 	"workbench.activityBar.visible": true,
 	"workbench.statusBar.visible": true,
 	"workbench.sideBar.location": "left",
-	"workbench.editor.showTabs": true,
 	"window.zoomLevel": 0,
 	"editor.fontSize": 14,
 	"editor.minimap.enabled": false,
@@ -17,7 +18,7 @@
 	"explorer.confirmDragAndDrop": false,
 	"explorer.confirmDelete": false,
 	"files.trimTrailingWhitespace": true,
-
+	"cmake.configureOnOpen": false,
 	"C_Cpp.default.cStandard": "c11",
 	"C_Cpp.default.cppStandard": "c++14",
 	"C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 0}",
@@ -29,37 +30,17 @@
 	"C_Cpp.enhancedColorization": "Enabled",
 	"C_Cpp.dimInactiveRegions": true,
 	"C_Cpp.inactiveRegionOpacity": 0.8,
-	"C_Cpp.inactiveRegionBackgroundColor": "#393939",
-
+	"C_Cpp.inactiveRegionBackgroundColor": "#404040", // dark
+	"go.toolsManagement.autoUpdate": true,
 	"go.gopath": "${env:GOPATH}",
 	"go.toolsGopath": "${env:GOPATH}",
 	"go.inferGopath": false,
 	"go.useLanguageServer": true,
-	"go.formatTool": "goimports",
 	"go.lintFlags": [
 		"--disable=all",
 		"--enable=errcheck"
 	],
-
-	"java.configuration.checkProjectSettingsExclusions": false,
-
-	"python.formatting.provider": "yapf",
+	"java.import.generatesMetadataFilesAtProjectRoot": false,
 	"python.linting.enabled": true,
-	"python.linting.pylintEnabled": false,
-	"python.linting.flake8Enabled": true,
-	"python.languageServer": "Default",
-
-	"perl.perltidyArgs": [
-		"-q",
-		"-i=4",
-		"-ce",
-		"-l=0",
-		"-bar",
-		"-naws",
-		"-blbs=2",
-		"-mbl=2"
-	],
-
-	"cmake.configureOnOpen": false,
-	"remote.autoForwardPorts": false
+	"python.languageServer": "Default"
 }
