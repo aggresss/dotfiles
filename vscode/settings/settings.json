@@ -19,6 +19,7 @@
 	"explorer.confirmDelete": false,
 	"files.trimTrailingWhitespace": true,
 	"cmake.configureOnOpen": false,
+	"mesonbuild.configureOnOpen": false,
 	"C_Cpp.default.cStandard": "c11",
 	"C_Cpp.default.cppStandard": "c++14",
 	"C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 0}",
