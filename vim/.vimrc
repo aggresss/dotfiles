@@ -105,6 +105,8 @@ highlight User7 ctermfg=yellow  ctermbg=darkblue
 "
 " Custom command
 "
+" Sudo write
+command SudoWrite :execute ':silent w !sudo tee % > /dev/null' | :edit!
 " Trim CRLF to LF
 command TrimCRLF %s/\r\(\n\)/\r/g
 " Trim redundancy sapce at the end of line
@@ -119,8 +121,6 @@ command TrimSpaces %s/^\s*//g
 command TrimBlankLines g/^\s*$/d
 " Trans SDP info \r\n
 command TransSDP %s/\(\\r\)\?\\n/\r/g
-" Sudo save
-command SudoWrite :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 "
 " Custom function
