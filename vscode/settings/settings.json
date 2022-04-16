@@ -23,10 +23,6 @@
 	"C_Cpp.default.cStandard": "c11",
 	"C_Cpp.default.cppStandard": "c++14",
 	"C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 0}",
-	"C_Cpp.default.defines": [],
-	"C_Cpp.default.includePath": [
-		"${workspaceFolder}/**"
-	],
 	"C_Cpp.errorSquiggles": "Enabled",
 	"C_Cpp.enhancedColorization": "Enabled",
 	"C_Cpp.dimInactiveRegions": true,
