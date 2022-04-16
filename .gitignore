@@ -2,7 +2,6 @@
 *.out
 
 # vscode project file
-.vscode/
 .vstags
 
 # MacOS cache file
