@@ -20,7 +20,7 @@
 	"files.trimTrailingWhitespace": true,
 	"cmake.configureOnOpen": false,
 	"mesonbuild.configureOnOpen": false,
-	"C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 0}",
+	"C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Google}",
 	"go.toolsManagement.autoUpdate": true,
 	"go.gopath": "${env:GOPATH}",
 	"go.toolsGopath": "${env:GOPATH}",
