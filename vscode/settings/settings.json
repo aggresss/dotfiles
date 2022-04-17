@@ -22,15 +22,8 @@
 	"mesonbuild.configureOnOpen": false,
 	"C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Google}",
 	"go.toolsManagement.autoUpdate": true,
-	"go.gopath": "${env:GOPATH}",
-	"go.toolsGopath": "${env:GOPATH}",
-	"go.inferGopath": false,
-	"go.useLanguageServer": true,
 	"go.lintFlags": [
 		"--disable=all",
 		"--enable=errcheck"
-	],
-	"java.import.generatesMetadataFilesAtProjectRoot": false,
-	"python.linting.enabled": true,
-	"python.languageServer": "Default"
+	]
 }
