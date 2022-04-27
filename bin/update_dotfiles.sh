@@ -69,6 +69,16 @@ fi
 update_file ${DOTFILES_URL}/sh/.bash_aliases ${HOME}/.bash_aliases
 update_file ${DOTFILES_URL}/sh/.inputrc ${HOME}/.inputrc
 update_file ${DOTFILES_URL}/bin/hello.sh ${HOME}/bin/hello.sh
+# ssh
+if [ ! -d ${HOME}/.ssh ]; then
+    mkdir -p ${HOME}/.ssh
+fi
+if [ ! -f ${HOME}/.ssh/config ]; then
+    cat <<END >${HOME}/.ssh/config
+Host *
+  ServerAliveInterval 60
+END
+fi
 # vim
 if [ $(
     command -v vim >/dev/null
