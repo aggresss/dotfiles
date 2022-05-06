@@ -1,0 +1,11 @@
+{
+    "snippets main": {
+        "prefix": "main",
+        "body": [
+            "fn main() {",
+            "\t$0",
+            "}\n"
+        ],
+        "description": ""
+    }
+}

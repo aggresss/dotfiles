@@ -4,7 +4,7 @@
 		"body":[
 			"package main\n",
 			"func main() {",
-			"\t$2",
+			"\t$0",
 			"}\n"
 		],
 		"description": ""
