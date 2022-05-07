@@ -15,6 +15,8 @@ golang.go
 ms-python.python
 # Java
 vscjava.vscode-java-pack
+# Rust
+matklad.rust-analyzer
 # Lua
 sumneko.lua
 # Perl
