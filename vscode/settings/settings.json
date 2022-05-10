@@ -3,7 +3,6 @@
 	"remote.autoForwardPorts": false,
 	"workbench.iconTheme": "vscode-icons",
 	"workbench.startupEditor": "none",
-	"workbench.colorTheme": "Default Dark+",
 	"workbench.activityBar.visible": true,
 	"workbench.statusBar.visible": true,
 	"workbench.sideBar.location": "left",
@@ -13,17 +12,18 @@
 	"editor.renderWhitespace": "all",
 	"editor.suggestSelection": "first",
 	"editor.semanticHighlighting.enabled": true,
+	"editor.inlayHints.enabled": "offUnlessPressed",
 	"editor.fontFamily": "'JetBrains Mono', Menlo, DejaVu, 'Cascadia Code', Consolas, 'Courier New', monospace",
 	"terminal.integrated.fontSize": 12,
 	"explorer.confirmDragAndDrop": false,
 	"explorer.confirmDelete": false,
 	"files.trimTrailingWhitespace": true,
-	"cmake.configureOnOpen": false,
-	"mesonbuild.configureOnOpen": false,
 	"C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Google}",
 	"go.toolsManagement.autoUpdate": true,
 	"go.lintFlags": [
 		"--disable=all",
 		"--enable=errcheck"
-	]
+	],
+	"cmake.configureOnOpen": false,
+	"mesonbuild.configureOnOpen": false
 }
