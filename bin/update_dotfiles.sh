@@ -133,25 +133,12 @@ if [ $(
 ) -eq 0 ]; then
     update_file ${DOTFILES_URL}/maven/settings.xml ${HOME}/.m2/settings.xml
 fi
-# rust
+# cargo
 if [ $(
     command -v cargo > /dev/null
     echo $?
 ) -eq 0 ]; then
-    if [ ! -f ${HOME}/.cargo/config ]
-    cat <<END >>${HOME}/.cargo/config
-[source.crates-io]
-replace-with = 'rsproxy'
-
-[source.rsproxy]
-registry = "https://rsproxy.cn/crates.io-index"
-
-[registries.rsproxy]
-index = "https://rsproxy.cn/crates.io-index"
-
-[net]
-git-fetch-with-cli = true
-END
+    update_file ${DOTFILES_URL}/cargo/config ${HOME}/.cargo/config
 fi
 # powershell
 if [ $(
