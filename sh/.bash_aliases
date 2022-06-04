@@ -1094,4 +1094,16 @@ if [ -d "$HOME/.cargo/bin" ]; then
     env_insert "PATH" "$HOME/.cargo/bin"
 fi
 
+function rustup_proxy() {
+    if [ ${RUSTUP_DIST_SERVER:-NOCONFIG} = "NOCONFIG" ]; then
+        export RUSTUP_DIST_SERVER="https://rsproxy.cn"
+        export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
+        echo -e "${YELLOW}Rustup proxy: ${RUSTUP_DIST_SERVER}${NORMAL}"
+    else
+        unset RUSTUP_DIST_SERVER
+        unset RUSTUP_UPDATE_ROOT
+        echo -e "${YELLOW}Rustup proxy: disabled${NORMAL}"
+    fi
+}
+
 # End of .bash_aliases

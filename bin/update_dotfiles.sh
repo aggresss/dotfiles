@@ -133,6 +133,26 @@ if [ $(
 ) -eq 0 ]; then
     update_file ${DOTFILES_URL}/maven/settings.xml ${HOME}/.m2/settings.xml
 fi
+# rust
+if [ $(
+    command -v cargo > /dev/null
+    echo $?
+) -eq 0 ]; then
+    if [ ! -f ${HOME}/.cargo/config ]
+    cat <<END >>${HOME}/.cargo/config
+[source.crates-io]
+replace-with = 'rsproxy'
+
+[source.rsproxy]
+registry = "https://rsproxy.cn/crates.io-index"
+
+[registries.rsproxy]
+index = "https://rsproxy.cn/crates.io-index"
+
+[net]
+git-fetch-with-cli = true
+END
+fi
 # powershell
 if [ $(
     command -v pwsh >/dev/null
@@ -143,7 +163,6 @@ if [ $(
     update_file ${DOTFILES_URL}/powershell/Microsoft.PowerShell_profile.ps1 \
         ${HOME}/.config/powershell/Microsoft.VSCode_profile.ps1
 fi
-
 # sh
 if [[ ${SHELL} =~ .*zsh$ ]]; then
     # .zshrc
