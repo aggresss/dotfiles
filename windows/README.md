@@ -116,5 +116,6 @@ New-NetFirewallRule -DisplayName "WSL" -Direction Inbound  -InterfaceAlias "vEth
 ## Windows manual setting
 
 ```
+Personalization > Background > Solid color > rgb(1, 133, 116)
 Update & security > Advanced options > Delivery Optimization > Off
 ```
