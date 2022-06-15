@@ -1,4 +1,5 @@
 {
+	"window.newWindowDimensions": "inherit",
 	"security.workspace.trust.enabled": false,
 	"remote.autoForwardPorts": false,
 	"workbench.iconTheme": "vscode-icons",
