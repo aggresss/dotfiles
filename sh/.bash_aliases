@@ -1028,6 +1028,10 @@ function perl_install() {
 # JavaScript for Bash/Zsh
 #########################
 
+function npm_link_list() {
+    ls -F  ${NODE_PATH} | grep -E '@$'
+}
+
 # fast echo package.json run
 alias j='jq .scripts package.json'
 
