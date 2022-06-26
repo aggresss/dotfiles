@@ -7,5 +7,12 @@
             "}\n"
         ],
         "description": ""
+    },
+    "snippets allow": {
+        "prefix": "allow",
+        "body": [
+            "#![allow($0)]"
+        ],
+        "description": ""
     }
 }
