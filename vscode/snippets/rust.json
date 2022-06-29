@@ -14,5 +14,13 @@
             "#![allow($0)]"
         ],
         "description": ""
+    },
+    "snippets mod tests": {
+        "prefix": "mod tests",
+        "body": [
+            "#[cfg(test)]",
+            "mod tests {\n\t$0\n}"
+        ],
+        "description": ""
     }
 }
