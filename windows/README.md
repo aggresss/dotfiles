@@ -110,7 +110,10 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" /v Enabl
 ## Windows firewall
 
 ```
+## WSL Setting
 New-NetFirewallRule -DisplayName "WSL" -Direction Inbound  -InterfaceAlias "vEthernet (WSL)"  -Action Allow
+## Reset SecHealthUI
+Get-AppxPackage Microsoft.SecHealthUI -AllUsers | Reset-AppxPackage
 ```
 
 ## Windows manual setting
