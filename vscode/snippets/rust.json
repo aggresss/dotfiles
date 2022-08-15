@@ -22,5 +22,23 @@
             "mod tests {\n\t$0\n}"
         ],
         "description": ""
+    },
+    "snippets leetcode": {
+        "prefix": "leetcode",
+        "body": [
+            "#![allow(dead_code)]\n",
+            "fn main() {}\n",
+            "struct Solution {}\n",
+            "impl Solution{\n$0",
+            "}\n",
+            "#[cfg(test)]",
+            "mod tests {",
+            "\tuse super::*;",
+            "\t#[test]",
+            "\tfn tests() {",
+            "\t}",
+            "}"
+        ],
+        "description": ""
     }
 }
