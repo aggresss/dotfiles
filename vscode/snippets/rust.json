@@ -19,7 +19,12 @@
         "prefix": "mod tests",
         "body": [
             "#[cfg(test)]",
-            "mod tests {\n\t$0\n}"
+            "mod tests {",
+            "\tuse super::*;\n",
+            "\t#[test]",
+            "\tfn tests() {\n\t\t$0",
+            "\t}",
+            "}"
         ],
         "description": ""
     },
