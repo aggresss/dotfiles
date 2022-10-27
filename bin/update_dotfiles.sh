@@ -77,6 +77,8 @@ if [ ! -f ${HOME}/.ssh/config ]; then
     cat <<END >${HOME}/.ssh/config
 Host *
   ServerAliveInterval 60
+  HostKeyAlgorithms +ssh-rsa
+  PubkeyAcceptedKeyTypes +ssh-rsa
 END
 fi
 # vim
