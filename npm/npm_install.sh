@@ -10,5 +10,6 @@ npm install -g grunt-cli
 npm install -g typescript
 npm install -g ts-node
 npm install -g serve
+npm install -g http-server
 npm install -g live-server
 npm install -g create-react-app
