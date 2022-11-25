@@ -548,7 +548,7 @@ function update_configfiles {
   # Windows Envrionment
   if ($IsWindows -or $Env:OS) {
     # SSH
-    if (-not $(Test-Path ${HOME}/.ssh/config))) {
+    if (-not $(Test-Path ${HOME}/.ssh/config)) {
       update_internal $isLocal ".ssh/config" "${HOME}/.ssh/config"
     }
     # Vim
