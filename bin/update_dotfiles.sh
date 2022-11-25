@@ -74,12 +74,7 @@ if [ ! -d ${HOME}/.ssh ]; then
     mkdir -p ${HOME}/.ssh
 fi
 if [ ! -f ${HOME}/.ssh/config ]; then
-    cat <<END >${HOME}/.ssh/config
-Host *
-  ServerAliveInterval 60
-  HostKeyAlgorithms +ssh-rsa
-  PubkeyAcceptedKeyTypes +ssh-rsa
-END
+    update_file ${DOTFILES_URL}/ssh/config ${HOME}/.ssh/config
 fi
 # vim
 if [ $(

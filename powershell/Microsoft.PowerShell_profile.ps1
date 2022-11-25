@@ -547,6 +547,10 @@ function update_configfiles {
   update_internal $isLocal "powershell/Microsoft.PowerShell_profile.ps1" ${PROFILE_PATH}/Microsoft.VSCode_profile.ps1
   # Windows Envrionment
   if ($IsWindows -or $Env:OS) {
+    # SSH
+    if (-not $(Test-Path ${HOME}/.ssh/config))) {
+      update_internal $isLocal ".ssh/config" "${HOME}/.ssh/config"
+    }
     # Vim
     if (Get-Command vim -errorAction SilentlyContinue) {
       update_internal $isLocal "vim/.vimrc" "${HOME}/.vimrc"
