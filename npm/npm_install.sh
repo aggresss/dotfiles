@@ -2,6 +2,9 @@
 
 npm config set registry https://registry.npmmirror.com
 
+npm install -g n
+sudo ${HOME}/.local/bin/n stable
+
 npm install -g npm
 npm install -g npm-check
 npm install -g yarn
