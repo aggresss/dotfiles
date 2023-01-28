@@ -68,9 +68,15 @@ fi
 # Update commom dotfiles
 update_file ${DOTFILES_URL}/sh/.bash_aliases ${HOME}/.bash_aliases
 update_file ${DOTFILES_URL}/sh/.inputrc ${HOME}/.inputrc
-update_file ${DOTFILES_URL}/bin/hello.sh ${HOME}/bin/hello.sh
-update_file ${DOTFILES_URL}/bin/go_up.sh ${HOME}/bin/go_up.sh
-update_file ${DOTFILES_URL}/bin/rust_up.sh ${HOME}/bin/rust_up.sh
+COMMON_FILES="\
+    hello.sh \
+    go_up.sh \
+    rust_up.sh \
+"
+for CF in ${COMMON_FILES}
+do
+    update_file ${DOTFILES_URL}/bin/${CF} ${HOME}/bin/${CF}
+done
 # ssh
 if [ ! -d ${HOME}/.ssh ]; then
     mkdir -p ${HOME}/.ssh
