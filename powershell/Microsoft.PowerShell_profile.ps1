@@ -399,8 +399,17 @@ if ($IsWindows -or $Env:OS) {
     }
   }
   Set-Alias cd custom_cd -Option AllScope
-  function ln ($target, $link) {
-    New-Item -Path $link -ItemType SymbolicLink -Value $target
+  function ln () {
+    Param (
+      [Parameter(Mandatory = $true, Position = 0)] [string]$target,
+      [Parameter(Mandatory = $true, Position = 1)] [string]$link,
+      [Parameter()] [switch]$s
+    )
+    if ($s) {
+      New-Item -Path $link -ItemType SymbolicLink -Value $target
+    } else {
+      fsutil hardlink create $link $target
+    }
   }
   function which ($target) {
     $obj = $(Get-Command $target)
