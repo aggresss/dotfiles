@@ -14,10 +14,10 @@
 - [PulseAudio](https://www.freedesktop.org/wiki/Software/PulseAudio/Ports/Windows/Support/)
 
 ```
-winget install Microsoft.PowerToys
 winget install Git.Git
 winget install Kitware.CMake
 winget install vim.vim
+winget install 7zip.7zip
 winget install GNU.Emacs
 winget install GnuWin32.make
 winget install marha.VcXsrv
@@ -31,6 +31,7 @@ winget install Mozilla.Firefox
 winget install Microsoft.Edge
 winget install VideoLAN.VLC
 winget install WiresharkFoundation.Wireshark
+winget install Microsoft.PowerToys
 winget install Microsoft.VisualStudioCode-User-x64
 winget install Microsoft.VisualStudio.Community
 winget install CPUID.GPU-Z
