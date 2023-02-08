@@ -187,12 +187,10 @@ END
     ;;
 cmake)
     cat <<END >${TMP_PATH}/CMakeLists.txt
-cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
-project(HELLO C)
+cmake_minimum_required(VERSION 3.0)
+project(HELLO)
 set(CMAKE_VERBOSE_MAKEFILE ON)
-file(WRITE \${CMAKE_BINARY_DIR}/main.c "#include <stdio.h>\nint main(void){printf(\"Hello, World!\\\\n\");return 0;}\n")
-add_executable(main main.c)
-install(TARGETS main RUNTIME DESTINATION bin)
+message(STATUS "Hello, World!")
 
 END
     echo "${TMP_PATH}/CMakeLists.txt"
