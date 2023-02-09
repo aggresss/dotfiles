@@ -21,6 +21,7 @@ winget install 7zip.7zip
 winget install GNU.Emacs
 winget install GnuWin32.make
 winget install marha.VcXsrv
+winget install SourceGear.DiffMerge
 winget install Graphviz.Graphviz
 winget install Python.Python
 winget install StrawberryPerl.StrawberryPerl
