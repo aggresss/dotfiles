@@ -399,6 +399,18 @@ if ($IsWindows -or $Env:OS) {
     }
   }
   Set-Alias cd custom_cd -Option AllScope
+  function custom_rm () {
+    Param (
+      [Parameter()] [switch]$rf,
+      [Parameter(Mandatory = $true, ValueFromRemainingArguments)] [string]$path
+    )
+    if ($rf) {
+      Remove-Item -Path $path -Force -Recurse -Confirm:$false
+    } else {
+      Remove-Item -Path $path
+    }
+  }
+  Set-Alias rm custom_rm -Option AllScope
   function ln () {
     Param (
       [Parameter(Mandatory = $true, Position = 0)] [string]$target,
