@@ -800,7 +800,7 @@ function git_set_upstream() {
 ####################
 
 function cmake_init() {
-    touch CmakeLists.txt
+    touch CMakeLists.txt
 }
 
 #####################

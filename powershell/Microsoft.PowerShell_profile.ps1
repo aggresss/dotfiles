@@ -944,7 +944,7 @@ function git_set_upstream {
 ####################
 
 function cmake_init() {
-    New-Item "CmakeLists.txt" -ItemType File
+    New-Item "CMakeLists.txt" -ItemType File
 }
 
 <#######################
