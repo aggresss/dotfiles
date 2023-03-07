@@ -795,6 +795,14 @@ function git_set_upstream() {
     git branch --set-upstream-to=$1
 }
 
+####################
+# Cmake for Bash/Zsh
+####################
+
+function cmake_init() {
+    touch CmakeLists.txt
+}
+
 #####################
 # Vscode for Bash/Zsh
 #####################
