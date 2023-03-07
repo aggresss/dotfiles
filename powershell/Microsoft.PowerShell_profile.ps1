@@ -939,9 +939,9 @@ function git_set_upstream {
   git branch --set-upstream-to=$args
 }
 
-####################
-# Cmake for Bash/Zsh
-####################
+######################
+# Cmake for PowerShell
+######################
 
 function cmake_init() {
     New-Item "CMakeLists.txt" -ItemType File
