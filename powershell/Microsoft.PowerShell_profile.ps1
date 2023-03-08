@@ -947,6 +947,30 @@ function cmake_init() {
     New-Item "CMakeLists.txt" -ItemType File
 }
 
+function cmake_clean() {
+    $cmake_files = @(
+        'CMakeLists.txt.user'
+        'CMakeCache.txt'
+        'CMakeFiles'
+        'CMakeScripts'
+        'compile_commands.json'
+        'cmake_install.cmake'
+        'install_manifest.txt'
+        'Testing'
+        'CTestTestfile.cmake'
+        '_deps'
+        'Makefile'
+        '*.sln'
+        '*.vcxproj'
+        '*.vcxproj.filters'
+    )
+    foreach ($cf in $cmake_files) {
+      if (Test-Path $cf) {
+        Remove-Item $cf -Recurse -Force -Verbose
+      }
+    }
+}
+
 <#######################
  # VSCode for PowerShell
  #######################>

@@ -273,7 +273,7 @@ echo -e "${CYAN}${SHELL}${NORMAL}"
 # Envronment specific
 case $(uname) in
 Darwin)
-    # ls colours
+    # variable
     export CLICOLOR=1
     export LSCOLORS=ExGxFxDxCxegedabagacad
     # open application from command
@@ -291,8 +291,6 @@ Darwin)
     alias firefox='open -a Firefox'
     alias chrome_command="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
     alias firefox_command='/Applications/Firefox.app/Contents/MacOS/firefox'
-    # variable
-    export ICD="${HOME}/Library/Mobile Documents/com~apple~CloudDocs"
     ;;
 Linux)
     # Export history format
@@ -801,6 +799,26 @@ function git_set_upstream() {
 
 function cmake_init() {
     touch CMakeLists.txt
+}
+
+function cmake_clean() {
+    CMAKE_FILES="\
+        CMakeLists.txt.user \
+        CMakeCache.txt \
+        CMakeFiles \
+        CMakeScripts \
+        compile_commands.json \
+        cmake_install.cmake \
+        install_manifest.txt \
+        Testing \
+        CTestTestfile.cmake \
+        _deps \
+        Makefile \
+    "
+    for CF in ${CMAKE_FILES}
+    do
+        find . -name ${CF} -exec rm -rvf {} \;
+    done
 }
 
 #####################
