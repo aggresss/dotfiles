@@ -814,10 +814,11 @@ function cmake_clean() {
         CTestTestfile.cmake \
         _deps \
         Makefile \
+        *.xcodeproj \
     "
-    for CF in ${CMAKE_FILES}
+    for CF in `echo ${CMAKE_FILES}`
     do
-        find . -name ${CF} -exec rm -rvf {} \;
+        find . -name ${CF} -prune -exec rm -rvf {} \;
     done
 }
 

@@ -73,7 +73,7 @@ COMMON_FILES="\
     go_up.sh \
     rust_up.sh \
 "
-for CF in ${COMMON_FILES}
+for CF in `echo ${COMMON_FILES}`
 do
     update_file ${DOTFILES_URL}/bin/${CF} ${HOME}/bin/${CF}
 done
