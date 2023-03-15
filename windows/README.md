@@ -26,6 +26,7 @@ winget install Graphviz.Graphviz
 winget install JGraph.Draw
 winget install VideoLAN.VLC
 winget install WiresharkFoundation.Wireshark
+winget install Postman.Postman
 winget install Python.Python
 winget install StrawberryPerl.StrawberryPerl
 winget install RubyInstallerTeam.Ruby
