@@ -59,6 +59,8 @@ brew install \
     nodejs \
     ninja \
     openjdk \
+    kubectl \
+    helm \
     redis
 
 brew install --cask\
