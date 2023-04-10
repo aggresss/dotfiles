@@ -273,6 +273,10 @@ echo -e "${CYAN}${SHELL}${NORMAL}"
 # Envronment specific
 case $(uname) in
 Darwin)
+    # Env
+    if [[ ${SHELL} =~ .*zsh$ ]]; then
+            autoload -Uz compinit && compinit
+    fi
     # variable
     export CLICOLOR=1
     export LSCOLORS=ExGxFxDxCxegedabagacad
