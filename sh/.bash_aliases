@@ -856,22 +856,23 @@ function docker_shell() {
     docker exec -it $1 bash -c "stty cols $COLUMNS rows $LINES && bash"
 }
 
-# Show docker host infomation
+# Show docker environment variables
+# https://docs.docker.com/engine/reference/commandline/cli/#environment-variables
 function docker_info() {
+    echo -e "${RED}DOCKER_DEFAULT_PLATFORM: ${GREEN}${DOCKER_DEFAULT_PLATFORM}${NORMAL}"
+    echo -e "${RED}DOCKER_CONFIG: ${GREEN}${DOCKER_CONFIG}${NORMAL}"
     echo -e "${RED}DOCKER_HOST: ${GREEN}${DOCKER_HOST}${NORMAL}"
     echo -e "${RED}DOCKER_CERT_PATH: ${GREEN}${DOCKER_CERT_PATH}${NORMAL}"
     echo -e "${RED}DOCKER_TLS_VERIFY: ${GREEN}${DOCKER_TLS_VERIFY}${NORMAL}"
 }
 
+# clear docker environment variables
 function docker_unset() {
+    unset DOCKER_DEFAULT_PLATFORM
+    unset DOCKER_CONFIG
     unset DOCKER_HOST
     unset DOCKER_CERT_PATH
     unset DOCKER_TLS_VERIFY
-    unset MINIKUBE_ACTIVE_DOCKERD
-}
-
-function docker_minikube() {
-    eval $(minikube docker-env)
 }
 
 # Inspect volumes and port
