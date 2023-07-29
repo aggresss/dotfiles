@@ -365,8 +365,6 @@ alias h='history | grep'
 alias fdf='find . -name "*" |grep -sin'
 # find file content
 alias fdc='find . -name "*" |xargs grep -sin'
-# count code line
-alias ccl='find . -name "*[.h|.c|.hpp|.cpp|.cc|.cs|.go|.rs|.py|.java|.ts|.js]" -type f | xargs cat | wc -l'
 # alias for emacs
 alias emacs='emacs -nw'
 alias emacsx='emacs'
@@ -396,6 +394,23 @@ alias f='mkdir_cd ${HOME}/workspace-formal'
 alias z='cd ${HOME}/workspace-zoo'
 alias d='mkdir_cd ${HOME}/Downloads'
 alias m='mkdir_cd ${HOME}/Documents'
+
+# count code line
+function count_code_line() {
+    if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
+        SUFFIX="h c hpp cpp cc cs go rs py java ts js"
+        for CF in `echo ${SUFFIX}`
+        do
+            printf "|%6s|" ${CF}
+            find . -name "*.${CF}" -type f | xargs cat | wc -l
+        done
+    else
+        printf "|%s|" ${1}
+        find . -name "${1}" -type f | xargs cat | wc -l
+    fi
+}
+alias ccl='count_code_line'
+
 # $1 download url
 # $2 local filepath
 function update_file() {
