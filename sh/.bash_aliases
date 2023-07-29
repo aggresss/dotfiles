@@ -398,7 +398,7 @@ alias m='mkdir_cd ${HOME}/Documents'
 # count code line
 function count_code_line() {
     if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
-        SUFFIX="h c hpp cpp cc cs go rs py java ts js"
+        SUFFIX="h c hpp cpp cc cs go rs py java ts js html md txt"
         for CF in `echo ${SUFFIX}`
         do
             printf "|%6s|" ${CF}
