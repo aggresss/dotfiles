@@ -61,7 +61,9 @@ brew install \
     openjdk \
     kubectl \
     helm \
-    redis
+    redis \
+    bazel \
+    buildifier
 
 brew install --cask\
     iterm2 \
