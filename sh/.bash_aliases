@@ -396,7 +396,7 @@ alias d='mkdir_cd ${HOME}/Downloads'
 alias m='mkdir_cd ${HOME}/Documents'
 
 # count code line
-function count_code_line() {
+function lines_of_code() {
     if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
         SUFFIX="h c hpp cpp cc cs go rs py java ts js html md txt"
         for CF in `echo ${SUFFIX}`
@@ -409,7 +409,7 @@ function count_code_line() {
         find . -name "${1}" -type f | xargs cat | wc -l
     fi
 }
-alias ccl='count_code_line'
+alias loc='lines_of_code'
 
 # $1 download url
 # $2 local filepath
