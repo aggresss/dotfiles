@@ -99,7 +99,7 @@
 			"\t. \"github.com/onsi/gomega\"",
 			")\n",
 			"var _ = Describe(\"unit\", func() {",
-			"var ()\n",
+			"\tvar ()\n",
 			"\tBeforeEach(func() {\n",
 			"\t})\n",
 			"\tIt(\"test\", func() {",
