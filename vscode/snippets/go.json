@@ -68,8 +68,8 @@
 		],
 		"description": ""
 	},
-	"snippets test case": {
-		"prefix": "test case",
+	"snippets tdd testify": {
+		"prefix": "tdd testify",
 		"body":[
 			"// \"github.com/stretchr/testify/assert\"",
 			"func TestEqual(t *testing.T) {",
@@ -90,6 +90,24 @@
 			"}\n"
 		],
 		"description": ""
+	},
+	"snippets bdd ginkgo": {
+		"prefix": "bdd ginkgo",
+		"body":[
+			"import (",
+			"\t. \"github.com/onsi/ginkgo/v2\"",
+			"\t. \"github.com/onsi/gomega\"",
+			")\n",
+			"var _ = Describe(\"unit\", func() {\n",
+			"\tBeforeEach(func() {\n",
+			"\t})\n",
+			"\tIt(\"test\", func() {",
+			"\t\tExpect(0).To(Equal(0))",
+			"\t\tExpect(true).To(BeTrue())",
+			"\t\tExpect(func() { panic(\"\") }).To(Panic())",
+			"\t})",
+			"})\n"
+		],
+		"description": ""
 	}
-
 }
