@@ -102,7 +102,7 @@
 			"\tvar ()\n",
 			"\tBeforeEach(func() {\n",
 			"\t})\n",
-			"\tIt(\"test\", func() {",
+			"\tIt(\"\", func() {",
 			"\t\tExpect(0).To(Equal(0))",
 			"\t\tExpect(true).To(BeTrue())",
 			"\t\tExpect(func() { panic(\"\") }).To(Panic())",
