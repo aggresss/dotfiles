@@ -98,7 +98,7 @@
 			"\t. \"github.com/onsi/ginkgo/v2\"",
 			"\t. \"github.com/onsi/gomega\"",
 			")\n",
-			"var _ = Describe(\"unit\", func() {",
+			"var _ = Describe(\"\", func() {",
 			"\tvar ()\n",
 			"\tBeforeEach(func() {\n",
 			"\t})\n",
