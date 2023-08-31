@@ -30,6 +30,7 @@ brew install \
     hexedit \
     htop \
     bmon \
+    iperf3 \
     mtr \
     jq \
     lua \
