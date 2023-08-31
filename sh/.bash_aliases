@@ -579,6 +579,8 @@ alias git_log='git log --oneline'
 alias git_skip='git update-index --skip-worktree'
 # git assume unchanged
 alias git_assume='git update-index --assume-unchanged'
+# git set upstream to
+alias git_upstream='git branch --set-upstream-to'
 
 # Show git status
 function git_status() {

@@ -839,6 +839,10 @@ function git_diff {
   git diff --name-status $args
 }
 
+function git_upstream {
+  git branch --set-upstream-to $args
+}
+
 function git_branch {
   git branch -vv $args
 }
