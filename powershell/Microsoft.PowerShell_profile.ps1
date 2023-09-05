@@ -455,7 +455,9 @@ if ($IsWindows -or $Env:OS) {
     Write-Host "`nVisual Studio Command Prompt variables set." -ForegroundColor Yellow
   }
   # vim
-  if ($(Test-Path "${Env:ProgramFiles(x86)}\Vim\*\vim.exe")) {
+  if ($(Test-Path "${Env:ProgramFiles}\Vim\*\vim.exe")) {
+    Set-Alias vim (Get-ChildItem "${Env:ProgramFiles}\Vim\*\vim.exe")[-1].FullName
+  } elseif ($(Test-Path "${Env:ProgramFiles(x86)}\Vim\*\vim.exe")) {
     Set-Alias vim (Get-ChildItem "${Env:ProgramFiles(x86)}\Vim\*\vim.exe")[-1].FullName
   }
   # emacs
