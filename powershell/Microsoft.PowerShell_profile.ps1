@@ -918,7 +918,8 @@ function git_global_set {
   update_internal $isLocal ".gitignore" ${HOME}/.gitignore
   if ($IsWindows -or $Env:OS) {
     [Environment]::SetEnvironmentVariable("LESSCHARSET", "utf-8", "User")
-    git config --global core.sshcommand "${Env:SystemRoot}\System32\OpenSSH\ssh.exe"
+    $system_root = ${Env:SystemRoot}.replace("\", "/")
+    git config --global core.sshcommand "${system_root}/System32/OpenSSH/ssh.exe"
   }
   # git global config
   git config --global core.excludesfile ${HOME}/.gitignore
