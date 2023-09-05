@@ -97,7 +97,8 @@ dism /Online /Add-Capability /CapabilityName:OpenSSH.Server~~~~0.0.1.0
 ## Windows service
 
 ```
-Start-Service ssh-agent; Set-Service -Name ssh-agent -StartupType 'Automatic'
+Start-Service ssh-agent
+Set-Service -Name ssh-agent -StartupType 'Automatic'
 ```
 
 ## Windows registry
