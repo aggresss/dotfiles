@@ -125,5 +125,5 @@ Get-AppxPackage Microsoft.SecHealthUI -AllUsers | Reset-AppxPackage
 
 ```
 Personalization > Background > Solid color > rgb(1, 133, 116)
-Update & security > Advanced options > Delivery Optimization > Off
+Update & security > Delivery Optimization > Off
 ```
