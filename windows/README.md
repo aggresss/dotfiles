@@ -35,7 +35,7 @@ winget install --id Google.Chrome
 winget install --id Mozilla.Firefox
 winget install --id Microsoft.Edge
 winget install --id Microsoft.PowerToys
-winget install --id Microsoft.VisualStudioCode-User-x64
+winget install --id Microsoft.VisualStudioCode
 winget install --id Microsoft.VisualStudio.Community
 winget install --id CPUID.GPU-Z
 winget install --id TechPowerUpCPU-Z
