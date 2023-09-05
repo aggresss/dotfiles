@@ -14,31 +14,31 @@
 - [PulseAudio](https://www.freedesktop.org/wiki/Software/PulseAudio/Ports/Windows/Support/)
 
 ```
-winget install Git.Git
-winget install Kitware.CMake
-winget install vim.vim
-winget install 7zip.7zip
-winget install GNU.Emacs
-winget install GnuWin32.make
-winget install marha.VcXsrv
-winget install SourceGear.DiffMerge
-winget install Graphviz.Graphviz
-winget install JGraph.Draw
-winget install VideoLAN.VLC
-winget install WiresharkFoundation.Wireshark
-winget install Postman.Postman
-winget install Python.Python
-winget install StrawberryPerl.StrawberryPerl
-winget install RubyInstallerTeam.Ruby
-winget install OpenJS.NodeJS
-winget install Google.Chrome
-winget install Mozilla.Firefox
-winget install Microsoft.Edge
-winget install Microsoft.PowerToys
-winget install Microsoft.VisualStudioCode-User-x64
-winget install Microsoft.VisualStudio.Community
-winget install CPUID.GPU-Z
-winget install TechPowerUpCPU-Z
+winget install --id Git.Git
+winget install --id Kitware.CMake
+winget install --id vim.vim
+winget install --id 7zip.7zip
+winget install --id GNU.Emacs
+winget install --id GnuWin32.make
+winget install --id marha.VcXsrv
+winget install --id SourceGear.DiffMerge
+winget install --id Graphviz.Graphviz
+winget install --id JGraph.Draw
+winget install --id VideoLAN.VLC
+winget install --id WiresharkFoundation.Wireshark
+winget install --id Postman.Postman
+winget install --id Python.Python
+winget install --id StrawberryPerl.StrawberryPerl
+winget install --id RubyInstallerTeam.Ruby
+winget install --id OpenJS.NodeJS
+winget install --id Google.Chrome
+winget install --id Mozilla.Firefox
+winget install --id Microsoft.Edge
+winget install --id Microsoft.PowerToys
+winget install --id Microsoft.VisualStudioCode-User-x64
+winget install --id Microsoft.VisualStudio.Community
+winget install --id CPUID.GPU-Z
+winget install --id TechPowerUpCPU-Z
 ```
 
 ## Windows environment
