@@ -280,6 +280,7 @@ Darwin)
     # variable
     export CLICOLOR=1
     export LSCOLORS=ExGxFxDxCxegedabagacad
+    export GREP_OPTIONS='--color=auto'
     # open application from command
     alias preview='open -a Preview'
     alias typora='open -a Typora'
