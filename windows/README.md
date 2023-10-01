@@ -18,6 +18,7 @@ winget install --id Git.Git
 winget install --id Kitware.CMake
 winget install --id vim.vim
 winget install --id 7zip.7zip
+winget install --id RARLab.WinRAR
 winget install --id GNU.Emacs
 winget install --id GnuWin32.make
 winget install --id marha.VcXsrv
