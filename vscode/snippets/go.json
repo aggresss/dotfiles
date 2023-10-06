@@ -110,5 +110,12 @@
 			"})\n"
 		],
 		"description": ""
+	},
+	"snippets comment deprecated": {
+		"prefix": "deprecated",
+		"body":[
+			"// Deprecated: "
+		],
+		"description": ""
 	}
 }
