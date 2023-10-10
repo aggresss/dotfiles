@@ -117,5 +117,15 @@
 			"// Deprecated: "
 		],
 		"description": ""
+	},
+	"snippets cgo function": {
+		"prefix": "cgo func",
+		"body":[
+			"//",
+			"func $0() int32 {",
+			"\treturn (int32)(C.())",
+			"}\n"
+		],
+		"description": ""
 	}
 }
