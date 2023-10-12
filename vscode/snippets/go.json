@@ -126,5 +126,15 @@
 			"}\n"
 		],
 		"description": ""
+	},
+	"snippets cgo import": {
+		"prefix": "cgo import",
+		"body":[
+			"/*",
+			"#include <stdlib.h>",
+			"*/",
+			"import \"C\""
+		],
+		"description": ""
 	}
 }
