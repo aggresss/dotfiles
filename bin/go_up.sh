@@ -6,7 +6,7 @@
 BASE_URL="https://golang.google.cn/dl"
 
 if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
-    GO_VERSION=$(curl -q -s -L 'https://golang.google.cn/VERSION?m=text')
+    GO_VERSION=$(echo `curl -q -s -L 'https://golang.google.cn/VERSION?m=text'` | awk '{print $1}')
 else
     GO_VERSION="go$1"
 fi
