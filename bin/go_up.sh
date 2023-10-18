@@ -12,7 +12,7 @@ else
 fi
 
 if [ $(echo ${GO_VERSION} | grep -q -E  'go[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'; echo $?) -ne 0 ]; then
-    echo -e "\nNot support go version: ${GO_VERSION}"
+    echo -e "\nNot support go version: ${GO_VERSION}\n"
     exit 1
 fi
 
