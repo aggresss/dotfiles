@@ -11,6 +11,11 @@ else
     GO_VERSION="go$1"
 fi
 
+if [ $(echo ${GO_VERSION} | grep -q -E  'go[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'; echo $?) -ne 0 ]; then
+    echo -e "\nNot support go version: ${GO_VERSION}"
+    exit 1
+fi
+
 if [ $(command -v go >/dev/null; echo $?) -eq 0 ]; then
     CUR_VERSION=$(go version | awk '{print $3}')
     if [ ${GO_VERSION} = ${CUR_VERSION} ]; then
