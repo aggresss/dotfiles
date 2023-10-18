@@ -22,7 +22,7 @@ if [ $(command -v go >/dev/null; echo $?) -eq 0 ]; then
         echo -e "\nVersion ${CUR_VERSION} is already update\n"
         exit 0
     else
-         echo -e "\nUpdate version to ${GO_VERSION}\n"
+        echo -e "\nUpdate version to ${GO_VERSION}\n"
     fi
 fi
 
