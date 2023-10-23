@@ -1033,12 +1033,18 @@ function go_version() {
     if [ ! -L ${GOROOT} ]; then
         echo -e "${YELLOW}Current GOROOT not support go version switch."
     else
+        local version_cached=$(ls -1 `dirname ${GOROOT}` | grep -E 'go[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')
         if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
+            go version
             echo -e "${YELLOW}Cached:"
-            ls -1 `dirname ${GOROOT}` | grep -E 'go[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'
+            echo -e "${RED}${version_cached}"
         elif [ -d `dirname ${GOROOT}`/go${1} ]; then
             ln -shf `dirname ${GOROOT}`/go${1} ${GOROOT}
             echo -e "${GREEN}Successful switch go version to go${1}"
+        elif [ $1 = "_" ] && [ ! -z ${version_cached} ]; then
+            local latest_version=`echo ${version_cached} | sed -n '$p'`
+            ln -shf `dirname ${GOROOT}`/${latest_version} ${GOROOT}
+            echo -e "${GREEN}Successful switch to latest ${latest_version}"
         else
             echo -e "${RED}Switch go version failed."
         fi
