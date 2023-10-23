@@ -4,6 +4,7 @@
 
 # viriable for install
 BASE_URL="https://golang.google.cn/dl"
+GO_VERSION=""
 
 if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
     GO_VERSION=$(echo `curl -q -s -L 'https://golang.google.cn/VERSION?m=text'` | awk '{print $1}')
@@ -12,17 +13,21 @@ else
 fi
 
 if [ $(echo ${GO_VERSION} | grep -q -E  'go[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'; echo $?) -ne 0 ]; then
-    echo -e "\nNot support go version: ${GO_VERSION}\n"
+    echo -e "\nnot support go version: ${GO_VERSION}\n"
     exit 1
 fi
 
 if [ $(command -v go >/dev/null; echo $?) -eq 0 ]; then
     CUR_VERSION=$(go version | awk '{print $3}')
     if [ ${GO_VERSION} = ${CUR_VERSION} ]; then
-        echo -e "\nVersion ${CUR_VERSION} is already update\n"
+        echo -e "\nversion ${CUR_VERSION} is already updated.\n"
+        exit 0
+    elif [ -L ${GOROOT} ] && [ -d `dirname ${GOROOT}`/${GO_VERSION} ]; then
+        echo -e "\nversion ${CUR_VERSION} is already cached. link go version to specified version already.\n"
+        ln -shf `dirname ${GOROOT}`/${GO_VERSION} ${GOROOT}
         exit 0
     else
-        echo -e "\nUpdate version to ${GO_VERSION}\n"
+        echo -e "\nupdate version to ${GO_VERSION}\n"
     fi
 fi
 
@@ -55,7 +60,11 @@ function down_load {
 if [ ${GOROOT:-NOCONFIG} = "NOCONFIG" ]; then
     INSTALL_DIR=${HOME}/.local/go
 else
-    INSTALL_DIR="${GOROOT}"
+    if [ -L ${GOROOT} ]; then
+        INSTALL_DIR="`dirname ${GOROOT}`/${GO_VERSION}"
+    else
+        INSTALL_DIR="${GOROOT}"
+    fi
 fi
 
 case $(uname) in
@@ -85,3 +94,7 @@ case $(uname -m) in
 esac
 
 down_load ${BASE_URL}/${GO_VERSION}.${OS}-${ARCH}.tar.gz ${INSTALL_DIR}
+
+if [ -L ${GOROOT} ]; then
+    ln -shf ${INSTALL_DIR} ${GOROOT}
+fi
