@@ -1041,14 +1041,11 @@ function go_version() {
         if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
             go version
             echo -e "${YELLOW}Cached:${NORMAL}"
-            for ((i=1;i<=${index_range};i++))
+            for ((;i<=${index_range};i++))
             do
                 iter_version=$(echo ${version_cached} | sed -n "${i}p")
-                if [ ${cur_version} = ${iter_version} ]; then
-                    printf "${CYAN}*%3s -> %s${NORMAL}\n" $i ${iter_version}
-                else
-                    printf "%4s -> %s\n" $i `echo ${version_cached} | sed -n "${i}p"`
-                fi
+                [ ${cur_version} = ${iter_version} ] && printf "${CYAN}*" || printf " "
+                printf "%3s -> %s${NORMAL}\n" $i `echo ${version_cached} | sed -n "${i}p"`
             done
         elif [ $1 = "_" ] && [ ! -z ${version_cached} ]; then
             local latest_version=`echo ${version_cached} | sed -n '$p'`
