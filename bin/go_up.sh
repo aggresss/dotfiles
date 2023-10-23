@@ -53,6 +53,10 @@ function down_load {
 
     if [ $file_ext = "gz" -o $file_ext = "bz2" ]; then
         tar -vxf ${down_file} -C $2 --strip-components 1
+        if [ `echo $?` -ne 0 ]; then
+            rm -rf $2
+            echo "Extract $1 failed."
+        fi
         rm -rf ${down_file}
     fi
 }
