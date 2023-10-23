@@ -1034,17 +1034,19 @@ function go_version() {
         go version
     else
         local version_cached=$(ls -1 `dirname ${GOROOT}` | grep -E 'go[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')
+        local index_range=$(echo ${version_cached} | sed -n '$=')
         if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
             go version
-            echo -e "${YELLOW}Cached:"
-            echo -e "${RED}${version_cached}"
-        elif [ -d `dirname ${GOROOT}`/go${1} ]; then
-            ln -shf `dirname ${GOROOT}`/go${1} ${GOROOT}
-            echo -e "${GREEN}Successful switch go version to go${1}"
+            echo -e "${YELLOW}Cached:${NORMAL}"
+            echo -e "${version_cached}" | awk '{print NR " -> " $0}'
         elif [ $1 = "_" ] && [ ! -z ${version_cached} ]; then
             local latest_version=`echo ${version_cached} | sed -n '$p'`
             ln -shf `dirname ${GOROOT}`/${latest_version} ${GOROOT}
-            echo -e "${GREEN}Successful switch to latest ${latest_version}"
+            echo -e "${GREEN}Successful switch to last cached ${latest_version}"
+        elif [ $1 -ge 1 -a $1 -le ${index_range} ] 2>/dev/null; then
+            local select_version=$(echo ${version_cached} | sed -n "${1}p")
+            ln -shf `dirname ${GOROOT}`/${select_version} ${GOROOT}
+            echo -e "${GREEN}Successful switch to select cached ${select_version}"
         else
             echo -e "${RED}Switch go version failed."
         fi
