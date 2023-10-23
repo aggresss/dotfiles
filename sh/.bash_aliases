@@ -1028,6 +1028,23 @@ function go_proxy() {
     fi
 }
 
+# switch go version from cached
+function go_version() {
+    if [ ! -L ${GOROOT} ]; then
+        echo -e "${YELLOW}Current GOROOT not support go version switch."
+    else
+        if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
+            echo -e "${YELLOW}Cached:"
+            ls -1 `dirname ${GOROOT}` | grep -E 'go[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'
+        elif [ -d `dirname ${GOROOT}`/go${1} ]; then
+            ln -shf `dirname ${GOROOT}`/go${1} ${GOROOT}
+            echo -e "${GREEN}Successful switch go version to go${1}"
+        else
+            echo -e "${RED}Switch go version failed."
+        fi
+    fi
+}
+
 #####################
 # Python for Bash/Zsh
 #####################
