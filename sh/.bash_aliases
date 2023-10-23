@@ -1004,6 +1004,7 @@ function go_env() {
     env_list GOPATH
     echo -e "${GREEN}GODEBUG:${NORMAL}"
     env_list GODEBUG
+    go_version
 }
 
 # reset $GOPATH
