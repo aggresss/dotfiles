@@ -1031,7 +1031,7 @@ function go_proxy() {
 # switch go version from cached
 function go_version() {
     if [ ! -L ${GOROOT} ]; then
-        echo -e "${YELLOW}Current GOROOT not support go version switch."
+        go version
     else
         local version_cached=$(ls -1 `dirname ${GOROOT}` | grep -E 'go[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')
         if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
