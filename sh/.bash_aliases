@@ -1033,12 +1033,23 @@ function go_version() {
     if [ ! -L ${GOROOT} ]; then
         go version
     else
+        local cur_version=$(go version | awk '{print $3}')
         local version_cached=$(ls -1 `dirname ${GOROOT}` | grep -E 'go[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')
         local index_range=$(echo ${version_cached} | sed -n '$=')
+        local i=1
+        local iter_version=""
         if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
             go version
             echo -e "${YELLOW}Cached:${NORMAL}"
-            echo -e "${version_cached}" | awk '{printf "%3s -> %s\n", NR, $0}'
+            for ((i=1;i<=${index_range};i++))
+            do
+                iter_version=$(echo ${version_cached} | sed -n "${i}p")
+                if [ ${cur_version} = ${iter_version} ]; then
+                    printf "${CYAN}*%3s -> %s${NORMAL}\n" $i ${iter_version}
+                else
+                    printf "%4s -> %s\n" $i `echo ${version_cached} | sed -n "${i}p"`
+                fi
+            done
         elif [ $1 = "_" ] && [ ! -z ${version_cached} ]; then
             local latest_version=`echo ${version_cached} | sed -n '$p'`
             ln -shf `dirname ${GOROOT}`/${latest_version} ${GOROOT}
