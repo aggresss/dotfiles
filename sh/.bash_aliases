@@ -1038,7 +1038,7 @@ function go_version() {
         if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
             go version
             echo -e "${YELLOW}Cached:${NORMAL}"
-            echo -e "${version_cached}" | awk '{print "  " NR " -> " $0}'
+            echo -e "${version_cached}" | awk '{printf "%3s -> %s\n", NR, $0}'
         elif [ $1 = "_" ] && [ ! -z ${version_cached} ]; then
             local latest_version=`echo ${version_cached} | sed -n '$p'`
             ln -shf `dirname ${GOROOT}`/${latest_version} ${GOROOT}
