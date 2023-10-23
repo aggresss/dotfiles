@@ -54,11 +54,14 @@ function down_load {
     if [ $file_ext = "gz" -o $file_ext = "bz2" ]; then
         tar -vxf ${down_file} -C $2 --strip-components 1
         if [ `echo $?` -ne 0 ]; then
+            rm -rf ${down_file}
             rm -rf $2
             echo "Extract $1 failed."
+            return 3
         fi
         rm -rf ${down_file}
     fi
+    return 0
 }
 
 if [ ${GOROOT:-NOCONFIG} = "NOCONFIG" ]; then
@@ -99,6 +102,6 @@ esac
 
 down_load ${BASE_URL}/${GO_VERSION}.${OS}-${ARCH}.tar.gz ${INSTALL_DIR}
 
-if [ -L ${GOROOT} ]; then
+if [ `echo $?` -eq 0 ] && [ -L ${GOROOT} ]; then
     ln -shf ${INSTALL_DIR} ${GOROOT}
 fi
