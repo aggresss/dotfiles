@@ -102,6 +102,6 @@ esac
 
 down_load ${BASE_URL}/${GO_VERSION}.${OS}-${ARCH}.tar.gz ${INSTALL_DIR}
 
-if [ `echo $?` -eq 0 ] && [ -n ${GOROOT} ] && [ -L ${GOROOT} ]; then
+if [ `echo $?` -eq 0 ] && [ ! -z ${GOROOT} ] && [ -L ${GOROOT} ]; then
     rm -f ${GOROOT} && ln -s ${INSTALL_DIR} ${GOROOT} && go version
 fi
