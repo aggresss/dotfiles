@@ -1031,14 +1031,12 @@ function go_proxy() {
 
 # switch go version from cached
 function go_version() {
-    if [ ! -L ${GOROOT} ]; then
-        go version
-    else
-        local cur_version=$(go version || return | awk '{print $3}')
+    go version || return
+    if [ -L ${GOROOT} ]; then
+        local cur_version=$(go version | awk '{print $3}')
         local version_cached=$(ls -1 `dirname ${GOROOT}` | grep -E 'go[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')
         local index_range=$(echo ${version_cached} | tr ' ' '\n' | sed -n '$=')
         if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
-            go version
             echo -e "${YELLOW}Cached:${NORMAL}"
             local iter_version=""
             local i=1
