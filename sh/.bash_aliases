@@ -1037,11 +1037,11 @@ function go_version() {
         local cur_version=$(go version | awk '{print $3}')
         local version_cached=$(ls -1 `dirname ${GOROOT}` | grep -E 'go[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')
         local index_range=$(echo ${version_cached} | tr ' ' '\n' | sed -n '$=')
-        local i=1
-        local iter_version=""
         if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
             go version
             echo -e "${YELLOW}Cached:${NORMAL}"
+            local iter_version=""
+            local i=1
             for ((;i<=${index_range};i++))
             do
                 iter_version=$(echo ${version_cached} | tr ' ' '\n' | sed -n "${i}p")
