@@ -24,7 +24,7 @@ if [ $(command -v go >/dev/null; echo $?) -eq 0 ]; then
         exit 0
     elif [ -L ${GOROOT} ] && [ -d `dirname ${GOROOT}`/${GO_VERSION} ]; then
         echo -e "\nversion ${CUR_VERSION} is already cached. link go version to specified version already.\n"
-        ln -shf `dirname ${GOROOT}`/${GO_VERSION} ${GOROOT}
+        rm -f ${GOROOT} && ln -s `dirname ${GOROOT}`/${GO_VERSION} ${GOROOT}
         exit 0
     else
         echo -e "\nupdate version to ${GO_VERSION}\n"
@@ -103,5 +103,5 @@ esac
 down_load ${BASE_URL}/${GO_VERSION}.${OS}-${ARCH}.tar.gz ${INSTALL_DIR}
 
 if [ `echo $?` -eq 0 ] && [ -L ${GOROOT} ]; then
-    ln -shf ${INSTALL_DIR} ${GOROOT}
+    rm -f ${GOROOT} && ln -s ${INSTALL_DIR} ${GOROOT} && go version
 fi
