@@ -577,15 +577,6 @@ function update_configfiles {
     # Vim
     if (Get-Command vim -errorAction SilentlyContinue) {
       update_internal $isLocal "vim\.vimrc" "${HOME}\.vimrc"
-      update_internal $isLocal "vim\.vimrc.bundles" "${HOME}\.vimrc.bundles"
-      if (-not $(Test-Path ${HOME}\.vim/bundle)) {
-        $ErrorActionPreference = "stop"; `
-          git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}\.vim\bundle\Vundle.vim; `
-          vim +BundleInstall +qall
-      }
-      else {
-        vim +BundleInstall +qall
-      }
     }
     # Emacs
     if (Get-Command emacs -errorAction SilentlyContinue) {
