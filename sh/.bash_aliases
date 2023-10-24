@@ -1036,7 +1036,7 @@ function go_version() {
     else
         local cur_version=$(go version | awk '{print $3}')
         local version_cached=$(ls -1 `dirname ${GOROOT}` | grep -E 'go[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')
-        local index_range=$(echo ${version_cached} | sed -n '$=')
+        local index_range=$(echo ${version_cached} | tr ' ' '\n' | sed -n '$=')
         local i=1
         local iter_version=""
         if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
@@ -1044,17 +1044,17 @@ function go_version() {
             echo -e "${YELLOW}Cached:${NORMAL}"
             for ((;i<=${index_range};i++))
             do
-                iter_version=$(echo ${version_cached} | sed -n "${i}p")
+                iter_version=$(echo ${version_cached} | tr ' ' '\n' | sed -n "${i}p")
                 [ ${cur_version} = ${iter_version} ] && printf "${CYAN}*" || printf " "
-                printf "%3s -> %s${NORMAL}\n" $i `echo ${version_cached} | sed -n "${i}p"`
+                printf "%3s -> %s${NORMAL}\n" $i ${iter_version}
             done
-        elif [ $1 = "_" ] && [ ! -z ${version_cached} ]; then
-            local latest_version=`echo ${version_cached} | sed -n '$p'`
-            ln -shf `dirname ${GOROOT}`/${latest_version} ${GOROOT}
+        elif [[ "$1" = "_"  && -n ${version_cached} ]]; then
+            local latest_version=`echo ${version_cached} | tr ' ' '\n' | sed -n '$p'`
+            rm -f ${GOROOT} && ln -s `dirname ${GOROOT}`/${latest_version} ${GOROOT}
             echo -e "${GREEN}Successful switch to latest cached ${latest_version}"
         elif [ $1 -ge 1 -a $1 -le ${index_range} ] 2>/dev/null; then
-            local select_version=$(echo ${version_cached} | sed -n "${1}p")
-            ln -shf `dirname ${GOROOT}`/${select_version} ${GOROOT}
+            local select_version=$(echo ${version_cached} | tr ' ' '\n' | sed -n "${1}p")
+            rm -f ${GOROOT} && ln -s `dirname ${GOROOT}`/${select_version} ${GOROOT}
             echo -e "${GREEN}Successful switch to select cached ${select_version}"
         else
             echo -e "${RED}Switch go version failed."
