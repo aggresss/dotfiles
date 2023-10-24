@@ -90,13 +90,6 @@ if [ $(
     echo $?
 ) -eq 0 ]; then
     update_file ${DOTFILES_URL}/vim/.vimrc ${HOME}/.vimrc
-    update_file ${DOTFILES_URL}/vim/.vimrc.bundles ${HOME}/.vimrc.bundles
-    if [ ! -d ${HOME}/.vim/bundle ]; then
-        git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim &&
-            vim +BundleInstall +qall
-    else
-        vim +BundleInstall +qall
-    fi
 fi
 # emacs
 if [ $(
