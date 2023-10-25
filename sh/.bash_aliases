@@ -1000,8 +1000,8 @@ fi
 
 # print go env
 function go_env() {
-    echo "GOPATH=\'`go env GOPATH`\'"
-    echo "GOROOT=\'`go env GOROOT`\'"
+    echo "GOPATH='`go env GOPATH`'"
+    echo "GOROOT='`go env GOROOT`'"
     echo "CGO_ENABLED=`go env CGO_ENABLED`"
     go_version
 }
