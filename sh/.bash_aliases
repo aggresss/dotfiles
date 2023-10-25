@@ -1000,10 +1000,9 @@ fi
 
 # print go env
 function go_env() {
-    echo -e "${GREEN}GOPATH:${NORMAL}"
-    env_list GOPATH
-    echo -e "${GREEN}GODEBUG:${NORMAL}"
-    env_list GODEBUG
+    echo "GOPATH=`go env GOPATH`"
+    echo "GOROOT=`go env GOROOT`"
+    echo "CGO_ENABLED=`go env CGO_ENABLED`"
     go_version
 }
 
