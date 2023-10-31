@@ -132,6 +132,7 @@
 		"body":[
 			"/*",
 			"#include <stdlib.h>",
+			"$0",
 			"*/",
 			"import \"C\""
 		],
