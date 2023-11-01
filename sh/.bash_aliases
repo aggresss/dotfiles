@@ -1004,7 +1004,7 @@ function go_env() {
     echo "GOROOT='`go env GOROOT`'"
     echo "CGO_ENABLED=`go env CGO_ENABLED`"
     if [ ! ${PKG_CONFIG_PATH:-NOCONFIG} = "NOCONFIG" ]; then
-        echo "PKG_CONFIG_PATH=${PKG_CONFIG_PATH}"
+        echo "PKG_CONFIG_PATH='${PKG_CONFIG_PATH}'"
     fi
     go_version
 }
