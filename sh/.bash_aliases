@@ -406,7 +406,11 @@ function lines_of_code() {
             find . -name "*.${CF}" -type f | xargs cat | wc -l
         done
     else
-        printf "|%s|" ${1}
+        for F in `find . -name "*${1}*" -type f`
+        do
+            wc -l ${F}
+        done
+        printf "TOTAL: "
         find . -name "*${1}*" -type f | xargs cat | wc -l
     fi
 }
