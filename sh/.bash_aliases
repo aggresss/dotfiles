@@ -407,7 +407,7 @@ function lines_of_code() {
         done
     else
         printf "|%s|" ${1}
-        find . -name "${1}" -type f | xargs cat | wc -l
+        find . -name "*${1}*" -type f | xargs cat | wc -l
     fi
 }
 alias loc='lines_of_code'
