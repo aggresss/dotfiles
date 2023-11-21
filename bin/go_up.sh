@@ -32,8 +32,8 @@ if [ $(command -v go >/dev/null; echo $?) -eq 0 ]; then
         echo -e "\nversion ${CUR_VERSION} is already updated.\n"
         exit 0
     elif [ -L ${GOROOT} ] && [ -d `dirname ${GOROOT}`/${UPDATE_GO_VERSION} ]; then
-        echo -e "\nversion ${CUR_VERSION} is already cached. link go version to specified version already.\n"
         rm -f ${GOROOT} && ln -s `dirname ${GOROOT}`/${UPDATE_GO_VERSION} ${GOROOT}
+        echo -e "\nversion ${UPDATE_GO_VERSION} is already cached. link go version to specified version already.\n"
         exit 0
     else
         echo -e "\nupdate version to ${UPDATE_GO_VERSION}\n"
