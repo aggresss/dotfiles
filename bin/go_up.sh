@@ -4,30 +4,39 @@
 
 # viriable for install
 BASE_URL="https://golang.google.cn/dl"
-GO_VERSION=""
+UPDATE_GO_VERSION=""
+DISCARD_GO_VERSION=""
 
-if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
-    GO_VERSION=$(echo `curl -q -s -L 'https://golang.google.cn/VERSION?m=text'` | awk '{print $1}')
+if [ ${1:-NOCONFIG} = "NOCONFIG" ] || [ $1 == "_" ]; then
+    UPDATE_GO_VERSION=$(echo `curl -q -s -L 'https://golang.google.cn/VERSION?m=text'` | awk '{print $1}')
 else
-    GO_VERSION="go$1"
+    UPDATE_GO_VERSION="go$1"
 fi
 
-if [ $(echo ${GO_VERSION} | grep -q -E  'go[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'; echo $?) -ne 0 ]; then
-    echo -e "\nnot support go version: ${GO_VERSION}\n"
+if [ $(echo ${UPDATE_GO_VERSION} | grep -q -E  'go[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'; echo $?) -ne 0 ]; then
+    echo -e "\nnot support go version: ${UPDATE_GO_VERSION}\n"
     exit 1
+fi
+
+if [ ${2:-NOCONFIG} != "NOCONFIG" ]; then
+    DISCARD_GO_VERSION="go$2"
+    if [ $(echo ${DISCARD_GO_VERSION} | grep -q -E  'go[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'; echo $?) -ne 0 ]; then
+        echo -e "\nnot support go version: ${DISCARD_GO_VERSION}\n"
+        exit 1
+    fi
 fi
 
 if [ $(command -v go >/dev/null; echo $?) -eq 0 ]; then
     CUR_VERSION=$(go version | awk '{print $3}')
-    if [ ${GO_VERSION} = ${CUR_VERSION} ]; then
+    if [ ${UPDATE_GO_VERSION} = ${CUR_VERSION} ]; then
         echo -e "\nversion ${CUR_VERSION} is already updated.\n"
         exit 0
-    elif [ -L ${GOROOT} ] && [ -d `dirname ${GOROOT}`/${GO_VERSION} ]; then
+    elif [ -L ${GOROOT} ] && [ -d `dirname ${GOROOT}`/${UPDATE_GO_VERSION} ]; then
         echo -e "\nversion ${CUR_VERSION} is already cached. link go version to specified version already.\n"
-        rm -f ${GOROOT} && ln -s `dirname ${GOROOT}`/${GO_VERSION} ${GOROOT}
+        rm -f ${GOROOT} && ln -s `dirname ${GOROOT}`/${UPDATE_GO_VERSION} ${GOROOT}
         exit 0
     else
-        echo -e "\nupdate version to ${GO_VERSION}\n"
+        echo -e "\nupdate version to ${UPDATE_GO_VERSION}\n"
     fi
 fi
 
@@ -68,7 +77,7 @@ if [ ${GOROOT:-NOCONFIG} = "NOCONFIG" ]; then
     INSTALL_DIR=${HOME}/.local/go
 else
     if [ -L ${GOROOT} ]; then
-        INSTALL_DIR="`dirname ${GOROOT}`/${GO_VERSION}"
+        INSTALL_DIR="`dirname ${GOROOT}`/${UPDATE_GO_VERSION}"
     else
         INSTALL_DIR="${GOROOT}"
     fi
@@ -100,8 +109,14 @@ case $(uname -m) in
         ;;
 esac
 
-down_load ${BASE_URL}/${GO_VERSION}.${OS}-${ARCH}.tar.gz ${INSTALL_DIR}
+down_load ${BASE_URL}/${UPDATE_GO_VERSION}.${OS}-${ARCH}.tar.gz ${INSTALL_DIR}
 
 if [ `echo $?` -eq 0 ] && [ ! -z ${GOROOT} ] && [ -L ${GOROOT} ]; then
     rm -f ${GOROOT} && ln -s ${INSTALL_DIR} ${GOROOT} && go version
+    if [ ! -z ${DISCARD_GO_VERSION} ]; then
+        if [ -d `dirname ${GOROOT}`/${DISCARD_GO_VERSION} ]; then
+            echo "remove obsolate version ${DISCARD_GO_VERSION}"
+            rm -rf `dirname ${GOROOT}`/${DISCARD_GO_VERSION}
+        fi
+    fi
 fi
