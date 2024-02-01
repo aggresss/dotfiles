@@ -295,6 +295,7 @@ Darwin)
     alias chrome='open -a Google\ Chrome'
     alias firefox='open -a Firefox'
     alias chrome_command="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+    alias chrome_beta_command="/Applications/Google\ Chrome\ Beta.app/Contents/MacOS/Google\ Chrome\ Beta"
     alias firefox_command='/Applications/Firefox.app/Contents/MacOS/firefox'
     ;;
 Linux)
