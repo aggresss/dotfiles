@@ -674,6 +674,17 @@ function git_pull() {
     git branch -q -D ${pull_branch}_staging
 }
 
+# Sync remote from upstream to origin
+function git_sync() {
+    git remote update
+    while [ $# -gt 0 ]; do
+        git checkout $1 && \
+        git rebase upstream/$1 && \
+        git push origin $1
+        shift
+    done
+}
+
 # Checkout a branch and delete current branch
 # $1 branch for checkout
 function git_leave() {
