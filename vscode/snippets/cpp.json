@@ -2,7 +2,7 @@
 	"snippets main": {
 		"prefix": "main",
 		"body": [
-			"#include<iostream>",
+			"#include <iostream>",
 			"",
 			"class Foo {",
 			"  public:",
