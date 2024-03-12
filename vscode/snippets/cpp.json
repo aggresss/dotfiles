@@ -24,6 +24,17 @@
 		],
 		"description": ""
 	},
+	"snippets greek alphabet": {
+		"prefix": "greek alphabet",
+		"body":[
+			"list<std::string> alphabet = {",
+			"\t\t\"alpha\", \"bata\", \"gamma\", \"delta\", \"epsilon\", \"zeta\", \"eta\", \"theta\",",
+			"\t\t\"iota\", \"kappa\", \"lambda\", \"mu\", \"nu\", \"xi\", \"omicron\", \"pi\",",
+			"\t\t\"rho\", \"sigma\", \"tau\", \"upsilon\", \"phi\", \"chi\", \"psi\", \"omega\",",
+			"\t};"
+		],
+		"description": ""
+	},
 	"snippets sleep": {
 		"prefix": "sleep",
 		"body": [
