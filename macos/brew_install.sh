@@ -64,7 +64,10 @@ brew install \
     helm \
     redis \
     bazel \
-    buildifier
+    buildifier \
+    meson \
+    clang-format \
+    mono-libgdiplus
 
 brew install --cask\
     iterm2 \
@@ -86,4 +89,5 @@ brew install --cask\
     wireshark \
     docker \
     vagrant \
+    dotnet \
     mkvtoolnix
