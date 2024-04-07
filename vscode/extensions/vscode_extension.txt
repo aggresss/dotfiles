@@ -43,3 +43,5 @@ eriklynd.json-tools
 DavidAnson.vscode-markdownlint
 # PlantUML
 jebbs.plantuml
+# Compare Folders
+moshfeu.compare-folders
