@@ -11,7 +11,7 @@
     "snippets allow": {
         "prefix": "allow",
         "body": [
-            "#![allow($0)]"
+            "#[allow($0)]"
         ],
         "description": ""
     },
