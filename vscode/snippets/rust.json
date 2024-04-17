@@ -28,6 +28,17 @@
         ],
         "description": ""
     },
+    "snippets greek alphabet": {
+		"prefix": "greek alphabet",
+		"body":[
+			"let alphabet = vec![",
+			"\t\"alpha\", \"bata\", \"gamma\", \"delta\", \"epsilon\", \"zeta\", \"eta\", \"theta\", \"iota\", \"kappa\",",
+			"\t\"lambda\", \"mu\", \"nu\", \"xi\", \"omicron\", \"pi\", \"rho\", \"sigma\", \"tau\", \"upsilon\", \"phi\",",
+			"\t\"chi\", \"psi\", \"omega\",",
+			"];\n"
+		],
+		"description": ""
+	},
     "snippets leetcode": {
         "prefix": "leetcode",
         "body": [
