@@ -15,13 +15,6 @@
         ],
         "description": ""
     },
-    "snippets println": {
-        "prefix": "println",
-        "body": [
-            "println!(\"{:?}\", $0);"
-        ],
-        "description": ""
-    },
     "snippets mod tests": {
         "prefix": "mod tests",
         "body": [
