@@ -1202,6 +1202,10 @@ function mvn_exec() {
 # Rust for Bash/Zsh
 ###################
 
+# fast cargo run
+alias cargo_b='cargo run --bin'
+alias cargo_e='cargo run --example'
+
 # environmnet for Rust
 if [ -d "$HOME/.cargo/bin" ]; then
     env_insert "PATH" "$HOME/.cargo/bin"
