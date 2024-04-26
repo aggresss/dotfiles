@@ -1203,8 +1203,8 @@ function mvn_exec() {
 ###################
 
 # fast cargo run
-alias cargo_b='cargo run --bin'
-alias cargo_e='cargo run --example'
+alias cargo_bin='cargo run --bin'
+alias cargo_example='cargo run --example'
 
 # environmnet for Rust
 if [ -d "$HOME/.cargo/bin" ]; then
