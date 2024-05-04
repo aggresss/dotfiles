@@ -8,6 +8,16 @@
         ],
         "description": ""
     },
+    "snippets tokio main": {
+        "prefix": "tokio main",
+        "body": [
+            "#[tokio::main]",
+            "async fn main() {",
+            "\t$0",
+            "}\n"
+        ],
+        "description": ""
+    },
     "snippets allow": {
         "prefix": "allow",
         "body": [
