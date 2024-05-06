@@ -2,8 +2,9 @@
     "snippets main": {
         "prefix": "main",
         "body": [
-            "fn main() {",
+            "fn main() -> Result<(), Box<dyn std::error::Error>>{",
             "\t$0",
+            "\tOk(())",
             "}\n"
         ],
         "description": ""
