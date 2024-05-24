@@ -43,6 +43,7 @@ brew install \
     p7zip \
     pstree \
     python \
+    pipx \
     readline \
     ruby \
     rbenv \
