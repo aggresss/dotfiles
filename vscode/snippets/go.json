@@ -112,7 +112,7 @@
 		"description": ""
 	},
 	"snippets comment lint unused": {
-		"prefix": "unused",
+		"prefix": "lint unused",
 		"body":[
 			"//lint:ignore U1000 Ignore unused."
 		],
