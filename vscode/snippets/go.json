@@ -111,6 +111,13 @@
 		],
 		"description": ""
 	},
+	"snippets comment lint unused": {
+		"prefix": "unused",
+		"body":[
+			"//lint:ignore U1000 Ignore unused."
+		],
+		"description": ""
+	},
 	"snippets comment deprecated": {
 		"prefix": "deprecated",
 		"body":[
