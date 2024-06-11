@@ -136,7 +136,7 @@ if [ $(
     command -v cargo > /dev/null
     echo $?
 ) -eq 0 ]; then
-    update_file ${DOTFILES_URL}/cargo/config ${HOME}/.cargo/config
+    update_file ${DOTFILES_URL}/cargo/config.toml ${HOME}/.cargo/config.toml
 fi
 # powershell
 if [ $(
