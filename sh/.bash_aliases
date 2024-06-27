@@ -1078,13 +1078,13 @@ function go_version() {
         elif [[ "$1" = "_"  && -n ${version_cached} ]]; then
             local latest_version=`echo ${version_cached} | tr ' ' '\n' | sed -n '$p'`
             rm -f ${GOROOT} && ln -s `dirname ${GOROOT}`/${latest_version} ${GOROOT}
-            echo -e "${GREEN}Successful switch to latest cached ${latest_version}"
+            echo -e "${GREEN}Successful switch to latest cached ${latest_version}${NORMAL}"
         elif [ $1 -ge 1 -a $1 -le ${index_range} ] 2>/dev/null; then
             local select_version=$(echo ${version_cached} | tr ' ' '\n' | sed -n "${1}p")
             rm -f ${GOROOT} && ln -s `dirname ${GOROOT}`/${select_version} ${GOROOT}
-            echo -e "${GREEN}Successful switch to select cached ${select_version}"
+            echo -e "${GREEN}Successful switch to select cached ${select_version}${NORMAL}"
         else
-            echo -e "${RED}Switch go version failed."
+            echo -e "${RED}Switch go version failed.${NORMAL}"
         fi
     fi
 }
