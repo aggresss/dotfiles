@@ -73,16 +73,17 @@ COMMON_FILES="\
     go_up.sh \
     rust_up.sh \
 "
-for CF in $(echo ${COMMON_FILES}); do
-    update_file ${DOTFILES_URL}/bin/${CF} ${HOME}/bin/${CF}
-done
 
 if [ $(
     which docker-entrypoint.sh >/dev/null
     echo $?
 ) -eq 0 ]; then
-    update_file ${DOTFILES_URL}/bin/link_elementary.sh ${HOME}/bin/link_elementary.sh
+    COMMON_FILES="${COMMON_FILES} link_elementary.sh"
 fi
+
+for CF in $(echo ${COMMON_FILES}); do
+    update_file ${DOTFILES_URL}/bin/${CF} ${HOME}/bin/${CF}
+done
 
 # ssh
 if [ ! -d ${HOME}/.ssh ]; then
