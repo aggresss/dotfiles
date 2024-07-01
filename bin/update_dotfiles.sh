@@ -73,12 +73,14 @@ COMMON_FILES="\
     go_up.sh \
     rust_up.sh \
 "
-for CF in `echo ${COMMON_FILES}`
-do
+for CF in $(echo ${COMMON_FILES}); do
     update_file ${DOTFILES_URL}/bin/${CF} ${HOME}/bin/${CF}
 done
 
-if [ $(which docker-entrypoint.sh >/dev/null; echo $?) -eq 0 ]; then
+if [ $(
+    which docker-entrypoint.sh >/dev/null
+    echo $?
+) -eq 0 ]; then
     update_file ${DOTFILES_URL}/bin/link_elementary.sh ${HOME}/bin/link_elementary.sh
 fi
 
@@ -138,7 +140,7 @@ if [ $(
 fi
 # cargo
 if [ $(
-    command -v cargo > /dev/null
+    command -v cargo >/dev/null
     echo $?
 ) -eq 0 ]; then
     update_file ${DOTFILES_URL}/cargo/config.toml ${HOME}/.cargo/config.toml
