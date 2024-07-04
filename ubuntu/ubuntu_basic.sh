@@ -47,6 +47,7 @@ sudo apt-get update && sudo apt-get install -y \
     cmake \
     cmake-curses-gui \
     ccache \
+    python-is-python3 \
     python-dev \
     python3-dev \
     python-pip \
