@@ -473,6 +473,12 @@ if ($IsWindows -or $Env:OS) {
       env_insert "PATH" "${Env:LOCALAPPDATA}\Programs\Microsoft VS Code\bin" "User"
     }
   }
+  # chrome
+  if ($(Test-Path "${Env:ProgramFiles}\Google\Chrome\Application\chrome.exe")) {
+    Set-Alias chrome (Get-ChildItem "${Env:ProgramFiles}\Google\Chrome\Application\chrome.exe")[-1].FullName
+  } elseif ($(Test-Path "${Env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe")) {
+    Set-Alias chrome (Get-ChildItem "${Env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe")[-1].FullName
+  }
   # ${HOME}\bin
   $bin_path = Join-Path -Path ${HOME} -ChildPath 'bin'
   if (-not $(Test-Path $bin_path)) {
