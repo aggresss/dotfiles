@@ -73,10 +73,7 @@ brew install \
 brew install --cask\
     iterm2 \
     xquartz \
-    barrier \
-    diffmerge \
     skim \
-    typora \
     drawio \
     vlc \
     google-chrome \
