@@ -297,6 +297,29 @@ Darwin)
     alias chrome_command="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
     alias chrome_beta_command="/Applications/Google\ Chrome\ Beta.app/Contents/MacOS/Google\ Chrome\ Beta"
     alias firefox_command='/Applications/Firefox.app/Contents/MacOS/firefox'
+    # Function
+    function proxy_sys() {
+        local proxy_device="Wi-Fi"
+        if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
+            echo -e "${YELLOW}HTTP Proxy Config:${NORMAL}"
+            networksetup -getwebproxy ${proxy_device}
+            echo -e "${YELLOW}HTTPS Proxy Config:${NORMAL}"
+            networksetup -getsecurewebproxy ${proxy_device}
+            echo -e "${YELLOW}SOCKS Proxy Config:${NORMAL}"
+            networksetup -getsocksfirewallproxy ${proxy_device}
+        elif [ "$1" = "off" ]; then
+            networksetup -setwebproxystate ${proxy_device} off
+            networksetup -setsecurewebproxystate ${proxy_device} off
+            networksetup -setsocksfirewallproxystate ${proxy_device} off
+        elif [ "$1" = "http" ]; then
+            networksetup -setwebproxy ${proxy_device} $2 $3
+            networksetup -setsecurewebproxy ${proxy_device} $2 $3
+        elif [ "$1" = "socks" ]; then
+            networksetup -setsocksfirewallproxy ${proxy_device} $2 $3
+        else
+            return 1
+        fi
+    }
     ;;
 Linux)
     # Export history format
