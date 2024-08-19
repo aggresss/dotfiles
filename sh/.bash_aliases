@@ -275,7 +275,7 @@ case $(uname) in
 Darwin)
     # Env
     if [[ ${SHELL} =~ .*zsh$ ]]; then
-            autoload -Uz compinit && compinit
+        autoload -Uz compinit && compinit
     fi
     # variable
     export CLICOLOR=1
@@ -300,16 +300,32 @@ Darwin)
     # Function
     function proxy_sys() {
         local proxy_device="Wi-Fi"
-        local proxy_domain=`netstat -rn | grep 'default' | grep 'en0' | awk '{print $2}'`
+        local proxy_domain=$(netstat -rn | grep 'default' | grep 'en0' | awk '{print $2}')
         local proxy_http_port="7890"
         local proxy_socks_port="7891"
         if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
-            echo -e "${YELLOW}HTTP Proxy Config:${NORMAL}"
-            networksetup -getwebproxy ${proxy_device}
-            echo -e "${YELLOW}HTTPS Proxy Config:${NORMAL}"
-            networksetup -getsecurewebproxy ${proxy_device}
-            echo -e "${YELLOW}SOCKS Proxy Config:${NORMAL}"
-            networksetup -getsocksfirewallproxy ${proxy_device}
+            if [ $(
+                networksetup -getwebproxy ${proxy_device} | grep "Enabled: Yes" >/dev/null
+                echo $?
+            ) -eq 0 ]; then
+                echo -e "${YELLOW}HTTP Proxy Config:${NORMAL}"
+                networksetup -getwebproxy ${proxy_device}
+            fi
+            if [ $(
+                networksetup -getsecurewebproxy ${proxy_device} | grep "Enabled: Yes" >/dev/null
+                echo $?
+            ) -eq 0 ]; then
+                echo -e "${YELLOW}HTTPS Proxy Config:${NORMAL}"
+                networksetup -getsecurewebproxy ${proxy_device}
+            fi
+            if [ $(
+                networksetup -getsocksfirewallproxy ${proxy_device} | grep "Enabled: Yes" >/dev/null
+                echo $?
+            ) -eq 0 ]; then
+                echo -e "${YELLOW}SOCKS Proxy Config:${NORMAL}"
+                networksetup -getsocksfirewallproxy ${proxy_device}
+            fi
+
         elif [ "$1" = "off" ]; then
             networksetup -setwebproxystate ${proxy_device} off
             networksetup -setsecurewebproxystate ${proxy_device} off
@@ -338,6 +354,7 @@ Darwin)
             echo -e "${YELLOW}SOCKS Proxy Config:${NORMAL}"
             networksetup -getsocksfirewallproxy ${proxy_device}
         else
+            echo -e "${RED}args error${NORMAL}"
             return 1
         fi
     }
@@ -348,7 +365,7 @@ Linux)
     # Specified for Microsoft WSL
     if [ -n "$WSL_DISTRO_NAME" ]; then
         export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0.0
-        export PULSE_SERVER=tcp:$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}');
+        export PULSE_SERVER=tcp:$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}')
     fi
     # Specified for docker container
     if [ -f /.dockerenv ]; then
@@ -445,14 +462,12 @@ alias m='mkdir_cd ${HOME}/Documents'
 function lines_of_code() {
     if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
         SUFFIX="h c hpp cpp cc cs go rs py java ts js html md txt"
-        for CF in `echo ${SUFFIX}`
-        do
+        for CF in $(echo ${SUFFIX}); do
             printf "|%6s|" ${CF}
             find . -name "*.${CF}" -type f | xargs cat | wc -l
         done
     else
-        for F in `find . -name "*${1}*" -type f`
-        do
+        for F in $(find . -name "*${1}*" -type f); do
             wc -l ${F}
         done
         printf "TOTAL: "
@@ -722,9 +737,9 @@ function git_pull() {
 function git_sync() {
     git remote update
     while [ $# -gt 0 ]; do
-        git checkout $1 && \
-        git rebase upstream/$1 && \
-        git push origin $1
+        git checkout $1 &&
+            git rebase upstream/$1 &&
+            git push origin $1
         shift
     done
 }
@@ -896,8 +911,7 @@ function cmake_clean() {
         Makefile \
         *.xcodeproj \
     "
-    for CF in `echo ${CMAKE_FILES}`
-    do
+    for CF in $(echo ${CMAKE_FILES}); do
         find . -name ${CF} -prune -exec rm -rvf {} \;
     done
 }
@@ -1071,9 +1085,9 @@ fi
 
 # print go env
 function go_env() {
-    echo "GOPATH='`go env GOPATH`'"
-    echo "GOROOT='`go env GOROOT`'"
-    echo "CGO_ENABLED=`go env CGO_ENABLED`"
+    echo "GOPATH='$(go env GOPATH)'"
+    echo "GOROOT='$(go env GOROOT)'"
+    echo "CGO_ENABLED=$(go env CGO_ENABLED)"
     if [ ! ${PKG_CONFIG_PATH:-NOCONFIG} = "NOCONFIG" ]; then
         echo "PKG_CONFIG_PATH='${PKG_CONFIG_PATH}'"
     fi
@@ -1107,25 +1121,24 @@ function go_version() {
     go version || return
     if [ -L ${GOROOT} ]; then
         local cur_version=$(go version | awk '{print $3}')
-        local version_cached=$(ls -1 `dirname ${GOROOT}` | grep -E 'go[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')
+        local version_cached=$(ls -1 $(dirname ${GOROOT}) | grep -E 'go[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')
         local index_range=$(echo ${version_cached} | tr ' ' '\n' | sed -n '$=')
         if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
             echo -e "${YELLOW}Cached:${NORMAL}"
             local iter_version=""
             local i=1
-            for ((;i<=${index_range};i++))
-            do
+            for (( ; i <= ${index_range}; i++)); do
                 iter_version=$(echo ${version_cached} | tr ' ' '\n' | sed -n "${i}p")
                 [ ${cur_version} = ${iter_version} ] && printf "${CYAN}*" || printf " "
                 printf "%3s -> %s${NORMAL}\n" $i ${iter_version}
             done
-        elif [[ "$1" = "_"  && -n ${version_cached} ]]; then
-            local latest_version=`echo ${version_cached} | tr ' ' '\n' | sed -n '$p'`
-            rm -f ${GOROOT} && ln -s `dirname ${GOROOT}`/${latest_version} ${GOROOT}
+        elif [[ "$1" = "_" && -n ${version_cached} ]]; then
+            local latest_version=$(echo ${version_cached} | tr ' ' '\n' | sed -n '$p')
+            rm -f ${GOROOT} && ln -s $(dirname ${GOROOT})/${latest_version} ${GOROOT}
             echo -e "${GREEN}Successful switch to latest cached ${latest_version}${NORMAL}"
         elif [ $1 -ge 1 -a $1 -le ${index_range} ] 2>/dev/null; then
             local select_version=$(echo ${version_cached} | tr ' ' '\n' | sed -n "${1}p")
-            rm -f ${GOROOT} && ln -s `dirname ${GOROOT}`/${select_version} ${GOROOT}
+            rm -f ${GOROOT} && ln -s $(dirname ${GOROOT})/${select_version} ${GOROOT}
             echo -e "${GREEN}Successful switch to select cached ${select_version}${NORMAL}"
         else
             echo -e "${RED}Switch go version failed.${NORMAL}"
@@ -1182,7 +1195,7 @@ function perl_install() {
 #########################
 
 function npm_link_list() {
-    ls -F  ${NODE_PATH} | grep -E '@$'
+    ls -F ${NODE_PATH} | grep -E '@$'
 }
 
 # fast echo package.json run
