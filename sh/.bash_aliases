@@ -300,6 +300,9 @@ Darwin)
     # Function
     function proxy_sys() {
         local proxy_device="Wi-Fi"
+        local proxy_domain=`netstat -rn | grep 'default' | grep 'en0' | awk '{print $2}'`
+        local proxy_http_port="7890"
+        local proxy_socks_port="7891"
         if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
             echo -e "${YELLOW}HTTP Proxy Config:${NORMAL}"
             networksetup -getwebproxy ${proxy_device}
@@ -312,10 +315,28 @@ Darwin)
             networksetup -setsecurewebproxystate ${proxy_device} off
             networksetup -setsocksfirewallproxystate ${proxy_device} off
         elif [ "$1" = "http" ]; then
-            networksetup -setwebproxy ${proxy_device} $2 $3
-            networksetup -setsecurewebproxy ${proxy_device} $2 $3
+            if [ ${2:-NOCONFIG} != "NOCONFIG" ]; then
+                proxy_domain="$2"
+            fi
+            if [ ${3:-NOCONFIG} != "NOCONFIG" ]; then
+                proxy_http_port="$3"
+            fi
+            networksetup -setwebproxy ${proxy_device} ${proxy_domain} ${proxy_http_port}
+            echo -e "${YELLOW}HTTP Proxy Config:${NORMAL}"
+            networksetup -getwebproxy ${proxy_device}
+            networksetup -setsecurewebproxy ${proxy_device} ${proxy_domain} ${proxy_http_port}
+            echo -e "${YELLOW}HTTPS Proxy Config:${NORMAL}"
+            networksetup -getsecurewebproxy ${proxy_device}
         elif [ "$1" = "socks" ]; then
-            networksetup -setsocksfirewallproxy ${proxy_device} $2 $3
+            if [ ${2:-NOCONFIG} != "NOCONFIG" ]; then
+                proxy_domain="$2"
+            fi
+            if [ ${3:-NOCONFIG} != "NOCONFIG" ]; then
+                proxy_socks_port="$3"
+            fi
+            networksetup -setsocksfirewallproxy ${proxy_device} ${proxy_domain} ${proxy_socks_port}
+            echo -e "${YELLOW}SOCKS Proxy Config:${NORMAL}"
+            networksetup -getsocksfirewallproxy ${proxy_device}
         else
             return 1
         fi
