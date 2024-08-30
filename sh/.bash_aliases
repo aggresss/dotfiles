@@ -300,7 +300,7 @@ Darwin)
     # Function
     function proxy_sys() {
         local proxy_device="Wi-Fi"
-        local proxy_domain=$(netstat -rn | grep 'default' | grep 'en0' | awk '{print $2}')
+        local proxy_domain=$(netstat -rn | grep 'default' | grep -m1 'en0' | awk '{print $2}')
         local proxy_http_port="7890"
         local proxy_socks_port="7891"
         if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
