@@ -1090,7 +1090,7 @@ Set-Alias g go_env
 
 function go_proxy {
   if (-not $Env:GOPROXY) {
-    env_amend GOPROXY "https://goproxy.cn"
+    env_amend GOPROXY "https://mirrors.aliyun.com/goproxy/"
     Write-Host "GOPROXY: $Env:GOPROXY" -ForegroundColor Yellow
   }
   else {

@@ -1108,7 +1108,7 @@ function go_pwd() {
 
 function go_proxy() {
     if [ ${GOPROXY:-NOCONFIG} = "NOCONFIG" ]; then
-        export GOPROXY=https://goproxy.cn
+        export GOPROXY="https://mirrors.aliyun.com/goproxy/"
         echo -e "${YELLOW}GOPROXY: ${GOPROXY}${NORMAL}"
     else
         unset GOPROXY
