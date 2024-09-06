@@ -96,21 +96,21 @@ fi
 if [ $(
     command -v vim >/dev/null
     echo $?
-) -eq 0 ]; then
+) -eq 0 ] && [ ! -f ${HOME}/.vimrc ]; then
     update_file ${DOTFILES_URL}/vim/.vimrc ${HOME}/.vimrc
 fi
 # emacs
 if [ $(
     command -v emacs >/dev/null
     echo $?
-) -eq 0 ]; then
+) -eq 0 ] && [ ! -f ${HOME}/.emacs ]; then
     update_file ${DOTFILES_URL}/emacs/.emacs ${HOME}/.emacs
 fi
 # tmux
 if [ $(
     command -v tmux >/dev/null
     echo $?
-) -eq 0 ]; then
+) -eq 0 ] && [ ! -f ${HOME}/.tmux.conf ]; then
     update_file ${DOTFILES_URL}/tmux/.tmux.conf ${HOME}/.tmux.conf
 fi
 # pip
