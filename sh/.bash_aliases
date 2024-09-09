@@ -354,7 +354,7 @@ Darwin)
             echo -e "${YELLOW}SOCKS Proxy Config:${NORMAL}"
             networksetup -getsocksfirewallproxy ${proxy_device}
         else
-            echo -e "${RED}args error${NORMAL}"
+            echo -e "${RED}args: [socks|http|off] [address] [port]${NORMAL}"
             return 1
         fi
     }
