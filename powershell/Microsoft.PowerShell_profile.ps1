@@ -229,7 +229,7 @@ function source_file {
   elseif ($args.Count -eq 1) {
     if (-not $(Test-Path $snippets_dir)) {
       New-Item -Path $snippets_dir -ItemType Directory
-      New-Item -Path ${snippets_dir}/note.common -ItemType File
+      New-Item -Path ${snippets_dir}/snippets.common -ItemType File
     }
     $file_index = Get-ChildItem -Path $snippets_dir -Exclude .*
     $file_index | add_index

@@ -172,7 +172,7 @@ function source_file() {
     if [ $# -le 1 ]; then
         if [ ! -d ${snippets_dir} ]; then
             mkdir -p ${snippets_dir}
-            touch ${snippets_dir}/note.common
+            touch ${snippets_dir}/snippets.common
         fi
         echo -e ${YELLOW}
         ls -1p ${snippets_dir}/* 2>/dev/null | cat -n
