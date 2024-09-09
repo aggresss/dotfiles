@@ -167,20 +167,20 @@ alias p='git_prompt'
 # $2: filename or ~/snippets/* index
 # $3-: lines to execute
 function source_file() {
-    local note_dir="${HOME}/snippets"
-    local index_range=$(ls -1p ${note_dir}/* 2>/dev/null | sed -n '$=')
+    local snippets_dir="${HOME}/snippets"
+    local index_range=$(ls -1p ${snippets_dir}/* 2>/dev/null | sed -n '$=')
     if [ $# -le 1 ]; then
-        if [ ! -d ${note_dir} ]; then
-            mkdir -p ${note_dir}
-            touch ${note_dir}/note.common
+        if [ ! -d ${snippets_dir} ]; then
+            mkdir -p ${snippets_dir}
+            touch ${snippets_dir}/note.common
         fi
         echo -e ${YELLOW}
-        ls -1p ${note_dir}/* 2>/dev/null | cat -n
+        ls -1p ${snippets_dir}/* 2>/dev/null | cat -n
         echo -e ${NORMAL}
     else
         # arguments >= 2
         if [ ! -f $2 -a $2 -ge 1 -a $2 -le ${index_range} ] 2>/dev/null; then
-            local index_file=$(ls -1p ${note_dir}/* | sed -n "${2}p")
+            local index_file=$(ls -1p ${snippets_dir}/* | sed -n "${2}p")
         else
             local index_file=${2}
         fi

@@ -210,7 +210,7 @@ Set-Alias p git_prompt
 # args[1] file
 # args[2..-1] lines
 function source_file {
-  $note_dir = "${HOME}/snippets/"
+  $snippets_dir = "${HOME}/snippets/"
   function add_index {
     Begin { $i = 1 }
     Process {
@@ -227,17 +227,17 @@ function source_file {
     Write-Host "Arguments error."
   }
   elseif ($args.Count -eq 1) {
-    if (-not $(Test-Path $note_dir)) {
-      New-Item -Path $note_dir -ItemType Directory
-      New-Item -Path ${note_dir}/note.common -ItemType File
+    if (-not $(Test-Path $snippets_dir)) {
+      New-Item -Path $snippets_dir -ItemType Directory
+      New-Item -Path ${snippets_dir}/note.common -ItemType File
     }
-    $file_index = Get-ChildItem -Path $note_dir -Exclude .*
+    $file_index = Get-ChildItem -Path $snippets_dir -Exclude .*
     $file_index | add_index
     $file_index | Format-Table -Property Index, Name -AutoSize
   }
   else {
     $filepath = ""
-    $file_index = Get-ChildItem -Path $note_dir -Exclude .*
+    $file_index = Get-ChildItem -Path $snippets_dir -Exclude .*
     $file_index | add_index
     if (($args[1] -match '^[0-9]+$') -and ($args[1] -gt $file_index.Count)) {
       Write-Host "File index out of range."
@@ -246,7 +246,7 @@ function source_file {
     if (($args[1] -match '^[0-9]+$') -and ($args[1] -le $file_index.Count)) {
       $index = $args[1]
       $filename = $file_index | Where-Object { $_.Index -eq $index }
-      $filepath = $note_dir + $filename.Name.ToString()
+      $filepath = $snippets_dir + $filename.Name.ToString()
     }
     else {
       $filepath = $args[1]
