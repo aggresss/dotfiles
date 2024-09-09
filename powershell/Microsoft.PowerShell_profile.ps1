@@ -210,7 +210,7 @@ Set-Alias p git_prompt
 # args[1] file
 # args[2..-1] lines
 function source_file {
-  $note_dir = "${HOME}/notes/"
+  $note_dir = "${HOME}/snippets/"
   function add_index {
     Begin { $i = 1 }
     Process {
@@ -1004,7 +1004,7 @@ function docker_private {
     docker run --rm -it `
       -v root:/root `
       -v home:/home `
-      -v ${HOME}/notes:/mnt/notes `
+      -v ${HOME}/snippets:/mnt/snippets `
       -v ${HOME}/Downloads:/mnt/Downloads `
       -v ${HOME}/Documents:/mnt/Documents `
       -v ${HOME}/workspace-scratch:/mnt/workspace-scratch `
@@ -1017,7 +1017,7 @@ function docker_private {
     docker run --rm -it `
       -v root:/root `
       -v home:/home `
-      -v ${HOME}/notes:/mnt/notes `
+      -v ${HOME}/snippets:/mnt/snippets `
       -v ${HOME}/Downloads:/mnt/Downloads `
       -v ${HOME}/Documents:/mnt/Documents `
       -v ${HOME}/workspace-scratch:/mnt/workspace-scratch `
@@ -1033,7 +1033,7 @@ function docker_private {
       -v /tmp/.X11-unix/:/tmp/.X11-unix `
       -v root:/root `
       -v home:/home `
-      -v ${HOME}/notes:/mnt/notes `
+      -v ${HOME}/snippets:/mnt/snippets `
       -v ${HOME}/Downloads:/mnt/Downloads `
       -v ${HOME}/Documents:/mnt/Documents `
       -v ${HOME}/workspace-scratch:/mnt/workspace-scratch `

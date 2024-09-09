@@ -164,10 +164,10 @@ alias p='git_prompt'
 
 # fast source file content
 # $1: copy source
-# $2: filename or ~/notes/* index
+# $2: filename or ~/snippets/* index
 # $3-: lines to execute
 function source_file() {
-    local note_dir="${HOME}/notes"
+    local note_dir="${HOME}/snippets"
     local index_range=$(ls -1p ${note_dir}/* 2>/dev/null | sed -n '$=')
     if [ $# -le 1 ]; then
         if [ ! -d ${note_dir} ]; then
@@ -994,7 +994,7 @@ function docker_private() {
             -v /tmp/.X11-unix/:/tmp/.X11-unix \
             -v root:/root \
             -v home:/home \
-            -v ${HOME}/notes:/mnt/notes \
+            -v ${HOME}/snippets:/mnt/snippets \
             -v ${HOME}/Downloads:/mnt/Downloads \
             -v ${HOME}/Documents:/mnt/Documents \
             -v ${HOME}/workspace-scratch:/mnt/workspace-scratch \
@@ -1007,7 +1007,7 @@ function docker_private() {
         docker run --rm -it \
             -v root:/root \
             -v home:/home \
-            -v ${HOME}/notes:/mnt/notes \
+            -v ${HOME}/snippets:/mnt/snippets \
             -v ${HOME}/Downloads:/mnt/Downloads \
             -v ${HOME}/Documents:/mnt/Documents \
             -v ${HOME}/workspace-scratch:/mnt/workspace-scratch \
