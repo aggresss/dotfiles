@@ -581,11 +581,11 @@ function update_configfiles {
       update_internal $isLocal "ssh\config" "${HOME}\.ssh\config"
     }
     # Vim
-    if (Get-Command vim -errorAction SilentlyContinue) {
+    if ((Get-Command vim -errorAction SilentlyContinue) -and (-not $(Test-Path ${HOME}\.vimrc))) {
       update_internal $isLocal "vim\.vimrc" "${HOME}\.vimrc"
     }
     # Emacs
-    if (Get-Command emacs -errorAction SilentlyContinue) {
+    if ((Get-Command emacs -errorAction SilentlyContinue) -and (-not $(Test-Path ${Env:APPDATA}\.emacs))) {
       update_internal $isLocal "emacs\.emacs" "${Env:APPDATA}\.emacs"
     }
     # pip

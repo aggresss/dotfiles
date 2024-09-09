@@ -1107,13 +1107,16 @@ function go_pwd() {
 }
 
 function go_proxy() {
-    if [ ${GOPROXY:-NOCONFIG} = "NOCONFIG" ]; then
-        export GOPROXY="https://mirrors.aliyun.com/goproxy/"
-        echo -e "${YELLOW}GOPROXY: ${GOPROXY}${NORMAL}"
+    if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
+        echo "GOPROXY:"
+    elif [ "$1" = "on" ]; then
+        go env -w GOPROXY="https://mirrors.aliyun.com/goproxy/"
+    elif [ "$1" = "off" ]; then
+        go env -u GOPROXY
     else
-        unset GOPROXY
-        echo -e "${YELLOW}GOPROXY: disabled${NORMAL}"
+        echo -e "${RED}args: [on|off]${NORMAL}"
     fi
+    go env GOPROXY
 }
 
 # switch go version from cached
