@@ -2,7 +2,6 @@
 	"window.newWindowDimensions": "offset",
 	"security.workspace.trust.enabled": false,
 	"remote.autoForwardPorts": false,
-	"workbench.iconTheme": "vscode-icons",
 	"workbench.startupEditor": "none",
 	"workbench.activityBar.visible": true,
 	"workbench.statusBar.visible": true,
