@@ -3,5 +3,8 @@
 # Author: @aggresss
 
 for file in /mnt/*; do
+    if [ -L ${HOME}/`basename $file` ]; then
+        rm -f ${HOME}/`basename $file`
+    fi
     ln -s $file ${HOME}/`basename $file`
 done
