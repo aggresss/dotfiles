@@ -7,4 +7,5 @@ for file in /mnt/*; do
         rm -f ${HOME}/`basename $file`
     fi
     ln -s $file ${HOME}/`basename $file`
+    echo "$file"
 done
