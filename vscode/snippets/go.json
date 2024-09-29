@@ -102,7 +102,7 @@
 			"func TestX(t *testing.T) {",
 			"\tRegisterFailHandler(Fail)",
 			"\tRunSpecs(t, \"Test Suite\")",
-			"}",
+			"}\n",
 			"var _ = Describe(\"\", func() {",
 			"\tvar ()\n",
 			"\tBeforeEach(func() {\n",
