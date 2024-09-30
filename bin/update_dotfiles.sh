@@ -132,6 +132,13 @@ prefix=\${HOME}/.local
 END
     fi
 fi
+# R
+if [ $(
+    command -v R >/dev/null
+    echo $?
+) -eq 0 ]; then
+    update_file ${DOTFILES_URL}/r/.Rprofile ${HOME}/.Rprofile
+fi
 # maven
 if [ $(
     command -v mvn >/dev/null
