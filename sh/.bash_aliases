@@ -461,7 +461,7 @@ alias m='mkdir_cd ${HOME}/Documents'
 # count code line
 function lines_of_code() {
     if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
-        SUFFIX="h c hpp cpp cc cs go rs py java ts js html md txt"
+        SUFFIX="h c hpp cpp cc cs go rs java py r m ts js html md txt"
         for CF in $(echo ${SUFFIX}); do
             printf "|%6s|" ${CF}
             find . -name "*.${CF}" -type f | xargs cat | wc -l
