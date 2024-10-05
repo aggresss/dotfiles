@@ -25,5 +25,11 @@
 		"--enable=errcheck"
 	],
 	"cmake.configureOnOpen": false,
-	"mesonbuild.configureOnOpen": false
+	"mesonbuild.configureOnOpen": false,
+	"MATLAB.showFeatureNotAvailableError": false,
+	"[markdown]": {
+		"editor.quickSuggestions": {
+			"other": "on"
+		}
+	}
 }

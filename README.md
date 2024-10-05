@@ -28,14 +28,14 @@ Unblock-File $PROFILE
 ### 1. Common
 
 | Drectory | Type | Illustrate |
-|---|---|---|
+| -------- | ---- | ---------- |
 | `~/Downloads/` | **Delete Anytime** | common downloads repository |
 | `~/Documents/` | ***Periodic Backup*** | common documents repository |
 
 ### 2. Customized
 
 | Drectory | Type | Illustrate |
-|---|---|---|
+| -------- | ---- | ---------- |
 | `~/bin/` | *Auto Generation* | user executable files |
 | `~/snippets/` | ***Periodic Backup*** | snippets sort by classify |
 | `~/dotfiles/` | ***Periodic Backup*** | dotfiles sort by classify |
@@ -48,42 +48,42 @@ Unblock-File $PROFILE
 #### VirtualBox
 
 | Drectory | Type | Illustrate |
-|---|---|---|
+| -------- | ---- | ---------- |
 | `~/VirtualBox VMs/` | *Auto Generation* | default VirtualBox virtual machine directory |
 
 #### Vagrant
 
 | Drectory | Type | Illustrate |
-|---|---|---|
+| -------- | ---- | ---------- |
 | `~/Vagrant/` | *Auto Generation* | default Vagarant workspace |
 
 #### Golang
 
 | Drectory | Type | Illustrate |
-|---|---|---|
+| -------- | ---- | ---------- |
 | `~/go/` | *Auto Generation* | default GOPATH directory |
 | `~/.local/go/` | *Auto Generation* | default GOROOT directory |
 
 #### Rust
 
 | Drectory | Type | Illustrate |
-|---|---|---|
+| -------- | ---- | ---------- |
 |`~/.cargo/`| *Auto Generation* | default Rust directory |
 
 #### Python
 
 | Drectory | Type | Illustrate |
-|---|---|---|
+| -------- | ---- | ---------- |
 | `~/env/` | **Delete Anytime** | python virtualenv directory |
 | `~/.local/` | *Auto Generation* | pip user directory |
 
 #### npm
 
 | Drectory | Type | Illustrate |
-|---|---|---|
+| -------- | ---- | ---------- |
 | `~/.local/` | *Auto Generation* | npm global directory |
 
 #### Perl
 | Drectory | Type | Illustrate |
-|---|---|---|
+| -------- | ---- | ---------- |
 | `~/perl5/` | *Auto Generation* | default local::lib directory |

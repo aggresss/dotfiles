@@ -1,0 +1,25 @@
+{
+    "table": {
+        "prefix": "table",
+        "body": [
+            "| abc$0 | def |",
+            "| --- | --- |",
+            "| bar | baz |"
+        ],
+        "description": ""
+    },
+    "task": {
+        "prefix": "task",
+        "body": [
+            "- [ ] foo$0"
+        ],
+        "description": ""
+    },
+    "comment": {
+        "prefix": "comment",
+        "body": [
+            "<!--- \n --->"
+        ],
+        "description": ""
+    }
+}
