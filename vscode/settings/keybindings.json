@@ -1,0 +1,15 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "cmd+k cmd+u",
+        "command": "editor.action.transformToUppercase"
+    },
+    {
+        "key": "cmd+k cmd+p",
+        "command": "editor.action.transformToPascalcase"
+    },
+    {
+        "key": "cmd+k cmd+s",
+        "command": "editor.action.transformToSnakecase"
+    }
+]
