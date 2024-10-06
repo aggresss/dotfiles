@@ -1,18 +1,27 @@
 [
     {
-        "key": "cmd+k cmd+u",
+        "description": "insert markdown table",
+        "key": "cmd+k shift+t",
+        "command": "editor.action.insertSnippet",
+        "when": "editorTextFocus && editorLangId == 'markdown'",
+        "args": {
+            "snippet": "| abc$0 | def |\n| --- | --- |\n| bar | baz |"
+        }
+    },
+    {
+        "key": "cmd+k shift+u",
         "command": "editor.action.transformToUppercase"
     },
     {
-        "key": "cmd+k cmd+p",
+        "key": "cmd+k shift+p",
         "command": "editor.action.transformToPascalcase"
     },
     {
-        "key": "cmd+k cmd+s",
+        "key": "cmd+k shift+s",
         "command": "editor.action.transformToSnakecase"
     },
     {
-        "key": "cmd+k cmd+r",
+        "key": "cmd+k shift+r",
         "command": "r.createRTerm"
     }
 ]
