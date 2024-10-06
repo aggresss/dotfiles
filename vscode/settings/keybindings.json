@@ -1,4 +1,3 @@
-// Place your key bindings in this file to override the defaults
 [
     {
         "key": "cmd+k cmd+u",
@@ -11,5 +10,9 @@
     {
         "key": "cmd+k cmd+s",
         "command": "editor.action.transformToSnakecase"
+    },
+    {
+        "key": "cmd+k cmd+r",
+        "command": "r.createRTerm"
     }
 ]
