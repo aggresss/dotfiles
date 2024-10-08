@@ -1,11 +1,11 @@
 {
-	"window.newWindowDimensions": "offset",
 	"security.workspace.trust.enabled": false,
 	"remote.autoForwardPorts": false,
 	"workbench.startupEditor": "none",
 	"workbench.activityBar.visible": true,
 	"workbench.statusBar.visible": true,
 	"workbench.sideBar.location": "left",
+	"window.newWindowDimensions": "maximized",
 	"window.zoomLevel": 0,
 	"editor.fontSize": 15,
 	"editor.minimap.enabled": false,
