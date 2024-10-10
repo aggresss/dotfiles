@@ -1,0 +1,28 @@
+// keybindings.json for Windows
+[
+    {
+        "description": "insert markdown table",
+        "key": "ctrl+k shift+t",
+        "command": "editor.action.insertSnippet",
+        "when": "editorTextFocus && editorLangId == 'markdown'",
+        "args": {
+            "snippet": "| abc$0 | def |\n| --- | --- |\n| bar | baz |"
+        }
+    },
+    {
+        "key": "ctrl+k shift+u",
+        "command": "editor.action.transformToUppercase"
+    },
+    {
+        "key": "ctrl+k shift+p",
+        "command": "editor.action.transformToPascalcase"
+    },
+    {
+        "key": "ctrl+k shift+s",
+        "command": "editor.action.transformToSnakecase"
+    },
+    {
+        "key": "ctrl+k shift+r",
+        "command": "r.createRTerm"
+    }
+]

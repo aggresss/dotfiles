@@ -1,7 +1,8 @@
+// keybindings.json for Linux
 [
     {
         "description": "insert markdown table",
-        "key": "cmd+k shift+t",
+        "key": "ctrl+k shift+t",
         "command": "editor.action.insertSnippet",
         "when": "editorTextFocus && editorLangId == 'markdown'",
         "args": {
@@ -9,19 +10,19 @@
         }
     },
     {
-        "key": "cmd+k shift+u",
+        "key": "ctrl+k shift+u",
         "command": "editor.action.transformToUppercase"
     },
     {
-        "key": "cmd+k shift+p",
+        "key": "ctrl+k shift+p",
         "command": "editor.action.transformToPascalcase"
     },
     {
-        "key": "cmd+k shift+s",
+        "key": "ctrl+k shift+s",
         "command": "editor.action.transformToSnakecase"
     },
     {
-        "key": "cmd+k shift+r",
+        "key": "ctrl+k shift+r",
         "command": "r.createRTerm"
     }
 ]

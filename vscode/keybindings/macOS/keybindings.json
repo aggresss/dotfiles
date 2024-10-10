@@ -1,0 +1,28 @@
+// keybindings.json for macOS
+[
+    {
+        "description": "insert markdown table",
+        "key": "cmd+k shift+t",
+        "command": "editor.action.insertSnippet",
+        "when": "editorTextFocus && editorLangId == 'markdown'",
+        "args": {
+            "snippet": "| abc$0 | def |\n| --- | --- |\n| bar | baz |"
+        }
+    },
+    {
+        "key": "cmd+k shift+u",
+        "command": "editor.action.transformToUppercase"
+    },
+    {
+        "key": "cmd+k shift+p",
+        "command": "editor.action.transformToPascalcase"
+    },
+    {
+        "key": "cmd+k shift+s",
+        "command": "editor.action.transformToSnakecase"
+    },
+    {
+        "key": "cmd+k shift+r",
+        "command": "r.createRTerm"
+    }
+]

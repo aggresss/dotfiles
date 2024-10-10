@@ -7,8 +7,7 @@ visualstudioexptteam.vscodeintellicode
 alefragnani.bookmarks
 ms-vscode-remote.vscode-remote-extensionpack
 # C/CPP
-ms-vscode.cpptools
-ms-vscode.cpptools-themes
+ms-vscode.cpptools-extension-pack
 # Golang
 golang.go
 # Python
@@ -33,6 +32,7 @@ techer.open-in-browser
 # Git
 donjayamanne.githistory
 eamodio.gitlens
+mhutchie.git-graph
 # Docker
 ms-azuretools.vscode-docker
 # Editorconfig
