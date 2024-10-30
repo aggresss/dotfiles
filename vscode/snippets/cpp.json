@@ -14,7 +14,7 @@
 			"struct Bar {",
 			"};",
 			"",
-			"int main(int argc, char const* argv[])",
+			"int main(int argc, char **argv)",
 			"{",
 			"    $2",
 			"    std::cout << \"\" << std::endl;",
