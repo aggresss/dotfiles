@@ -24,6 +24,16 @@
 		],
 		"description": ""
 	},
+	"snippets guard": {
+		"prefix": "guard",
+		"body": [
+			"#ifndef ${TM_FILENAME/(?:^.*\\\\src\\\\)?(\\w+)\\W?/${1:/upcase}_/g}",
+			"#define ${TM_FILENAME/(?:^.*\\\\src\\\\)?(\\w+)\\W?/${1:/upcase}_/g}",
+			"",
+			"#endif  // ${TM_FILENAME/(?:^.*\\\\src\\\\)?(\\w+)\\W?/${1:/upcase}_/g}"
+		],
+		"description": ""
+	},
 	"snippets greek alphabet": {
 		"prefix": "greek alphabet",
 		"body":[
