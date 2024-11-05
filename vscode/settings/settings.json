@@ -18,6 +18,7 @@
 	"explorer.confirmDragAndDrop": false,
 	"explorer.confirmDelete": false,
 	"files.trimTrailingWhitespace": true,
+	"files.eol": "\n",
 	"C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Google}",
 	"go.toolsManagement.autoUpdate": true,
 	"go.lintFlags": [
