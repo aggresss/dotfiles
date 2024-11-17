@@ -666,7 +666,7 @@ function ssh_agent_add {
 Set-Alias a ssh_agent_add
 
 function ssh_agent_del {
-  ssh-add -d
+  ssh-add -D
 }
 Set-Alias k ssh_agent_del
 
