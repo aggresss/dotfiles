@@ -1,28 +1,43 @@
-// keybindings.json for macOS
+// Place your key bindings in this file to override the defaults
 [
+    // Editor
     {
-        "description": "insert markdown table",
-        "key": "cmd+k shift+t",
-        "command": "editor.action.insertSnippet",
-        "when": "editorTextFocus && editorLangId == 'markdown'",
-        "args": {
-            "snippet": "| abc$0 | def |\n| --- | --- |\n| bar | baz |"
-        }
+        "key": "cmd+e l",
+        "command": "editor.action.transformToLowercase"
     },
     {
-        "key": "cmd+k shift+u",
+        "key": "cmd+e u",
         "command": "editor.action.transformToUppercase"
     },
     {
-        "key": "cmd+k shift+p",
+        "key": "cmd+e p",
         "command": "editor.action.transformToPascalcase"
     },
     {
-        "key": "cmd+k shift+s",
+        "key": "cmd+e s",
         "command": "editor.action.transformToSnakecase"
     },
     {
-        "key": "cmd+k shift+r",
-        "command": "r.createRTerm"
+        "key": "cmd+e t",
+        "command": "editor.action.transformToTitlecase"
+    },
+    {
+        "key": "cmd+e c",
+        "command": "editor.action.transformToCamelcase"
+    },
+    {
+        "key": "cmd+e k",
+        "command": "editor.action.transformToKebabcase"
+    },
+    // Terminal
+    {
+        "key": "cmd+t c",
+        "command": "workbench.action.createTerminalEditor",
+        "when": "terminalProcessSupported"
+    },
+    {
+        "key": "cmd+t l",
+        "command": "workbench.action.quickOpenTerm",
+        "when": "terminalHasBeenCreated || terminalProcessSupported"
     }
 ]
