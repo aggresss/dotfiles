@@ -3,6 +3,7 @@
 
 # vscode project file
 .vstags
+.vscode/
 
 # MacOS cache file
 .DS_Store
