@@ -10,20 +10,20 @@
         "command": "editor.action.transformToUppercase"
     },
     {
-        "key": "ctrl+e p",
-        "command": "editor.action.transformToPascalcase"
-    },
-    {
-        "key": "ctrl+e s",
-        "command": "editor.action.transformToSnakecase"
-    },
-    {
         "key": "ctrl+e t",
         "command": "editor.action.transformToTitlecase"
     },
     {
+        "key": "ctrl+e p",
+        "command": "editor.action.transformToPascalcase"
+    },
+    {
         "key": "ctrl+e c",
         "command": "editor.action.transformToCamelcase"
+    },
+    {
+        "key": "ctrl+e s",
+        "command": "editor.action.transformToSnakecase"
     },
     {
         "key": "ctrl+e k",
