@@ -589,15 +589,15 @@ function update_configfiles {
       update_internal $isLocal "emacs\.emacs" "${Env:APPDATA}\.emacs"
     }
     # pip
-    if (Get-Command pip -errorAction SilentlyContinue) {
+    if ((Get-Command pip -errorAction SilentlyContinue) -and (-not $(Test-Path ${HOME}\pip\pip.conf))) {
       update_internal $true "pip\pip.conf" "${HOME}\pip\pip.ini"
     }
     # npm
-    if (Get-Command npm -errorAction SilentlyContinue) {
+    if ((Get-Command npm -errorAction SilentlyContinue) -and (-not $(Test-Path ${HOME}\.npmrc))) {
       update_internal $true "npm\.npmrc" "${HOME}\.npmrc"
     }
     # Maven
-    if (Get-Command mvn -errorAction SilentlyContinue) {
+    if ((Get-Command mvn -errorAction SilentlyContinue) -and (-not $(Test-Path ${HOME}\.m2\settings.xml))) {
       update_internal $true "maven\settings.xml" "${HOME}\.m2\settings.xml"
     }
   }
