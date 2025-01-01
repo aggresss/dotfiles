@@ -29,6 +29,17 @@
         "key": "ctrl+e k",
         "command": "editor.action.transformToKebabcase"
     },
+    {
+        "key": "ctrl+e e",
+        "command": "editor.actions.findWithArgs",
+        "args": {
+            "searchString": "^\\s*$\\n",
+            "replaceString": "",
+            "isRegex": true,
+            "isCaseSensitive": false,
+            "matchWholeWord": false
+        }
+    },
     // Terminal
     {
         "key": "ctrl+t c",
