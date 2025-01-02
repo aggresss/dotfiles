@@ -589,7 +589,7 @@ function update_configfiles {
       update_internal $isLocal "emacs\.emacs" "${Env:APPDATA}\.emacs"
     }
     # pip
-    if ((Get-Command pip -errorAction SilentlyContinue) -and (-not $(Test-Path ${HOME}\pip\pip.conf))) {
+    if ((Get-Command pip -errorAction SilentlyContinue) -and (-not $(Test-Path ${HOME}\pip\pip.ini))) {
       update_internal $true "pip\pip.conf" "${HOME}\pip\pip.ini"
     }
     # npm
