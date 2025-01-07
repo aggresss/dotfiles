@@ -1036,6 +1036,18 @@ function docker_user() {
         $*
 }
 
+# Run UVW
+function docker_run() {
+    docker run --rm -it \
+        -u $(id -u):$(id -g) \
+        -v /etc/passwd:/etc/passwd:ro \
+        -v /etc/group:/etc/group:ro \
+        -v /etc/timezone:/etc/timezone:ro \
+        -v ${HOME}:${HOME} \
+        -w ${HOME} \
+        $*
+}
+
 # killall containers
 function docker_kill() {
     if [ -n "$(docker ps -a -q)" ]; then
