@@ -45,3 +45,5 @@ DavidAnson.vscode-markdownlint
 jebbs.plantuml
 # Compare Folders
 moshfeu.compare-folders
+# Formatter
+esbenp.prettier-vscode
