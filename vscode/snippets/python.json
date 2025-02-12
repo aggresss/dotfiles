@@ -6,5 +6,15 @@
 			"# -*- coding: utf-8 -*-"
 		],
 		"description": ""
+	},
+	"Python Main Function": {
+		"prefix": "main",
+		"body": [
+			"def main():",
+			"\tprint(\"Hello, World!\")\n",
+			"if __name__ == \"__main__\":",
+			"\tmain()\n"
+		],
+		"description": ""
 	}
 }
