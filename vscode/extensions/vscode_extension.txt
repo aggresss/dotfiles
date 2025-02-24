@@ -43,6 +43,8 @@ eriklynd.json-tools
 DavidAnson.vscode-markdownlint
 # PlantUML
 jebbs.plantuml
+# Mermaid
+bierner.markdown-mermaid
 # Compare Folders
 moshfeu.compare-folders
 # Formatter
