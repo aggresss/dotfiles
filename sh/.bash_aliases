@@ -1042,6 +1042,7 @@ function docker_run() {
         -u $(id -u):$(id -g) \
         -v /etc/passwd:/etc/passwd:ro \
         -v /etc/group:/etc/group:ro \
+        -v /etc/localtime:/etc/localtime:ro \
         -v /etc/timezone:/etc/timezone:ro \
         -v ${HOME}:${HOME} \
         -w ${HOME} \
