@@ -30,10 +30,11 @@
 	"MATLAB.showFeatureNotAvailableError": false,
 	"[markdown]": {
 		"editor.quickSuggestions": {
-			"other": "on"
+			"other": "off"
 		}
 	},
 	"plantuml.jar": "C:\\plantuml\\plantuml.jar",
 	"plantuml.render": "Local",
-	"plantuml.server": "https://www.plantuml.com/plantuml"
+	"plantuml.server": "https://www.plantuml.com/plantuml",
+	"markdowntable.showMenu.csvToTable":true
 }
