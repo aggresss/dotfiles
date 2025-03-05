@@ -32,5 +32,8 @@
 		"editor.quickSuggestions": {
 			"other": "on"
 		}
-	}
+	},
+	"plantuml.jar": "C:\\plantuml\\plantuml.jar",
+	"plantuml.render": "Local",
+	"plantuml.server":"https://www.plantuml.com/plantuml"
 }
