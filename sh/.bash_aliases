@@ -1036,9 +1036,10 @@ function docker_user() {
         $*
 }
 
-# Run UVW
+# Run EUVW
 function docker_run() {
     docker run --rm -it \
+        -e TERM=xterm-256color \
         -u $(id -u):$(id -g) \
         -v /etc/passwd:/etc/passwd:ro \
         -v /etc/group:/etc/group:ro \
