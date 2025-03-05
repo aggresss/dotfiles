@@ -37,10 +37,9 @@ mhutchie.git-graph
 ms-azuretools.vscode-docker
 # Editorconfig
 editorconfig.editorconfig
-# JSON
-eriklynd.json-tools
 # Markdown
-DavidAnson.vscode-markdownlint
+yzhang.markdown-all-in-one
+takumii.markdowntable
 # PlantUML
 jebbs.plantuml
 # Mermaid
