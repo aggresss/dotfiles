@@ -534,7 +534,7 @@ function du {
   )
 
   if ((Get-Command du).CommandType -eq "Application") {
-    "du -h --max-depth=1" | Invoke-Expression
+    "du $args" | Invoke-Expression
     return
   }
 
