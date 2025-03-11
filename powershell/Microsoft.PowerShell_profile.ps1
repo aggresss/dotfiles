@@ -358,9 +358,9 @@ if ($IsWindows -or $Env:OS) {
   function touch { New-Item "$args" -ItemType File }
   function sudo {
     $processOptions = @{
-      FilePath = "$args"
+      FilePath    = "$args"
       WindowStyle = "Maximized"
-      Verb = "RunAs"
+      Verb        = "RunAs"
     }
     Start-Process @processOptions
   }
@@ -373,7 +373,8 @@ if ($IsWindows -or $Env:OS) {
       2 {
         if ($args[1]) {
           fsutil file setCaseSensitiveInfo $args[0] enable
-        } else {
+        }
+        else {
           fsutil file setCaseSensitiveInfo $args[0] disable
         }
         break
@@ -406,7 +407,8 @@ if ($IsWindows -or $Env:OS) {
     )
     if ($rf) {
       Remove-Item -Path $path -Force -Recurse -Confirm:$false
-    } else {
+    }
+    else {
       Remove-Item -Path $path
     }
   }
@@ -419,7 +421,8 @@ if ($IsWindows -or $Env:OS) {
     )
     if ($s) {
       New-Item -Path $link -ItemType SymbolicLink -Value $target
-    } else {
+    }
+    else {
       fsutil hardlink create $link $target
     }
   }
@@ -457,13 +460,14 @@ if ($IsWindows -or $Env:OS) {
   # vim
   if ($(Test-Path "${Env:ProgramFiles}\Vim\*\vim.exe")) {
     Set-Alias vim (Get-ChildItem "${Env:ProgramFiles}\Vim\*\vim.exe")[-1].FullName
-  } elseif ($(Test-Path "${Env:ProgramFiles(x86)}\Vim\*\vim.exe")) {
+  }
+  elseif ($(Test-Path "${Env:ProgramFiles(x86)}\Vim\*\vim.exe")) {
     Set-Alias vim (Get-ChildItem "${Env:ProgramFiles(x86)}\Vim\*\vim.exe")[-1].FullName
   }
   # emacs
   if ($(Test-Path "${Env:ProgramFiles}\Emacs\*\bin\emacs.exe")) {
     function emacs {
-       $emacs_path = (Get-ChildItem "${Env:ProgramFiles}\Emacs\*\bin\emacs.exe")[-1].FullName -replace ' ', '` '
+      $emacs_path = (Get-ChildItem "${Env:ProgramFiles}\Emacs\*\bin\emacs.exe")[-1].FullName -replace ' ', '` '
       "$emacs_path -nw $args" | Invoke-Expression
     }
   }
@@ -476,7 +480,8 @@ if ($IsWindows -or $Env:OS) {
   # chrome
   if ($(Test-Path "${Env:ProgramFiles}\Google\Chrome\Application\chrome.exe")) {
     Set-Alias chrome (Get-ChildItem "${Env:ProgramFiles}\Google\Chrome\Application\chrome.exe")[-1].FullName
-  } elseif ($(Test-Path "${Env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe")) {
+  }
+  elseif ($(Test-Path "${Env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe")) {
     Set-Alias chrome (Get-ChildItem "${Env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe")[-1].FullName
   }
   # ${HOME}\bin
@@ -521,6 +526,39 @@ function ll {
   else {
     Get-ChildItem -Attributes !System, Hidden
   }
+}
+
+function du {
+  Param (
+    [Parameter(Mandatory = $false, Position = 1)] [int]$depth = 1
+  )
+
+  if ((Get-Command du).CommandType -eq "Application") {
+    "du -h --max-depth=1" | Invoke-Expression
+    return
+  }
+
+  $items = Get-ChildItem -Directory -Recurse -Depth ($depth - 1) | ForEach-Object {
+    $dir = $_
+    $size = Get-ChildItem -Path $dir.FullName -Recurse -File | Measure-Object -Property Length -Sum | Select-Object -ExpandProperty Sum
+    [PSCustomObject]@{
+      Size = if ($size) { $size } else { 0 }
+      Path = $dir.FullName
+    }
+  }
+
+  $items | Sort-Object -Property Size -Descending:$false | Format-Table @{
+    Label      = "Size"
+    Expression = {
+      switch ($_.Size) {
+        { $_ -ge 1TB } { "{0:N1} TB" -f ($_ / 1TB); break }
+        { $_ -ge 1GB } { "{0:N1} GB" -f ($_ / 1GB); break }
+        { $_ -ge 1MB } { "{0:N1} MB" -f ($_ / 1MB); break }
+        { $_ -ge 1KB } { "{0:N1} KB" -f ($_ / 1KB); break }
+        default { "$_ B" }
+      }
+    }
+  }, Path
 }
 
 function mkdir_cd {
@@ -945,31 +983,31 @@ function git_upstream {
 ######################
 
 function cmake_init() {
-    New-Item "CMakeLists.txt" -ItemType File
+  New-Item "CMakeLists.txt" -ItemType File
 }
 
 function cmake_clean() {
-    $cmake_files = @(
-        'CMakeLists.txt.user'
-        'CMakeCache.txt'
-        'CMakeFiles'
-        'CMakeScripts'
-        'compile_commands.json'
-        'cmake_install.cmake'
-        'install_manifest.txt'
-        'Testing'
-        'CTestTestfile.cmake'
-        '_deps'
-        'Makefile'
-        '*.sln'
-        '*.vcxproj'
-        '*.vcxproj.filters'
-    )
-    foreach ($cf in $cmake_files) {
-      if (Test-Path $cf) {
-        Remove-Item $cf -Recurse -Force -Verbose
-      }
+  $cmake_files = @(
+    'CMakeLists.txt.user'
+    'CMakeCache.txt'
+    'CMakeFiles'
+    'CMakeScripts'
+    'compile_commands.json'
+    'cmake_install.cmake'
+    'install_manifest.txt'
+    'Testing'
+    'CTestTestfile.cmake'
+    '_deps'
+    'Makefile'
+    '*.sln'
+    '*.vcxproj'
+    '*.vcxproj.filters'
+  )
+  foreach ($cf in $cmake_files) {
+    if (Test-Path $cf) {
+      Remove-Item $cf -Recurse -Force -Verbose
     }
+  }
 }
 
 <#######################
