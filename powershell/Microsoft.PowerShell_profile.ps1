@@ -530,7 +530,7 @@ function ll {
 
 function du {
   Param (
-    [Parameter(Mandatory = $false, Position = 1)] [int]$depth = 1
+    [Parameter(Mandatory = $false)] [int]$depth = 1
   )
 
   if ((Get-Command du).CommandType -eq "Application") {
