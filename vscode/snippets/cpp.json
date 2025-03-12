@@ -34,9 +34,16 @@
 		],
 		"description": ""
 	},
+	"snippets template": {
+		"prefix": "template",
+		"body": [
+			"template<typename T>\n$2"
+		],
+		"description": ""
+	},
 	"snippets greek alphabet": {
 		"prefix": "greek alphabet",
-		"body":[
+		"body": [
 			"list<std::string> alphabet = {",
 			"\t\t\"alpha\", \"bata\", \"gamma\", \"delta\", \"epsilon\", \"zeta\", \"eta\", \"theta\",",
 			"\t\t\"iota\", \"kappa\", \"lambda\", \"mu\", \"nu\", \"xi\", \"omicron\", \"pi\",",
