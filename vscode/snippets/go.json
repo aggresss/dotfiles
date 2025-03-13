@@ -9,6 +9,13 @@
 		],
 		"description": ""
 	},
+	"snippets implement": {
+		"prefix": "implement",
+		"body":[
+			"panic(\"Not implemented\")"
+		],
+		"description": ""
+	},
 	"snippets sigterm": {
 		"prefix": "sigterm",
 		"body":[
