@@ -37,7 +37,14 @@
 	"snippets template": {
 		"prefix": "template",
 		"body": [
-			"template<typename T>\n$2"
+			"template<typename T>$2"
+		],
+		"description": ""
+	},
+	"snippets implemented": {
+		"prefix": "implement",
+		"body": [
+			"throw std::runtime_error(\"Not implemented\");$2"
 		],
 		"description": ""
 	},
