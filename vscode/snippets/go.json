@@ -1,7 +1,7 @@
 {
 	"snippets main": {
 		"prefix": "main",
-		"body":[
+		"body": [
 			"package main\n",
 			"func main() {",
 			"\t$0",
@@ -11,14 +11,50 @@
 	},
 	"snippets implement": {
 		"prefix": "implement",
-		"body":[
+		"body": [
 			"panic(\"Not implemented\")"
+		],
+		"description": ""
+	},
+	"snippets test": {
+		"prefix": "test",
+		"body": [
+			"class AlphaTest : public ::testing::Test",
+			"{",
+			"protected:",
+			"\tvirtual void SetUp()",
+			"\t{",
+			"\t}",
+			"\tvirtual void TearDown()",
+			"\t{",
+			"\t}",
+			"};",
+			"",
+			"TEST(AlphaTest, KnownAnswerTest)",
+			"{",
+			"\tstruct KnownAnswerTest",
+			"\t{",
+			"\t\tbool alpha;",
+			"\t\tint beta;",
+			"\t};",
+			"",
+			"\tconst std::vector<KnownAnswerTest> cases{",
+			"\t\t{true, 0},",
+			"\t\t{true, 1},",
+			"\t};",
+			"",
+			"\tfor (const auto &tc : cases)",
+			"\t{",
+			"\t\tEXPECT_TRUE(tc.alpha == true);",
+			"\t\tEXPECT_TRUE(tc.beta < 2);",
+			"\t}",
+			"}"
 		],
 		"description": ""
 	},
 	"snippets sigterm": {
 		"prefix": "sigterm",
-		"body":[
+		"body": [
 			"ch := make(chan os.Signal, 1)",
 			"signal.Notify(ch, os.Interrupt, syscall.SIGTERM)",
 			"select {",
@@ -29,7 +65,7 @@
 	},
 	"snippets go select": {
 		"prefix": "go select",
-		"body":[
+		"body": [
 			"go func() {",
 			"\tfor {",
 			"\t\tselect {",
@@ -42,7 +78,7 @@
 	},
 	"snippets wait group": {
 		"prefix": "wait group",
-		"body":[
+		"body": [
 			"wg := &sync.WaitGroup{}",
 			"for range []int{} {",
 			"\twg.Add(1)",
@@ -56,7 +92,7 @@
 	},
 	"snippets greek alphabet": {
 		"prefix": "greek alphabet",
-		"body":[
+		"body": [
 			"var (",
 			"\talphabet = []string{",
 			"\t\t\"alpha\", \"bata\", \"gamma\", \"delta\", \"epsilon\", \"zeta\", \"eta\", \"theta\",",
@@ -69,7 +105,7 @@
 	},
 	"snippets http server": {
 		"prefix": "http server",
-		"body":[
+		"body": [
 			"// _ \"net/http/pprof\"",
 			"fmt.Println((&http.Server{Addr: \":6070\"}).ListenAndServe().Error())\n"
 		],
@@ -77,7 +113,7 @@
 	},
 	"snippets tdd testify": {
 		"prefix": "tdd testify",
-		"body":[
+		"body": [
 			"// \"github.com/stretchr/testify/assert\"",
 			"func TestEqual(t *testing.T) {",
 			"\ttestCases := map[string]struct {",
@@ -100,7 +136,7 @@
 	},
 	"snippets bdd ginkgo": {
 		"prefix": "bdd ginkgo",
-		"body":[
+		"body": [
 			"import (",
 			"\t\"testing\"\n",
 			"\t. \"github.com/onsi/ginkgo/v2\"",
@@ -127,21 +163,21 @@
 	},
 	"snippets comment lint unused": {
 		"prefix": "lint unused",
-		"body":[
+		"body": [
 			"//lint:ignore U1000 Ignore unused."
 		],
 		"description": ""
 	},
 	"snippets comment deprecated": {
 		"prefix": "deprecated",
-		"body":[
+		"body": [
 			"// Deprecated: "
 		],
 		"description": ""
 	},
 	"snippets cgo function": {
 		"prefix": "cgo func",
-		"body":[
+		"body": [
 			"func $0() int32 {",
 			"\treturn (int32)(C.())",
 			"}\n"
@@ -150,7 +186,7 @@
 	},
 	"snippets cgo import": {
 		"prefix": "cgo import",
-		"body":[
+		"body": [
 			"/*",
 			"#include <stdlib.h>",
 			"$0",
