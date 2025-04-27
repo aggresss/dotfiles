@@ -855,6 +855,26 @@ function git_pull {
   git branch -q -D ${pull_branch}_staging
 }
 
+function git_sync {
+  git remote update
+  param (
+      [String[]]$Branches
+  )
+  foreach ($branch in $Branches) {
+      git checkout $branch
+      if ($LASTEXITCODE -eq 0) {
+          git rebase "upstream/$branch"
+          if ($LASTEXITCODE -eq 0) {
+              git push origin $branch
+          } else {
+              Write-Error "Rebasing upstream/$branch failed"
+          }
+      } else {
+          Write-Error "Checking out branch $branch failed"
+      }
+  }
+}
+
 function git_leave {
   if ($args.Count -lt 1 ) {
     Write-Host "Please input a branch to checkout." -ForegroundColor Red
