@@ -521,31 +521,33 @@ function update_file() {
 }
 
 # switch proxy on-off
-# $1: port 1-65536; null to display; else to close
-function proxy_cfg() {
+# $1: proxy url; null to display; off to disable
+function proxy_env() {
     if [ ${1:-NOCONFIG} = "NOCONFIG" ]; then
-        if [ -n "${proxy-}" ]; then
-            echo -e "${YELLOW}${proxy}${NORMAL}"
+        if [ -n "${PROXY-}" ]; then
+            echo -e "${YELLOW}${PROXY}${NORMAL}"
         else
             echo -e "${YELLOW}proxy disabled.${NORMAL}"
         fi
         return 0
     fi
-    local port=$(echo $1 | sed 's/[^0-9]//g')
-    if [ ${port:=0} -gt 0 -a ${port} -lt 65536 ]; then
+    local gateway=$(netstat -nr | awk '/^0.0.0.0/ {print $2; exit} /^default/ {print $2; exit}')
+    local port=7890
+    if [ "$1" = "off" ]; then
+        unset PROXY HTTP_PROXY HTTPS_PROXY FTP_PROXY ALL_PROXY
+        echo -e "${RED}porxy unset.${NORMAL}"
+    else
         if [ -f /.dockerenv ]; then
             local proxy_url="http://host.docker.internal:${port}"
         else
-            local proxy_url="http://localhost:${port}"
+            local proxy_url="http://${gateway}:${port}"
         fi
-        export proxy=${proxy_url}
-        export http_proxy=${proxy_url}
-        export https_proxy=${proxy_url}
-        export ftp_proxy=${proxy_url}
-        echo -e "${GREEN}${proxy}${NORMAL}"
-    else
-        unset proxy http_proxy https_proxy ftp_proxy
-        echo -e "${RED}porxy cloesd.${NORMAL}"
+        export PROXY=${proxy_url}
+        export HTTP_PROXY=${proxy_url}
+        export HTTPS_PROXY=${proxy_url}
+        export FTP_PROXY=${proxy_url}
+        export ALL_PROXY=${proxy_url}
+        echo -e "${GREEN}${PROXY}${NORMAL}"
     fi
 }
 
