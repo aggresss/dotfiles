@@ -531,16 +531,14 @@ function proxy_env() {
         fi
         return 0
     fi
-    local gateway=$(netstat -nr | awk '/^0.0.0.0/ {print $2; exit} /^default/ {print $2; exit}')
-    local port=7890
     if [ "$1" = "off" ]; then
         unset PROXY HTTP_PROXY HTTPS_PROXY FTP_PROXY ALL_PROXY
         echo -e "${RED}porxy unset.${NORMAL}"
     else
-        if [ -f /.dockerenv ]; then
-            local proxy_url="http://host.docker.internal:${port}"
+        if [ "$1" = "default" ]; then
+            local proxy_url="http://$(netstat -nr | awk '/^0.0.0.0/ {print $2; exit} /^default/ {print $2; exit}'):7890"
         else
-            local proxy_url="http://${gateway}:${port}"
+            local proxy_url=$1
         fi
         export PROXY=${proxy_url}
         export HTTP_PROXY=${proxy_url}
