@@ -115,7 +115,7 @@ if [ $(
 fi
 # pip
 if [ $(
-    command -v pip >/dev/null
+    command -v pip >/dev/null || command -v pip3 >/dev/null
     echo $?
 ) -eq 0 ]; then
     update_file ${DOTFILES_URL}/pip/pip.conf ${HOME}/.pip/pip.conf
