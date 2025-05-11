@@ -36,5 +36,6 @@
 	"plantuml.jar": "C:\\plantuml\\plantuml.jar",
 	"plantuml.render": "Local",
 	"plantuml.server": "https://www.plantuml.com/plantuml",
-	"markdowntable.showMenu.csvToTable":true
+	"markdowntable.showMenu.csvToTable":true,
+	"python.terminal.activateEnvironment": false
 }
