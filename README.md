@@ -62,7 +62,7 @@ Unblock-File $PROFILE
 | Drectory | Type | Illustrate |
 | -------- | ---- | ---------- |
 | `~/go/` | *Auto Generation* | default GOPATH directory |
-| `~/.local/go/` | *Auto Generation* | default GOROOT directory |
+| `~/.local/lib/go/` | *Auto Generation* | default GOROOT directory |
 
 #### Rust
 
@@ -87,3 +87,10 @@ Unblock-File $PROFILE
 | Drectory | Type | Illustrate |
 | -------- | ---- | ---------- |
 | `~/perl5/` | *Auto Generation* | default local::lib directory |
+
+### 4. Custom
+
+```shell
+git clone git@github.com:nvm-sh/nvm.git ${HOME}/.nvm
+git clone git@github.com:pyenv/pyenv.git ${HOME}/.pyenv
+```
