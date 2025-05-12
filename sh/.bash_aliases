@@ -1083,8 +1083,8 @@ alias g='go_env'
 alias go_workspace='mkdir -p src pkg bin'
 
 # environmnet for Golang
-if [ -d "$HOME/.local/go" ]; then
-    export GOROOT="$HOME/.local/go"
+if [ -d "$HOME/.local/lib/go" ]; then
+    export GOROOT="$HOME/.local/lib/go"
     env_insert "PATH" "$GOROOT/bin"
 fi
 

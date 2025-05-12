@@ -74,7 +74,7 @@ function down_load {
 }
 
 if [ ${GOROOT:-NOCONFIG} = "NOCONFIG" ]; then
-    INSTALL_DIR=${HOME}/.local/go
+    INSTALL_DIR=${HOME}/.local/lib/go
 else
     if [ -L ${GOROOT} ]; then
         INSTALL_DIR="`dirname ${GOROOT}`/${UPDATE_GO_VERSION}"
