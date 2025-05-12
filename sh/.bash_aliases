@@ -1201,7 +1201,7 @@ function pyenv_load() {
 }
 
 function py_venv() {
-    python -m venv .venv && source .venv/bin/activate
+    python3 -m venv .venv && source .venv/bin/activate
 }
 
 ###################
