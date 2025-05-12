@@ -1216,12 +1216,9 @@ function perl_install() {
 # JavaScript for Bash/Zsh
 #########################
 
-function npm_link_list() {
-    ls -F ${NODE_PATH} | grep -E '@$'
-}
-
-# fast echo package.json run
-alias j='jq .scripts package.json'
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 env_amend "NPM_PACKAGES" "${HOME}/.local"
 if [ ! -d ${NPM_PACKAGES} ]; then
@@ -1229,6 +1226,13 @@ if [ ! -d ${NPM_PACKAGES} ]; then
 fi
 env_insert "PATH" "${NPM_PACKAGES}/bin"
 env_insert "NODE_PATH" "${NPM_PACKAGES}/lib/node_modules"
+
+function npm_link_list() {
+    ls -F ${NODE_PATH} | grep -E '@$'
+}
+
+# fast echo package.json run
+alias j='jq .scripts package.json'
 
 function npm_rc() {
     if [ ! -f ${PWD}/.npmrc ]; then
