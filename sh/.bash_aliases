@@ -1216,9 +1216,11 @@ function perl_install() {
 # JavaScript for Bash/Zsh
 #########################
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+function nvm_load() {
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+}
 
 env_amend "NPM_PACKAGES" "${HOME}/.local"
 if [ ! -d ${NPM_PACKAGES} ]; then
