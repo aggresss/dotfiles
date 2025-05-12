@@ -1192,6 +1192,14 @@ function py_path() {
     cd $(python3 -c 'import site; print(site.USER_BASE)')
 }
 
+function pyenv_load() {
+    export PYENV_ROOT="$HOME/.pyenv"
+    if [ -d ${PYENV_ROOT} ]; then
+        env_insert "PATH" "$PYENV_ROOT/bin"
+        eval "$(pyenv init -)"
+    fi
+}
+
 ###################
 # Perl for Bash/Zsh
 ###################
@@ -1216,12 +1224,6 @@ function perl_install() {
 # JavaScript for Bash/Zsh
 #########################
 
-function nvm_load() {
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-}
-
 env_amend "NPM_PACKAGES" "${HOME}/.local"
 if [ ! -d ${NPM_PACKAGES} ]; then
     mkdir -p ${NPM_PACKAGES}
@@ -1241,6 +1243,14 @@ function npm_rc() {
         cat <<END >${PWD}/.npmrc
 package-lock=false
 END
+    fi
+}
+
+function nvm_load() {
+    export NVM_DIR="$HOME/.nvm"
+    if [ -d ${NV_DIR} ]; then
+        source "$NVM_DIR/nvm.sh"
+        source "$NVM_DIR/bash_completion"
     fi
 }
 
