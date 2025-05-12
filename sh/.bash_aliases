@@ -1200,6 +1200,10 @@ function pyenv_load() {
     fi
 }
 
+function py_venv() {
+    python -m venv .venv && source .venv/bin/activate
+}
+
 ###################
 # Perl for Bash/Zsh
 ###################
