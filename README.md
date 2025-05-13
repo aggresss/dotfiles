@@ -84,6 +84,7 @@ Unblock-File $PROFILE
 | `~/.local/` | *Auto Generation* | npm global directory |
 
 #### Perl
+
 | Drectory | Type | Illustrate |
 | -------- | ---- | ---------- |
 | `~/perl5/` | *Auto Generation* | default local::lib directory |
