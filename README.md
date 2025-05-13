@@ -88,9 +88,16 @@ Unblock-File $PROFILE
 | -------- | ---- | ---------- |
 | `~/perl5/` | *Auto Generation* | default local::lib directory |
 
-### 4. Custom
+### 4. Version Management
+
+#### pyenv
+
+```shell
+git clone git@github.com:pyenv/pyenv.git ${HOME}/.pyenv
+```
+
+#### nvm
 
 ```shell
 git clone git@github.com:nvm-sh/nvm.git ${HOME}/.nvm
-git clone git@github.com:pyenv/pyenv.git ${HOME}/.pyenv
 ```
