@@ -17,6 +17,7 @@
 	"terminal.integrated.fontSize": 13,
 	"explorer.confirmDragAndDrop": false,
 	"explorer.confirmDelete": false,
+	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
 	"files.eol": "\n",
 	"C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Google}",
