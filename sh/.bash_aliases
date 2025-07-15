@@ -1047,6 +1047,7 @@ function docker_run() {
         -e TERM=xterm-256color \
         -u $(id -u):$(id -g) \
         -v /etc/passwd:/etc/passwd:ro \
+        -v /etc/shadow:/etc/shadow:ro \
         -v /etc/group:/etc/group:ro \
         -v /etc/localtime:/etc/localtime:ro \
         -v /etc/timezone:/etc/timezone:ro \
