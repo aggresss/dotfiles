@@ -1073,6 +1073,7 @@ alias c++11='c++ -std=c++11'
 alias c++14='c++ -std=c++14'
 alias c++17='c++ -std=c++17'
 alias c++20='c++ -std=c++20'
+alias c++23='c++ -std=c++23'
 
 #####################
 # Golang for Bash/Zsh
