@@ -17,6 +17,7 @@
 	"terminal.integrated.fontSize": 13,
 	"explorer.confirmDragAndDrop": false,
 	"explorer.confirmDelete": false,
+	"explorer.compactFolders": false,
 	"files.trimFinalNewlines": true,
 	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
